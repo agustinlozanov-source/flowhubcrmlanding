@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Términos de Servicio — FlowCRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #070708; --white: #ffffff;
+      --gray-1: #f5f5f7; --gray-2: #e8e8ed; --gray-3: #c7c7cc;
+      --gray-4: #8e8e93; --gray-5: #3a3a3c; --gray-6: #1c1c1e;
+      --blue: #0066ff; --purple: #7c3aed; --green: #00c853;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.7; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 48px; height: 60px; display: flex; align-items: center; gap: 40px;
+      background: rgba(7,7,8,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-mark {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-text { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+    .nav-back { margin-left: auto; font-size: 13px; color: var(--gray-4); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+    .nav-back:hover { color: white; }
+
+    .doc-hero {
+      padding: 120px 48px 64px; max-width: 800px; margin: 0 auto; text-align: center; position: relative;
+    }
+    .doc-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 70%);
+    }
+    .doc-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; font-weight: 600; color: var(--gray-3); margin-bottom: 24px;
+    }
+    .doc-hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 4vw, 48px); font-weight: 900;
+      line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px;
+    }
+    .doc-hero p { font-size: 15px; color: var(--gray-4); max-width: 520px; margin: 0 auto; }
+    .doc-updated { margin-top: 24px; font-size: 12.5px; color: var(--gray-5); }
+
+    .doc-content { max-width: 800px; margin: 0 auto; padding: 0 48px 100px; }
+    .doc-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 48px 0; }
+    .doc-section { margin-bottom: 48px; }
+    .doc-section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+      margin-bottom: 16px; color: white;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .doc-section h2 .num {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--purple); flex-shrink: 0;
+    }
+    .doc-section p { font-size: 14.5px; color: var(--gray-4); margin-bottom: 12px; line-height: 1.75; }
+    .doc-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .doc-section ul li { font-size: 14.5px; color: var(--gray-4); padding-left: 20px; position: relative; line-height: 1.65; }
+    .doc-section ul li::before { content: '–'; position: absolute; left: 0; color: var(--purple); font-weight: 600; }
+    .doc-section a { color: var(--blue); text-decoration: none; }
+    .doc-section a:hover { text-decoration: underline; }
+
+    .highlight-box {
+      background: rgba(124,58,237,0.06); border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+    }
+    .highlight-box p { margin: 0; font-size: 14px; color: var(--gray-3); }
+
+    .warning-box {
+      background: rgba(255,149,0,0.06); border: 1px solid rgba(255,149,0,0.2);
+      border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+    }
+    .warning-box p { margin: 0; font-size: 14px; color: var(--gray-3); }
+
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 48px; text-align: center; }
+    .footer-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .footer-copy { font-size: 12.5px; color: var(--gray-5); margin-bottom: 16px; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; }
+    .footer-links a { font-size: 12.5px; color: var(--gray-4); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      <img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 32px;">
+    </a>
+    <a href="/index.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <div class="doc-badge">Documento legal</div>
+    <h1>Términos de Servicio</h1>
+    <p>Las condiciones que rigen el uso de la plataforma FlowCRM y los servicios asociados.</p>
+    <div class="doc-updated">Última actualización: 23 de marzo de 2026</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="doc-content">
+    <div class="doc-divider"></div>
+
+    <div class="doc-section">
+      <h2><span class="num">1</span> Aceptación de los términos</h2>
+      <p>Al registrarse, acceder o utilizar FlowCRM, el usuario acepta quedar vinculado por estos Términos de Servicio y la Política de Privacidad. Si actúas en nombre de una organización, declaras tener la autoridad para aceptar estos términos en su nombre.</p>
+      <p>Si no estás de acuerdo con alguna de estas condiciones, no debes utilizar la plataforma.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">2</span> Descripción del servicio</h2>
+      <p>FlowCRM es una plataforma de gestión de relaciones con clientes (CRM) con agentes de inteligencia artificial, desarrollada y operada por Qubit Corp. El servicio incluye:</p>
+      <ul>
+        <li>Pipeline de ventas con gestión de leads y etapas configurables.</li>
+        <li>Agente IA entrenado por el cliente para atención y calificación de prospectos.</li>
+        <li>Bandeja de entrada unificada para canales de Meta (Facebook, Instagram, WhatsApp).</li>
+        <li>Módulos de contenido, landing pages, reuniones, analítica y referidos según el plan contratado.</li>
+        <li>Importación de bases de datos de contactos.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">3</span> Registro y cuentas</h2>
+      <p>Para usar FlowCRM debes crear una cuenta de organización con información veraz y actualizada. Eres responsable de:</p>
+      <ul>
+        <li>Mantener la confidencialidad de tus credenciales de acceso.</li>
+        <li>Todas las actividades que ocurran bajo tu cuenta.</li>
+        <li>Notificarnos de inmediato ante cualquier uso no autorizado de tu cuenta.</li>
+        <li>Asegurarte de que todos los usuarios de tu organización cumplan con estos términos.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">4</span> Uso de integraciones de Meta</h2>
+      <p>FlowCRM utiliza las APIs oficiales de Meta Platforms para habilitar la bandeja de entrada unificada. Al conectar tus canales de Meta, aceptas también los términos de uso de Meta para desarrolladores y empresas.</p>
+      <div class="highlight-box">
+        <p>Eres el único responsable de obtener los permisos necesarios de Meta para tu página, cuenta de Instagram y número de WhatsApp Business antes de conectarlos a FlowCRM. FlowCRM actúa como intermediario técnico y no garantiza la disponibilidad ni el funcionamiento de las APIs de Meta.</p>
+      </div>
+      <p>No debes utilizar las integraciones de Meta en FlowCRM para enviar mensajes no solicitados (spam), violar las políticas de mensajería de Meta, o contactar a personas que no hayan iniciado una conversación contigo de forma orgánica o que no hayan dado su consentimiento previo.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">5</span> Uso aceptable</h2>
+      <p>Al usar FlowCRM te comprometes a no:</p>
+      <ul>
+        <li>Utilizar la plataforma para actividades ilegales, fraudulentas o que violen derechos de terceros.</li>
+        <li>Enviar mensajes masivos no solicitados o spam a través de los canales integrados.</li>
+        <li>Intentar acceder a datos de otras organizaciones o comprometer la seguridad de la plataforma.</li>
+        <li>Usar el agente IA para difundir información falsa, engañosa o dañina.</li>
+        <li>Revender o sublicenciar el acceso a la plataforma sin autorización escrita de Qubit Corp.</li>
+        <li>Realizar ingeniería inversa, descompilar o intentar extraer el código fuente de la plataforma.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">6</span> Planes y pagos</h2>
+      <p>FlowCRM se ofrece mediante suscripción mensual. Los precios, características y condiciones de cada plan están disponibles en la plataforma y pueden actualizarse con previo aviso de 30 días.</p>
+      <ul>
+        <li>Los pagos son recurrentes y se cobran al inicio de cada período de facturación.</li>
+        <li>No se ofrecen reembolsos por períodos parciales salvo que la ley aplicable lo requiera.</li>
+        <li>El impago puede resultar en la suspensión del acceso a la plataforma.</li>
+        <li>Los precios no incluyen impuestos aplicables según la legislación de cada país.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">7</span> Propiedad intelectual</h2>
+      <p>FlowCRM y todos sus componentes, incluyendo el software, diseño, marca, logotipos y documentación, son propiedad de Qubit Corp y están protegidos por las leyes de propiedad intelectual aplicables.</p>
+      <p>El cliente conserva todos los derechos sobre los datos que ingresa en la plataforma, incluyendo información de contactos, base de conocimiento del agente y contenido generado. Qubit Corp no reivindica propiedad sobre dichos datos.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">8</span> Disponibilidad del servicio</h2>
+      <p>Nos esforzamos por mantener FlowCRM disponible de forma continua, pero no garantizamos una disponibilidad del 100%. El servicio puede interrumpirse por:</p>
+      <ul>
+        <li>Mantenimiento programado, notificado con anticipación cuando sea posible.</li>
+        <li>Fallas de proveedores de infraestructura terceros (Firebase, Railway, Netlify).</li>
+        <li>Interrupciones en las APIs de Meta o Anthropic fuera de nuestro control.</li>
+        <li>Causas de fuerza mayor.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">9</span> Limitación de responsabilidad</h2>
+      <div class="warning-box">
+        <p>FlowCRM se proporciona "tal cual" y "según disponibilidad". En la máxima medida permitida por la ley, Qubit Corp no será responsable por daños indirectos, incidentales, especiales o consecuentes derivados del uso o la imposibilidad de usar la plataforma, incluyendo pérdida de negocios, datos o ingresos.</p>
+      </div>
+      <p>La responsabilidad total de Qubit Corp hacia el cliente no excederá el monto pagado por el servicio en los 3 meses anteriores al evento que dio origen a la reclamación.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">10</span> Cancelación y terminación</h2>
+      <p>El cliente puede cancelar su suscripción en cualquier momento desde la configuración de su cuenta. La cancelación será efectiva al final del período de facturación en curso.</p>
+      <p>Qubit Corp puede suspender o terminar el acceso de un cliente si:</p>
+      <ul>
+        <li>Se incumplen estos Términos de Servicio.</li>
+        <li>Se detecta actividad fraudulenta o uso que viole las políticas de Meta u otras plataformas integradas.</li>
+        <li>El pago de la suscripción permanece pendiente por más de 10 días hábiles.</li>
+      </ul>
+      <p>Tras la cancelación, los datos del cliente estarán disponibles para exportación durante 30 días, después de los cuales serán eliminados permanentemente.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">11</span> Modificaciones a los términos</h2>
+      <p>Qubit Corp se reserva el derecho de modificar estos Términos de Servicio. Los cambios materiales serán notificados por correo electrónico con al menos 15 días de anticipación. El uso continuado de la plataforma tras la fecha de entrada en vigor implica la aceptación de los nuevos términos.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">12</span> Ley aplicable</h2>
+      <p>Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier disputa será sometida a la jurisdicción de los tribunales competentes de Monterrey, Nuevo León, México.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2><span class="num">13</span> Contacto</h2>
+      <p>Para cualquier consulta relacionada con estos términos:</p>
+      <div class="highlight-box">
+        <p><strong style="color:white">Qubit Corp — FlowCRM</strong><br>
+        Correo: <a href="mailto:contacto@qubitcorp.mx">contacto@qubitcorp.mx</a><br>
+        Sitio web: <a href="https://flowhubcrm.app">flowhubcrm.app</a><br>
+        Monterrey, Nuevo León, México</p>
+      </div>
+    </div>
+
+    <div class="doc-divider"></div>
+    <p style="font-size:13px;color:var(--gray-5);text-align:center">Al usar FlowCRM aceptas haber leído, entendido y acordado estos Términos de Servicio en su totalidad.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 28px;"></div>
+    <div class="footer-copy">© 2026 FlowCRM. CRM + Agentes IA para agencias y empresas.</div>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacidad</a>
+      <a href="/terms.html">Términos</a>
+      <a href="mailto:contacto@qubitcorp.mx">Contacto</a>
+    </div>
+  </footer>
+
+</body>
+</html>
