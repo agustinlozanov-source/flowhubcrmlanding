@@ -13,7 +13,6 @@
     }
 
     :root {
-      --bg: #ffffff;
       --blue: #0066ff;
       --purple: #7c3aed;
     }
@@ -21,11 +20,167 @@
     html, body {
       width: 100%;
       height: 100%;
-      background: var(--bg);
-      font-family: 'Inter', sans-serif;
-      color: #070708;
       overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
     }
+
+    /* ── VIDEO FULL-SCREEN ── */
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── OVERLAY CONTENT ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 60px;
+      gap: 20px;
+    }
+
+    /* ── LOGO (top-left) ── */
+    .logo-wrap {
+      position: fixed;
+      top: 28px;
+      left: 36px;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeDown 0.7s ease 0.1s forwards;
+    }
+
+    .logo-wrap img {
+      height: 36px;
+    }
+
+    /* ── BADGE ── */
+    .badge-wrap {
+      position: relative;
+      display: inline-block;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .badge-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #3a3a3c;
+      white-space: nowrap;
+    }
+
+    .badge-pill .badge-ai {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    /* ── BUTTON ── */
+    .btn-welcome {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 44px;
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      box-shadow: 0 8px 32px rgba(0, 102, 255, 0.4), 0 2px 8px rgba(124, 58, 237, 0.3);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      text-decoration: none;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .btn-welcome:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 44px rgba(0, 102, 255, 0.5), 0 4px 16px rgba(124, 58, 237, 0.4);
+    }
+
+    .btn-welcome:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .btn-welcome::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      opacity: 0;
+      z-index: -1;
+      filter: blur(14px);
+      transition: opacity 0.18s;
+    }
+
+    .btn-welcome:hover::before {
+      opacity: 0.55;
+    }
+
+    .btn-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 
     /* ── FULL-SCREEN LAYOUT ── */
     .scene {
@@ -225,33 +380,29 @@
 </head>
 <body>
 
-  <div class="scene">
+  <!-- VIDEO FONDO FULL-SCREEN -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="Video_Generado_con_Animaci%C3%B3n.mp4" type="video/mp4">
+    </video>
+  </div>
 
-    <!-- LOGO -->
-    <div class="logo-wrap">
-      <img src="flow%20hub%20logo%201.png" alt="Flow Hub CRM">
-    </div>
+  <!-- LOGO TOP-LEFT -->
+  <div class="logo-wrap">
+    <img src="flow%20hub%20logo%201.png" alt="Flow Hub CRM">
+  </div>
 
-    <!-- AI FOR SALES BADGE -->
+  <!-- BADGE + BOTÓN ABAJO CENTRADO -->
+  <div class="overlay">
     <div class="badge-wrap">
       <div class="badge-pill">
         AI for <span class="badge-ai">Sales</span>
       </div>
     </div>
-
-    <!-- VIDEO -->
-    <div class="video-wrap">
-      <video autoplay muted loop playsinline>
-        <source src="Video_Generado_con_Animaci%C3%B3n.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <!-- BUTTON -->
     <a href="/index.html" class="btn-welcome">
       <div class="btn-dot"></div>
       Bienvenidos
     </a>
-
   </div>
 
 </body>
