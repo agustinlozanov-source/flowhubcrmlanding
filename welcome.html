@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido — Flow Hub CRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #070708;
+      --blue: #0066ff;
+      --purple: #7c3aed;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* ── FULL-SCREEN LAYOUT ── */
+    .scene {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      position: relative;
+    }
+
+    /* ── SUBTLE GLOW BEHIND VIDEO ── */
+    .scene::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 50%, rgba(0, 102, 255, 0.10) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 70% 30%, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LOGO ── */
+    .logo-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-wrap img {
+      height: 40px;
+      opacity: 0;
+      animation: fadeDown 0.7s ease 0.1s forwards;
+    }
+
+    /* ── VIDEO ── */
+    .video-wrap {
+      position: relative;
+      z-index: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 32px 80px rgba(0, 0, 0, 0.7),
+        0 0 60px rgba(0, 102, 255, 0.12);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+      max-width: min(820px, 90vw);
+      width: 100%;
+    }
+
+    .video-wrap video {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      background: var(--bg);
+    }
+
+    /* ── BUTTON ── */
+    .btn-welcome {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      box-shadow: 0 8px 32px rgba(0, 102, 255, 0.35), 0 2px 8px rgba(124, 58, 237, 0.25);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      text-decoration: none;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .btn-welcome:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 40px rgba(0, 102, 255, 0.45), 0 4px 16px rgba(124, 58, 237, 0.35);
+    }
+
+    .btn-welcome:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    /* pulse ring on button */
+    .btn-welcome::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      opacity: 0;
+      z-index: -1;
+      filter: blur(12px);
+      transition: opacity 0.18s;
+    }
+
+    .btn-welcome:hover::before {
+      opacity: 0.5;
+    }
+
+    .btn-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scene">
+
+    <!-- LOGO -->
+    <div class="logo-wrap">
+      <img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM">
+    </div>
+
+    <!-- VIDEO -->
+    <div class="video-wrap">
+      <video autoplay muted loop playsinline>
+        <source src="Video_Generado_con_Animaci%C3%B3n.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <!-- BUTTON -->
+    <a href="/index.html" class="btn-welcome">
+      <div class="btn-dot"></div>
+      Bienvenidos a Flow Hub CRM
+    </a>
+
+  </div>
+
+</body>
+</html>
