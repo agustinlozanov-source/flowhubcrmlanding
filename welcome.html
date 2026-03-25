@@ -8,7 +8,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root { --blue: #0066ff; --purple: #7c3aed; }
+    :root { --blue: #1aab99; --purple: #3533cd; }
 
     html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', sans-serif; background: #ffffff; }
 
@@ -23,11 +23,10 @@
     }
     .logo-wrap img { height: 36px; }
 
-    /* BADGE — top center, misma altura que logo */
+    /* BADGE — bottom center, paralelo al botón Welcome */
     .badge-wrap {
-      position: fixed; top: 28px; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: inline-block;
-      opacity: 0; animation: fadeDown 0.7s ease 0.1s forwards;
+      position: relative; display: inline-block;
+      opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
     }
     /* gradient border */
     .badge-wrap::before {
@@ -40,19 +39,19 @@
     }
     .badge-pill {
       display: inline-flex; align-items: center;
-      padding: 7px 20px; b      padding: 7px 20pckground: transparent;
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;
-      white-space: nowrap;
+      padding: 15px 44px; border-radius: 50px; background: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800;
+      letter-spacing: -0.2px; white-space: nowrap;
       background: linear-gradient(135deg, var(--blue), var(--purple));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    /* OVERLAY — botón bottom center */
+    /* OVERLAY — badge + botón en fila, bottom center */
     .overlay {
       position: fixed; inset: 0; z-index: 1;
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: flex-end; padding-bottom: 64px;
-      pointer-events: none;
+      display: flex; flex-direction: row; align-items: center;
+      justify-content: center; align-items: flex-end; padding-bottom: 64px;
+      gap: 16px; pointer-events: none;
     }
 
     /* BOTÓN */
@@ -118,16 +117,14 @@
     <img src="flow hub logo 1.png" alt="Flow Hub CRM">
   </div>
 
-  <!-- BADGE — top center, misma altura que logo -->
-  <div class="badge-wrap">
-    <div class="badge-pill">AI for Sales</div>
-  </div>
-
-  <!-- BOTÓN — bottom center -->
+  <!-- BADGE + BOTÓN — bottom center, paralelos -->
   <div class="overlay">
+    <div class="badge-wrap">
+      <div class="badge-pill">AI for Sales</div>
+    </div>
     <a href="/index.html" class="btn-welcome">
       <div class="btn-dot"></div>
-      <span class="btn-text">Bienvenidos</span>
+      <span class="btn-text">Welcome</span>
     </a>
   </div>
 
