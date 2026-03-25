@@ -4,374 +4,100 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bienvenido — Flow Hub CRM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root { --blue: #0066ff; --purple: #7c3aed; }
+
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', sans-serif; background: #ffffff; }
+
+    /* VIDEO FULL-SCREEN */
+    .video-bg { position: fixed; inset: 0; z-index: 0; }
+    .video-bg video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* LOGO — top left */
+    .logo-wrap {
+      position: fixed; top: 28px; left: 36px; z-index: 2;
+      opacity: 0; animation: fadeDown 0.7s ease 0.1s forwards;
+    }
+    .logo-wrap img { height: 36px; }
+
+    /* BADGE — top center, misma altura que logo */
+    .badge-wrap {
+      position: fixed; top: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: inline-block;
+      opacity: 0; animation: fadeDown 0.7s ease 0.1s forwards;
+    }
+    /* gradient border */
+    .badge-wrap::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50px; padding: 2px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude; pointer-events: none;
+    }
+    .badge-pill {
+      display: inline-flex; align-items: center;
+      padding: 7px 20px; b      padding: 7px 20pckground: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;
+      white-space: nowrap;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    :root {
-      --blue: #0066ff;
-      --purple: #7c3aed;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-    }
-
-    /* ── VIDEO FULL-SCREEN ── */
-    .video-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-    }
-
-    .video-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── OVERLAY CONTENT ── */
+    /* OVERLAY — botón bottom center */
     .overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 60px;
-      gap: 20px;
+      position: fixed; inset: 0; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-end; padding-bottom: 64px;
+      pointer-events: none;
     }
 
-    /* ── LOGO (top-left) ── */
-    .logo-wrap {
-      position: fixed;
-      top: 28px;
-      left: 36px;
-      z-index: 2;
-      opacity: 0;
-      animation: fadeDown 0.7s ease 0.1s forwards;
+    /* BOTÓN */
+    .btn-welcome {
+      position: relative; display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 44px; border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800;
+      letter-spacing: -0.2px; border: none; cursor: pointer;
+      background: transparent; text-decoration: none;
+      transition: transform 0.18s ease;
+      opacity: 0; animation: fadeUp 0.8s ease 0.45s forwards;
+      pointer-events: auto;
     }
-
-    .logo-wrap img {
-      height: 36px;
-    }
-
-    /* ── BADGE ── */
-    .badge-wrap {
-      position: relative;
-      display: inline-block;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.3s forwards;
-    }
-
-    .badge-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50px;
-      padding: 2px;
+    /* gradient border */
+    .btn-welcome::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50px; padding: 2px;
       background: linear-gradient(135deg, var(--blue), var(--purple));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask-composite: exclude;
+      mask-composite: exclude; pointer-events: none;
     }
+    .btn-welcome:hover { transform: translateY(-3px) scale(1.03); }
+    .btn-welcome:active { transform: translateY(0) scale(0.99); }
 
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 20px;
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #3a3a3c;
-      white-space: nowrap;
-    }
-
-    .badge-pill .badge-ai {
+    /* gradient text */
+    .btn-text {
       background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 700;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
-    /* ── BUTTON ── */
-    .btn-welcome {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 44px;
-      border-radius: 50px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.2px;
-      color: white;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
-      box-shadow: 0 8px 32px rgba(0, 102, 255, 0.4), 0 2px 8px rgba(124, 58, 237, 0.3);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      text-decoration: none;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.5s forwards;
-    }
-
-    .btn-welcome:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 16px 44px rgba(0, 102, 255, 0.5), 0 4px 16px rgba(124, 58, 237, 0.4);
-    }
-
-    .btn-welcome:active {
-      transform: translateY(0) scale(0.99);
-    }
-
-    .btn-welcome::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50px;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      opacity: 0;
-      z-index: -1;
-      filter: blur(14px);
-      transition: opacity 0.18s;
-    }
-
-    .btn-welcome:hover::before {
-      opacity: 0.55;
-    }
-
+    /* gradient dot */
     .btn-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.8);
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.7); }
+      50%       { opacity: 0.5; transform: scale(0.65); }
     }
-
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-
-    /* ── FULL-SCREEN LAYOUT ── */
-    .scene {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      position: relative;
-    }
-
-    /* ── AI FOR SALES BADGE ── */
-    .badge {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 18px;
-      border-radius: 50px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      background: white;
-      cursor: default;
-      opacity: 0;
-      animation: fadeDown 0.7s ease 0s forwards;
-      /* gradient border via background-clip trick */
-      border: 2px solid transparent;
-      background-clip: padding-box;
-      box-shadow: 0 0 0 2px transparent;
-      /* layered bg for gradient border */
-      background-image: none;
-    }
-
-    .badge-inner {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .badge-wrap {
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      animation: fadeDown 0.7s ease 0s forwards;
-      display: inline-block;
-    }
-
-    .badge-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50px;
-      padding: 2px;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask-composite: exclude;
-    }
-
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 18px;
-      border-radius: 50px;
-      background: white;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: #3a3a3c;
-      white-space: nowrap;
-    }
-
-    .badge-pill .badge-ai {
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 700;
-    }
-
-    /* ── LOGO ── */
-    .logo-wrap {
-      position: relative;
-      z-index: 1;
-    }
-
-    .logo-wrap img {
-      height: 40px;
-      opacity: 0;
-      animation: fadeDown 0.7s ease 0.1s forwards;
-    }
-
-    /* ── VIDEO ── */
-    .video-wrap {
-      position: relative;
-      z-index: 1;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.06),
-        0 20px 60px rgba(0, 0, 0, 0.10);
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
-      max-width: min(820px, 90vw);
-      width: 100%;
-    }
-
-    .video-wrap video {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 20px;
-      background: var(--bg);
-    }
-
-    /* ── BUTTON ── */
-    .btn-welcome {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 40px;
-      border-radius: 50px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.2px;
-      color: white;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
-      box-shadow: 0 8px 32px rgba(0, 102, 255, 0.35), 0 2px 8px rgba(124, 58, 237, 0.25);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      text-decoration: none;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.6s forwards;
-    }
-
-    .btn-welcome:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 14px 40px rgba(0, 102, 255, 0.45), 0 4px 16px rgba(124, 58, 237, 0.35);
-    }
-
-    .btn-welcome:active {
-      transform: translateY(0) scale(0.99);
-    }
-
-    /* pulse ring on button */
-    .btn-welcome::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50px;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      opacity: 0;
-      z-index: -1;
-      filter: blur(12px);
-      transition: opacity 0.18s;
-    }
-
-    .btn-welcome:hover::before {
-      opacity: 0.5;
-    }
-
-    .btn-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.85);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.7); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-16px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -383,25 +109,25 @@
   <!-- VIDEO FONDO FULL-SCREEN -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
-      <source src="Video_Generado_con_Animaci%C3%B3n.mp4" type="video/mp4">
+      <source src="Video_Generado_con_Animación.mp4" type="video/mp4">
     </video>
   </div>
 
-  <!-- LOGO TOP-LEFT -->
+  <!-- LOGO — top left -->
   <div class="logo-wrap">
-    <img src="flow%20hub%20logo%201.png" alt="Flow Hub CRM">
+    <img src="flow hub logo 1.png" alt="Flow Hub CRM">
   </div>
 
-  <!-- BADGE + BOTÓN ABAJO CENTRADO -->
+  <!-- BADGE — top center, misma altura que logo -->
+  <div class="badge-wrap">
+    <div class="badge-pill">AI for Sales</div>
+  </div>
+
+  <!-- BOTÓN — bottom center -->
   <div class="overlay">
-    <div class="badge-wrap">
-      <div class="badge-pill">
-        AI for <span class="badge-ai">Sales</span>
-      </div>
-    </div>
     <a href="/index.html" class="btn-welcome">
       <div class="btn-dot"></div>
-      Bienvenidos
+      <span class="btn-text">Bienvenidos</span>
     </a>
   </div>
 
