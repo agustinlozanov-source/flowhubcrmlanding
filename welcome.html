@@ -13,7 +13,7 @@
     }
 
     :root {
-      --bg: #070708;
+      --bg: #ffffff;
       --blue: #0066ff;
       --purple: #7c3aed;
     }
@@ -23,7 +23,7 @@
       height: 100%;
       background: var(--bg);
       font-family: 'Inter', sans-serif;
-      color: white;
+      color: #070708;
       overflow: hidden;
     }
 
@@ -35,20 +35,83 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 40px;
+      gap: 32px;
       position: relative;
     }
 
-    /* ── SUBTLE GLOW BEHIND VIDEO ── */
-    .scene::before {
+    /* ── AI FOR SALES BADGE ── */
+    .badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      background: white;
+      cursor: default;
+      opacity: 0;
+      animation: fadeDown 0.7s ease 0s forwards;
+      /* gradient border via background-clip trick */
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      box-shadow: 0 0 0 2px transparent;
+      /* layered bg for gradient border */
+      background-image: none;
+    }
+
+    .badge-inner {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-wrap {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeDown 0.7s ease 0s forwards;
+      display: inline-block;
+    }
+
+    .badge-wrap::before {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 70% 55% at 50% 50%, rgba(0, 102, 255, 0.10) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 40% at 70% 30%, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
+      border-radius: 50px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 18px;
+      border-radius: 50px;
+      background: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #3a3a3c;
+      white-space: nowrap;
+    }
+
+    .badge-pill .badge-ai {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
     }
 
     /* ── LOGO ── */
@@ -70,11 +133,10 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.06),
-        0 32px 80px rgba(0, 0, 0, 0.7),
-        0 0 60px rgba(0, 102, 255, 0.12);
+        0 0 0 1px rgba(0, 0, 0, 0.06),
+        0 20px 60px rgba(0, 0, 0, 0.10);
       opacity: 0;
-      animation: fadeUp 0.8s ease 0.3s forwards;
+      animation: fadeUp 0.8s ease 0.2s forwards;
       max-width: min(820px, 90vw);
       width: 100%;
     }
@@ -141,7 +203,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.85);
       animation: pulse 2s infinite;
     }
 
@@ -167,7 +229,14 @@
 
     <!-- LOGO -->
     <div class="logo-wrap">
-      <img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM">
+      <img src="flow%20hub%20logo%201.png" alt="Flow Hub CRM">
+    </div>
+
+    <!-- AI FOR SALES BADGE -->
+    <div class="badge-wrap">
+      <div class="badge-pill">
+        AI for <span class="badge-ai">Sales</span>
+      </div>
     </div>
 
     <!-- VIDEO -->
@@ -180,7 +249,7 @@
     <!-- BUTTON -->
     <a href="/index.html" class="btn-welcome">
       <div class="btn-dot"></div>
-      Bienvenidos a Flow Hub CRM
+      Bienvenidos
     </a>
 
   </div>
