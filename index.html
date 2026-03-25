@@ -1602,6 +1602,314 @@
       width: 1em;
       height: 1em;
     }
+
+    /* ─── THEME TOGGLE BTN ─── */
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: transparent;
+      color: var(--gray-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+
+    /* ─── LIGHT MODE ─── */
+    [data-theme="light"] body {
+      background: #f0f0f5;
+      color: #070708;
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(240, 240, 245, 0.92);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .nav-links a {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .nav-links a:hover {
+      color: #070708;
+    }
+
+    [data-theme="light"] .nav-btn-ghost {
+      color: #3a3a3c;
+      border: 1px solid rgba(0, 0, 0, 0.14);
+    }
+
+    [data-theme="light"] .nav-btn-ghost:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: #070708;
+    }
+
+    [data-theme="light"] .nav-btn-primary {
+      background: #070708;
+      color: #ffffff;
+    }
+
+    [data-theme="light"] .nav-btn-primary:hover {
+      background: #1c1c1e;
+    }
+
+    [data-theme="light"] .theme-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.14);
+      color: #3a3a3c;
+    }
+
+    [data-theme="light"] .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.06);
+      color: #070708;
+    }
+
+    [data-theme="light"] .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(0, 102, 255, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 60% at 80% 30%, rgba(124, 58, 237, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 80%, rgba(0, 200, 83, 0.04) 0%, transparent 60%);
+    }
+
+    [data-theme="light"] .hero-grid {
+      opacity: 0.05;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.6) 1px, transparent 1px);
+    }
+
+    [data-theme="light"] .hero-badge {
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      color: #3a3a3c;
+    }
+
+    [data-theme="light"] .hero-metrics {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    [data-theme="light"] .hero-metric {
+      border-right: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    [data-theme="light"] .metric-small {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .btn-hero-primary {
+      background: #070708;
+      color: #ffffff;
+    }
+
+    [data-theme="light"] .btn-hero-primary:hover {
+      background: #1c1c1e;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    [data-theme="light"] .btn-hero-ghost {
+      color: #3a3a3c;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    [data-theme="light"] .btn-hero-ghost:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: #070708;
+    }
+
+    [data-theme="light"] h2 em {
+      color: #8e8e93;
+    }
+
+    [data-theme="light"] .section-sub {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .problem-card {
+      background: rgba(255, 59, 48, 0.04);
+      border: 1px solid rgba(255, 59, 48, 0.12);
+    }
+
+    [data-theme="light"] .problem-desc {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .step {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    [data-theme="light"] .step-num {
+      color: rgba(0, 0, 0, 0.07);
+    }
+
+    [data-theme="light"] .step-desc {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .step-bullet {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      color: #3a3a3c;
+    }
+
+    [data-theme="light"] .agent-feature {
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    [data-theme="light"] .agent-feature:hover {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    [data-theme="light"] .af-desc {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .source-card-dark {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .source-card-dark:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 0, 0, 0.13);
+    }
+
+    [data-theme="light"] .sc-desc {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .module-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .module-card:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 0, 0, 0.13);
+    }
+
+    [data-theme="light"] .module-desc {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .module-num {
+      color: #8e8e93;
+    }
+
+    [data-theme="light"] .badge-soon {
+      background: rgba(0, 0, 0, 0.05);
+      color: #8e8e93;
+      border: 1px solid rgba(0, 0, 0, 0.09);
+    }
+
+    [data-theme="light"] .mf {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .bi-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .bi-card-period {
+      color: #8e8e93;
+    }
+
+    [data-theme="light"] .funnel-bar-wrap {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="light"] .split-bar-wrap {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    [data-theme="light"] .split-name {
+      color: #3a3a3c;
+    }
+
+    [data-theme="light"] .split-pct {
+      color: #3a3a3c;
+    }
+
+    [data-theme="light"] .funnel-label {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .trend-label {
+      color: #8e8e93;
+    }
+
+    [data-theme="light"] .referral-card {
+      background: rgba(0, 102, 255, 0.04);
+      border: 1px solid rgba(0, 102, 255, 0.15);
+    }
+
+    [data-theme="light"] .referral-desc {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .referral-mock {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .rm-title {
+      color: #8e8e93;
+    }
+
+    [data-theme="light"] .rm-row {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    [data-theme="light"] .rm-name {
+      color: #070708;
+    }
+
+    [data-theme="light"] .ref-step-desc {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .cta-bg {
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0, 102, 255, 0.07) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] .cta-sub {
+      color: #6e6e73;
+    }
+
+    [data-theme="light"] .sep {
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    [data-theme="light"] footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .footer-copy {
+      color: #8e8e93;
+    }
+
+    [data-theme="light"] .footer-links a {
+      color: #8e8e93;
+    }
+
+    [data-theme="light"] .footer-links a:hover {
+      color: #3a3a3c;
+    }
+
+    [data-theme="light"] .glow-line {
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0.5;
+    }
   </style>
 </head>
 
@@ -1610,7 +1918,7 @@
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">
-      <img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 32px;">
+      <img id="nav-logo-img" src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 32px;">
     </a>
     <div class="nav-links">
       <a href="#problema">El problema</a>
@@ -1622,6 +1930,9 @@
     </div>
     <div class="nav-cta">
       <a href="/pipeline-diagnostico.html" class="nav-btn nav-btn-ghost" style="text-decoration:none;">🔍 Diagnóstico de Pipeline</a>
+      <button class="theme-toggle" id="theme-toggle" title="Cambiar tema" aria-label="Cambiar tema">
+        <i data-lucide="sun" id="theme-icon"></i>
+      </button>
       <button class="nav-btn nav-btn-primary">Solicitar cotización</button>
     </div>
   </nav>
@@ -2618,7 +2929,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo"><img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 28px;"></div>
+    <div class="footer-logo"><img id="footer-logo-img" src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 28px;"></div>
     <div class="footer-copy">© 2026 FlowCRM. CRM + Agentes IA para agencias y empresas.</div>
     <div class="footer-links">
       <a href="/privacy.html">Privacidad</a>
@@ -2628,6 +2939,29 @@
   </footer>
 
   <script>
+    // ─── THEME TOGGLE ───
+    const DARK_LOGO  = 'flow%20hub%20logo%202.png';
+    const LIGHT_LOGO = 'flow%20hub%20logo%201.png';
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const isDark = theme === 'dark';
+      document.getElementById('nav-logo-img').src    = isDark ? DARK_LOGO  : LIGHT_LOGO;
+      document.getElementById('footer-logo-img').src = isDark ? DARK_LOGO  : LIGHT_LOGO;
+      const icon = document.getElementById('theme-icon');
+      icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      lucide.createIcons();
+      localStorage.setItem('theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
     lucide.createIcons();
     // Smooth scroll nav
     document.querySelectorAll('a[href^="#"]').forEach(a => {
