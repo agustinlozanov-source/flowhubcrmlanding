@@ -436,6 +436,63 @@ h2.slide-subtitle{
 }
 .nav-btn:hover{background:rgba(255,255,255,0.15)}
 .nav-info{font-size:13px;color:#c7c7cc;font-weight:500;min-width:54px;text-align:center}
+
+/* ─── FILMINA AGUA ─── */
+#slide-agua .bg-image{
+  position:absolute;inset:0;
+  background-image:url('Gemini_Generated_Image_ao5cspao5cspao5c.png');
+  background-size:cover;
+  background-position:center right;
+  z-index:1;
+}
+#slide-agua .bg-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,
+    rgba(7,7,8,0.95) 0%,
+    rgba(7,7,8,0.85) 35%,
+    rgba(7,7,8,0.5) 60%,
+    rgba(7,7,8,0.2) 100%);
+  z-index:2;
+}
+#slide-agua .bg-fallback{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 75% 50%, rgba(120,80,40,0.25) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(180,120,60,0.15) 0%, transparent 60%),
+    linear-gradient(135deg, #0a0a0c 0%, #050507 100%);
+  z-index:0;
+}
+#slide-agua .content-wrapper{
+  position:relative;z-index:5;
+  display:flex;flex-direction:column;justify-content:center;
+  height:100%;max-width:55%;padding-top:3em;
+}
+#slide-agua .kicker-dot-amber{width:0.4em;height:0.4em;background:var(--amber);border-radius:50%;box-shadow:0 0 0.7em var(--amber)}
+#slide-agua .main-quote{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:5em;font-weight:800;line-height:1.05;
+  letter-spacing:-0.025em;margin-top:1.5em;color:#fff;
+}
+#slide-agua .main-quote em{
+  font-style:normal;
+  background:linear-gradient(135deg,#ff9500 0%,#ff3b30 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+#slide-agua .agua-explanation{
+  margin-top:2.5em;font-size:1.5em;line-height:1.5;
+  color:var(--gray-2);font-weight:400;max-width:32em;letter-spacing:-0.01em;
+}
+#slide-agua .agua-tagline{
+  margin-top:2em;padding:1.4em 1.8em;
+  background:rgba(255,149,0,0.08);
+  border:1px solid rgba(255,149,0,0.25);
+  backdrop-filter:blur(10px);
+  border-radius:0.9em;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1.4em;font-weight:600;line-height:1.4;
+  letter-spacing:-0.015em;color:var(--gray-2);max-width:30em;
+}
+#slide-agua .agua-tagline strong{color:var(--amber);font-weight:700}
 </style>
 </head>
 <body>
@@ -448,7 +505,7 @@ h2.slide-subtitle{
     <div class="bg-grid"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">01 / 10</div>
+      <div class="slide-counter">01 / 11</div>
     </div>
     <div class="cover-content">
       <div class="kicker"><span class="kicker-dot"></span>Entrega de implementación</div>
@@ -467,7 +524,7 @@ h2.slide-subtitle{
     <div class="bg-glow"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">02 / 10</div>
+      <div class="slide-counter">02 / 11</div>
     </div>
     <div style="margin-top:3.5em">
       <div class="kicker">Vista general del proceso</div>
@@ -504,7 +561,7 @@ h2.slide-subtitle{
     <div class="bg-glow"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">03 / 10</div>
+      <div class="slide-counter">03 / 11</div>
     </div>
     <div style="margin-top:3.5em">
       <div class="kicker">El seguimiento — donde se gana o se pierde</div>
@@ -538,7 +595,7 @@ h2.slide-subtitle{
     <div class="bg-grid"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">04 / 10</div>
+      <div class="slide-counter">04 / 11</div>
     </div>
     <div style="text-align:center;width:100%">
       <div class="impact-pre">En los últimos 3 días, el agente atendió a</div>
@@ -553,12 +610,29 @@ h2.slide-subtitle{
     </div>
   </div>
 
-  <!-- 5 — PROSPECCIÓN -->
+  <!-- AGUA — ANALOGÍA DEL AGUA -->
+  <div class="slide" id="slide-agua">
+    <div class="bg-fallback"></div>
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+    <div class="slide-header">
+      <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
+      <div class="slide-counter">05 / 11</div>
+    </div>
+    <div class="content-wrapper">
+      <div class="kicker"><span class="kicker-dot-amber"></span>La analogía del agua</div>
+      <h1 class="main-quote">Si llenas el embudo con <em>agua sucia</em>, todo lo que sale está sucio.</h1>
+      <p class="agua-explanation">Por más que filtres después, por más sistema que tengas, por más que tu equipo trabaje, <strong>nada limpia el agua que entró sucia desde el principio.</strong></p>
+      <div class="agua-tagline">Tu prospección es <strong>la fuente</strong>. Cuando la cuidas, todo el sistema funciona. Cuando la descuidas, gastas dinero filtrando basura.</div>
+    </div>
+  </div>
+
+  <!-- 6 — PROSPECCIÓN -->
   <div class="slide" id="slide-5">
     <div class="bg-glow"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">05 / 10</div>
+      <div class="slide-counter">06 / 11</div>
     </div>
     <div style="margin-top:3.5em">
       <div class="kicker">Etapa 01 — Tu equipo</div>
@@ -598,7 +672,7 @@ h2.slide-subtitle{
     <div class="bg-grid"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">06 / 10</div>
+      <div class="slide-counter">07 / 11</div>
     </div>
     <div style="text-align:center;width:100%">
       <div class="impact-pre">De cada 100 leads que entran a tu campaña</div>
@@ -613,7 +687,7 @@ h2.slide-subtitle{
     <div class="bg-glow"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">07 / 10</div>
+      <div class="slide-counter">08 / 11</div>
     </div>
     <div style="margin-top:3.5em">
       <div class="kicker">El costo real de los leads</div>
@@ -654,7 +728,7 @@ h2.slide-subtitle{
     <div class="bg-glow"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">08 / 10</div>
+      <div class="slide-counter">09 / 11</div>
     </div>
     <div style="margin-top:3.5em">
       <div class="kicker">Con FlowHub</div>
@@ -706,7 +780,7 @@ h2.slide-subtitle{
     <div class="bg-glow"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">09 / 10</div>
+      <div class="slide-counter">10 / 11</div>
     </div>
     <div style="margin-top:2em">
       <div class="kicker">Nuestro modelo de negocio</div>
@@ -747,7 +821,7 @@ h2.slide-subtitle{
     <div class="bg-glow"></div>
     <div class="slide-header">
       <div class="logo"><img src="flow hub logo 2.png" alt="FlowHub"></div>
-      <div class="slide-counter">10 / 10</div>
+      <div class="slide-counter">11 / 11</div>
     </div>
     <div style="margin-top:3.5em">
       <div class="kicker">Etapa 03 — Tu equipo</div>
