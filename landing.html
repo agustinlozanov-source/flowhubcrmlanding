@@ -1618,8 +1618,13 @@
       color: var(--gray-3); white-space: nowrap;
     }
     .plans-table tbody td:first-child { text-align: left; padding-left: 0; }
-    .plan-cell { display: flex; align-items: center; gap: 11px; }
-    .plan-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .plan-cell { display: flex; align-items: center; }
+    /* Acento lateral a tonalidad plena, como las tarjetas del pipeline en la
+       aplicación: el color dice de qué plan se trata sin competir con el texto. */
+    .plans-table tbody td:first-child {
+      box-shadow: inset 8px 0 0 var(--acento, transparent);
+      padding-left: 22px;
+    }
     .plan-name {
       font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
       color: var(--white); font-size: 15.5px; letter-spacing: -0.01em;
@@ -1632,7 +1637,8 @@
     .plan-price .cur { font-weight: 500; font-size: 11px; color: var(--gray-4); margin-left: 3px; }
     .plan-annual { font-size: 12.5px; color: var(--gray-4); }
     .plans-table tr.reco td { background: rgba(0, 200, 83, 0.06); }
-    .plans-table tr.reco td:first-child { box-shadow: inset 3px 0 0 var(--green); }
+    /* La fila recomendada ya se distingue por su fondo; el acento sigue
+       siendo el de su propio plan. */
     .tag-reco {
       display: inline-block; font-size: 9.5px; letter-spacing: 0.12em;
       text-transform: uppercase; font-weight: 800; color: var(--green);
@@ -1661,25 +1667,25 @@
     }
     .plan-btns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .plan-btn {
-      display: grid; grid-template-columns: auto 1fr auto; align-items: center;
-      gap: 9px; text-align: left; cursor: pointer;
+      display: grid; grid-template-columns: 1fr auto; align-items: center;
+      gap: 2px 9px; text-align: left; cursor: pointer;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 6px solid var(--acento, transparent);
       border-radius: var(--radius-sm); padding: 11px 13px;
       color: var(--gray-3); font-family: inherit; transition: all 0.15s;
     }
     .plan-btn:hover { border-color: rgba(255, 255, 255, 0.2); }
-    .plan-btn.on { border-color: var(--blue); background: var(--blue-light); }
+    .plan-btn.on { border-color: var(--blue); background: var(--blue-light); border-left-color: var(--acento, var(--blue)); }
     .plan-btn .nm {
       font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
-      font-size: 14px; color: var(--white); grid-column: 2;
+      font-size: 14px; color: var(--white); grid-column: 1;
     }
-    .plan-btn .mini { grid-column: 2; font-size: 11px; color: var(--gray-4); }
+    .plan-btn .mini { grid-column: 1; font-size: 11px; color: var(--gray-4); }
     .plan-btn .pr {
-      grid-row: 1 / span 2; grid-column: 3; font-family: 'Plus Jakarta Sans', sans-serif;
+      grid-row: 1 / span 2; grid-column: 2; font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700; font-size: 13.5px; color: var(--white); white-space: nowrap;
     }
-    .plan-btn .dot { grid-row: 1 / span 2; width: 9px; height: 9px; border-radius: 50%; }
 
     .calc-leads { display: flex; align-items: center; gap: 12px; }
     .calc-leads input[type="number"] {
@@ -1769,11 +1775,13 @@
         border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius);
         padding: 14px 16px; margin-bottom: 12px;
       }
-      .plans-table tbody td { border: none; padding: 4px 0; text-align: left; white-space: normal; }
+      .plans-table tbody td { border: none; padding: 4px 0; text-align: left; white-space: normal; box-shadow: none; }
+      .plans-table tbody td:first-child { padding-left: 0; }
+      .plans-table tr { border-left: 8px solid var(--acento, transparent); }
       .plans-table tbody td:not(:first-child)::before {
         content: attr(data-th) ": "; color: var(--gray-4); font-size: 12px;
       }
-      .plans-table tr.reco td:first-child { box-shadow: none; }
+
     }
 
     .sep {
@@ -2034,7 +2042,7 @@
       border-color: rgba(0, 0, 0, 0.1);
     }
     [data-theme="light"] .calc-leads input[type="number"] { color: #070708; }
-    [data-theme="light"] .plan-btn.on { background: var(--blue-light); border-color: var(--blue); }
+    [data-theme="light"] .plan-btn.on { background: var(--blue-light); border-color: var(--blue); border-left-color: var(--acento, var(--blue)); }
     [data-theme="light"] .billing-toggle button.on { color: #fff; }
     [data-theme="light"] .extra-band { background: rgba(255, 149, 0, 0.08); border-color: rgba(255, 149, 0, 0.25); }
     [data-theme="light"] .tip.up { color: #1d4ed8; }
@@ -3202,10 +3210,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr style="--acento:#2f6bf0">
           <td>
-            <div class="plan-cell"><span class="plan-dot" style="background:#2f6bf0"></span>
-              <div><div class="plan-name">Básico</div><div class="plan-feats">11 funciones</div></div>
+            <div class="plan-cell"><div><div class="plan-name">Básico</div><div class="plan-feats">11 funciones</div></div>
             </div>
           </td>
           <td data-th="Usuarios">1</td>
@@ -3213,10 +3220,9 @@
           <td data-th="Mensual"><span class="plan-price">$4,000<span class="cur">MXN</span></span></td>
           <td data-th="Anual · /mes"><span class="plan-annual">$3,333</span></td>
         </tr>
-        <tr class="reco">
+        <tr class="reco" style="--acento:#17b6c6">
           <td>
-            <div class="plan-cell"><span class="plan-dot" style="background:#17b6c6"></span>
-              <div><div class="plan-name">Solo<span class="tag-reco">Recomendado</span></div><div class="plan-feats">11 funciones</div></div>
+            <div class="plan-cell"><div><div class="plan-name">Solo<span class="tag-reco">Recomendado</span></div><div class="plan-feats">11 funciones</div></div>
             </div>
           </td>
           <td data-th="Usuarios">2</td>
@@ -3224,10 +3230,9 @@
           <td data-th="Mensual"><span class="plan-price">$5,500<span class="cur">MXN</span></span></td>
           <td data-th="Anual · /mes"><span class="plan-annual">$4,583</span></td>
         </tr>
-        <tr>
+        <tr style="--acento:#2fb867">
           <td>
-            <div class="plan-cell"><span class="plan-dot" style="background:#2fb867"></span>
-              <div><div class="plan-name">Equipo</div><div class="plan-feats">11 funciones</div></div>
+            <div class="plan-cell"><div><div class="plan-name">Equipo</div><div class="plan-feats">11 funciones</div></div>
             </div>
           </td>
           <td data-th="Usuarios">3</td>
@@ -3235,10 +3240,9 @@
           <td data-th="Mensual"><span class="plan-price">$8,500<span class="cur">MXN</span></span></td>
           <td data-th="Anual · /mes"><span class="plan-annual">$7,083</span></td>
         </tr>
-        <tr>
+        <tr style="--acento:#7c5cff">
           <td>
-            <div class="plan-cell"><span class="plan-dot" style="background:#7c5cff"></span>
-              <div><div class="plan-name">Agencia</div><div class="plan-feats">12 funciones</div></div>
+            <div class="plan-cell"><div><div class="plan-name">Agencia</div><div class="plan-feats">12 funciones</div></div>
             </div>
           </td>
           <td data-th="Usuarios">8</td>
@@ -3246,10 +3250,9 @@
           <td data-th="Mensual"><span class="plan-price">$12,500<span class="cur">MXN</span></span></td>
           <td data-th="Anual · /mes"><span class="plan-annual">$10,417</span></td>
         </tr>
-        <tr>
+        <tr style="--acento:#ef4444">
           <td>
-            <div class="plan-cell"><span class="plan-dot" style="background:#ef4444"></span>
-              <div><div class="plan-name">Red</div><div class="plan-feats">12 funciones</div></div>
+            <div class="plan-cell"><div><div class="plan-name">Red</div><div class="plan-feats">12 funciones</div></div>
             </div>
           </td>
           <td data-th="Usuarios">25</td>
@@ -3257,10 +3260,9 @@
           <td data-th="Mensual"><span class="plan-price">$22,500<span class="cur">MXN</span></span></td>
           <td data-th="Anual · /mes"><span class="plan-annual">$18,750</span></td>
         </tr>
-        <tr>
+        <tr style="--acento:#8a9098">
           <td>
-            <div class="plan-cell"><span class="plan-dot" style="background:#8a9098"></span>
-              <div><div class="plan-name">Corporativo</div><div class="plan-feats">13 funciones · a la medida</div></div>
+            <div class="plan-cell"><div><div class="plan-name">Corporativo</div><div class="plan-feats">13 funciones · a la medida</div></div>
             </div>
           </td>
           <td data-th="Usuarios">∞</td>
@@ -3399,8 +3401,8 @@
         var b = document.createElement('button');
         b.className = 'plan-btn' + (p.id === state.plan ? ' on' : '');
         b.setAttribute('data-id', p.id);
+        b.style.setProperty('--acento', p.dot);
         b.innerHTML =
-          '<span class="dot" style="background:' + p.dot + '"></span>' +
           '<span class="nm">' + p.nm + '</span>' +
           '<span class="mini">' + (p.leads === '∞' ? '∞' : p.leads.toLocaleString('es-MX')) +
             ' leads · ' + p.u + (p.u === 1 ? ' usuario' : ' usuarios') + '</span>' +
