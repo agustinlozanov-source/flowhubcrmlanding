@@ -1572,6 +1572,210 @@
     }
 
     /* ─── SEPARATOR ─── */
+
+    /* ─── PRECIOS ─── */
+    .pricing-section {
+      padding: 100px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pricing-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 44px;
+    }
+    .pricing-pillar {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius);
+      padding: 22px 22px 24px;
+    }
+    .pricing-pillar .pk {
+      font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+      font-weight: 700; color: var(--blue);
+    }
+    .pricing-pillar .pt {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+      font-size: 17px; margin: 10px 0 8px; letter-spacing: -0.01em;
+    }
+    .pricing-pillar .pd { font-size: 13.5px; line-height: 1.6; color: var(--gray-4); }
+
+    /* Tabla de planes. En pantallas chicas cada fila se vuelve una tarjeta:
+       una tabla de cinco columnas en un teléfono no se lee. */
+    .plans-table { width: 100%; border-collapse: collapse; }
+    .plans-table thead th {
+      font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gray-4); font-weight: 700; text-align: right;
+      padding: 0 12px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      white-space: nowrap;
+    }
+    .plans-table thead th:first-child { text-align: left; padding-left: 0; }
+    .plans-table tbody td {
+      padding: 16px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: right; font-variant-numeric: tabular-nums;
+      color: var(--gray-3); white-space: nowrap;
+    }
+    .plans-table tbody td:first-child { text-align: left; padding-left: 0; }
+    .plan-cell { display: flex; align-items: center; gap: 11px; }
+    .plan-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .plan-name {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+      color: var(--white); font-size: 15.5px; letter-spacing: -0.01em;
+    }
+    .plan-feats { font-size: 11.5px; color: var(--gray-4); margin-top: 2px; }
+    .plan-price {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+      color: var(--white); font-size: 15.5px;
+    }
+    .plan-price .cur { font-weight: 500; font-size: 11px; color: var(--gray-4); margin-left: 3px; }
+    .plan-annual { font-size: 12.5px; color: var(--gray-4); }
+    .plans-table tr.reco td { background: rgba(0, 200, 83, 0.06); }
+    .plans-table tr.reco td:first-child { box-shadow: inset 3px 0 0 var(--green); }
+    .tag-reco {
+      display: inline-block; font-size: 9.5px; letter-spacing: 0.12em;
+      text-transform: uppercase; font-weight: 800; color: var(--green);
+      background: var(--green-light); border-radius: 5px;
+      padding: 3px 7px; margin-left: 9px; vertical-align: middle;
+    }
+    .plans-note { font-size: 13px; color: var(--gray-4); margin-top: 18px; line-height: 1.65; max-width: 70ch; }
+    .plans-note b { color: var(--gray-3); font-weight: 600; }
+
+    /* Calculadora */
+    .calc {
+      margin-top: 56px;
+      display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .calc-h {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+      font-size: 18px; margin-bottom: 4px; letter-spacing: -0.01em;
+    }
+    .calc-sub { font-size: 13.5px; color: var(--gray-4); margin-bottom: 20px; line-height: 1.6; }
+    .calc-label {
+      font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 700; color: var(--gray-4); margin: 18px 0 9px;
+    }
+    .plan-btns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .plan-btn {
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+      gap: 9px; text-align: left; cursor: pointer;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm); padding: 11px 13px;
+      color: var(--gray-3); font-family: inherit; transition: all 0.15s;
+    }
+    .plan-btn:hover { border-color: rgba(255, 255, 255, 0.2); }
+    .plan-btn.on { border-color: var(--blue); background: var(--blue-light); }
+    .plan-btn .nm {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+      font-size: 14px; color: var(--white); grid-column: 2;
+    }
+    .plan-btn .mini { grid-column: 2; font-size: 11px; color: var(--gray-4); }
+    .plan-btn .pr {
+      grid-row: 1 / span 2; grid-column: 3; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: 13.5px; color: var(--white); white-space: nowrap;
+    }
+    .plan-btn .dot { grid-row: 1 / span 2; width: 9px; height: 9px; border-radius: 50%; }
+
+    .calc-leads { display: flex; align-items: center; gap: 12px; }
+    .calc-leads input[type="number"] {
+      width: 110px; background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-sm);
+      padding: 9px 11px; color: var(--white); font-family: inherit;
+      font-size: 14px; font-variant-numeric: tabular-nums;
+    }
+    .calc-leads input[type="range"] { flex: 1; accent-color: var(--blue); min-width: 0; }
+
+    .billing-toggle { display: inline-flex; gap: 4px; background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); padding: 4px; }
+    .billing-toggle button {
+      border: none; background: none; cursor: pointer; font-family: inherit;
+      font-size: 12.5px; font-weight: 600; color: var(--gray-4);
+      padding: 7px 14px; border-radius: 7px; transition: all 0.15s;
+    }
+    .billing-toggle button.on { background: var(--blue); color: #fff; }
+
+    .calc-result {
+      background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius); padding: 24px; align-self: start;
+    }
+    .calc-result .lbl { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-4); font-weight: 700; }
+    .calc-result .total {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+      font-size: 42px; line-height: 1.05; color: var(--white); margin-top: 8px; letter-spacing: -0.03em;
+    }
+    .calc-result .total .cur { font-size: 15px; color: var(--gray-4); margin-left: 6px; font-weight: 500; }
+    .calc-result .total-sub { font-size: 12.5px; color: var(--gray-4); margin-top: 6px; }
+    .calc-result .corp { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 26px; color: var(--white); margin-top: 8px; }
+    .calc-result .corp-sub { font-size: 13px; color: var(--gray-4); margin-top: 8px; line-height: 1.6; }
+    .calc-result .brk { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .calc-result .line { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; padding: 5px 0; }
+    .calc-result .line .d { color: var(--gray-4); }
+    .calc-result .line .v { color: var(--white); font-variant-numeric: tabular-nums; font-weight: 600; }
+    .calc-result .line.extra .v { color: var(--amber); }
+    .calc-incl { font-size: 12.5px; color: var(--gray-4); margin-top: 14px; line-height: 1.6; }
+    .calc-incl b { color: var(--gray-3); }
+    .tip { margin-top: 16px; border-radius: var(--radius-sm); padding: 13px 15px; font-size: 12.5px; line-height: 1.6; }
+    .tip.ok { background: var(--green-light); color: var(--green); }
+    .tip.up { background: var(--blue-light); color: #8ab4ff; }
+    .tip b { font-weight: 700; }
+    .tip .cta { display: inline-block; margin-top: 8px; cursor: pointer; text-decoration: underline; font-weight: 700; }
+
+    /* Lead adicional y prueba */
+    .extra-band {
+      margin-top: 24px; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center;
+      background: rgba(255, 149, 0, 0.06); border: 1px solid rgba(255, 149, 0, 0.18);
+      border-radius: var(--radius); padding: 26px 28px;
+    }
+    .extra-band .amt {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 42px;
+      line-height: 1; color: var(--white); letter-spacing: -0.03em; white-space: nowrap;
+    }
+    .extra-band .amt .u { font-size: 15px; color: var(--amber); margin-left: 5px; }
+    .extra-band .cap { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-4); margin-top: 9px; font-weight: 700; }
+    .extra-band .bh { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 16px; color: var(--white); margin-bottom: 7px; }
+    .extra-band p { font-size: 13.5px; color: var(--gray-4); line-height: 1.6; }
+    .extra-band p + p { margin-top: 9px; }
+    .extra-band b { color: var(--gray-3); }
+
+    .trial-strip {
+      margin-top: 16px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius); padding: 20px 24px;
+    }
+    .trial-strip .badge {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px;
+      color: var(--green); background: var(--green-light); border-radius: var(--radius-sm);
+      padding: 11px 15px; white-space: nowrap;
+    }
+    .trial-strip .tx { font-size: 13.5px; color: var(--gray-4); line-height: 1.6; flex: 1; min-width: 240px; }
+    .trial-strip .tx b { color: var(--gray-3); }
+
+    @media (max-width: 900px) {
+      .pricing-pillars { grid-template-columns: 1fr; }
+      .calc { grid-template-columns: 1fr; }
+      .plan-btns { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .pricing-section { padding: 70px 24px; }
+      .extra-band { grid-template-columns: 1fr; gap: 18px; }
+      /* La tabla se vuelve tarjetas: cinco columnas no entran en un teléfono */
+      .plans-table thead { display: none; }
+      .plans-table, .plans-table tbody, .plans-table tr, .plans-table td { display: block; width: 100%; }
+      .plans-table tr {
+        border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius);
+        padding: 14px 16px; margin-bottom: 12px;
+      }
+      .plans-table tbody td { border: none; padding: 4px 0; text-align: left; white-space: normal; }
+      .plans-table tbody td:not(:first-child)::before {
+        content: attr(data-th) ": "; color: var(--gray-4); font-size: 12px;
+      }
+      .plans-table tr.reco td:first-child { box-shadow: none; }
+    }
+
     .sep {
       width: 100%;
       height: 1px;
@@ -1786,6 +1990,55 @@
       color: #6e6e73;
     }
 
+    /* Precios en tema claro. Las superficies de la sección son blancos
+       translúcidos pensados para fondo oscuro: sobre claro desaparecen, y el
+       texto blanco queda invisible. */
+    [data-theme="light"] .pricing-pillar,
+    [data-theme="light"] .calc,
+    [data-theme="light"] .trial-strip {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+    [data-theme="light"] .pricing-pillar .pt { color: #070708; }
+    [data-theme="light"] .pricing-pillar .pd,
+    [data-theme="light"] .plans-note,
+    [data-theme="light"] .plan-feats,
+    [data-theme="light"] .calc-sub,
+    [data-theme="light"] .trial-strip .tx,
+    [data-theme="light"] .extra-band p { color: #5c5c66; }
+    [data-theme="light"] .calc-incl { color: #5c5c66; }
+    [data-theme="light"] .calc-incl b,
+    [data-theme="light"] .plans-note b,
+    [data-theme="light"] .trial-strip .tx b,
+    [data-theme="light"] .extra-band b { color: #070708; }
+
+    [data-theme="light"] .plans-table thead th { border-bottom-color: rgba(0, 0, 0, 0.1); color: #6b6b75; }
+    [data-theme="light"] .plans-table tbody td { border-bottom-color: rgba(0, 0, 0, 0.07); color: #3c3c46; }
+    [data-theme="light"] .plan-name,
+    [data-theme="light"] .plan-price,
+    [data-theme="light"] .calc-h,
+    [data-theme="light"] .calc-result .total,
+    [data-theme="light"] .calc-result .corp,
+    [data-theme="light"] .calc-result .line .v,
+    [data-theme="light"] .extra-band .amt,
+    [data-theme="light"] .extra-band .bh,
+    [data-theme="light"] .plan-btn .nm,
+    [data-theme="light"] .plan-btn .pr { color: #070708; }
+    [data-theme="light"] .plans-table tr.reco td { background: rgba(0, 200, 83, 0.08); }
+
+    [data-theme="light"] .plan-btn,
+    [data-theme="light"] .calc-result,
+    [data-theme="light"] .calc-leads input[type="number"],
+    [data-theme="light"] .billing-toggle {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+    [data-theme="light"] .calc-leads input[type="number"] { color: #070708; }
+    [data-theme="light"] .plan-btn.on { background: var(--blue-light); border-color: var(--blue); }
+    [data-theme="light"] .billing-toggle button.on { color: #fff; }
+    [data-theme="light"] .extra-band { background: rgba(255, 149, 0, 0.08); border-color: rgba(255, 149, 0, 0.25); }
+    [data-theme="light"] .tip.up { color: #1d4ed8; }
+
     [data-theme="light"] .module-card {
       background: rgba(255, 255, 255, 0.8);
       border: 1px solid rgba(0, 0, 0, 0.08);
@@ -1927,6 +2180,7 @@
       <a href="#fuentes">Integraciones</a>
       <a href="#modulos">Módulos</a>
       <a href="#referidos">Referidos</a>
+      <a href="#precios">Precios</a>
     </div>
     <div class="nav-cta">
       <a href="/pipeline-diagnostico.html" class="nav-btn nav-btn-ghost" style="text-decoration:none;">🔍 Diagnóstico de Pipeline</a>
@@ -2910,7 +3164,169 @@
   <!-- ═══════════════════════════════════════
      CTA FINAL
 ════════════════════════════════════════ -->
-  <div class="sep"></div>
+    <div class="sep"></div>
+  <div class="pricing-section" id="precios">
+    <div class="section-label">Precios</div>
+    <h2>Un motor.<br><em>La capacidad que uses.</em></h2>
+    <p class="section-sub">Todos los planes traen la plataforma completa — el mismo CRM con IA. Lo que cambia es cuántos
+      leads incluye. Mientras más alto el plan, menos te cuesta cada lead.</p>
+
+    <div class="pricing-pillars">
+      <div class="pricing-pillar">
+        <div class="pk">Base</div>
+        <div class="pt">Plataforma</div>
+        <div class="pd">CRM con IA completo: seguimiento comercial, automatización y reportes. El mismo motor en todos
+          los planes, sin funciones recortadas.</div>
+      </div>
+      <div class="pricing-pillar">
+        <div class="pk">Incluido</div>
+        <div class="pt">Capacidad de leads</div>
+        <div class="pd">Cada plan incluye un volumen mensual de leads. Entre más alto el plan, más bajo el costo por
+          cada uno.</div>
+      </div>
+      <div class="pricing-pillar">
+        <div class="pk">Crecimiento</div>
+        <div class="pt">Lead adicional</div>
+        <div class="pd">Si superas tu plan, cada lead extra se cobra a tarifa fija. La operación nunca se interrumpe.</div>
+      </div>
+    </div>
+
+    <table class="plans-table">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Usuarios</th>
+          <th>Leads / mes</th>
+          <th>Mensual</th>
+          <th>Anual · /mes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="plan-cell"><span class="plan-dot" style="background:#2f6bf0"></span>
+              <div><div class="plan-name">Básico</div><div class="plan-feats">11 funciones</div></div>
+            </div>
+          </td>
+          <td data-th="Usuarios">1</td>
+          <td data-th="Leads / mes">150</td>
+          <td data-th="Mensual"><span class="plan-price">$4,000<span class="cur">MXN</span></span></td>
+          <td data-th="Anual · /mes"><span class="plan-annual">$3,333</span></td>
+        </tr>
+        <tr class="reco">
+          <td>
+            <div class="plan-cell"><span class="plan-dot" style="background:#17b6c6"></span>
+              <div><div class="plan-name">Solo<span class="tag-reco">Recomendado</span></div><div class="plan-feats">11 funciones</div></div>
+            </div>
+          </td>
+          <td data-th="Usuarios">2</td>
+          <td data-th="Leads / mes">300</td>
+          <td data-th="Mensual"><span class="plan-price">$5,500<span class="cur">MXN</span></span></td>
+          <td data-th="Anual · /mes"><span class="plan-annual">$4,583</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="plan-cell"><span class="plan-dot" style="background:#2fb867"></span>
+              <div><div class="plan-name">Equipo</div><div class="plan-feats">11 funciones</div></div>
+            </div>
+          </td>
+          <td data-th="Usuarios">3</td>
+          <td data-th="Leads / mes">600</td>
+          <td data-th="Mensual"><span class="plan-price">$8,500<span class="cur">MXN</span></span></td>
+          <td data-th="Anual · /mes"><span class="plan-annual">$7,083</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="plan-cell"><span class="plan-dot" style="background:#7c5cff"></span>
+              <div><div class="plan-name">Agencia</div><div class="plan-feats">12 funciones</div></div>
+            </div>
+          </td>
+          <td data-th="Usuarios">8</td>
+          <td data-th="Leads / mes">1,000</td>
+          <td data-th="Mensual"><span class="plan-price">$12,500<span class="cur">MXN</span></span></td>
+          <td data-th="Anual · /mes"><span class="plan-annual">$10,417</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="plan-cell"><span class="plan-dot" style="background:#ef4444"></span>
+              <div><div class="plan-name">Red</div><div class="plan-feats">12 funciones</div></div>
+            </div>
+          </td>
+          <td data-th="Usuarios">25</td>
+          <td data-th="Leads / mes">2,000</td>
+          <td data-th="Mensual"><span class="plan-price">$22,500<span class="cur">MXN</span></span></td>
+          <td data-th="Anual · /mes"><span class="plan-annual">$18,750</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="plan-cell"><span class="plan-dot" style="background:#8a9098"></span>
+              <div><div class="plan-name">Corporativo</div><div class="plan-feats">13 funciones · a la medida</div></div>
+            </div>
+          </td>
+          <td data-th="Usuarios">∞</td>
+          <td data-th="Leads / mes">∞</td>
+          <td data-th="Mensual"><span class="plan-price" style="color:var(--green)">Cotización</span></td>
+          <td data-th="Anual · /mes"><span class="plan-annual">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="plans-note">Montos en pesos mexicanos (MXN), IVA incluido. El plan anual se cobra por adelantado:
+      <b>pagas 10 meses y usas 12</b> — la columna “Anual · /mes” muestra el equivalente mensual.
+      <b>Corporativo</b>: usuarios y leads ilimitados, con precio según volumen.</p>
+
+    <!-- Calculadora: deja que cada quien vea su propio número en vez de
+         deducirlo de la tabla. -->
+    <div class="calc">
+      <div>
+        <div class="calc-h">¿Cuánto te saldría a vos?</div>
+        <div class="calc-sub">Elegí un plan y movelo según los leads que manejás por mes. Si otro plan te conviene más,
+          te lo decimos.</div>
+
+        <div class="calc-label">Plan</div>
+        <div class="plan-btns" id="plans"></div>
+
+        <div class="calc-label">Leads por mes</div>
+        <div class="calc-leads">
+          <input type="number" id="leadNum" min="0" max="100000" step="10">
+          <input type="range" id="leadRange" min="0" max="2500" step="10">
+        </div>
+
+        <div class="calc-label">Facturación</div>
+        <div class="billing-toggle" id="billing">
+          <button data-b="mensual" class="on">Mensual</button>
+          <button data-b="anual">Anual</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="calc-result" id="result"></div>
+        <div class="calc-incl" id="inclNote"></div>
+      </div>
+    </div>
+    <p class="plans-note" id="foot"></p>
+
+    <div class="extra-band">
+      <div>
+        <div class="amt">$15<span class="u">MXN</span></div>
+        <div class="cap">por lead extra</div>
+      </div>
+      <div>
+        <div class="bh">Cuando superás los leads de tu plan</div>
+        <p>Cada lead por encima del límite se cobra automáticamente a <b>$15 MXN</b> sobre el consumo del mes. La
+          operación no se interrumpe: seguís capturando leads sin pausas.</p>
+        <p>Si lo superás mes a mes, <b>conviene subir de nivel</b>: el lead ya incluido en el siguiente plan sale más
+          barato que pagarlo como adicional.</p>
+      </div>
+    </div>
+
+    <div class="trial-strip">
+      <div class="badge">$50 MXN · 14 días</div>
+      <div class="tx">Acceso para evaluar la plataforma: <b>1 usuario</b>, <b>150 leads de prueba</b> y las funciones
+        base del CRM. Pensado para conocer el producto antes de contratar; no sustituye a los planes de pago.</div>
+    </div>
+  </div>
+
+<div class="sep"></div>
   <div class="cta-section" id="contacto">
     <div class="cta-bg"></div>
     <div class="cta-content">
@@ -2939,6 +3355,153 @@
   </footer>
 
   <script>
+
+    // ─── CALCULADORA DE PLANES ───
+    // Los planes viven acá y en la tabla de arriba. Si cambia un precio hay que
+    // tocarlo en los dos lugares: la tabla se lee sin JavaScript, que es lo que
+    // importa para que la vea Google y para que funcione si el script falla.
+    (function () {
+      var PLANS = [
+        { id: 'basico',  nm: 'Básico',      u: 1,   leads: 150,  price: 4000,  dot: '#2f6bf0' },
+        { id: 'solo',    nm: 'Solo',        u: 2,   leads: 300,  price: 5500,  dot: '#17b6c6', reco: true },
+        { id: 'equipo',  nm: 'Equipo',      u: 3,   leads: 600,  price: 8500,  dot: '#2fb867' },
+        { id: 'agencia', nm: 'Agencia',     u: 8,   leads: 1000, price: 12500, dot: '#7c5cff' },
+        { id: 'red',     nm: 'Red',         u: 25,  leads: 2000, price: 22500, dot: '#ef4444' },
+        { id: 'corp',    nm: 'Corporativo', u: '∞', leads: '∞',  price: null,  dot: '#8a9098' }
+      ];
+      var EXTRA = 15;             // precio por lead adicional (MXN)
+      var ANNUAL_FACTOR = 10 / 12; // anual: paga 10 meses, usa 12
+
+      var plansEl = document.getElementById('plans');
+      if (!plansEl) return;
+
+      var state = { plan: 'solo', leads: 300, billing: 'mensual' };
+      var fmt = function (n) { return '$' + Math.round(n).toLocaleString('es-MX'); };
+      var planById = function (id) { return PLANS.filter(function (p) { return p.id === id; })[0]; };
+
+      function monthlyTotal(p, leads) {
+        if (p.price === null) return null;
+        return p.price + Math.max(0, leads - p.leads) * EXTRA;
+      }
+
+      // El plan más barato para ese volumen, entre los de precio fijo.
+      function bestPlan(leads) {
+        var best = null;
+        PLANS.forEach(function (p) {
+          if (p.price === null) return;
+          var t = monthlyTotal(p, leads);
+          if (best === null || t < best.t) best = { p: p, t: t };
+        });
+        return best;
+      }
+
+      PLANS.forEach(function (p) {
+        var b = document.createElement('button');
+        b.className = 'plan-btn' + (p.id === state.plan ? ' on' : '');
+        b.setAttribute('data-id', p.id);
+        b.innerHTML =
+          '<span class="dot" style="background:' + p.dot + '"></span>' +
+          '<span class="nm">' + p.nm + '</span>' +
+          '<span class="mini">' + (p.leads === '∞' ? '∞' : p.leads.toLocaleString('es-MX')) +
+            ' leads · ' + p.u + (p.u === 1 ? ' usuario' : ' usuarios') + '</span>' +
+          '<span class="pr">' + (p.price === null ? 'Cotización' : fmt(p.price)) + '</span>';
+        b.addEventListener('click', function () {
+          state.plan = p.id;
+          // Al elegir un plan más grande se sube el volumen al mínimo de ese
+          // plan: si no, el resultado muestra un plan desaprovechado.
+          if (p.price !== null && state.leads < p.leads) state.leads = p.leads;
+          syncInputs(); render();
+        });
+        plansEl.appendChild(b);
+      });
+
+      var numEl = document.getElementById('leadNum');
+      var rangeEl = document.getElementById('leadRange');
+      function clampLeads(v) { v = parseInt(v, 10); if (isNaN(v) || v < 0) v = 0; if (v > 100000) v = 100000; return v; }
+      function syncInputs() { numEl.value = state.leads; rangeEl.value = Math.min(state.leads, 2500); }
+      numEl.addEventListener('input', function () { state.leads = clampLeads(numEl.value); rangeEl.value = Math.min(state.leads, 2500); render(); });
+      rangeEl.addEventListener('input', function () { state.leads = clampLeads(rangeEl.value); numEl.value = state.leads; render(); });
+
+      document.getElementById('billing').addEventListener('click', function (e) {
+        var btn = e.target.closest('button'); if (!btn) return;
+        state.billing = btn.getAttribute('data-b');
+        Array.prototype.forEach.call(this.querySelectorAll('button'), function (x) { x.classList.toggle('on', x === btn); });
+        render();
+      });
+
+      function render() {
+        Array.prototype.forEach.call(plansEl.children, function (b) {
+          b.classList.toggle('on', b.getAttribute('data-id') === state.plan);
+        });
+        var p = planById(state.plan);
+        var incl = document.getElementById('inclNote');
+        var res = document.getElementById('result');
+
+        if (p.price === null) {
+          incl.innerHTML = 'Corporativo incluye <b>usuarios y leads ilimitados</b>.';
+          res.innerHTML =
+            '<div class="lbl">Costo estimado</div>' +
+            '<div class="corp">Cotización a la medida</div>' +
+            '<div class="corp-sub">Usuarios y leads ilimitados. El precio se define según el volumen y las necesidades de cada empresa.</div>';
+          renderFoot(); return;
+        }
+
+        var extra = Math.max(0, state.leads - p.leads);
+        var baseShown = state.billing === 'anual' ? p.price * ANNUAL_FACTOR : p.price;
+        var extraCost = extra * EXTRA;
+
+        incl.innerHTML = 'El plan <b>' + p.nm + '</b> incluye <b>' + p.leads.toLocaleString('es-MX') + ' leads</b> y ' +
+          p.u + (p.u === 1 ? ' usuario' : ' usuarios') + '.' +
+          (extra > 0 ? ' Estás ' + extra.toLocaleString('es-MX') + ' leads por encima.' : ' Dentro del plan.');
+
+        var html =
+          '<div class="lbl">Costo estimado</div>' +
+          '<div class="total">' + fmt(baseShown + extraCost) + '<span class="cur">MXN</span></div>' +
+          '<div class="total-sub">' + (state.billing === 'anual'
+            ? 'al mes · facturación anual (pagás 10, usás 12)'
+            : 'al mes · facturación mensual') + '</div>' +
+          '<div class="brk">' +
+            '<div class="line"><span class="d">Plan ' + p.nm + (state.billing === 'anual' ? ' (anual /mes)' : '') +
+              '</span><span class="v">' + fmt(baseShown) + '</span></div>';
+        if (extra > 0) {
+          html += '<div class="line extra"><span class="d">' + extra.toLocaleString('es-MX') +
+            ' leads extra × $' + EXTRA + '</span><span class="v">' + fmt(extraCost) + '</span></div>';
+        }
+        html += '</div>' + tipHTML(p);
+        res.innerHTML = html;
+
+        var cta = res.querySelector('.cta');
+        if (cta) cta.addEventListener('click', function () { state.plan = cta.getAttribute('data-go'); syncInputs(); render(); });
+        renderFoot();
+      }
+
+      function tipHTML(current) {
+        if (state.leads > 2000) {
+          return '<div class="tip up">Con <b>' + state.leads.toLocaleString('es-MX') +
+            ' leads</b> conviene <b>Corporativo</b>: a ese volumen los leads extra se disparan.</div>';
+        }
+        var best = bestPlan(state.leads);
+        // Se comparan montos mensuales base, sin el descuento anual, para que
+        // la sugerencia no dependa de cómo elegiste facturar.
+        var curMonthly = monthlyTotal(current, state.leads);
+        if (best && best.p.id !== current.id && best.t < curMonthly) {
+          return '<div class="tip up">Con <b>' + state.leads.toLocaleString('es-MX') + ' leads</b>, el plan <b>' +
+            best.p.nm + '</b> sale ' + fmt(best.t) + '/mes — ' + fmt(curMonthly - best.t) + ' menos que ' +
+            current.nm + ' con extras.<br><span class="cta" data-go="' + best.p.id + '">Cambiar a ' + best.p.nm + '</span></div>';
+        }
+        return '<div class="tip ok">Este es el plan más conveniente para ' + state.leads.toLocaleString('es-MX') + ' leads al mes.</div>';
+      }
+
+      function renderFoot() {
+        document.getElementById('foot').innerHTML =
+          'Montos en pesos mexicanos (MXN), IVA incluido. Lead adicional: $' + EXTRA + ' c/u. ' +
+          'El plan anual se cobra por adelantado (pagás 10 meses, usás 12); los leads extra se cobran según consumo. ' +
+          'Precios de referencia, sujetos a cambio.';
+      }
+
+      syncInputs(); render();
+    })();
+
     // ─── THEME TOGGLE ───
     const DARK_LOGO  = 'flow%20hub%20logo%202.png';
     const LIGHT_LOGO = 'flow%20hub%20logo%201.png';
