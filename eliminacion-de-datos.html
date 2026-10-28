@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliminación de datos — FlowCRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #070708; --white: #ffffff;
+      --gray-1: #f5f5f7; --gray-2: #e8e8ed; --gray-3: #c7c7cc;
+      --gray-4: #8e8e93; --gray-5: #3a3a3c; --gray-6: #1c1c1e;
+      --blue: #0066ff; --purple: #7c3aed; --green: #00c853;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 48px; height: 60px; display: flex; align-items: center; gap: 40px;
+      background: rgba(7,7,8,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-mark {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-text { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+    .nav-back { margin-left: auto; font-size: 13px; color: var(--gray-4); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+    .nav-back:hover { color: white; }
+
+    /* HERO */
+    .doc-hero {
+      padding: 120px 48px 64px;
+      max-width: 800px; margin: 0 auto; text-align: center;
+      position: relative;
+    }
+    .doc-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,102,255,0.1) 0%, transparent 70%);
+    }
+    .doc-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; font-weight: 600; color: var(--gray-3); margin-bottom: 24px;
+    }
+    .doc-hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 4vw, 48px); font-weight: 900;
+      line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px;
+    }
+    .doc-hero p { font-size: 15px; color: var(--gray-4); max-width: 520px; margin: 0 auto; }
+    .doc-updated { margin-top: 24px; font-size: 12.5px; color: var(--gray-5); }
+
+    /* CONTENT */
+    .doc-content {
+      max-width: 800px; margin: 0 auto;
+      padding: 0 48px 100px;
+    }
+    .doc-divider {
+      height: 1px; background: rgba(255,255,255,0.06);
+      margin: 48px 0;
+    }
+    .doc-section { margin-bottom: 48px; }
+    .doc-section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+      margin-bottom: 16px; color: white;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .doc-section h2 .num {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(0,102,255,0.15); border: 1px solid rgba(0,102,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--blue); flex-shrink: 0;
+    }
+    .doc-section p { font-size: 14.5px; color: var(--gray-4); margin-bottom: 12px; line-height: 1.75; }
+    .doc-section ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .doc-section ul li {
+      font-size: 14.5px; color: var(--gray-4); padding-left: 20px; position: relative; line-height: 1.65;
+    }
+    .doc-section ul li::before {
+      content: '–'; position: absolute; left: 0; color: var(--blue); font-weight: 600;
+    }
+    .doc-section a { color: var(--blue); text-decoration: none; }
+    .doc-section a:hover { text-decoration: underline; }
+
+    .highlight-box {
+      background: rgba(0,102,255,0.06); border: 1px solid rgba(0,102,255,0.15);
+      border-radius: 12px; padding: 20px 24px; margin: 16px 0;
+    }
+    .highlight-box p { margin: 0; font-size: 14px; color: var(--gray-3); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 48px; text-align: center;
+    }
+    .footer-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .footer-copy { font-size: 12.5px; color: var(--gray-5); margin-bottom: 16px; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; }
+    .footer-links a { font-size: 12.5px; color: var(--gray-4); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/landing.html" class="nav-logo">
+      <img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 32px;">
+    </a>
+    <a href="/landing.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <div class="doc-badge">Documento legal</div>
+    <h1>Eliminación de datos</h1>
+    <p class="doc-sub">Cómo pedir que borremos la información que tenemos de ti, seas el titular de una cuenta o una persona que escribió a un negocio.</p>
+    <div class="doc-updated">Última actualización: 28 de octubre de 2026</div>
+  </div>
+
+  <div class="doc-content">
+    <div class="doc-divider"></div>
+
+    <div class="doc-section">
+      <h2>Si escribiste a un negocio por Instagram, Messenger o WhatsApp</h2>
+      <p>Cuando mandas un mensaje a un negocio que usa FlowCRM, ese negocio recibe tu mensaje dentro de nuestra plataforma. Guardamos tu nombre de perfil, el identificador que nos entrega Meta o WhatsApp, y el contenido de la conversación, para que el negocio pueda atenderte y darte seguimiento.</p>
+      <p>Ese negocio es el responsable de tus datos. Nosotros los guardamos por encargo suyo. Puedes pedir que se borren de cualquiera de estas dos formas:</p>
+      <ul>
+        <li><strong>Directamente al negocio con el que hablaste.</strong> Es el camino más rápido: puede borrar tu ficha y tu conversación desde la plataforma en el momento.</li>
+        <li><strong>Escribiéndonos a nosotros</strong> a <a href="mailto:contacto@qubitcorp.mx">contacto@qubitcorp.mx</a> con el asunto <strong>«Eliminación de datos»</strong>. Dinos por qué canal escribiste —Instagram, Messenger o WhatsApp—, el nombre de usuario o el número desde el que lo hiciste, y a qué negocio. Con eso lo localizamos.</li>
+      </ul>
+      <p>No necesitas tener una cuenta con nosotros ni demostrar nada más. Atendemos la solicitud en un plazo máximo de <strong>30 días naturales</strong> y te confirmamos por el mismo medio cuando esté hecho.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2>Qué se borra exactamente</h2>
+      <ul>
+        <li>Tu ficha de contacto: nombre, teléfono, correo y cualquier dato que el negocio haya registrado sobre ti.</li>
+        <li>El historial completo de la conversación en todos los canales.</li>
+        <li>Los identificadores que nos entregan Meta o WhatsApp para poder entregarte mensajes.</li>
+        <li>Las citas que se hayan agendado contigo y las oportunidades asociadas a tu ficha.</li>
+      </ul>
+      <p>Hay una excepción, y conviene decirla de frente: <strong>los registros contables o fiscales que la ley nos obliga a conservar</strong> —una factura emitida, por ejemplo— no se pueden borrar antes del plazo legal. Si hubiera alguno, te lo decimos en la respuesta.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2>Si tienes una cuenta de FlowCRM</h2>
+      <p>Si eres usuario de la plataforma y quieres eliminar tu cuenta y los datos de tu organización, escríbenos a <a href="mailto:contacto@qubitcorp.mx">contacto@qubitcorp.mx</a> desde el correo con el que te registraste.</p>
+      <p>Antes de borrar nada te damos la opción de exportar tus contactos en CSV, para que no pierdas tu información al cerrar la cuenta. Una vez confirmada la eliminación, los datos de la organización se borran de forma permanente y no se pueden recuperar.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2>Datos obtenidos a través de las plataformas de Meta</h2>
+      <p>FlowCRM se integra con Instagram, Facebook Messenger y WhatsApp mediante las APIs oficiales de Meta Platforms, Inc. Los datos que obtenemos por esa vía —tu identificador de usuario, tu nombre de perfil y el contenido de los mensajes— se usan únicamente para que el negocio con el que hablaste pueda leerte y responderte dentro de la plataforma.</p>
+      <p>Esos datos se eliminan con el mismo procedimiento descrito arriba. También se eliminan automáticamente si el negocio desconecta su cuenta de Instagram o de WhatsApp de FlowCRM, o si cierra su cuenta con nosotros.</p>
+      <p>No vendemos ni rentamos esa información, y no la usamos para publicidad ni para entrenar modelos.</p>
+    </div>
+
+    <div class="doc-section">
+      <h2>Contacto</h2>
+      <p>Para cualquier solicitud relacionada con tus datos personales: <a href="mailto:contacto@qubitcorp.mx">contacto@qubitcorp.mx</a></p>
+      <p>Si quieres leer el documento completo sobre qué datos tratamos y por qué, está en nuestra <a href="/privacy.html">Política de Privacidad</a>.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo"><img src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 28px;"></div>
+    <div class="footer-copy">© 2026 FlowCRM. CRM + Agentes IA para agencias y empresas.</div>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacidad</a>
+      <a href="/terms.html">Términos</a>
+      <a href="/eliminacion-de-datos.html">Eliminar mis datos</a>
+      <a href="mailto:contacto@qubitcorp.mx">Contacto</a>
+    </div>
+  </footer>
+
+</body>
+</html>
