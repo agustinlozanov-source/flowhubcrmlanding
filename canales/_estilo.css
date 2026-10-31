@@ -348,3 +348,52 @@ footer a { color: var(--muted); text-decoration: none; }
   }
   .escena__icono img { width: 27px; height: 27px; }
 }
+
+/* ── Los botones ──────────────────────────────────────────
+ * El hover no cambiaba nada y un botón que no responde no se siente
+ * apretable. El degradado de la marca crece desde abajo, un brillo cruza una
+ * sola vez, y el botón se levanta.
+ *
+ * El degradado va como background-image del propio botón y no como una capa
+ * detrás: una capa con z-index negativo queda debajo del fondo del botón y no
+ * se ve nunca.
+ */
+.btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  background-color: var(--fg);
+  background-image: linear-gradient(120deg, #1aab99, #3533cd);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% 0%;
+  transition: background-size .32s cubic-bezier(.2,.8,.2,1),
+              transform .18s ease, box-shadow .22s ease, color .18s ease;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.4) 50%, transparent 62%);
+  transform: translateX(-130%);
+}
+.btn:hover {
+  color: #fff;
+  background-size: 100% 100%;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(26,171,153,.34), 0 4px 12px rgba(53,51,205,.26);
+}
+.btn:hover::after { animation: brillo .72s cubic-bezier(.3,.7,.3,1); }
+.btn:active { transform: translateY(0); }
+@keyframes brillo { to { transform: translateX(130%); } }
+
+/* el secundario arranca de vidrio y se enciende igual */
+.btn--ghost {
+  background-color: rgba(255,255,255,.05);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+}
+[data-theme="light"] .btn--ghost { background-color: rgba(255,255,255,.6); }
+.btn--ghost:hover { border-color: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: background-size .2s; }
+  .btn:hover { transform: none; }
+  .btn:hover::after { animation: none; }
+}
