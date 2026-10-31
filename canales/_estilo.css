@@ -34,6 +34,13 @@ body {
 .top nav { display: flex; gap: 22px; align-items: center; }
 .top nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
 .top nav a:hover { color: var(--fg); }
+.tema {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 9px; cursor: pointer;
+  background: transparent; border: 1px solid var(--line); color: var(--muted);
+  font-size: 15px; line-height: 1;
+}
+.tema:hover { color: var(--fg); border-color: var(--g4); }
 .top .cta {
   background: var(--fg); color: var(--bg); padding: 8px 16px; border-radius: 9px;
   font-size: 13.5px; font-weight: 600;
@@ -41,6 +48,11 @@ body {
 
 /* Encabezado */
 header { padding: 72px 0 40px; }
+.hero--alto header { padding: 0 0 34px; }
+.hero--alto h1 { font-size: clamp(28px, 3.6vw, 42px); letter-spacing: -1.4px; margin-bottom: 14px; }
+.hero--alto .lead { font-size: 18px; }
+.hero--alto .ctas { margin-top: 20px; }
+.hero--alto .tira { margin-top: 16px; }
 .kicker { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 20px; }
 .kicker img { width: 26px; height: 26px; }
 .kicker span { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -263,10 +275,10 @@ footer a { color: var(--muted); text-decoration: none; }
  * El mockup entra antes que el texto: primero se ve de qué se trata,
  * después se lee, y el botón está ahí mismo sin bajar nada.
  */
-.hero--alto { padding: 44px 0 0; text-align: center; }
+.hero--alto { padding: 26px 0 0; text-align: center; }
 .hero--alto .wrap { max-width: 980px; }
 
-.escena { position: relative; height: 360px; margin-bottom: 44px; }
+.escena { position: relative; height: 300px; margin-bottom: 30px; }
 .escena__centro {
   position: absolute; left: 50%; top: 0; transform: translateX(-50%);
   width: 420px; max-width: 92%; text-align: left;
@@ -278,8 +290,8 @@ footer a { color: var(--muted); text-decoration: none; }
   font-size: 13px; animation: flotar 6s ease-in-out infinite;
 }
 [data-theme="light"] .flotante { background: var(--white); box-shadow: 0 18px 44px rgba(0,0,0,.12); }
-.flotante--izq { left: 2%; top: 92px; animation-delay: -1.5s; }
-.flotante--der { right: 1%; top: 182px; animation-delay: -3.2s; }
+.flotante--izq { left: 2%; top: 76px; animation-delay: -1.5s; }
+.flotante--der { right: 1%; top: 152px; animation-delay: -3.2s; }
 .flotante__t { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
 .flotante__v { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.5px; }
 .flotante__v small { font-size: 12px; font-weight: 600; color: var(--muted); }
@@ -304,12 +316,12 @@ footer a { color: var(--muted); text-decoration: none; }
 
 /* el ícono de la plataforma, encima del mockup */
 .escena__icono {
-  position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%);
-  width: 72px; height: 72px; border-radius: 20px;
+  position: absolute; left: 50%; bottom: -20px; transform: translateX(-50%);
+  width: 62px; height: 62px; border-radius: 18px;
   background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 16px 36px rgba(221,42,123,.4);
   z-index: 3;
 }
-.escena__icono img { width: 36px; height: 36px; filter: brightness(0) invert(1); }
-.escena { padding-bottom: 26px; }
+.escena__icono img { width: 31px; height: 31px; filter: brightness(0) invert(1); }
+.escena { padding-bottom: 20px; }

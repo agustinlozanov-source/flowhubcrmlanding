@@ -28,6 +28,7 @@
     <a href="../landing.html#canales">Canales</a>
     <a href="../landing.html#agente">Agente IA</a>
     <a href="../landing.html#precios">Precios</a>
+    <button class="tema" id="tema" title="Cambiar tema" aria-label="Cambiar tema">☾</button>
     <a href="../landing.html#precios" class="cta">Solicitar cotización</a>
   </nav>
 </div></div>
@@ -292,9 +293,25 @@
 </div></footer>
 
 <script>
-  var l = document.getElementById('logo');
-  if (l && document.documentElement.getAttribute('data-theme') === 'light')
-    l.src = '../flow%20hub%20logo%201.png';
+  /* El mismo interruptor que el landing y la misma llave de localStorage, así
+   * el visitante no pierde su tema al pasar de una página a otra. */
+  (function () {
+    var raiz = document.documentElement;
+    var boton = document.getElementById('tema');
+    var logo = document.getElementById('logo');
+
+    function aplicar(t) {
+      raiz.setAttribute('data-theme', t);
+      if (logo) logo.src = '../flow%20hub%20logo%20' + (t === 'dark' ? '2' : '1') + '.png';
+      if (boton) boton.textContent = t === 'dark' ? '☾' : '☀';
+      try { localStorage.setItem('theme', t); } catch (e) {}
+    }
+
+    aplicar(raiz.getAttribute('data-theme') || 'dark');
+    if (boton) boton.onclick = function () {
+      aplicar(raiz.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    };
+  })();
 
   /* El mockup se revela por piezas.
    *
