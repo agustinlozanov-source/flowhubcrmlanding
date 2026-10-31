@@ -254,11 +254,11 @@ footer a { color: var(--muted); text-decoration: none; }
 .hero--alto { padding: 26px 0 0; text-align: center; }
 .hero--alto .wrap { max-width: 980px; }
 
-.escena { position: relative; height: 300px; margin-bottom: 30px; }
-.escena__centro {
-  position: absolute; left: 50%; top: 0; transform: translateX(-50%);
-  width: 420px; max-width: 92%; text-align: left;
-}
+/* La escena crece con el mockup en vez de tener altura fija: cada canal tiene
+   su conversación y unas son más largas que otras. Con altura fija, la de
+   WhatsApp se montaba encima del titular. */
+.escena { position: relative; display: flex; justify-content: center; margin-bottom: 30px; }
+.escena__centro { position: relative; width: 420px; max-width: 92%; text-align: left; }
 .flotante {
   position: absolute; text-align: left;
   background: var(--bg); border: 1px solid var(--line); border-radius: 13px;
