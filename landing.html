@@ -2197,6 +2197,16 @@
       transition: opacity .15s, max-width .15s;
     }
     a.ch-chip:hover::after { opacity: .5; max-width: 14px; }
+    /* El enlace a la página del grupo: misma forma que las fichas, sin logo,
+       para que se lea como una más y no como un botón suelto. */
+    a.ch-chip--ver {
+      font-weight: 600; border-style: dashed;
+      border-color: rgba(255,255,255,0.18);
+    }
+    a.ch-chip--ver::after { content: none; }
+    a.ch-chip--ver span { opacity: .5; }
+    a.ch-chip--ver:hover { border-style: solid; }
+    [data-theme="light"] a.ch-chip--ver { border-color: var(--gray-3); }
     .ch-chip img { width: 20px; height: 20px; object-fit: contain; flex-shrink: 0; }
     [data-theme="light"] .ch-chip { background: var(--white); border-color: var(--gray-2); }
     [data-theme="light"] .ch-chip:hover { border-color: var(--gray-3); }
@@ -2264,54 +2274,54 @@
             <a href="canales/facebook.html"><img src="https://cdn.simpleicons.org/messenger" alt="" loading="lazy" width="17" height="17"><span>Messenger</span></a>
             <a href="canales/facebook.html"><img src="https://cdn.simpleicons.org/facebook" alt="" loading="lazy" width="17" height="17"><span>Facebook</span></a>
             <a href="canales/tiktok.html"><img src="https://cdn.simpleicons.org/tiktok" alt="" loading="lazy" width="17" height="17"><span>TikTok</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/telegram" alt="" loading="lazy" width="17" height="17"><span>Telegram</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/telegram" alt="" loading="lazy" width="17" height="17"><span>Telegram</span></a>
             <a href="canales/linkedin.html"><img src="https://svgl.app/library/linkedin.svg" alt="" loading="lazy" width="17" height="17"><span>LinkedIn</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/x" alt="" loading="lazy" width="17" height="17"><span>X</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/threads" alt="" loading="lazy" width="17" height="17"><span>Threads</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/x" alt="" loading="lazy" width="17" height="17"><span>X</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/threads" alt="" loading="lazy" width="17" height="17"><span>Threads</span></a>
             <a href="canales/google-business.html"><img src="https://cdn.simpleicons.org/googlemaps" alt="" loading="lazy" width="17" height="17"><span>Google Business</span></a>
           </div>
         </div>
         <div class="mm-col">
           <div class="mm-col__t"><a href="canales/mas-canales.html" style="color:inherit;text-decoration:none">Más canales →</a></div>
           <div class="mm-col__items">
-            <a href="#canales"><img src="https://cdn.simpleicons.org/youtube" alt="" loading="lazy" width="17" height="17"><span>YouTube</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/pinterest" alt="" loading="lazy" width="17" height="17"><span>Pinterest</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/discord" alt="" loading="lazy" width="17" height="17"><span>Discord</span></a>
-            <a href="#canales"><img src="https://svgl.app/library/slack.svg" alt="" loading="lazy" width="17" height="17"><span>Slack</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/imessage" alt="" loading="lazy" width="17" height="17"><span>iMessage</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/reddit" alt="" loading="lazy" width="17" height="17"><span>Reddit</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/bluesky" alt="" loading="lazy" width="17" height="17"><span>Bluesky</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/snapchat" alt="" loading="lazy" width="17" height="17"><span>Snapchat</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/youtube" alt="" loading="lazy" width="17" height="17"><span>YouTube</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/pinterest" alt="" loading="lazy" width="17" height="17"><span>Pinterest</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/discord" alt="" loading="lazy" width="17" height="17"><span>Discord</span></a>
+            <a href="canales/mas-canales.html"><img src="https://svgl.app/library/slack.svg" alt="" loading="lazy" width="17" height="17"><span>Slack</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/imessage" alt="" loading="lazy" width="17" height="17"><span>iMessage</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/reddit" alt="" loading="lazy" width="17" height="17"><span>Reddit</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/bluesky" alt="" loading="lazy" width="17" height="17"><span>Bluesky</span></a>
+            <a href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/snapchat" alt="" loading="lazy" width="17" height="17"><span>Snapchat</span></a>
           </div>
         </div>
         <div class="mm-col">
-          <div class="mm-col__t">Pauta</div>
+          <div class="mm-col__t"><a href="canales/pauta.html" style="color:inherit;text-decoration:none">Pauta →</a></div>
           <div class="mm-col__items">
-            <a href="#canales"><img src="https://cdn.simpleicons.org/meta" alt="" loading="lazy" width="17" height="17"><span>Meta Ads</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/googleads" alt="" loading="lazy" width="17" height="17"><span>Google Ads</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/tiktok" alt="" loading="lazy" width="17" height="17"><span>TikTok Ads</span></a>
-            <a href="#canales"><img src="https://svgl.app/library/linkedin.svg" alt="" loading="lazy" width="17" height="17"><span>LinkedIn Ads</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/pinterest" alt="" loading="lazy" width="17" height="17"><span>Pinterest Ads</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/x" alt="" loading="lazy" width="17" height="17"><span>X Ads</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/reddit" alt="" loading="lazy" width="17" height="17"><span>Reddit Ads</span></a>
-            <a href="#canales"><img src="https://svgl.app/library/openai.svg" alt="" loading="lazy" width="17" height="17"><span>OpenAI Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://cdn.simpleicons.org/meta" alt="" loading="lazy" width="17" height="17"><span>Meta Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://cdn.simpleicons.org/googleads" alt="" loading="lazy" width="17" height="17"><span>Google Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://cdn.simpleicons.org/tiktok" alt="" loading="lazy" width="17" height="17"><span>TikTok Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://svgl.app/library/linkedin.svg" alt="" loading="lazy" width="17" height="17"><span>LinkedIn Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://cdn.simpleicons.org/pinterest" alt="" loading="lazy" width="17" height="17"><span>Pinterest Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://cdn.simpleicons.org/x" alt="" loading="lazy" width="17" height="17"><span>X Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://cdn.simpleicons.org/reddit" alt="" loading="lazy" width="17" height="17"><span>Reddit Ads</span></a>
+            <a href="canales/pauta.html"><img src="https://svgl.app/library/openai.svg" alt="" loading="lazy" width="17" height="17"><span>OpenAI Ads</span></a>
           </div>
         </div>
         <div class="mm-col">
-          <div class="mm-col__t">Web y tiendas</div>
+          <div class="mm-col__t"><a href="canales/web-y-tiendas.html" style="color:inherit;text-decoration:none">Web y tiendas →</a></div>
           <div class="mm-col__items">
-            <a href="#canales"><img src="https://cdn.simpleicons.org/shopify" alt="" loading="lazy" width="17" height="17"><span>Shopify</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/wordpress" alt="" loading="lazy" width="17" height="17"><span>WordPress</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/wix" alt="" loading="lazy" width="17" height="17"><span>Wix</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/webflow" alt="" loading="lazy" width="17" height="17"><span>Webflow</span></a>
+            <a href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/shopify" alt="" loading="lazy" width="17" height="17"><span>Shopify</span></a>
+            <a href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/wordpress" alt="" loading="lazy" width="17" height="17"><span>WordPress</span></a>
+            <a href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/wix" alt="" loading="lazy" width="17" height="17"><span>Wix</span></a>
+            <a href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/webflow" alt="" loading="lazy" width="17" height="17"><span>Webflow</span></a>
           </div>
         </div>
         <div class="mm-col">
-          <div class="mm-col__t">Productividad</div>
+          <div class="mm-col__t"><a href="canales/productividad.html" style="color:inherit;text-decoration:none">Productividad →</a></div>
           <div class="mm-col__items">
-            <a href="#canales"><img src="https://cdn.simpleicons.org/google" alt="" loading="lazy" width="17" height="17"><span>Google</span></a>
-            <a href="#canales"><img src="https://svgl.app/library/microsoft.svg" alt="" loading="lazy" width="17" height="17"><span>Microsoft</span></a>
-            <a href="#canales"><img src="https://cdn.simpleicons.org/googleanalytics" alt="" loading="lazy" width="17" height="17"><span>Google Analytics</span></a>
+            <a href="canales/productividad.html"><img src="https://cdn.simpleicons.org/google" alt="" loading="lazy" width="17" height="17"><span>Google</span></a>
+            <a href="canales/productividad.html"><img src="https://svgl.app/library/microsoft.svg" alt="" loading="lazy" width="17" height="17"><span>Microsoft</span></a>
+            <a href="canales/productividad.html"><img src="https://cdn.simpleicons.org/googleanalytics" alt="" loading="lazy" width="17" height="17"><span>Google Analytics</span></a>
           </div>
         </div>
           <div class="mm-cta">
@@ -2876,61 +2886,70 @@
           <a class="ch-chip" href="canales/facebook.html"><img src="https://cdn.simpleicons.org/messenger" alt="Messenger" loading="lazy" width="20" height="20"><span>Messenger</span></a>
           <a class="ch-chip" href="canales/facebook.html"><img src="https://cdn.simpleicons.org/facebook" alt="Facebook" loading="lazy" width="20" height="20"><span>Facebook</span></a>
           <a class="ch-chip" href="canales/tiktok.html"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok" loading="lazy" width="20" height="20"><span>TikTok</span></a>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/telegram" alt="Telegram" loading="lazy" width="20" height="20"><span>Telegram</span></div>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/telegram" alt="Telegram" loading="lazy" width="20" height="20"><span>Telegram</span></a>
           <a class="ch-chip" href="canales/linkedin.html"><img src="https://svgl.app/library/linkedin.svg" alt="LinkedIn" loading="lazy" width="20" height="20"><span>LinkedIn</span></a>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/x" alt="X" loading="lazy" width="20" height="20"><span>X</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/threads" alt="Threads" loading="lazy" width="20" height="20"><span>Threads</span></div>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/x" alt="X" loading="lazy" width="20" height="20"><span>X</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/threads" alt="Threads" loading="lazy" width="20" height="20"><span>Threads</span></a>
           <a class="ch-chip" href="canales/google-business.html"><img src="https://cdn.simpleicons.org/googlemaps" alt="Google Business" loading="lazy" width="20" height="20"><span>Google Business</span></a>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube" loading="lazy" width="20" height="20"><span>YouTube</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/pinterest" alt="Pinterest" loading="lazy" width="20" height="20"><span>Pinterest</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/discord" alt="Discord" loading="lazy" width="20" height="20"><span>Discord</span></div>
-          <div class="ch-chip"><img src="https://svgl.app/library/slack.svg" alt="Slack" loading="lazy" width="20" height="20"><span>Slack</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/imessage" alt="iMessage" loading="lazy" width="20" height="20"><span>iMessage</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/reddit" alt="Reddit" loading="lazy" width="20" height="20"><span>Reddit</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/bluesky" alt="Bluesky" loading="lazy" width="20" height="20"><span>Bluesky</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/snapchat" alt="Snapchat" loading="lazy" width="20" height="20"><span>Snapchat</span></div>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube" loading="lazy" width="20" height="20"><span>YouTube</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/pinterest" alt="Pinterest" loading="lazy" width="20" height="20"><span>Pinterest</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/discord" alt="Discord" loading="lazy" width="20" height="20"><span>Discord</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://svgl.app/library/slack.svg" alt="Slack" loading="lazy" width="20" height="20"><span>Slack</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/imessage" alt="iMessage" loading="lazy" width="20" height="20"><span>iMessage</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/reddit" alt="Reddit" loading="lazy" width="20" height="20"><span>Reddit</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/bluesky" alt="Bluesky" loading="lazy" width="20" height="20"><span>Bluesky</span></a>
+          <a class="ch-chip" href="canales/mas-canales.html"><img src="https://cdn.simpleicons.org/snapchat" alt="Snapchat" loading="lazy" width="20" height="20"><span>Snapchat</span></a>
+        
+          <a class="ch-chip ch-chip--ver" href="canales/instagram.html">Cómo funciona cada canal <span>→</span></a>
+          <a class="ch-chip ch-chip--ver" href="canales/mas-canales.html">Más canales <span>→</span></a>
         </div>
       </div>
       <div class="ch-grupo">
         <div class="ch-grupo__head">
-          <h3><a href="canales/pauta.html" style="color:inherit;text-decoration:none">Pauta <span style="opacity:.4;font-weight:400">→</span></a></h3>
+          <h3>Pauta</h3>
           <p>De qué campaña vino cada lead.</p>
           <span class="ch-grupo__n">8</span>
         </div>
         <div class="ch-chips">
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/meta" alt="Meta Ads" loading="lazy" width="20" height="20"><span>Meta Ads</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/googleads" alt="Google Ads" loading="lazy" width="20" height="20"><span>Google Ads</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok Ads" loading="lazy" width="20" height="20"><span>TikTok Ads</span></div>
-          <div class="ch-chip"><img src="https://svgl.app/library/linkedin.svg" alt="LinkedIn Ads" loading="lazy" width="20" height="20"><span>LinkedIn Ads</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/pinterest" alt="Pinterest Ads" loading="lazy" width="20" height="20"><span>Pinterest Ads</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/x" alt="X Ads" loading="lazy" width="20" height="20"><span>X Ads</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/reddit" alt="Reddit Ads" loading="lazy" width="20" height="20"><span>Reddit Ads</span></div>
-          <div class="ch-chip"><img src="https://svgl.app/library/openai.svg" alt="OpenAI Ads" loading="lazy" width="20" height="20"><span>OpenAI Ads</span></div>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://cdn.simpleicons.org/meta" alt="Meta Ads" loading="lazy" width="20" height="20"><span>Meta Ads</span></a>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://cdn.simpleicons.org/googleads" alt="Google Ads" loading="lazy" width="20" height="20"><span>Google Ads</span></a>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok Ads" loading="lazy" width="20" height="20"><span>TikTok Ads</span></a>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://svgl.app/library/linkedin.svg" alt="LinkedIn Ads" loading="lazy" width="20" height="20"><span>LinkedIn Ads</span></a>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://cdn.simpleicons.org/pinterest" alt="Pinterest Ads" loading="lazy" width="20" height="20"><span>Pinterest Ads</span></a>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://cdn.simpleicons.org/x" alt="X Ads" loading="lazy" width="20" height="20"><span>X Ads</span></a>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://cdn.simpleicons.org/reddit" alt="Reddit Ads" loading="lazy" width="20" height="20"><span>Reddit Ads</span></a>
+          <a class="ch-chip" href="canales/pauta.html"><img src="https://svgl.app/library/openai.svg" alt="OpenAI Ads" loading="lazy" width="20" height="20"><span>OpenAI Ads</span></a>
+        
+          <a class="ch-chip ch-chip--ver" href="canales/pauta.html">Cómo se mide tu pauta <span>→</span></a>
         </div>
       </div>
       <div class="ch-grupo">
         <div class="ch-grupo__head">
-          <h3><a href="canales/web-y-tiendas.html" style="color:inherit;text-decoration:none">Web y tiendas <span style="opacity:.4;font-weight:400">→</span></a></h3>
+          <h3>Web y tiendas</h3>
           <p>El formulario de tu sitio y tus ventas en línea.</p>
           <span class="ch-grupo__n">4</span>
         </div>
         <div class="ch-chips">
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/shopify" alt="Shopify" loading="lazy" width="20" height="20"><span>Shopify</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/wordpress" alt="WordPress" loading="lazy" width="20" height="20"><span>WordPress</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/wix" alt="Wix" loading="lazy" width="20" height="20"><span>Wix</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/webflow" alt="Webflow" loading="lazy" width="20" height="20"><span>Webflow</span></div>
+          <a class="ch-chip" href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/shopify" alt="Shopify" loading="lazy" width="20" height="20"><span>Shopify</span></a>
+          <a class="ch-chip" href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/wordpress" alt="WordPress" loading="lazy" width="20" height="20"><span>WordPress</span></a>
+          <a class="ch-chip" href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/wix" alt="Wix" loading="lazy" width="20" height="20"><span>Wix</span></a>
+          <a class="ch-chip" href="canales/web-y-tiendas.html"><img src="https://cdn.simpleicons.org/webflow" alt="Webflow" loading="lazy" width="20" height="20"><span>Webflow</span></a>
+        
+          <a class="ch-chip ch-chip--ver" href="canales/web-y-tiendas.html">Cómo entran los formularios <span>→</span></a>
         </div>
       </div>
       <div class="ch-grupo">
         <div class="ch-grupo__head">
-          <h3><a href="canales/productividad.html" style="color:inherit;text-decoration:none">Productividad <span style="opacity:.4;font-weight:400">→</span></a></h3>
+          <h3>Productividad</h3>
           <p>Agenda, correo y lo que ya usa tu equipo.</p>
           <span class="ch-grupo__n">3</span>
         </div>
         <div class="ch-chips">
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/google" alt="Google" loading="lazy" width="20" height="20"><span>Google</span></div>
-          <div class="ch-chip"><img src="https://svgl.app/library/microsoft.svg" alt="Microsoft" loading="lazy" width="20" height="20"><span>Microsoft</span></div>
-          <div class="ch-chip"><img src="https://cdn.simpleicons.org/googleanalytics" alt="Google Analytics" loading="lazy" width="20" height="20"><span>Google Analytics</span></div>
+          <a class="ch-chip" href="canales/productividad.html"><img src="https://cdn.simpleicons.org/google" alt="Google" loading="lazy" width="20" height="20"><span>Google</span></a>
+          <a class="ch-chip" href="canales/productividad.html"><img src="https://svgl.app/library/microsoft.svg" alt="Microsoft" loading="lazy" width="20" height="20"><span>Microsoft</span></a>
+          <a class="ch-chip" href="canales/productividad.html"><img src="https://cdn.simpleicons.org/googleanalytics" alt="Google Analytics" loading="lazy" width="20" height="20"><span>Google Analytics</span></a>
+        
+          <a class="ch-chip ch-chip--ver" href="canales/productividad.html">Cómo agenda el agente <span>→</span></a>
         </div>
       </div>
     </div>
