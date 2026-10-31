@@ -258,3 +258,58 @@ footer a { color: var(--muted); text-decoration: none; }
 .fake__meta { font-size: 11px; color: #8e8e93; }
 
 @media (max-width: 720px) { .pasos3 { grid-template-columns: 1fr; } .p3__caja { height: 160px; } }
+
+/* ── Encabezado con el mockup arriba ──────────────────────
+ * El mockup entra antes que el texto: primero se ve de qué se trata,
+ * después se lee, y el botón está ahí mismo sin bajar nada.
+ */
+.hero--alto { padding: 44px 0 0; text-align: center; }
+.hero--alto .wrap { max-width: 980px; }
+
+.escena { position: relative; height: 360px; margin-bottom: 44px; }
+.escena__centro {
+  position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+  width: 420px; max-width: 92%; text-align: left;
+}
+.flotante {
+  position: absolute; text-align: left;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 13px;
+  padding: 11px 14px; box-shadow: 0 18px 44px rgba(0,0,0,.4);
+  font-size: 13px; animation: flotar 6s ease-in-out infinite;
+}
+[data-theme="light"] .flotante { background: var(--white); box-shadow: 0 18px 44px rgba(0,0,0,.12); }
+.flotante--izq { left: 2%; top: 92px; animation-delay: -1.5s; }
+.flotante--der { right: 1%; top: 182px; animation-delay: -3.2s; }
+.flotante__t { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+.flotante__v { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.5px; }
+.flotante__v small { font-size: 12px; font-weight: 600; color: var(--muted); }
+.flotante--chat { display: flex; align-items: center; gap: 9px; }
+.flotante--chat img { width: 20px; height: 20px; }
+@keyframes flotar { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+
+.ctas { display: flex; gap: 11px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+.btn--ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+.hero--alto .tira { justify-content: center; margin-top: 22px; }
+.hero--alto .lead { max-width: 620px; margin: 0 auto; }
+.hero--alto .kicker { justify-content: center; }
+
+@media (max-width: 860px) {
+  .escena { height: 330px; }
+  .flotante { display: none; }
+}
+@media (max-width: 640px) {
+  .escena { height: 300px; }
+  .escena__centro { width: 100%; }
+}
+
+/* el ícono de la plataforma, encima del mockup */
+.escena__icono {
+  position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%);
+  width: 72px; height: 72px; border-radius: 20px;
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 16px 36px rgba(221,42,123,.4);
+  z-index: 3;
+}
+.escena__icono img { width: 36px; height: 36px; filter: brightness(0) invert(1); }
+.escena { padding-bottom: 26px; }
