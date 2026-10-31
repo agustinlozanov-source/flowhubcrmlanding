@@ -32,7 +32,9 @@
   </nav>
 </div></div>
 
-<div class="hero"><div class="wrap">
+<div class="hero">
+  <div class="hero__fondo"><span></span><span></span><span></span></div>
+  <div class="wrap">
   <header>
     <div class="kicker">
       <img src="https://cdn.simpleicons.org/instagram" alt="">
@@ -51,7 +53,7 @@
     </div>
   </header>
 
-  <div class="mk">
+  <div class="mk revelar" id="mk-hero">
     <div class="mk__top">
       <div class="mk__av"></div>
       <div>
@@ -276,6 +278,44 @@
   var l = document.getElementById('logo');
   if (l && document.documentElement.getAttribute('data-theme') === 'light')
     l.src = '../flow%20hub%20logo%201.png';
+
+  /* El mockup se revela por piezas.
+   *
+   * No es un video: son celdas opacas del color del fondo, encima del mockup
+   * de verdad, que se desvanecen en desorden. Por eso se ve nítido en
+   * cualquier pantalla y no pesa nada.
+   *
+   * El desorden es sembrado y no aleatorio: la misma página se revela igual
+   * cada vez, que es lo que separa un efecto de un parpadeo. */
+  (function () {
+    var caja = document.getElementById('mk-hero');
+    if (!caja || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var COLS = 14, FILAS = 9;
+    var rej = document.createElement('div');
+    rej.className = 'revelar__piezas';
+    rej.style.gridTemplateColumns = 'repeat(' + COLS + ', 1fr)';
+    rej.style.gridTemplateRows = 'repeat(' + FILAS + ', 1fr)';
+
+    // hash determinista: misma celda, mismo retraso, siempre
+    function ruido(x, y) {
+      var h = (x * 374761393 + y * 668265263) >>> 0;
+      h = (h ^ (h >>> 13)) * 1274126177 >>> 0;
+      return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+    }
+
+    for (var y = 0; y < FILAS; y++) {
+      for (var x = 0; x < COLS; x++) {
+        var i = document.createElement('i');
+        // avanza en diagonal desde la esquina, con el ruido desordenando el frente
+        var onda = (x / COLS) * 0.55 + (y / FILAS) * 0.25;
+        i.style.animationDelay = (0.12 + onda * 0.9 + ruido(x, y) * 0.3).toFixed(3) + 's';
+        rej.appendChild(i);
+      }
+    }
+    caja.appendChild(rej);
+    setTimeout(function () { rej.remove(); }, 2600);
+  })();
 </script>
 </body>
 </html>

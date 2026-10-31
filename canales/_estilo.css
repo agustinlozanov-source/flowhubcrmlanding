@@ -119,13 +119,60 @@ footer a { color: var(--muted); text-decoration: none; }
  * Construidos en la página, no capturas: se ven nítidos en cualquier
  * pantalla, pesan nada, y cambian con el tema.
  */
-.hero { position: relative; padding: 56px 0 0; overflow: hidden; }
-.hero::before {
-  content: ''; position: absolute; top: -140px; left: 50%; transform: translateX(-50%);
-  width: 900px; height: 420px; pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(0,102,255,.20), transparent 62%);
+/* La entrada.
+ *
+ * Dos manchas de color de marca -el verde azulado y el morado del logo- que
+ * se mueven lento detrás del encabezado. Solo transform y opacidad, así que
+ * no cuesta nada y no traba el scroll.
+ */
+.hero { position: relative; padding: 56px 0 0; overflow: hidden; isolation: isolate; }
+.hero__fondo { position: absolute; inset: -20% -10% auto; height: 760px; z-index: -1; pointer-events: none; }
+.hero__fondo span {
+  position: absolute; border-radius: 50%; filter: blur(90px); opacity: .5;
+  will-change: transform;
+}
+.hero__fondo span:nth-child(1) {
+  width: 620px; height: 520px; top: 0; left: 6%;
+  background: #1aab99; animation: flota1 19s ease-in-out infinite;
+}
+.hero__fondo span:nth-child(2) {
+  width: 560px; height: 480px; top: 60px; right: 4%;
+  background: #3533cd; animation: flota2 23s ease-in-out infinite;
+}
+.hero__fondo span:nth-child(3) {
+  width: 420px; height: 380px; top: 220px; left: 42%;
+  background: #0066ff; opacity: .32; animation: flota3 27s ease-in-out infinite;
+}
+[data-theme="light"] .hero__fondo span { opacity: .3; filter: blur(110px); }
+@keyframes flota1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(70px,36px) scale(1.12)} }
+@keyframes flota2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-60px,50px) scale(1.08)} }
+@keyframes flota3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(40px,-40px) scale(1.16)} }
+
+/* la rejilla fina encima, para que el color no quede lechoso */
+.hero::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+}
+[data-theme="light"] .hero::after {
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
 }
 .hero .wrap { position: relative; }
+
+/* El mockup se revela por piezas. Los retrasos los pone el script. */
+.revelar { position: relative; }
+.revelar__piezas { position: absolute; inset: 0; display: grid; pointer-events: none; z-index: 2; }
+.revelar__piezas i { background: var(--bg); animation: pieza .5s ease forwards; }
+@keyframes pieza { to { opacity: 0; transform: scale(.92); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero__fondo span { animation: none; }
+  .revelar__piezas { display: none; }
+}
 
 .mk {
   background: var(--bg); border: 1px solid var(--line); border-radius: 16px;
