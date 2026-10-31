@@ -14,8 +14,8 @@
 <link rel="stylesheet" href="_estilo.css">
 <script>
   (function () {
-    var t = 'dark';
-    try { t = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+    var t = 'light';
+    try { t = localStorage.getItem('theme') || 'light'; } catch (e) {}
     document.documentElement.setAttribute('data-theme', t);
   })();
 </script>
@@ -34,8 +34,7 @@
 </div></div>
 
 <div class="hero hero--alto">
-  <div class="hero__fondo"><span></span><span></span><span></span></div>
-  <div class="wrap">
+    <div class="wrap">
 
     <div class="escena">
       <div class="flotante flotante--izq">
@@ -307,7 +306,7 @@
       try { localStorage.setItem('theme', t); } catch (e) {}
     }
 
-    aplicar(raiz.getAttribute('data-theme') || 'dark');
+    aplicar(raiz.getAttribute('data-theme') || 'light');
     if (boton) boton.onclick = function () {
       aplicar(raiz.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     };
