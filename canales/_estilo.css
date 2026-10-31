@@ -122,7 +122,8 @@ footer a { color: var(--muted); text-decoration: none; }
 
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  .top nav { display: none; }
+  .top nav a:not(.cta) { display: none; }
+  .top nav { gap: 10px; }
   header { padding: 48px 0 28px; }
   .lead { font-size: 18px; }
 }
@@ -305,18 +306,29 @@ footer a { color: var(--muted); text-decoration: none; }
 .hero--alto .lead { max-width: 620px; margin: 0 auto; }
 .hero--alto .kicker { justify-content: center; }
 
-@media (max-width: 860px) {
-  .escena { height: 330px; }
-  .flotante { display: none; }
+@media (max-width: 1000px) {
+  .escena__icono { left: 10px; bottom: 6px; }
 }
-@media (max-width: 640px) {
-  .escena { height: 300px; }
-  .escena__centro { width: 100%; }
+/* En pantalla angosta la tarjeta crece al envolver el texto, así que la
+   escena deja de tener altura fija: el mockup fluye y empuja al titular en vez
+   de montarse encima. */
+@media (max-width: 860px) {
+  .escena { height: auto; padding-bottom: 0; margin-bottom: 26px; }
+  .escena__centro { position: static; transform: none; width: 100%; max-width: 100%; }
+  .flotante { display: none; }
+  .escena__icono {
+    position: static; margin: -26px auto 0; left: auto; bottom: auto;
+    width: 54px; height: 54px; border-radius: 16px; position: relative; z-index: 3;
+  }
+  .escena__icono img { width: 27px; height: 27px; }
 }
 
 /* el ícono de la plataforma, encima del mockup */
+/* El ícono va al costado, no encima: centrado tapaba la conversación, que es
+   justo lo que hay que leer. La tarjeta mide 420 y está centrada, así que su
+   borde izquierdo cae en 50% − 210. */
 .escena__icono {
-  position: absolute; left: 50%; bottom: -20px; transform: translateX(-50%);
+  position: absolute; left: calc(50% - 252px); bottom: 14px;
   width: 62px; height: 62px; border-radius: 18px;
   background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
   display: flex; align-items: center; justify-content: center;
@@ -325,3 +337,14 @@ footer a { color: var(--muted); text-decoration: none; }
 }
 .escena__icono img { width: 31px; height: 31px; filter: brightness(0) invert(1); }
 .escena { padding-bottom: 20px; }
+
+/* Esto va al final a propósito: las reglas del ícono se definen más arriba y
+   una media query anterior no las puede vencer. */
+@media (max-width: 860px) {
+  .escena__icono {
+    position: relative; left: auto; bottom: auto;
+    margin: -26px auto 0; z-index: 3;
+    width: 54px; height: 54px; border-radius: 16px;
+  }
+  .escena__icono img { width: 27px; height: 27px; }
+}
