@@ -2398,6 +2398,18 @@
     }
     [data-theme="dark"] .nav-cta .nav-btn-ghost:hover { color: var(--white) !important; }
 
+    /* Y donde el menú ya no cabe, no se parte: se esconde. Con `nowrap` la
+       alternativa era desbordar la pantalla. Cada sección sigue accesible
+       desde el pie. */
+    @media (max-width: 1080px) {
+      .nav-links { display: none !important; }
+      nav { padding: 0 24px !important; gap: 0 !important; }
+      .nav-cta { margin-left: auto !important; }
+    }
+    @media (max-width: 560px) {
+      .nav-cta .nav-btn-ghost { display: none !important; }
+    }
+
     /* 7 · Los números del encabezado, sin caja.
            Eran tres recuadros grises con borde y tres colores decorativos: justo
            el color de ambiente que acabábamos de sacar, pero en forma de mueble.
@@ -2421,6 +2433,145 @@
     [data-theme="dark"] .metric-big { color: var(--white) !important; }
     .metric-big span { font-weight: 700; opacity: .45; letter-spacing: -.5px; }
     .metric-small { font-size: 12.5px !important; }
+
+    /* 8 · Los planes, en tarjetas.
+           La tabla de seis niveles sigue abajo: es la verdad completa y no se
+           toca. Arriba van los tres entre los que de verdad se elige, con el
+           número animándose al cambiar de facturación — si el precio se mueve
+           delante de los ojos, el ahorro anual se entiende sin leer la nota. */
+    .pl-switch { display: flex; justify-content: center; margin: 0 0 40px; }
+    .pl-switch__in {
+      position: relative; display: flex; padding: 5px; border-radius: 50px;
+      background: var(--gray-1); border: 1px solid var(--gray-2);
+    }
+    [data-theme="dark"] .pl-switch__in { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.1); }
+    .pl-switch__pill {
+      position: absolute; top: 5px; left: 0; height: calc(100% - 10px);
+      border-radius: 50px; background: var(--black); width: 0;
+      transition: transform .38s cubic-bezier(.4,0,.2,1), width .38s cubic-bezier(.4,0,.2,1);
+    }
+    [data-theme="dark"] .pl-switch__pill { background: var(--white); }
+    .pl-switch button {
+      position: relative; z-index: 1; border: 0; background: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600;
+      color: var(--gray-4); padding: 11px 22px; border-radius: 50px;
+      transition: color .3s; display: inline-flex; align-items: center; gap: 9px;
+      white-space: nowrap;
+    }
+    .pl-switch button.sel { color: var(--white); }
+    [data-theme="dark"] .pl-switch button.sel { color: var(--black); }
+    .pl-switch__save {
+      font-size: 10.5px; font-weight: 800; padding: 3px 9px; border-radius: 50px;
+      background: var(--marca); color: #fff; letter-spacing: -.1px;
+    }
+
+    .pl-tray {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      background: var(--gray-1); border-radius: 24px; padding: 16px;
+      margin-bottom: 76px; align-items: stretch;
+    }
+    [data-theme="dark"] .pl-tray { background: rgba(255,255,255,.035); }
+
+    .pl-card {
+      display: flex; flex-direction: column; background: var(--white);
+      border: 1px solid var(--gray-2); border-radius: 18px;
+      padding: 26px 24px 24px; color: var(--black);
+    }
+    [data-theme="dark"] .pl-card { background: #0d0d0f; border-color: rgba(255,255,255,.1); color: var(--white); }
+
+    /* La recomendada se despega del resto: negra, un punto más grande y con
+       sombra. Es la única jerarquía de la sección. */
+    .pl-card--reco {
+      background: var(--black); border-color: var(--black); color: var(--white);
+      transform: scale(1.035); z-index: 1;
+      box-shadow: 0 24px 54px rgba(7,7,8,.2);
+    }
+    [data-theme="dark"] .pl-card--reco {
+      background: var(--white); border-color: var(--white); color: var(--black);
+      box-shadow: 0 24px 54px rgba(0,0,0,.5);
+    }
+
+    .pl-card__tag {
+      align-self: flex-start; font-size: 10.5px; font-weight: 800;
+      letter-spacing: .1em; text-transform: uppercase; padding: 5px 11px;
+      border-radius: 50px; background: var(--marca); color: #fff;
+    }
+    .pl-card__spacer { height: 27px; }
+
+    .pl-card__price { display: flex; align-items: baseline; gap: 7px; margin: 20px 0 3px; }
+    .pl-card__num {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900;
+      font-size: 42px; letter-spacing: -2px; line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .pl-card__per { font-size: 12.5px; color: var(--gray-4); font-weight: 500; }
+    .pl-card--reco .pl-card__per { color: var(--gray-3); }
+    [data-theme="dark"] .pl-card--reco .pl-card__per { color: var(--gray-5); }
+    .pl-card__bill { font-size: 11.5px; color: var(--gray-4); min-height: 17px; }
+
+    .pl-card__name {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+      font-size: 26px; letter-spacing: -.8px; margin: 22px 0 6px;
+    }
+    .pl-card__desc { font-size: 13px; line-height: 1.55; color: var(--gray-4); margin-bottom: 20px; }
+    .pl-card--reco .pl-card__desc { color: var(--gray-3); }
+    [data-theme="dark"] .pl-card--reco .pl-card__desc { color: var(--gray-5); }
+
+    .pl-card__list { list-style: none; padding: 18px 0 0; margin: 0 0 24px; border-top: 1px solid var(--gray-2); flex: 1; }
+    .pl-card--reco .pl-card__list { border-top-color: rgba(255,255,255,.16); }
+    [data-theme="dark"] .pl-card__list { border-top-color: rgba(255,255,255,.1); }
+    [data-theme="dark"] .pl-card--reco .pl-card__list { border-top-color: rgba(0,0,0,.14); }
+    .pl-card__list li { display: flex; align-items: flex-start; gap: 11px; font-size: 13.5px; line-height: 1.5; margin-bottom: 12px; }
+    .pl-card__list li:last-child { margin-bottom: 0; }
+    .pl-card__ck {
+      flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%;
+      display: grid; place-content: center; margin-top: 1px;
+      border: 1px solid currentColor;
+    }
+    .pl-card__ck svg { width: 11px; height: 11px; }
+    .pl-card__b { font-weight: 700; }
+
+    .pl-card__btn {
+      width: 100%; padding: 14px 20px; border-radius: 50px; cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+      font-size: 14.5px; letter-spacing: -.2px; border: 1.5px solid var(--black);
+      background: transparent; color: var(--black);
+      transition: background .22s, color .22s, transform .18s, box-shadow .24s;
+    }
+    .pl-card__btn:hover { background: var(--black); color: var(--white); transform: translateY(-2px); }
+    [data-theme="dark"] .pl-card__btn { border-color: var(--white); color: var(--white); }
+    [data-theme="dark"] .pl-card__btn:hover { background: var(--white); color: var(--black); }
+    .pl-card--reco .pl-card__btn { background: var(--white); border-color: var(--white); color: var(--black); }
+    .pl-card--reco .pl-card__btn:hover {
+      background: var(--marca); border-color: transparent; color: #fff;
+      box-shadow: 0 14px 34px rgba(26,171,153,.3);
+    }
+    [data-theme="dark"] .pl-card--reco .pl-card__btn { background: var(--black); border-color: var(--black); color: var(--white); }
+
+    .pl-todos {
+      font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+      font-weight: 700; color: var(--gray-4); margin-bottom: 16px;
+    }
+
+    /* La entrada: desenfoque que se despeja, escalonado. Es el único momento
+       de la seccion en que algo se mueve solo. */
+    .pl-rise { opacity: 0; transform: translateY(-18px); filter: blur(10px); }
+    .pl-rise.pl-in {
+      opacity: 1; transform: translateY(0); filter: blur(0);
+      transition: opacity .55s ease, transform .55s ease, filter .55s ease;
+      transition-delay: calc(var(--i, 0) * .11s);
+    }
+    .pl-rise.pl-card--reco { transform: translateY(-18px) scale(1.035); }
+    .pl-rise.pl-card--reco.pl-in { transform: translateY(0) scale(1.035); }
+    @media (prefers-reduced-motion: reduce) {
+      .pl-rise { opacity: 1; transform: none; filter: none; }
+      .pl-rise.pl-card--reco { transform: scale(1.035); }
+    }
+
+    @media (max-width: 900px) {
+      .pl-tray { grid-template-columns: 1fr; padding: 12px; }
+      .pl-card--reco, .pl-rise.pl-card--reco, .pl-rise.pl-card--reco.pl-in { transform: none; }
+    }
 </style>
 </head>
 
@@ -3610,6 +3761,70 @@
     <p class="section-sub">Todos los planes traen la plataforma completa — el mismo CRM con IA. Lo que cambia es cuántos
       leads incluye. Mientras más alto el plan, menos te cuesta cada lead.</p>
 
+    <div class="pl-switch pl-rise" style="--i:0">
+      <div class="pl-switch__in" id="pl-switch">
+        <span class="pl-switch__pill"></span>
+        <button type="button" data-b="mes" class="sel">Mensual</button>
+        <button type="button" data-b="anual">Anual <span class="pl-switch__save">2 meses gratis</span></button>
+      </div>
+    </div>
+
+    <div class="pl-tray" id="pl-tray">
+      <div class="pl-card pl-rise" style="--i:1" data-plan="basico" data-mes="4000" data-anual="3333">
+        <div class="pl-card__spacer"></div>
+        <div class="pl-card__price">
+          <span class="pl-card__num" data-num>$4,000</span>
+          <span class="pl-card__per">MXN / mes</span>
+        </div>
+        <div class="pl-card__bill" data-bill></div>
+        <div class="pl-card__name">Básico</div>
+        <p class="pl-card__desc">Para quien vende solo y quiere dejar de perder leads en el WhatsApp personal.</p>
+        <ul class="pl-card__list">
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><span class="pl-card__b">150 leads</span> al mes incluidos</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><span class="pl-card__b">1 usuario</span> en la plataforma</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>El CRM con IA <span class="pl-card__b">completo</span>, sin funciones recortadas</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Lead extra a <span class="pl-card__b">$15 MXN</span>, sin cortar la operación</span></li>
+        </ul>
+        <button class="pl-card__btn">Empezar</button>
+      </div>
+      <div class="pl-card pl-rise pl-card--reco" style="--i:2" data-plan="solo" data-mes="5500" data-anual="4583">
+        <div class="pl-card__tag">Recomendado</div>
+        <div class="pl-card__price">
+          <span class="pl-card__num" data-num>$5,500</span>
+          <span class="pl-card__per">MXN / mes</span>
+        </div>
+        <div class="pl-card__bill" data-bill></div>
+        <div class="pl-card__name">Solo</div>
+        <p class="pl-card__desc">El punto donde la mayoría arranca: dos personas y volumen real de prospección.</p>
+        <ul class="pl-card__list">
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><span class="pl-card__b">300 leads</span> al mes incluidos</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><span class="pl-card__b">2 usuarios</span> en la plataforma</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>El CRM con IA <span class="pl-card__b">completo</span>, sin funciones recortadas</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Lead extra a <span class="pl-card__b">$15 MXN</span>, sin cortar la operación</span></li>
+        </ul>
+        <button class="pl-card__btn">Empezar</button>
+      </div>
+      <div class="pl-card pl-rise" style="--i:3" data-plan="equipo" data-mes="8500" data-anual="7083">
+        <div class="pl-card__spacer"></div>
+        <div class="pl-card__price">
+          <span class="pl-card__num" data-num>$8,500</span>
+          <span class="pl-card__per">MXN / mes</span>
+        </div>
+        <div class="pl-card__bill" data-bill></div>
+        <div class="pl-card__name">Equipo</div>
+        <p class="pl-card__desc">Cuando ya hay un equipo de ventas y el seguimiento no puede depender de la memoria.</p>
+        <ul class="pl-card__list">
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><span class="pl-card__b">600 leads</span> al mes incluidos</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><span class="pl-card__b">3 usuarios</span> en la plataforma</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>El CRM con IA <span class="pl-card__b">completo</span>, sin funciones recortadas</span></li>
+          <li><span class="pl-card__ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Lead extra a <span class="pl-card__b">$15 MXN</span>, sin cortar la operación</span></li>
+        </ul>
+        <button class="pl-card__btn">Empezar</button>
+      </div>
+    </div>
+
+    <div class="pl-todos">Todos los planes</div>
+
     <div class="pricing-pillars">
       <div class="pricing-pillar">
         <div class="pk">Base</div>
@@ -3974,6 +4189,73 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    /* ── Planes: el switch, el número que se mueve y la entrada ──────────
+       El número se anima porque el ahorro anual es el argumento, y un
+       argumento que ocurre delante de los ojos no hay que explicarlo. */
+    (function () {
+      const caja = document.getElementById('pl-switch');
+      const tray = document.getElementById('pl-tray');
+      if (!caja || !tray) return;
+
+      const pill = caja.querySelector('.pl-switch__pill');
+      const btns = [...caja.querySelectorAll('button')];
+      const tarjetas = [...tray.querySelectorAll('.pl-card')];
+      const mx = n => n.toLocaleString('es-MX');
+
+      function moverPildora() {
+        const sel = caja.querySelector('button.sel');
+        pill.style.width = sel.offsetWidth + 'px';
+        pill.style.transform = 'translateX(' + (sel.offsetLeft - 5) + 'px)';
+      }
+
+      /* Equivalente a NumberFlow sin la librería: un tween con easeOut.
+         Se guarda el frame en el nodo para que dos clics seguidos no dejen
+         dos animaciones peleando por el mismo número. */
+      function tween(el, desde, hasta) {
+        cancelAnimationFrame(el._raf);
+        const t0 = performance.now(), dur = 460;
+        const paso = (t) => {
+          const k = Math.min(1, (t - t0) / dur);
+          const e = 1 - Math.pow(1 - k, 3);
+          el.textContent = '$' + mx(Math.round(desde + (hasta - desde) * e));
+          if (k < 1) el._raf = requestAnimationFrame(paso);
+        };
+        el._raf = requestAnimationFrame(paso);
+      }
+
+      function pintar(modo) {
+        tarjetas.forEach(c => {
+          const num = c.querySelector('[data-num]');
+          const actual = parseInt(num.textContent.replace(/\D/g, ''), 10) || 0;
+          tween(num, actual, parseInt(c.dataset[modo === 'anual' ? 'anual' : 'mes'], 10));
+          c.querySelector('[data-bill]').textContent =
+            modo === 'anual' ? 'Facturado por año — pagas 10 meses y usas 12' : '';
+        });
+      }
+
+      btns.forEach(b => b.addEventListener('click', () => {
+        if (b.classList.contains('sel')) return;
+        btns.forEach(x => x.classList.toggle('sel', x === b));
+        moverPildora();
+        pintar(b.dataset.b);
+      }));
+
+      moverPildora();
+      addEventListener('resize', moverPildora);
+      // El ancho real de los botones depende de la fuente; hasta que carga,
+      // la píldora queda corrida.
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(moverPildora);
+
+      const obs = new IntersectionObserver(es => {
+        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('pl-in'); obs.unobserve(e.target); } });
+      }, { threshold: .15 });
+      document.querySelectorAll('.pl-rise').forEach(el => obs.observe(el));
+
+      tray.querySelectorAll('.pl-card__btn').forEach(b => b.addEventListener('click', () => {
+        document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
+    })();
   </script>
 </body>
 
