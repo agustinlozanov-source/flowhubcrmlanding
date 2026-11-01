@@ -2292,6 +2292,85 @@
     .ind__cad { display: block; margin-top: 8px; font-size: 11.5px; font-weight: 600; color: #ff9f0a; }
     @media (max-width: 1000px) { .ind-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .ind-grid { grid-template-columns: 1fr; } .industrias-section { padding: 72px 20px; } }
+
+    /* ═══════════════════════════════════════════════════════
+       EL SISTEMA — docs/sistema-visual.md
+
+       Va al final a propósito: es una capa encima de lo que ya había, no una
+       reescritura. Cinco reglas: blanco y negro mandan, el degradado es
+       acento, el color entra por el contenido, todo lo redondeable es
+       píldora, y el aire es el diseño.
+    ═══════════════════════════════════════════════════════ */
+    :root { --marca: linear-gradient(110deg, #1aab99, #0066ff, #3533cd); }
+
+    /* 1 · Fuera el color de ambiente. El aire es el diseño. */
+    .bg-glow, .bg-glow-1, .bg-glow-2, .hero-glow, .hero-bg, .cta-bg { display: none !important; }
+    .hero, .hero-section { background-image: none !important; }
+    /* La rejilla se queda, pero apenas: da estructura sin meter color. */
+    .hero-grid { opacity: .5; }
+    [data-theme="light"] .hero-grid { opacity: .35; }
+
+    /* 2 · El degradado solo donde dice algo: en una línea del titular. */
+    h1 em, h2 em {
+      background: var(--marca) !important;
+      -webkit-background-clip: text !important; background-clip: text !important;
+      -webkit-text-fill-color: transparent !important; color: transparent !important;
+    }
+
+    /* 3 · Todo lo redondeable es píldora. */
+    .nav-btn, .btn-hero-primary, .btn-hero-ghost, .plan-btn, .plan-btns button,
+    .sc-stat, .start-badge, .hero-badge, .section-label, .q-chip, .badge,
+    .ch-chip, .tag, .pill, .stat-pill, .module-tag {
+      border-radius: 50px !important;
+    }
+    .card, .forma, .ind, .module-card, .plan-card, .problem-card, .step-card {
+      border-radius: 16px !important;
+    }
+
+    /* 4 · El botón: píldora negra el primario, contorno de degradado el
+           secundario, y el degradado se funde entero al pasar el mouse. */
+    .nav-btn-primary, .btn-hero-primary {
+      position: relative; isolation: isolate; overflow: hidden; border: none;
+      background: var(--black) !important; color: var(--white) !important;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: -.2px;
+      transition: transform .18s ease, box-shadow .24s ease !important;
+    }
+    [data-theme="dark"] .nav-btn-primary, [data-theme="dark"] .btn-hero-primary {
+      background: var(--white) !important; color: var(--black) !important;
+    }
+    .nav-btn-primary::before, .btn-hero-primary::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background: var(--marca); opacity: 0; transition: opacity .26s ease;
+    }
+    .nav-btn-primary:hover, .btn-hero-primary:hover {
+      color: #fff !important; transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(26,171,153,.3), 0 4px 12px rgba(53,51,205,.22);
+    }
+    .nav-btn-primary:hover::before, .btn-hero-primary:hover::before { opacity: 1; }
+
+    .btn-hero-ghost, .nav-btn-ghost {
+      position: relative; background: transparent !important;
+      border: 2px solid transparent !important;
+      background-image: linear-gradient(var(--white), var(--white)), var(--marca) !important;
+      background-origin: border-box !important;
+      background-clip: padding-box, border-box !important;
+      color: var(--black) !important;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: -.2px;
+      transition: transform .18s ease, box-shadow .24s ease !important;
+    }
+    [data-theme="dark"] .btn-hero-ghost, [data-theme="dark"] .nav-btn-ghost {
+      background-image: linear-gradient(var(--black), var(--black)), var(--marca) !important;
+      color: var(--white) !important;
+    }
+    .btn-hero-ghost:hover, .nav-btn-ghost:hover {
+      background-image: var(--marca), var(--marca) !important;
+      border-color: transparent !important; color: #fff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(26,171,153,.26);
+    }
+
+    /* 5 · Y el aire: las secciones respiran más. */
+    .problem-section, .agent-section, .modules-section, .referral-section { padding-top: 96px; padding-bottom: 96px; }
 </style>
 </head>
 
@@ -3821,7 +3900,7 @@
       localStorage.setItem('theme', theme);
     }
 
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
 
     document.getElementById('theme-toggle').addEventListener('click', () => {
