@@ -2249,6 +2249,49 @@
     [data-theme="light"] .mm-col__items a:hover { background: var(--gray-1); color: var(--black); }
     [data-theme="light"] .mm-cta { border-left-color: var(--gray-2); }
     @media (max-width: 1100px) { .nav-mm { display: none; } }
+
+    /* ── FORMAS DE VENDER ───────────────────────────────── */
+    .formas-section { max-width: 1140px; margin: 0 auto; padding: 96px 32px; }
+    .formas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 44px; }
+    .forma {
+      padding: 22px 24px; border-radius: 16px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    }
+    [data-theme="light"] .forma { background: var(--white); border-color: var(--gray-2); }
+    .forma__modo {
+      display: inline-block; padding: 3px 11px; border-radius: 50px; margin-bottom: 11px;
+      font-size: 11px; font-weight: 700; letter-spacing: .04em;
+      background: rgba(0,102,255,.1); color: #4d9fff;
+    }
+    .forma__modo--b2b { background: rgba(124,58,237,.12); color: #a78bfa; }
+    [data-theme="light"] .forma__modo { background: rgba(0,102,255,.08); color: #0066ff; }
+    [data-theme="light"] .forma__modo--b2b { background: rgba(124,58,237,.1); color: #7c3aed; }
+    .forma h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 6px; letter-spacing: -.3px; }
+    .forma p { font-size: 14.5px; color: var(--gray-4); line-height: 1.6; margin: 0; }
+    .formas-cierre {
+      margin-top: 28px; padding: 24px 28px; border-radius: 16px;
+      background: rgba(0,102,255,.06); border: 1px solid rgba(0,102,255,.18);
+      font-size: 17px; line-height: 1.6;
+    }
+    .formas-cierre strong { font-weight: 600; }
+    @media (max-width: 760px) { .formas-grid { grid-template-columns: 1fr; } .formas-section { padding: 72px 20px; } }
+
+    /* ── INDUSTRIAS ─────────────────────────────────────── */
+    .industrias-section { max-width: 1140px; margin: 0 auto; padding: 96px 32px; }
+    .ind-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 40px; }
+    .ind {
+      padding: 18px 20px; border-radius: 14px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color .15s, transform .15s;
+    }
+    .ind:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+    [data-theme="light"] .ind { background: var(--white); border-color: var(--gray-2); }
+    [data-theme="light"] .ind:hover { border-color: var(--gray-3); }
+    .ind__n { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+    .ind__d { font-size: 13px; color: var(--gray-4); line-height: 1.55; }
+    .ind__cad { display: block; margin-top: 8px; font-size: 11.5px; font-weight: 600; color: #ff9f0a; }
+    @media (max-width: 1000px) { .ind-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .ind-grid { grid-template-columns: 1fr; } .industrias-section { padding: 72px 20px; } }
 </style>
 </head>
 
@@ -2261,6 +2304,8 @@
     </a>
     <div class="nav-links">
       <a href="#problema">El problema</a>
+      <a href="#formas">Cómo vendes</a>
+      <a href="#industrias">Tu industria</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#agente">Agente IA</a>
       <div class="nav-mm">
@@ -2336,7 +2381,7 @@
       <a href="#precios">Precios</a>
     </div>
     <div class="nav-cta">
-      <a href="/pipeline-diagnostico.html" class="nav-btn nav-btn-ghost" style="text-decoration:none;">🔍 Diagnóstico de Pipeline</a>
+      <a href="/pipeline-diagnostico.html" class="nav-btn nav-btn-ghost" style="text-decoration:none;">¿Cuántos embudos necesitas?</a>
       <button class="theme-toggle" id="theme-toggle" title="Cambiar tema" aria-label="Cambiar tema">
         <i data-lucide="sun" id="theme-icon"></i>
       </button>
@@ -2866,6 +2911,50 @@
 ════════════════════════════════════════ -->
   <div class="sep"></div>
 
+
+  <div class="sep"></div>
+  <div class="formas-section" id="formas">
+    <div class="section-label">Líneas de negocio</div>
+    <h2>Tu negocio no vende<br><em>de una sola forma.</em></h2>
+    <p class="section-sub">Decir que una clínica es B2C es falso en cuanto la miras de cerca. Casi
+      ningún negocio cabe en un solo embudo — y meterlos todos en uno es por qué el CRM acaba
+      diciendo cosas que nadie cree.</p>
+
+    <div class="formas-grid">
+      <div class="forma">
+        <span class="forma__modo">B2C</span>
+        <h3>Atiende pacientes</h3>
+        <p>Ciclo de días, cierra una persona, llega por Instagram y WhatsApp. Lo que lo mata es no
+          contestar a tiempo.</p>
+      </div>
+      <div class="forma">
+        <span class="forma__modo forma__modo--b2b">B2B</span>
+        <h3>Convenio con aseguradoras</h3>
+        <p>Ciclo de meses, cierra un corporativo, se consigue tocando puertas. Lo que lo mata es que
+          cambie tu interlocutor.</p>
+      </div>
+      <div class="forma">
+        <span class="forma__modo forma__modo--b2b">B2B</span>
+        <h3>Insumos a otros hospitales</h3>
+        <p>Pedido recurrente con crédito. Aquí ganar no es cerrar: es que te sigan comprando, y que
+          se note cuando dejan de hacerlo.</p>
+      </div>
+      <div class="forma">
+        <span class="forma__modo forma__modo--b2b">B2B</span>
+        <h3>Chequeos empresariales</h3>
+        <p>Contrato anual con recursos humanos. Caduca con el presupuesto del año.</p>
+      </div>
+    </div>
+
+    <div class="formas-cierre">
+      Cuatro negocios distintos, cuatro clientes distintos, una sola razón social.
+      <strong>Y hoy los cuatro entran por el mismo WhatsApp.</strong>
+      <div style="margin-top:14px">
+        <a href="/pipeline-diagnostico.html" style="color:#4d9fff;text-decoration:none;font-weight:600">
+          Descubre cuántas tiene el tuyo →</a>
+      </div>
+    </div>
+  </div>
   <div class="sep"></div>
   <div class="canales-section" id="canales">
     <div class="section-label">Canales</div>
@@ -3179,6 +3268,35 @@
   <!-- ═══════════════════════════════════════
      MÓDULOS
 ════════════════════════════════════════ -->
+
+  <div class="sep"></div>
+  <div class="industrias-section" id="industrias">
+    <div class="section-label">Industrias</div>
+    <h2>Sirve para todas.<br><em>Funciona distinto en cada una.</em></h2>
+    <p class="section-sub">Lo que cambia no es el sistema: es quién es el cliente, si el prospecto
+      caduca, y cómo se llama el campo donde guardas a quién pertenece.</p>
+
+    <div class="ind-grid">
+      <div class="ind"><div class="ind__n">Salud</div><div class="ind__d">El paciente, por pauta y referido. Recurre.</div></div>
+      <div class="ind"><div class="ind__n">Educación</div><div class="ind__d">El alumno, por charla en colegio y pauta.<span class="ind__cad">El prospecto caduca con el ciclo</span></div></div>
+      <div class="ind"><div class="ind__n">Bienes raíces</div><div class="ind__d">El comprador, por portales.<span class="ind__cad">La unidad se vende y el lead muere</span></div></div>
+      <div class="ind"><div class="ind__n">Automotriz</div><div class="ind__d">Particulares y flotillas revueltos en el mismo número.</div></div>
+      <div class="ind"><div class="ind__n">Belleza y estética</div><div class="ind__d">La persona, por DM. Agenda por mensaje.</div></div>
+      <div class="ind"><div class="ind__n">Fitness</div><div class="ind__d">El socio. Se vende la inscripción y se pierde al tercer mes.</div></div>
+      <div class="ind"><div class="ind__n">Servicios profesionales</div><div class="ind__d">La empresa, por referido. Vende el socio, no un vendedor.</div></div>
+      <div class="ind"><div class="ind__n">Turismo</div><div class="ind__d">El viajero.<span class="ind__cad">Caduca con la fecha de salida</span></div></div>
+      <div class="ind"><div class="ind__n">Financiero y seguros</div><div class="ind__d">Persona o empresa.<span class="ind__cad">Caduca con la vigencia</span></div></div>
+      <div class="ind"><div class="ind__n">Retail y consumo</div><div class="ind__d">Mostrador y mayoreo: dos negocios, dos procesos.</div></div>
+      <div class="ind"><div class="ind__n">Alimentos y bebidas</div><div class="ind__d">Distribución de ruta y eventos con fecha encima.</div></div>
+      <div class="ind"><div class="ind__n">Tecnología</div><div class="ind__d">La empresa. Ciclos largos y varias personas decidiendo.</div></div>
+    </div>
+
+    <div class="formas-cierre" style="margin-top:32px">
+      <strong>Donde el prospecto caduca, insistir es correcto. Donde no, insistir quema.</strong>
+      Es la misma herramienta con el acelerador en otro lugar — y es por eso que no te vamos a
+      enseñar un demo genérico.
+    </div>
+  </div>
   <div class="sep"></div>
   <div class="modules-section" id="modulos">
     <div class="section-label">Módulos</div>
