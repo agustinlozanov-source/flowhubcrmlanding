@@ -98,7 +98,13 @@
    AWS está reservado a socios de su programa y el de ISO no se licencia a
    ninguna empresa. El nombre bien puesto carga la misma confianza. */
 .prov { border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
-.prov .marca-destacada { margin-bottom: 4px; }
+.prov__m { display: flex; align-items: center; gap: 11px; margin-bottom: 6px; }
+/* Monocromo forzado: brightness(0) aplasta cualquier color a negro, y en
+   oscuro se invierte a blanco. Así los seis logos se ven del mismo material
+   aunque vengan de fuentes distintas y con paletas distintas. */
+.prov__m img { height: 21px; width: auto; max-width: 112px; filter: brightness(0); opacity: .9; }
+[data-theme="dark"] .prov__m img { filter: brightness(0) invert(1); }
+.prov .marca-destacada { font-size: 16.5px; }
 .prov em { font-style: normal; font-size: 12.5px; color: var(--muted); display: block; margin-bottom: 12px; }
 .insig { display: flex; flex-wrap: wrap; gap: 6px; }
 .insig span {
@@ -661,38 +667,40 @@
 
     <div class="rej rej--3" style="margin-top:20px">
       <div class="prov">
-        <span class="marca-destacada">Amazon Web Services</span>
+        <div class="prov__m"><img src="https://svgl.app/library/aws_light.svg" alt="" loading="lazy" height="21"><span class="marca-destacada">Amazon Web Services</span></div>
         <em>Infraestructura y servidores</em>
         <div class="insig"><span>ISO/IEC 27001</span><span>ISO/IEC 42001</span><span>SOC 2</span></div>
       </div>
       <div class="prov">
-        <span class="marca-destacada">Google Cloud</span>
+        <div class="prov__m"><img src="https://svgl.app/library/google-cloud.svg" alt="" loading="lazy" height="21"><span class="marca-destacada">Google Cloud</span></div>
         <em>Base de datos y servicios gestionados</em>
         <div class="insig"><span>ISO/IEC 27001</span><span>SOC 2 Tipo II</span></div>
       </div>
       <div class="prov">
-        <span class="marca-destacada">Supabase</span>
+        <div class="prov__m"><img src="https://svgl.app/library/supabase.svg" alt="" loading="lazy" height="21"><span class="marca-destacada">Supabase</span></div>
         <em>Base de datos</em>
         <div class="insig"><span>SOC 2 Tipo II</span></div>
       </div>
       <div class="prov">
-        <span class="marca-destacada">Netlify</span>
+        <div class="prov__m"><img src="https://svgl.app/library/netlify.svg" alt="" loading="lazy" height="21"><span class="marca-destacada">Netlify</span></div>
         <em>Entrega de aplicaciones</em>
         <div class="insig"><span>SOC 2 Tipo II</span></div>
       </div>
       <div class="prov">
-        <span class="marca-destacada">Anthropic</span>
+        <div class="prov__m"><img src="https://svgl.app/library/anthropic_black.svg" alt="" loading="lazy" height="21"><span class="marca-destacada">Anthropic</span></div>
         <em>Modelos de inteligencia artificial</em>
         <div class="insig"><span>ISO/IEC 27001</span><span>ISO/IEC 42001</span><span>SOC 2 Tipo II</span></div>
       </div>
       <div class="prov">
-        <span class="marca-destacada">OpenAI</span>
+        <div class="prov__m"><img src="https://svgl.app/library/openai.svg" alt="" loading="lazy" height="21"><span class="marca-destacada">OpenAI</span></div>
         <em>Modelos de inteligencia artificial</em>
         <div class="insig"><span>SOC 2 Tipo II</span></div>
       </div>
     </div>
     <p class="corte">Certificaciones de cada proveedor de infraestructura, verificables en sus
-      portales de cumplimiento. Flow Hub no declara certificaciones propias.</p>
+      portales de cumplimiento. Flow Hub no declara certificaciones propias.
+      Las marcas y logotipos pertenecen a sus respectivos titulares y se muestran
+      para identificar la infraestructura utilizada.</p>
 
     <h3>Cómo se diseña cada sistema</h3>
     <p>Estos son los criterios con los que construimos un proyecto. Los que apliquen a su caso
