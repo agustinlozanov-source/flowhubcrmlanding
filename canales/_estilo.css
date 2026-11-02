@@ -112,7 +112,12 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: v
   font-size: 12px; font-weight: 700; color: var(--fg);
 }
 
-.cierre { border-top: 1px solid var(--line); padding: 44px 0 72px; }
+/* Ojo con la forma corta: el cierre es <div class="wrap cierre">, y escribir
+   `padding: 44px 0 72px` aqui borraba los 28px laterales que .wrap ya habia
+   puesto. En escritorio no se notaba —sobraba pantalla a los lados—, pero en
+   telefono el texto del cierre quedaba pegado a los dos bordes mientras el del
+   cuerpo respetaba su margen. Forma larga: solo lo vertical. */
+.cierre { border-top: 1px solid var(--line); padding-top: 44px; padding-bottom: 72px; }
 .cierre h2 { margin-bottom: 10px; }
 .btn {
   display: inline-block; margin-top: 16px; background: var(--fg); color: var(--bg);
@@ -398,4 +403,37 @@ footer a { color: var(--muted); text-decoration: none; }
   .btn { transition: color .2s; }
   .btn:hover { transform: none; }
   .btn:hover::after { animation: none; }
+}
+
+
+/* ── Teléfono: lo que no sabe encogerse ──────────────────────────
+ * Una columna `1fr` de rejilla no baja del ancho de su contenido: `1fr` es
+ * `minmax(auto, 1fr)` y ese `auto` es un minimo por contenido. Con una tabla
+ * o un bloque de codigo adentro, la columna se queda en el ancho de eso y
+ * empuja la pagina entera de lado.
+ *
+ * Va con `body` delante para ganarle por especificidad a la regla que cada
+ * pagina trae en su propio <style>, que se carga despues de esta hoja.
+ */
+@media (max-width: 920px) {
+  body .conind { grid-template-columns: minmax(0, 1fr); }
+  body .conind > * { min-width: 0; }
+}
+
+@media (max-width: 560px) {
+  /* "Agendar diagnostico" es mas largo que "Agendar demo" y en un telefono
+     se partia en dos renglones encimandose con el logo. Cede el boton de
+     tema, que es una comodidad; el CTA convierte. El tema sigue cambiable
+     desde el sistema operativo y recordado entre visitas. */
+  .top .tema { display: none; }
+  .top .cta { white-space: nowrap; padding: 8px 15px; font-size: 12.5px; }
+}
+
+@media (max-width: 640px) {
+  /* Tablas y bloques de codigo: que se deslicen ellos, dentro de su caja, y
+     no la pagina. Es lo mismo que hace el tablero del landing. */
+  main table, .mkt table {
+    display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .api3 pre { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
