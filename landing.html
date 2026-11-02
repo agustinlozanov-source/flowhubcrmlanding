@@ -2442,7 +2442,11 @@
     html { overflow-x: hidden; }
 
     @media (max-width: 860px) {
-      .problem-grid, .sources-cards, .modules-grid { grid-template-columns: 1fr; }
+      .problem-grid, .sources-cards, .modules-grid,
+      .agent-grid, .bi-grid { grid-template-columns: 1fr; }
+      /* Con la rejilla en una columna el hueco de 60px entre columnas se
+         vuelve un agujero entre el texto y el mockup. */
+      .agent-grid { gap: 32px; }
     }
 
     @media (max-width: 760px) {
