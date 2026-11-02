@@ -2427,6 +2427,42 @@
       .pl-tray { grid-template-columns: 1fr; padding: 12px; }
       .pl-card--reco, .pl-rise.pl-card--reco, .pl-rise.pl-card--reco.pl-in { transform: none; }
     }
+
+    /* ═══════════════════════════════════════════════════════
+       TELÉFONO
+
+       Varias secciones nunca tuvieron version de telefono: se quedaban en
+       tres y cinco columnas y lo que sobraba empujaba la pagina de lado.
+       Eso era el desplazamiento lateral — no un elemento suelto, sino
+       rejillas que no sabian encogerse.
+    ═══════════════════════════════════════════════════════ */
+
+    /* En iOS, overflow-x en body solo no alcanza: tiene que estar tambien
+       en html o el gesto lateral sigue funcionando. */
+    html { overflow-x: hidden; }
+
+    @media (max-width: 860px) {
+      .problem-grid, .sources-cards, .modules-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      /* El tablero del mockup son cinco columnas y asi debe verse: es lo que
+         esta mostrando. Pero el que se desliza es el tablero, no la pagina. */
+      .demo-cols {
+        grid-template-columns: repeat(5, 152px);
+        overflow-x: auto; -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px; scroll-snap-type: x proximity;
+      }
+      .demo-col { scroll-snap-align: start; }
+      .demo-topbar { flex-wrap: wrap; gap: 10px; }
+      .demo-spacer { display: none; }
+
+      /* Aire. Con secciones a ancho completo y texto grande, el contenido
+         llegaba pegado a los dos bordes. */
+      .problem-section, .agent-section, .modules-section,
+      .pricing-section, .cta-section, section { padding-left: 20px; padding-right: 20px; }
+      .mockup-body { padding: 12px; }
+    }
 </style>
 </head>
 
@@ -4054,7 +4090,7 @@
       }));
     })();
   </script>
-<script src="_tema.js?v=202611011200" defer></script>
+<script src="_tema.js?v=202611011400" defer></script>
 </body>
 
 </html>

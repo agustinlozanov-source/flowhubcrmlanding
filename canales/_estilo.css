@@ -133,6 +133,16 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 13.5px; 
 footer .wrap { max-width: 1140px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 footer a { color: var(--muted); text-decoration: none; }
 
+/* En telefono el cierre se centra. A ancho completo, un titular y un boton
+   alineados a la izquierda se leen como si se hubieran caido ahi; centrados
+   se leen como lo que son, el remate de la pagina. El cuerpo de texto NO se
+   centra: parrafos centrados se vuelven incomodos de leer. */
+@media (max-width: 640px) {
+  .cierre { text-align: center; }
+  .cierre .lead, .cierre > .wrap > p { margin-left: auto; margin-right: auto; }
+  .cierre .ctas, .cierre .otros { justify-content: center; }
+}
+
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .top nav a:not(.cta) { display: none; }
