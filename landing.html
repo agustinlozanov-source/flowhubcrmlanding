@@ -2250,6 +2250,38 @@
     [data-theme="light"] .mm-cta { border-left-color: var(--gray-2); }
     @media (max-width: 1100px) { .nav-mm { display: none; } }
 
+    /* Menús cortos: Plataforma y Servicios. A diferencia de Canales, que son
+       seis columnas de logos y por eso va centrado en la pantalla, estos
+       cuelgan del propio enlace. */
+    .nav-dd { position: relative; display: flex; align-items: center; }
+    .nav-dd__t { display: inline-flex; align-items: center; gap: 4px; cursor: default; }
+    .nav-dd__t i { width: 13px; height: 13px; transition: transform .2s; }
+    .nav-dd:hover .nav-dd__t i { transform: rotate(180deg); }
+    .nav-dd__p {
+      position: absolute; top: calc(100% + 15px); left: -14px;
+      min-width: 282px; padding: 10px; border-radius: 16px;
+      background: var(--gray-6); border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 24px 60px rgba(0,0,0,.5);
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity .18s, transform .18s, visibility .18s; z-index: 200;
+    }
+    /* Puente invisible sobre el hueco: sin esto el menú se cierra al cruzar
+       del enlace al panel. */
+    .nav-dd__p::before { content: ''; position: absolute; top: -15px; left: 0; right: 0; height: 15px; }
+    .nav-dd:hover .nav-dd__p { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dd__p a {
+      display: block !important; padding: 9px 11px; border-radius: 9px;
+      color: var(--gray-3) !important; text-decoration: none;
+      transition: background .12s, color .12s;
+    }
+    .nav-dd__p a:hover { background: rgba(255,255,255,.07); }
+    .nav-dd__p b { display: block; font-size: 13.5px; font-weight: 600; color: var(--white); }
+    .nav-dd__p span { display: block; font-size: 11.5px; color: var(--gray-4); margin-top: 2px; line-height: 1.4; }
+    [data-theme="light"] .nav-dd__p { background: var(--white); border-color: var(--gray-2); box-shadow: 0 24px 60px rgba(0,0,0,.12); }
+    [data-theme="light"] .nav-dd__p a:hover { background: var(--gray-1); }
+    [data-theme="light"] .nav-dd__p b { color: var(--black); }
+    @media (max-width: 1100px) { .nav-dd { display: none; } }
+
     /* ── FORMAS DE VENDER ───────────────────────────────── */
     .formas-section { max-width: 1140px; margin: 0 auto; padding: 96px 32px; }
     .formas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 44px; }
@@ -2378,7 +2410,8 @@
            y el botón negro-. Todo lo que se parte deja de verse proporcionado. */
     nav { height: 68px !important; padding: 0 40px !important; gap: 26px !important; }
     .nav-links { gap: 24px !important; margin-left: 10px !important; flex-wrap: nowrap !important; }
-    .nav-links a, .nav-mm__trigger { white-space: nowrap !important; font-size: 13px !important; }
+    .nav-links a, .nav-mm__trigger, .nav-dd__t { white-space: nowrap !important; font-size: 13px !important; }
+    .nav-dd__p a { white-space: normal !important; font-size: 13px !important; }
     .nav-cta { gap: 16px !important; }
     .nav-btn { white-space: nowrap !important; padding: 10px 20px !important; font-size: 13px !important; line-height: 1 !important; }
 
@@ -2583,14 +2616,18 @@
       <img id="nav-logo-img" src="flow%20hub%20logo%202.png" alt="Flow Hub CRM" style="height: 32px;">
     </a>
     <div class="nav-links">
-      <a href="tecnologia.html">Tecnología</a>
-      <a href="dx49.html">DX49</a>
-      <a href="consultoria.html">Consultoría</a>
-      <a href="#problema">El problema</a>
-      <a href="#formas">Cómo vendes</a>
-      <a href="#industrias">Tu industria</a>
-      <a href="#pipeline">Pipeline</a>
-      <a href="#agente">Agente IA</a>
+      <div class="nav-dd">
+        <span class="nav-dd__t">Plataforma <i data-lucide="chevron-down"></i></span>
+        <div class="nav-dd__p">
+          <a href="#problema"><b>El problema</b><span>Por qué se mueren los leads sin seguimiento</span></a>
+          <a href="#formas"><b>Cómo vendes</b><span>Las formas de venta que cubre el CRM</span></a>
+          <a href="#industrias"><b>Tu industria</b><span>Embudos prediseñados por giro</span></a>
+          <a href="#pipeline"><b>Pipeline</b><span>El tablero de venta en tiempo real</span></a>
+          <a href="#agente"><b>Agente IA</b><span>Qué hace el agente y hasta dónde llega</span></a>
+          <a href="#modulos"><b>Módulos</b><span>Lo que se activa según el plan</span></a>
+        </div>
+      </div>
+
       <div class="nav-mm">
         <a href="#canales" class="nav-mm__trigger">Canales <i data-lucide="chevron-down"></i></a>
         <div class="nav-mm__panel">
@@ -2659,8 +2696,16 @@
           </div>
         </div>
       </div>
-      <a href="#modulos">Módulos</a>
-      <a href="#referidos">Referidos</a>
+
+      <div class="nav-dd">
+        <span class="nav-dd__t">Servicios <i data-lucide="chevron-down"></i></span>
+        <div class="nav-dd__p">
+          <a href="tecnologia.html"><b>Tecnología</b><span>Sistemas a la medida sobre lo que ya tiene</span></a>
+          <a href="dx49.html"><b>DX49</b><span>El diagnóstico de madurez operativa</span></a>
+          <a href="consultoria.html"><b>Consultoría</b><span>Método, frameworks e indicadores</span></a>
+        </div>
+      </div>
+
       <a href="#precios">Precios</a>
     </div>
     <div class="nav-cta">
