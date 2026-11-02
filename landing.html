@@ -1119,180 +1119,26 @@
     }
 
     /* ─── REFERRAL ─── */
-    .referral-section {
-      padding: 80px 48px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
 
-    .referral-card {
-      background: rgba(0, 102, 255, 0.06);
-      border: 1px solid rgba(0, 102, 255, 0.2);
-      border-radius: 20px;
-      padding: 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
 
-    .referral-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
 
-    .referral-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 14px;
-    }
 
-    .referral-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.7px;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
 
-    .referral-desc {
-      font-size: 15px;
-      color: var(--gray-4);
-      line-height: 1.65;
-      margin-bottom: 28px;
-    }
 
-    .referral-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
 
-    .ref-step {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
 
-    .ref-step-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      background: var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
 
-    .ref-step-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      margin-bottom: 3px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
 
-    .ref-step-desc {
-      font-size: 12.5px;
-      color: var(--gray-4);
-      line-height: 1.5;
-    }
 
-    .referral-mock {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius);
-      padding: 20px;
-    }
 
-    .rm-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--gray-4);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 16px;
-    }
 
-    .rm-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 9px;
-      margin-bottom: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
 
-    .rm-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: white;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      flex-shrink: 0;
-    }
 
-    .rm-name {
-      font-size: 12.5px;
-      font-weight: 600;
-    }
 
-    .rm-ref {
-      font-size: 11px;
-      color: var(--gray-4);
-    }
 
-    .rm-earn {
-      margin-left: auto;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--green);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
 
-    .rm-total {
-      padding: 12px;
-      background: rgba(0, 200, 83, 0.08);
-      border: 1px solid rgba(0, 200, 83, 0.2);
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 12px;
-    }
 
-    .rm-total-label {
-      font-size: 12px;
-      color: var(--gray-4);
-    }
 
-    .rm-total-val {
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--green);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
 
     /* ─── BI SECTION ─── */
     .bi-section {
@@ -2108,36 +1954,12 @@
       color: #8e8e93;
     }
 
-    [data-theme="light"] .referral-card {
-      background: rgba(0, 102, 255, 0.04);
-      border: 1px solid rgba(0, 102, 255, 0.15);
-    }
 
-    [data-theme="light"] .referral-desc {
-      color: #6e6e73;
-    }
 
-    [data-theme="light"] .referral-mock {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-    }
 
-    [data-theme="light"] .rm-title {
-      color: #8e8e93;
-    }
 
-    [data-theme="light"] .rm-row {
-      background: rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(0, 0, 0, 0.07);
-    }
 
-    [data-theme="light"] .rm-name {
-      color: #070708;
-    }
 
-    [data-theme="light"] .ref-step-desc {
-      color: #6e6e73;
-    }
 
     [data-theme="light"] .cta-bg {
       background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0, 102, 255, 0.07) 0%, transparent 70%);
@@ -2402,7 +2224,7 @@
     }
 
     /* 5 · Y el aire: las secciones respiran más. */
-    .problem-section, .agent-section, .modules-section, .referral-section { padding-top: 96px; padding-bottom: 96px; }
+    .problem-section, .agent-section, .modules-section { padding-top: 96px; padding-bottom: 96px; }
 
     /* 6 · La barra de arriba, a escala.
            Estaba rota por una sola razón: el texto se partía en dos renglones
@@ -3725,79 +3547,6 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
-     REFERIDOS
-════════════════════════════════════════ -->
-  <div class="sep"></div>
-  <div class="referral-section" id="referidos">
-    <div class="referral-card">
-      <div>
-        <div class="referral-label">Programa de Referidos</div>
-        <div class="referral-title">Úsalo. Recomiéndalo.<br>Gana dinero con eso.</div>
-        <div class="referral-desc">Cada cliente tiene su código de referido único. Cuando alguien se registra usando tu
-          código, tú ganas comisión mensual mientras ese cliente siga activo.</div>
-
-        <div class="referral-steps">
-          <div class="ref-step">
-            <div class="ref-step-num">1</div>
-            <div>
-              <div class="ref-step-title">Comparte tu código</div>
-              <div class="ref-step-desc">Cada organización tiene un link y código únicos para compartir con otros
-                negocios.</div>
-            </div>
-          </div>
-          <div class="ref-step">
-            <div class="ref-step-num">2</div>
-            <div>
-              <div class="ref-step-title">Tu referido se registra</div>
-              <div class="ref-step-desc">El nuevo cliente activa su cuenta usando tu código. Tú apareces como referente.
-              </div>
-            </div>
-          </div>
-          <div class="ref-step">
-            <div class="ref-step-num">3</div>
-            <div>
-              <div class="ref-step-title">Cobras comisión mensual</div>
-              <div class="ref-step-desc">Mientras tu referido tenga activa su suscripción, tú generas ingresos pasivos
-                automáticamente.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="referral-mock">
-        <div class="rm-title">Mis referidos activos</div>
-        <div class="rm-row">
-          <div class="rm-avatar" style="background:linear-gradient(135deg,#0066ff,#7c3aed)">AG</div>
-          <div>
-            <div class="rm-name">Agencia Grow</div>
-            <div class="rm-ref" style="font-size:11px;color:rgba(255,255,255,0.35)">Activo · 8 meses</div>
-          </div>
-          <div class="rm-earn">+$480</div>
-        </div>
-        <div class="rm-row">
-          <div class="rm-avatar" style="background:linear-gradient(135deg,#00c853,#00b8d9)">CV</div>
-          <div>
-            <div class="rm-name">Constructora Vega</div>
-            <div class="rm-ref" style="font-size:11px;color:rgba(255,255,255,0.35)">Activo · 3 meses</div>
-          </div>
-          <div class="rm-earn">+$180</div>
-        </div>
-        <div class="rm-row">
-          <div class="rm-avatar" style="background:linear-gradient(135deg,#ff9500,#ff3b30)">RS</div>
-          <div>
-            <div class="rm-name">RetailSmart</div>
-            <div class="rm-ref" style="font-size:11px;color:rgba(255,255,255,0.35)">Activo · 1 mes</div>
-          </div>
-          <div class="rm-earn">+$60</div>
-        </div>
-        <div class="rm-total">
-          <span class="rm-total-label" style="font-size:12px;color:rgba(255,255,255,0.4)">Total acumulado</span>
-          <span class="rm-total-val">$720 / mes</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ═══════════════════════════════════════
      CTA FINAL
