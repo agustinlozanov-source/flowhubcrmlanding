@@ -132,6 +132,35 @@
 [data-theme="dark"] .et--esp { color: #fbbf24; }
 [data-theme="dark"] .et--rie { color: #f87171; }
 .ilustrativa { font-size: 11.5px; color: var(--muted); margin-top: 10px; display: block; }
+
+/* Seguimiento supervisado: a la izquierda lo que se va a enviar, a la derecha
+   lo que se entendió de la respuesta. Las dos mitades cuentan el ciclo. */
+.dos { display: grid; grid-template-columns: 1fr 1fr; }
+.dos > div { padding: 18px 16px; }
+.dos > div + div { border-left: 1px solid var(--line); }
+.etiq { font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--muted); }
+.correo { border: 1px solid var(--line); border-radius: 11px; padding: 13px; margin-top: 10px; font-size: 12.5px; }
+.correo__h { color: var(--muted); font-size: 11.5px; padding-bottom: 9px; margin-bottom: 9px; border-bottom: 1px solid var(--line); line-height: 1.5; }
+.correo p { margin: 0; line-height: 1.55; }
+.accs { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.acc { font-size: 11.5px; font-weight: 600; padding: 6px 13px; border-radius: 50px; border: 1px solid var(--line); color: var(--muted); }
+.acc--si { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+@media (max-width: 720px) { .dos { grid-template-columns: 1fr; } .dos > div + div { border-left: none; border-top: 1px solid var(--line); } }
+
+/* Barras de cumplimiento */
+.barras { display: grid; gap: 9px; margin-bottom: 10px; }
+.barra { display: grid; grid-template-columns: 110px 1fr 44px; align-items: center; gap: 12px; font-size: 12.5px; }
+.barra i { height: 7px; border-radius: 50px; background: var(--card); border: 1px solid var(--line); display: block; overflow: hidden; }
+.barra u { display: block; height: 100%; background: var(--fg); text-decoration: none; }
+.barra b { font-variant-numeric: tabular-nums; font-size: 12.5px; text-align: right; }
+@media (max-width: 560px) { .barra { grid-template-columns: 86px 1fr 40px; gap: 8px; } }
+
+/* Oficina virtual: una columna por función */
+.cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.col__t { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 9px; }
+.tar { border: 1px solid var(--line); border-radius: 9px; padding: 9px 10px; margin-bottom: 7px; font-size: 11.5px; line-height: 1.4; }
+.tar em { font-style: normal; display: block; color: var(--muted); font-size: 10.5px; margin-top: 4px; }
+@media (max-width: 860px) { .cols { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 720px) { .mkt__kpis { grid-template-columns: repeat(2, 1fr); } }
 
 /* Portal de API: tres columnas, como una referencia técnica de verdad */
@@ -240,6 +269,7 @@
 
   <aside class="ind">
     <a href="#maquila">Manufactura y maquila</a>
+    <a href="#torre">Torre de control</a>
     <a href="#forma">Nuestra forma de construir</a>
     <a href="#proceso">Cómo trabajamos</a>
     <a href="#soluciones">Soluciones</a>
@@ -259,48 +289,117 @@
     <p>Es donde más trabajo hemos hecho y donde la operación se parece más entre una empresa y otra:
       compras que se enteran tarde de los retrasos, precios que dejan de estar vigentes sin que nadie
       lo note, faltantes que se descubren en piso y un MRP con parámetros que nunca se recalibraron.</p>
+    <p>También es donde el costo de enterarse tarde es más alto, porque detrás de cada material hay
+      una línea que para.</p>
+  </section>
 
-    <h3>Torre de Control de Abastecimiento</h3>
-    <p>Acompaña cada orden de compra desde la necesidad hasta la recepción en planta. Pide
-      confirmaciones y guías a los proveedores, lee sus respuestas —vengan en español o en inglés—,
-      mantiene los precios vigentes y avisa con días de margen cuando algo pone en riesgo la
-      producción. Todo sobre el ERP y el correo que el equipo ya usa.</p>
+  <!-- ════ TORRE DE CONTROL ════ -->
+  <section id="torre">
+    <h2>Torre de control</h2>
+    <p>Una torre de control vigila <strong>compromisos contra una fecha</strong>. Sabe qué se
+      esperaba, de quién, para cuándo; persigue la confirmación, lee lo que contesta la otra parte y
+      avisa con días de margen cuando algo se sale de lugar. El trabajo que hoy hace una persona
+      revisando su bandeja de entrada y una hoja de cálculo.</p>
+
+    <div class="nota">
+      <strong>El patrón es el mismo; la torre no.</strong> Qué se vigila, con quién, en qué etapas,
+      con qué plazos y qué significa que algo esté en riesgo sale del diagnóstico de su área. Dos
+      empresas del mismo giro terminan con torres distintas, porque no operan igual. Lo que se
+      reutiliza es el motor, no su configuración.
+    </div>
+
+    <h3>Dónde aplica el mismo patrón</h3>
+    <div class="rej rej--3">
+      <div class="tj"><h3>Abastecimiento</h3><p>Órdenes de compra con proveedores: confirmación, fecha de embarque, guía y precio vigente. <strong>Es la más desarrollada.</strong></p></div>
+      <div class="tj"><h3>Cobranza</h3><p>Facturas por cobrar con clientes: compromiso de pago, recordatorios y escalamiento antes del vencimiento.</p></div>
+      <div class="tj"><h3>Embarques y entregas</h3><p>Órdenes hacia el cliente: fecha prometida, estatus del transporte y aviso cuando la promesa deja de ser alcanzable.</p></div>
+      <div class="tj"><h3>Comercio exterior</h3><p>Documentación y cruce: qué falta, quién lo tiene y cuánto margen queda antes de la fecha de planta.</p></div>
+      <div class="tj"><h3>Calidad</h3><p>No conformidades y acciones correctivas: responsable, fecha comprometida y evidencia de cierre.</p></div>
+      <div class="tj"><h3>Mantenimiento</h3><p>Órdenes de trabajo y refacciones: disponibilidad, fecha de intervención y riesgo de paro.</p></div>
+    </div>
+
+    <h3>Así se ve una torre de abastecimiento</h3>
+    <p>Las tres pantallas siguientes muestran el mismo motor en tres momentos: ver, actuar y medir.</p>
 
     <div class="mkt">
       <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
-        <span style="margin-left:8px">Órdenes abiertas</span></div>
+        <span style="margin-left:8px">1 · Ver — compromisos en seguimiento</span></div>
       <div class="mkt__in">
         <div class="mkt__kpis">
-          <div class="mkt__kpi"><b>186</b><span>órdenes abiertas</span></div>
-          <div class="mkt__kpi"><b>82%</b><span>confirmadas por el proveedor</span></div>
-          <div class="mkt__kpi"><b>7</b><span>sin guía a 5 días de la fecha</span></div>
-          <div class="mkt__kpi"><b>3</b><span>en riesgo para producción</span></div>
+          <div class="mkt__kpi"><b>248</b><span>compromisos vigentes</span></div>
+          <div class="mkt__kpi"><b>31</b><span>sin respuesta del proveedor</span></div>
+          <div class="mkt__kpi"><b>12</b><span>fuera de la fecha prometida</span></div>
+          <div class="mkt__kpi"><b>5</b><span>con riesgo para la línea</span></div>
         </div>
         <table>
-          <thead><tr><th>OC</th><th>Proveedor</th><th>Fecha requerida</th><th>Estado</th><th>Siguiente acción</th></tr></thead>
+          <thead><tr><th>Referencia</th><th>Contraparte</th><th>Compromiso</th><th>Estado</th><th>Siguiente acción</th></tr></thead>
           <tbody>
-            <tr><td>OC-10469</td><td>Proveedor C</td><td>11 nov</td><td><span class="et et--rie">Sin acuse · 9 días</span></td><td>Segundo recordatorio</td></tr>
-            <tr><td>OC-10471</td><td>Proveedor A</td><td>14 nov</td><td><span class="et et--esp">Esperando guía</span></td><td>Pedir número de guía</td></tr>
-            <tr><td>OC-10474</td><td>Proveedor B</td><td>18 nov</td><td><span class="et et--ok">Confirmada</span></td><td>Seguimiento en tránsito</td></tr>
-            <tr><td>OC-10478</td><td>Proveedor A</td><td>21 nov</td><td><span class="et et--esp">Precio con diferencia</span></td><td>Actualizar lista de precios</td></tr>
+            <tr><td>Orden 4821</td><td>Proveedor A</td><td>Entrega 24 nov</td><td><span class="et et--rie">Riesgo de paro</span></td><td>Escalar a compras</td></tr>
+            <tr><td>Orden 4834</td><td>Proveedor B</td><td>Confirmar fecha</td><td><span class="et et--esp">Sin respuesta</span></td><td>Segundo recordatorio</td></tr>
+            <tr><td>Orden 4840</td><td>Proveedor D</td><td>Entrega 2 dic</td><td><span class="et et--ok">En tránsito</span></td><td>Avisar a recibo</td></tr>
+            <tr><td>Orden 4852</td><td>Proveedor A</td><td>Precio de lista</td><td><span class="et et--esp">Diferencia detectada</span></td><td>Actualizar catálogo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo. Las columnas, las etapas y las alertas se definen en el diagnóstico de cada empresa.</span>
+
+    <div class="mkt" style="margin-top:26px">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">2 · Actuar — seguimiento supervisado</span></div>
+      <div class="dos">
+        <div>
+          <div class="etiq">Redactado, esperando aprobación</div>
+          <div class="correo">
+            <div class="correo__h">Para: contacto@proveedor-a.example<br>Asunto: Follow-up — Order 4834</div>
+            <p>Good morning,<br><br>We have not yet received confirmation for order 4834, required at
+              our plant on November 24. Could you confirm the ship date and share the tracking
+              number?<br><br>Thank you,</p>
+          </div>
+          <div class="accs"><span class="acc acc--si">Aprobar y enviar</span><span class="acc">Editar</span><span class="acc">Descartar</span></div>
+        </div>
+        <div>
+          <div class="etiq">Respuesta leída</div>
+          <table style="margin-top:10px">
+            <tbody>
+              <tr><td>Fecha de embarque</td><td><strong>21 nov</strong></td></tr>
+              <tr><td>Cantidad</td><td><strong>1,200 pz</strong></td></tr>
+              <tr><td>Precio</td><td><strong>$4.85</strong> <span class="et et--esp">+6% vs lista</span></td></tr>
+              <tr><td>Guía</td><td><strong>7731 0042 9815</strong></td></tr>
+            </tbody>
+          </table>
+          <div class="accs"><span class="acc acc--si">Actualizar lista de precios</span></div>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo. Nada sale hacia el proveedor sin que una persona lo apruebe.</span>
+
+    <div class="mkt" style="margin-top:26px">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">3 · Medir — desempeño de la contraparte</span></div>
+      <div class="mkt__in">
+        <div class="barras">
+          <div class="barra"><span>Proveedor A</span><i><u style="width:92%"></u></i><b>92%</b></div>
+          <div class="barra"><span>Proveedor B</span><i><u style="width:74%"></u></i><b>74%</b></div>
+          <div class="barra"><span>Proveedor C</span><i><u style="width:58%"></u></i><b>58%</b></div>
+          <div class="barra"><span>Proveedor D</span><i><u style="width:41%"></u></i><b>41%</b></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin:4px 0 16px">Cumplimiento contra la fecha que el propio proveedor confirmó.</p>
+        <table>
+          <thead><tr><th>Contraparte</th><th>Plazo cargado en el ERP</th><th>Plazo real</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Proveedor A</td><td>15 días</td><td>16 días</td><td><span class="et et--ok">Parámetro correcto</span></td></tr>
+            <tr><td>Proveedor C</td><td>15 días</td><td>27 días</td><td><span class="et et--rie">Ajustar parámetro</span></td></tr>
+            <tr><td>Proveedor D</td><td>30 días</td><td>44 días</td><td><span class="et et--rie">Ajustar parámetro</span></td></tr>
           </tbody>
         </table>
       </div>
     </div>
     <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
 
-    <h3>Qué resuelve, en concreto</h3>
-    <ul>
-      <li><strong>Seguimiento a proveedores.</strong> El sistema redacta el correo de seguimiento y lo deja listo para que su comprador lo apruebe y lo envíe.</li>
-      <li><strong>Lectura de la respuesta.</strong> De lo que contesta el proveedor extrae fecha de embarque, cantidad, precio y número de guía, y marca la diferencia contra lo pedido.</li>
-      <li><strong>Precio vigente.</strong> Cuando el precio facturado no coincide con la lista, lo señala y propone actualizarla, para que el error no regrese el mes siguiente.</li>
-      <li><strong>Evaluación de proveedores.</strong> Compara el tiempo de entrega cargado en el ERP contra el real, y señala cuáles parámetros conviene ajustar.</li>
-    </ul>
-
-    <div class="nota">
-      <strong>Convive con su ERP.</strong> La torre de control lee la información que ya existe en su
-      sistema y trabaja sobre el correo de compras. No sustituye al ERP ni obliga a su equipo a
-      capturar dos veces.
+    <div class="nota" style="margin-top:26px">
+      <strong>Convive con su ERP.</strong> La torre lee la información que ya existe en su sistema y
+      trabaja sobre el correo del área. No sustituye al ERP ni obliga a su equipo a capturar dos veces.
     </div>
   </section>
 
@@ -394,6 +493,64 @@
       </div>
 
     </div>
+
+    <h3 style="margin-top:34px">Un ERP, visto desde la dirección</h3>
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Panel de dirección</span></div>
+      <div class="mkt__in">
+        <div class="mkt__kpis">
+          <div class="mkt__kpi"><b>$3.1M</b><span>ventas del mes</span></div>
+          <div class="mkt__kpi"><b>$412K</b><span>por cobrar vencido</span></div>
+          <div class="mkt__kpi"><b>38 días</b><span>inventario</span></div>
+          <div class="mkt__kpi"><b>62</b><span>órdenes de compra abiertas</span></div>
+        </div>
+        <table>
+          <thead><tr><th>Folio</th><th>Área</th><th>Concepto</th><th>Monto</th><th>Solicita</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>REQ-2214</td><td>Compras</td><td>Refacción de línea 3</td><td>$86,400</td><td>Comprador 1</td><td><span class="acc acc--si">Aprobar</span></td></tr>
+            <tr><td>REQ-2215</td><td>Mantenimiento</td><td>Servicio externo</td><td>$24,900</td><td>Comprador 2</td><td><span class="acc acc--si">Aprobar</span></td></tr>
+            <tr><td>REQ-2219</td><td>Operaciones</td><td>Material indirecto</td><td>$9,150</td><td>Comprador 1</td><td><span class="acc acc--si">Aprobar</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <h3 style="margin-top:34px">Una oficina virtual, por función</h3>
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Hoy · autonomía del área: nivel 4 de 5 · 31 h recuperadas esta semana</span></div>
+      <div class="mkt__in">
+        <div class="cols">
+          <div>
+            <div class="col__t">Finanzas</div>
+            <div class="tar">Conciliación bancaria<em>Ejecutada · 7:40</em></div>
+            <div class="tar">Antigüedad de saldos<em>Ejecutada · 8:10</em></div>
+          </div>
+          <div>
+            <div class="col__t">Compras</div>
+            <div class="tar">Seguimiento a 14 órdenes<em>Ejecutada · 8:00</em></div>
+            <div class="tar">3 correos por aprobar<em>Esperando a una persona</em></div>
+          </div>
+          <div>
+            <div class="col__t">Comercial</div>
+            <div class="tar">Respuesta a 9 prospectos<em>Ejecutada · 9:15</em></div>
+            <div class="tar">Cotización fuera de política<em>Requiere autorización</em></div>
+          </div>
+          <div>
+            <div class="col__t">Capital humano</div>
+            <div class="tar">Avisos de incidencias<em>Ejecutada · 7:30</em></div>
+          </div>
+          <div>
+            <div class="col__t">Tecnología</div>
+            <div class="tar">Respaldo verificado<em>Ejecutada · 2:00</em></div>
+            <div class="tar">Integración con ERP<em>Sin novedades</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo. Cada acción queda en bitácora con su hora y su responsable.</span>
   </section>
 
   <!-- ════ INDUSTRIAS ════ -->
