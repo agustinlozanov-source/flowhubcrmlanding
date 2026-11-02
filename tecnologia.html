@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tecnología a la medida para empresas · Flow Hub</title>
+<meta name="description" content="ERP, MRP, torre de control de abastecimiento, oficinas virtuales y CRM con IA, construidos sobre sus sistemas a partir de un diagnóstico.">
+<link rel="canonical" href="https://landing.flowhubcrm.app/tecnologia">
+<meta property="og:title" content="Tecnología a la medida para empresas · Flow Hub">
+<meta property="og:description" content="Diseñamos y operamos sistemas que trabajan con lo que su empresa ya tiene.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="Icono%20Flow%20Hub%20CRM.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="canales/_estilo.css?v=202611010900">
+<script>
+  (function () {
+    var t = 'light';
+    try { t = localStorage.getItem('theme') || 'light'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<style>
+/* Esta página se lee más ancha que las de canal: lleva tablas, tarjetas de
+   solución y mockups que a 760px se estrangulan. El texto corrido sigue en
+   la medida de lectura; solo lo que es rejilla se ensancha. */
+.wrap--ancho { max-width: 1060px; }
+
+/* El encabezado de esta página va alineado a la izquierda; .ctas llega
+   centrado desde las páginas de canal, que sí centran el suyo. */
+.hero .ctas { justify-content: flex-start; }
+
+/* Índice lateral. En pantalla grande acompaña; en chica desaparece, porque
+   un índice flotante sobre un teléfono tapa justo lo que se quiere leer. */
+.conind { display: grid; grid-template-columns: 200px 1fr; gap: 56px; align-items: start; }
+.ind { position: sticky; top: 92px; font-size: 13.5px; line-height: 1.5; }
+.ind a {
+  display: block; padding: 6px 0 6px 12px; color: var(--muted);
+  text-decoration: none; border-left: 2px solid var(--line);
+}
+.ind a:hover { color: var(--fg); border-left-color: var(--fg); }
+@media (max-width: 920px) { .conind { grid-template-columns: 1fr; gap: 0; } .ind { display: none; } }
+
+/* Cifras. Sin caja: el dato se sostiene solo, igual que en el encabezado del
+   landing. Una línea de pelo entre uno y otro y nada más. */
+.cifras { display: grid; grid-template-columns: repeat(4, 1fr); margin: 40px 0 8px; }
+.cifras div { padding: 0 20px; }
+.cifras div + div { border-left: 1px solid var(--line); }
+.cifras b {
+  display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900;
+  font-size: 34px; letter-spacing: -1.4px; line-height: 1; margin-bottom: 8px;
+}
+.cifras span { font-size: 13px; color: var(--muted); line-height: 1.45; display: block; }
+/* La cuarta no es una cantidad sino un rango. Con el mismo cuerpo que los
+   números rompía la fila en dos renglones y desalineaba todo. */
+.cifras .texto b { font-size: 19px; letter-spacing: -.5px; line-height: 1.25; padding-top: 6px; }
+.corte { font-size: 12px; color: var(--muted); margin-top: 18px; }
+@media (max-width: 760px) {
+  .cifras { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
+  .cifras div:nth-child(3) { border-left: none; }
+}
+
+/* Tarjetas */
+.rej { display: grid; gap: 16px; margin: 26px 0 0; }
+.rej--2 { grid-template-columns: repeat(2, 1fr); }
+.rej--3 { grid-template-columns: repeat(3, 1fr); }
+/* Cuatro en fila no caben: la columna de contenido mide ~800px porque el
+   índice se lleva 200. En 2x2 cada tarjeta respira y el texto no se parte
+   palabra por palabra. */
+.rej--4 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 860px) { .rej--3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .rej--2, .rej--3, .rej--4 { grid-template-columns: 1fr; } }
+
+.tj { border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 24px; background: var(--bg); }
+.tj h3 { margin: 0 0 8px; font-size: 16.5px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -.2px; }
+.tj p { font-size: 14.5px; line-height: 1.6; color: var(--muted); margin: 0; }
+.tj__n {
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 13px;
+  color: var(--muted); display: block; margin-bottom: 12px; letter-spacing: .04em;
+}
+
+/* Solución: ficha más alta, con sus campos */
+.sol { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: var(--bg); }
+.sol--destacada { border-color: var(--fg); border-width: 1.5px; }
+.sol h3 { margin: 0 0 4px; font-size: 20px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: -.5px; }
+.sol__para { font-size: 12.5px; color: var(--muted); margin-bottom: 16px; }
+.sol dl { margin: 0; font-size: 14.5px; }
+.sol dt {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 700;
+  color: var(--muted); margin-top: 16px;
+}
+.sol dd { margin: 5px 0 0; line-height: 1.6; }
+.marca-destacada {
+  display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800; letter-spacing: -.4px; font-size: 19px;
+}
+
+/* Proveedores de infraestructura. Marcas tipográficas, no logotipos: el de
+   AWS está reservado a socios de su programa y el de ISO no se licencia a
+   ninguna empresa. El nombre bien puesto carga la misma confianza. */
+.prov { border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.prov .marca-destacada { margin-bottom: 4px; }
+.prov em { font-style: normal; font-size: 12.5px; color: var(--muted); display: block; margin-bottom: 12px; }
+.insig { display: flex; flex-wrap: wrap; gap: 6px; }
+.insig span {
+  font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 50px;
+  background: var(--card); border: 1px solid var(--line); color: var(--fg);
+}
+
+/* Mockups */
+.mkt { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--bg); font-size: 13.5px; }
+[data-theme="light"] .mkt { box-shadow: 0 20px 50px rgba(0,0,0,.08); }
+.mkt__bar {
+  display: flex; align-items: center; gap: 10px; padding: 11px 16px;
+  border-bottom: 1px solid var(--line); font-size: 12.5px; color: var(--muted);
+}
+.mkt__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--g3); flex: 0 0 9px; }
+.mkt__in { padding: 18px 16px; }
+.mkt__kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.mkt__kpi { border: 1px solid var(--line); border-radius: 11px; padding: 12px; }
+.mkt__kpi b {
+  display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+  font-size: 22px; letter-spacing: -.8px; line-height: 1;
+}
+.mkt__kpi span { font-size: 11px; color: var(--muted); display: block; margin-top: 5px; line-height: 1.35; }
+.mkt table { margin: 0; font-size: 13px; }
+.mkt th, .mkt td { padding: 9px 10px 9px 0; }
+.et { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 50px; white-space: nowrap; }
+.et--ok { background: rgba(0,200,83,.13); color: #00914b; }
+.et--esp { background: rgba(255,149,0,.15); color: #b86a00; }
+.et--rie { background: rgba(255,59,48,.12); color: #d32f2b; }
+[data-theme="dark"] .et--ok { color: #4ade80; }
+[data-theme="dark"] .et--esp { color: #fbbf24; }
+[data-theme="dark"] .et--rie { color: #f87171; }
+.ilustrativa { font-size: 11.5px; color: var(--muted); margin-top: 10px; display: block; }
+@media (max-width: 720px) { .mkt__kpis { grid-template-columns: repeat(2, 1fr); } }
+
+/* Portal de API: tres columnas, como una referencia técnica de verdad */
+.api3 { display: grid; grid-template-columns: 150px 1fr 1fr; gap: 0; font-size: 13px; }
+.api3 > div { padding: 16px; }
+.api3 > div + div { border-left: 1px solid var(--line); }
+.api3 ul { margin: 0; }
+.api3 li { padding-left: 0; margin-bottom: 7px; font-size: 12.5px; color: var(--muted); }
+.api3 li::before { display: none; }
+.api3 li.on { color: var(--fg); font-weight: 600; }
+.ruta {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 7px;
+  padding: 3px 8px; display: inline-block;
+}
+.api3 pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px;
+  line-height: 1.65; margin: 0; white-space: pre-wrap; word-break: break-word; color: var(--g5);
+}
+[data-theme="dark"] .api3 pre { color: var(--g3); }
+@media (max-width: 860px) {
+  .api3 { grid-template-columns: 1fr; }
+  .api3 > div + div { border-left: none; border-top: 1px solid var(--line); }
+}
+
+/* Preguntas */
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary {
+  cursor: pointer; padding: 17px 0; font-weight: 600; font-size: 16px;
+  list-style: none; display: flex; justify-content: space-between; gap: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; color: var(--muted); font-weight: 400; font-size: 20px; line-height: 1; }
+.faq details[open] summary::after { content: '−'; }
+.faq p { padding: 0 0 18px; color: var(--muted); font-size: 15.5px; margin: 0; }
+
+/* Formulario: pocos campos. Cada campo de más es gente que no lo termina. */
+.form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 24px; }
+.form label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+.form .ancho { grid-column: 1 / -1; }
+.form input, .form select {
+  width: 100%; padding: 12px 14px; border-radius: 11px; font-size: 15px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+  font-family: 'Inter', sans-serif;
+}
+.form input:focus, .form select:focus { outline: none; border-color: var(--fg); }
+.form button {
+  grid-column: 1 / -1; justify-self: start; border: none; cursor: pointer;
+  background: var(--fg); color: var(--bg); padding: 14px 30px; border-radius: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -.2px;
+}
+.form button:hover { opacity: .88; }
+@media (max-width: 620px) { .form { grid-template-columns: 1fr; } }
+
+/* WhatsApp flotante, solo en móvil */
+.wa {
+  display: none; position: fixed; right: 18px; bottom: 18px; z-index: 50;
+  background: #25d366; color: #fff; width: 54px; height: 54px; border-radius: 50%;
+  align-items: center; justify-content: center; box-shadow: 0 10px 26px rgba(0,0,0,.22);
+}
+.wa svg { width: 27px; height: 27px; fill: #fff; }
+@media (max-width: 860px) { .wa { display: flex; } }
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <a href="landing.html"><img id="logo" src="flow%20hub%20logo%201.png" alt="Flow Hub"></a>
+  <nav>
+    <a href="tecnologia.html">Tecnología</a>
+    <a href="#seguridad">Seguridad</a>
+    <a href="#api">API</a>
+    <a href="#diagnostico" class="cta">Agendar diagnóstico</a>
+    <button class="tema" id="tema" title="Cambiar tema" aria-label="Cambiar tema"></button>
+  </nav>
+</div></div>
+
+<div class="hero">
+  <div class="wrap wrap--ancho">
+    <header>
+      <div class="kicker"><span>Flow Hub · Tecnología</span></div>
+      <h1>Tecnología que trabaja con<br><em>lo que su empresa ya tiene</em></h1>
+      <p class="lead">Diseñamos y operamos sistemas a la medida —ERP, MRP, torre de control de
+        abastecimiento, oficinas virtuales y CRM con inteligencia artificial— a partir de un
+        diagnóstico de cómo opera su empresa.</p>
+      <div class="ctas">
+        <a class="btn" href="#diagnostico"><span>Agendar diagnóstico</span></a>
+        <a class="btn btn--ghost" href="#soluciones"><span>Ver soluciones</span></a>
+      </div>
+
+      <div class="cifras">
+        <div><b>40+</b><span>sistemas creados para clientes</span></div>
+        <div><b>1,300+</b><span>automatizaciones en operación</span></div>
+        <div><b>60+</b><span>agentes de inteligencia artificial</span></div>
+        <div class="texto"><b>Del sector médico<br>al industrial</b><span>industrias atendidas</span></div>
+      </div>
+      <p class="corte">Cifras a noviembre de 2026.</p>
+    </header>
+  </div>
+</div>
+
+<main>
+<div class="wrap wrap--ancho">
+<div class="conind">
+
+  <aside class="ind">
+    <a href="#maquila">Manufactura y maquila</a>
+    <a href="#forma">Nuestra forma de construir</a>
+    <a href="#proceso">Cómo trabajamos</a>
+    <a href="#soluciones">Soluciones</a>
+    <a href="#industrias">Industrias</a>
+    <a href="#dx49">Diagnóstico DX49</a>
+    <a href="#api">API y documentación</a>
+    <a href="#seguridad">Seguridad</a>
+    <a href="#modelo">Cómo se cotiza</a>
+    <a href="#preguntas">Preguntas frecuentes</a>
+  </aside>
+
+  <div>
+
+  <!-- ════ MAQUILA ════ -->
+  <section id="maquila">
+    <h2>Manufactura y maquila</h2>
+    <p>Es donde más trabajo hemos hecho y donde la operación se parece más entre una empresa y otra:
+      compras que se enteran tarde de los retrasos, precios que dejan de estar vigentes sin que nadie
+      lo note, faltantes que se descubren en piso y un MRP con parámetros que nunca se recalibraron.</p>
+
+    <h3>Torre de Control de Abastecimiento</h3>
+    <p>Acompaña cada orden de compra desde la necesidad hasta la recepción en planta. Pide
+      confirmaciones y guías a los proveedores, lee sus respuestas —vengan en español o en inglés—,
+      mantiene los precios vigentes y avisa con días de margen cuando algo pone en riesgo la
+      producción. Todo sobre el ERP y el correo que el equipo ya usa.</p>
+
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Órdenes abiertas</span></div>
+      <div class="mkt__in">
+        <div class="mkt__kpis">
+          <div class="mkt__kpi"><b>186</b><span>órdenes abiertas</span></div>
+          <div class="mkt__kpi"><b>82%</b><span>confirmadas por el proveedor</span></div>
+          <div class="mkt__kpi"><b>7</b><span>sin guía a 5 días de la fecha</span></div>
+          <div class="mkt__kpi"><b>3</b><span>en riesgo para producción</span></div>
+        </div>
+        <table>
+          <thead><tr><th>OC</th><th>Proveedor</th><th>Fecha requerida</th><th>Estado</th><th>Siguiente acción</th></tr></thead>
+          <tbody>
+            <tr><td>OC-10469</td><td>Proveedor C</td><td>11 nov</td><td><span class="et et--rie">Sin acuse · 9 días</span></td><td>Segundo recordatorio</td></tr>
+            <tr><td>OC-10471</td><td>Proveedor A</td><td>14 nov</td><td><span class="et et--esp">Esperando guía</span></td><td>Pedir número de guía</td></tr>
+            <tr><td>OC-10474</td><td>Proveedor B</td><td>18 nov</td><td><span class="et et--ok">Confirmada</span></td><td>Seguimiento en tránsito</td></tr>
+            <tr><td>OC-10478</td><td>Proveedor A</td><td>21 nov</td><td><span class="et et--esp">Precio con diferencia</span></td><td>Actualizar lista de precios</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <h3>Qué resuelve, en concreto</h3>
+    <ul>
+      <li><strong>Seguimiento a proveedores.</strong> El sistema redacta el correo de seguimiento y lo deja listo para que su comprador lo apruebe y lo envíe.</li>
+      <li><strong>Lectura de la respuesta.</strong> De lo que contesta el proveedor extrae fecha de embarque, cantidad, precio y número de guía, y marca la diferencia contra lo pedido.</li>
+      <li><strong>Precio vigente.</strong> Cuando el precio facturado no coincide con la lista, lo señala y propone actualizarla, para que el error no regrese el mes siguiente.</li>
+      <li><strong>Evaluación de proveedores.</strong> Compara el tiempo de entrega cargado en el ERP contra el real, y señala cuáles parámetros conviene ajustar.</li>
+    </ul>
+
+    <div class="nota">
+      <strong>Convive con su ERP.</strong> La torre de control lee la información que ya existe en su
+      sistema y trabaja sobre el correo de compras. No sustituye al ERP ni obliga a su equipo a
+      capturar dos veces.
+    </div>
+  </section>
+
+  <!-- ════ FORMA DE CONSTRUIR ════ -->
+  <section id="forma">
+    <h2>Nuestra forma de construir</h2>
+    <div class="rej rej--2">
+      <div class="tj"><h3>Diagnóstico primero</h3><p>Antes de construir medimos. Cada proyecto incluye un diagnóstico DX49 del área.</p></div>
+      <div class="tj"><h3>Se conecta a sus sistemas</h3><p>Leemos su ERP, su correo y sus archivos. Primero aprovechamos lo que ya tiene; solo construimos lo que falta.</p></div>
+      <div class="tj"><h3>Algoritmo y IA, cada uno en su lugar</h3><p>Las reglas, fechas y cálculos los lleva un algoritmo, para que siempre se ejecuten igual. La inteligencia artificial entra donde hay que entender o redactar texto.</p></div>
+      <div class="tj"><h3>De supervisado a autónomo</h3><p>Su equipo aprueba cada acción al inicio. El sistema gana autonomía conforme demuestra que acierta.</p></div>
+    </div>
+  </section>
+
+  <!-- ════ PROCESO ════ -->
+  <section id="proceso">
+    <h2>Cómo trabajamos</h2>
+    <div class="rej rej--4">
+      <div class="tj"><span class="tj__n">01</span><h3>Diagnóstico</h3><p>Medimos cómo opera el área, tarea por tarea, con datos de sus propios sistemas.</p></div>
+      <div class="tj"><span class="tj__n">02</span><h3>Diseño</h3><p>Definimos qué se resuelve con una política, qué con un algoritmo, qué con inteligencia artificial y qué se queda con una persona.</p></div>
+      <div class="tj"><span class="tj__n">03</span><h3>Construcción y calibración</h3><p>Conectamos con sus sistemas y operamos con aprobación de su equipo.</p></div>
+      <div class="tj"><span class="tj__n">04</span><h3>Operación y mejora</h3><p>El sistema gana autonomía y se mide contra la línea base.</p></div>
+    </div>
+  </section>
+
+  <!-- ════ SOLUCIONES ════ -->
+  <section id="soluciones">
+    <h2>Soluciones por tipo de sistema</h2>
+
+    <div class="rej rej--2" style="margin-top:22px">
+
+      <div class="sol sol--destacada">
+        <h3>MRP y torre de control de abastecimiento</h3>
+        <p class="sol__para">Para manufactura y maquila</p>
+        <dl>
+          <dt>Qué resuelve</dt>
+          <dd>Compras que se enteran tarde de los retrasos, precios que no están vigentes, faltantes que se descubren en piso.</dd>
+          <dt>Módulos típicos</dt>
+          <dd>Seguimiento con proveedores, precio vigente, monitor de faltantes y cambios, preparación de órdenes, evaluación de proveedores, reportes automáticos.</dd>
+          <dt>Cómo convive</dt>
+          <dd>Lee el ERP existente y trabaja sobre el correo de compras.</dd>
+        </dl>
+      </div>
+
+      <div class="sol">
+        <h3>ERP a la medida</h3>
+        <p class="sol__para">Para empresas que superaron su sistema contable</p>
+        <dl>
+          <dt>Qué resuelve</dt>
+          <dd>Información de finanzas, inventario, compras y ventas dispersa en hojas de cálculo y sistemas que no se hablan.</dd>
+          <dt>Módulos típicos</dt>
+          <dd>Compras, inventario, ventas, cuentas por cobrar y por pagar, conciliación, reportes, roles y aprobaciones.</dd>
+          <dt>Cómo convive</dt>
+          <dd>Se integra con su sistema contable y con la banca, o lo complementa por módulos cuando ya tienen un ERP.</dd>
+        </dl>
+      </div>
+
+      <div class="sol">
+        <h3>Oficina virtual</h3>
+        <p class="sol__para">Para operaciones que dependen de personas clave</p>
+        <dl>
+          <dt>Qué resuelve</dt>
+          <dd>Tareas repetitivas que consumen el día de equipos administrativos y operativos.</dd>
+          <dt>Qué incluye</dt>
+          <dd>Agentes que ejecutan tareas por función —finanzas, compras, comercial, capital humano, tecnología—, tablero de autonomía, bitácora de cada acción y supervisión humana.</dd>
+          <dt>Cómo convive</dt>
+          <dd>Se monta sobre los sistemas existentes y crece por áreas, empezando por la que el diagnóstico prioriza.</dd>
+        </dl>
+      </div>
+
+      <div class="sol">
+        <h3>CRM con inteligencia artificial</h3>
+        <p class="sol__para">Para direcciones comerciales y equipos de ventas</p>
+        <dl>
+          <dt>Qué resuelve</dt>
+          <dd>Prospectos sin seguimiento, equipos de ventas sin visibilidad, decisiones comerciales sin datos.</dd>
+          <dt>Qué incluye</dt>
+          <dd>Seguimiento automático, asignación de prospectos, tableros comerciales y agentes que redactan y priorizan.</dd>
+          <dt>Modelo</dt>
+          <dd>Membresía con onboarding y mensualidad. <a href="landing.html#precios">Ver planes</a>.</dd>
+        </dl>
+      </div>
+
+      <div class="sol" style="grid-column:1/-1">
+        <h3>Automatizaciones y agentes a la medida</h3>
+        <p class="sol__para">Para procesos que no justifican un sistema completo</p>
+        <dl>
+          <dt>Qué resuelve</dt>
+          <dd>Conciliaciones, reportes, avisos y captura de documentos: procesos específicos que consumen tiempo todos los días y no ameritan construir una plataforma entera. Hoy tenemos más de 1,300 automatizaciones y más de 60 agentes en operación.</dd>
+        </dl>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════ INDUSTRIAS ════ -->
+  <section id="industrias">
+    <h2>Otras industrias</h2>
+    <table>
+      <thead><tr><th>Industria</th><th>Situaciones frecuentes</th><th>Soluciones típicas</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Salud y clínicas</strong></td><td>Agenda, seguimiento a pacientes, equipos y estudios en sistemas separados</td><td>CRM de pacientes, automatización de seguimiento, oficina virtual administrativa</td></tr>
+        <tr><td><strong>Comercio y retail</strong></td><td>Inventario por sucursal, cortes, reabasto</td><td>ERP, reabasto automático</td></tr>
+        <tr><td><strong>Automotriz</strong></td><td>Seguimiento comercial largo, inventario de unidades y refacciones</td><td>CRM con IA, ERP por módulos</td></tr>
+        <tr><td><strong>Servicios profesionales</strong></td><td>Propuestas, seguimiento de proyectos, cobranza</td><td>CRM, seguimiento de proyectos, cobranza automática</td></tr>
+        <tr><td><strong>Valuación e inmobiliario</strong></td><td>Expedientes, plazos, reportes técnicos</td><td>Plataformas de gestión de expedientes y reportes</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ════ DX49 ════ -->
+  <section id="dx49">
+    <h2>Cada proyecto empieza con DX49</h2>
+    <p>DX49 es nuestra metodología de diagnóstico operativo. Levanta cada proceso y cada tarea del
+      área, los contrasta con los datos de sus sistemas y decide, tarea por tarea, si se resuelve con
+      una política, un algoritmo, inteligencia artificial o una persona.</p>
+    <div class="nota"><strong>El resultado del diagnóstico es la especificación del sistema.</strong>
+      Por eso va primero y por eso, en los proyectos de sistemas, va incluido en la cotización.</div>
+    <div class="rej rej--4" style="margin-top:22px">
+      <div class="tj"><h3>Política o proceso</h3><p>Se resuelve con una regla clara o un responsable definido. No necesita tecnología.</p></div>
+      <div class="tj"><h3>Algoritmo</h3><p>Reglas, fechas y cálculos que deben ejecutarse siempre igual.</p></div>
+      <div class="tj"><h3>Inteligencia artificial</h3><p>Entender o redactar texto libre: correos, documentos, mensajes en varios idiomas.</p></div>
+      <div class="tj"><h3>Persona</h3><p>Negociar, decidir excepciones y cuidar relaciones, con datos en la mano.</p></div>
+    </div>
+  </section>
+
+  <!-- ════ API ════ -->
+  <section id="api">
+    <h2>Cada sistema trae su propia API y su documentación</h2>
+    <p>Todo lo que construimos incluye una API documentada en estándar abierto, entregada a su
+      empresa. Cualquier otro sistema puede conectarse directamente, sin intermediarios y sin
+      solicitar nada a terceros. <strong>La documentación es suya desde el primer día.</strong></p>
+
+    <div class="mkt" style="margin-top:22px">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Referencia de la API</span></div>
+      <div class="api3">
+        <div>
+          <ul>
+            <li class="on">Órdenes</li>
+            <li>Proveedores</li>
+            <li>Artículos</li>
+            <li>Alertas</li>
+            <li>Webhooks</li>
+          </ul>
+        </div>
+        <div>
+          <span class="ruta">GET /v1/purchase-orders/{id}</span>
+          <p style="font-size:13px;color:var(--muted);margin:12px 0 0">Devuelve una orden de compra con
+            su estado de confirmación, lo acusado por el proveedor y su nivel de riesgo.</p>
+          <p style="font-size:12.5px;margin:10px 0 0"><strong>200</strong> Orden encontrada<br>
+            <strong>404</strong> No existe<br><strong>401</strong> Credencial inválida</p>
+        </div>
+        <div>
+<pre>{
+  "id": "OC-10469",
+  "supplier": {
+    "id": "SUP-003",
+    "name": "Proveedor C"
+  },
+  "required_date": "2026-11-11",
+  "status": "awaiting_acknowledgment",
+  "confirmed": {
+    "price": null,
+    "quantity": null,
+    "ship_date": null
+  },
+  "tracking_number": null,
+  "risk": {
+    "level": "medium",
+    "reason": "Sin acuse a 9 días"
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <h3>Qué incluye cada solución</h3>
+    <table>
+      <tbody>
+        <tr><td style="width:34%"><strong>Especificación OpenAPI 3.1</strong></td><td>Contrato formal de cada recurso y operación, legible por personas y por máquinas.</td></tr>
+        <tr><td><strong>Portal de documentación</strong></td><td>Referencia de cada endpoint, ejemplos de petición y respuesta, códigos de error.</td></tr>
+        <tr><td><strong>Versionado</strong></td><td>Cambios sin romper integraciones existentes, con aviso previo de cualquier cambio mayor.</td></tr>
+        <tr><td><strong>Registro de uso</strong></td><td>Bitácora de cada llamada a la API.</td></tr>
+        <tr><td><strong>Exportación</strong></td><td>Su información exportable en formatos abiertos en cualquier momento.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ════ SEGURIDAD ════ -->
+  <section id="seguridad">
+    <h2>Seguridad</h2>
+    <p>Sabemos que la información de compras, clientes, proveedores y costos es sensible. Esta
+      sección está escrita para que su área de sistemas pueda leerla por separado y decidir con ella.</p>
+
+    <h3>Sobre qué está construido</h3>
+    <p>El stack de cada proyecto se define en su propuesta, porque no todas las soluciones usan la
+      misma infraestructura. Estos son los proveedores sobre los que construimos, con las
+      certificaciones que cada uno sostiene:</p>
+
+    <div class="rej rej--3" style="margin-top:20px">
+      <div class="prov">
+        <span class="marca-destacada">Amazon Web Services</span>
+        <em>Infraestructura y servidores</em>
+        <div class="insig"><span>ISO/IEC 27001</span><span>ISO/IEC 42001</span><span>SOC 2</span></div>
+      </div>
+      <div class="prov">
+        <span class="marca-destacada">Google Cloud</span>
+        <em>Base de datos y servicios gestionados</em>
+        <div class="insig"><span>ISO/IEC 27001</span><span>SOC 2 Tipo II</span></div>
+      </div>
+      <div class="prov">
+        <span class="marca-destacada">Supabase</span>
+        <em>Base de datos</em>
+        <div class="insig"><span>SOC 2 Tipo II</span></div>
+      </div>
+      <div class="prov">
+        <span class="marca-destacada">Netlify</span>
+        <em>Entrega de aplicaciones</em>
+        <div class="insig"><span>SOC 2 Tipo II</span></div>
+      </div>
+      <div class="prov">
+        <span class="marca-destacada">Anthropic</span>
+        <em>Modelos de inteligencia artificial</em>
+        <div class="insig"><span>ISO/IEC 27001</span><span>ISO/IEC 42001</span><span>SOC 2 Tipo II</span></div>
+      </div>
+      <div class="prov">
+        <span class="marca-destacada">OpenAI</span>
+        <em>Modelos de inteligencia artificial</em>
+        <div class="insig"><span>SOC 2 Tipo II</span></div>
+      </div>
+    </div>
+    <p class="corte">Certificaciones de cada proveedor de infraestructura, verificables en sus
+      portales de cumplimiento. Flow Hub no declara certificaciones propias.</p>
+
+    <h3>Cómo se diseña cada sistema</h3>
+    <p>Estos son los criterios con los que construimos un proyecto. Los que apliquen a su caso
+      quedan por escrito en la propuesta, con su alcance y su fecha:</p>
+    <ul>
+      <li><strong>Cifrado.</strong> AES-256 en reposo y TLS 1.3 en tránsito, por la infraestructura sobre la que se construye.</li>
+      <li><strong>Aislamiento por cliente.</strong> La información de cada empresa queda separada y no se cruza con la de otra.</li>
+      <li><strong>Solo lectura al inicio.</strong> Escribir en sus sistemas requiere su autorización expresa.</li>
+      <li><strong>Mínimo privilegio.</strong> Cada usuario y cada agente accede solo a lo que su función necesita.</li>
+      <li><strong>Bitácora.</strong> Cada acción queda registrada: quién, qué, cuándo y con qué datos.</li>
+      <li><strong>Aprobación humana.</strong> Las acciones hacia terceros pasan por autorización de su equipo durante la operación supervisada.</li>
+      <li><strong>Sin entrenamiento con sus datos.</strong> Su información no se usa para entrenar modelos de inteligencia artificial.</li>
+      <li><strong>Respaldos cifrados.</strong> Copias automáticas y recuperación ante incidentes.</li>
+      <li><strong>Marco legal.</strong> Convenio de confidencialidad y cumplimiento de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</li>
+    </ul>
+
+    <h3>Acceso y conexión</h3>
+    <ul>
+      <li><strong>Acceso de usuarios.</strong> Aplicación web con inicio de sesión mediante cuentas corporativas —Google Workspace o Microsoft 365— y verificación en dos pasos. Opcionalmente, acceso restringido a la red de la empresa o su VPN.</li>
+      <li><strong>Conexión con sistemas internos.</strong> Cuando el ERP vive en servidores suyos, un conector instalado dentro de su red lee la información y solo envía datos hacia afuera, sin abrir puertos de entrada. Si su área de sistemas lo prefiere, VPN sitio a sitio.</li>
+      <li><strong>Ubicación de los datos.</strong> Servidores en Norteamérica; la región se acuerda con su área de sistemas.</li>
+      <li><strong>Portabilidad.</strong> Exportación en cualquier momento. Al terminar el servicio, entrega completa y eliminación de nuestros servidores.</li>
+    </ul>
+
+    <h3>Gobierno de la inteligencia artificial</h3>
+    <p>El uso de inteligencia artificial se diseña siguiendo los marcos internacionales de
+      referencia: la IA actúa dentro de límites definidos por personas, cada decisión es explicable
+      y todo queda auditado.</p>
+    <div class="insig"><span>ISO/IEC 42001</span><span>NIST AI RMF</span><span>OWASP Top 10 para LLM</span></div>
+  </section>
+
+  <!-- ════ MODELO ════ -->
+  <section id="modelo">
+    <h2>Cómo se cotiza</h2>
+    <p>Cada proyecto tiene dos partes. La <strong>implementación</strong>, que incluye el
+      diagnóstico, la construcción, la calibración y la capacitación. Y una <strong>mensualidad de
+      operación</strong>, que cubre servidores, soporte técnico, mantenimiento, mejoras y consumo de
+      inteligencia artificial.</p>
+    <p>La mensualidad se fija al medir el volumen real durante el diagnóstico, no antes.</p>
+  </section>
+
+  <!-- ════ FAQ ════ -->
+  <section id="preguntas">
+    <h2>Preguntas frecuentes</h2>
+    <div class="faq">
+      <details><summary>¿Tengo que cambiar mi ERP?</summary><p>No. Nuestros sistemas se conectan a su ERP y trabajan sobre la información que ya existe.</p></details>
+      <details><summary>¿Qué pasa con mis datos si termino el servicio?</summary><p>Se le entregan completos y se eliminan de nuestros servidores.</p></details>
+      <details><summary>¿La inteligencia artificial envía correos o toma decisiones sola?</summary><p>Al inicio, cada acción pasa por aprobación de su equipo. La autonomía se habilita por tipo de tarea, cuando su equipo lo decide.</p></details>
+      <details><summary>¿Mis datos entrenan modelos de inteligencia artificial?</summary><p>No.</p></details>
+      <details><summary>¿Pueden conectarse otros sistemas al que construyan?</summary><p>Sí. Cada solución incluye su propia API documentada, entregada a su empresa.</p></details>
+      <details><summary>¿Quién es dueño de qué?</summary><p>Los datos, los resultados y la documentación de la API son de su empresa. El sistema se entrega en licencia de uso.</p></details>
+      <details><summary>¿Funciona si mi ERP está en servidores propios?</summary><p>Sí, mediante un conector instalado dentro de su red o una VPN sitio a sitio.</p></details>
+    </div>
+  </section>
+
+  </div>
+</div>
+</div>
+</main>
+
+<!-- ════ CIERRE ════ -->
+<div class="cierre" id="diagnostico">
+  <div class="wrap wrap--ancho">
+    <h2>¿Por dónde empezar?</h2>
+    <p class="lead" style="max-width:640px">Un diagnóstico sobre un área de su empresa le muestra
+      dónde está, qué conviene resolver primero y cómo medirlo.</p>
+
+    <form class="form" name="diagnostico" method="POST" data-netlify="true" netlify-honeypot="empresa-web">
+      <input type="hidden" name="form-name" value="diagnostico">
+      <p style="display:none"><label>No llenar <input name="empresa-web"></label></p>
+      <div><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" required></div>
+      <div><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" required></div>
+      <div><label for="f-puesto">Puesto</label><input id="f-puesto" name="puesto"></div>
+      <div><label for="f-correo">Correo</label><input id="f-correo" name="correo" type="email" required></div>
+      <div><label for="f-tel">Teléfono</label><input id="f-tel" name="telefono" type="tel"></div>
+      <div><label for="f-area">¿Qué área le gustaría revisar primero?</label>
+        <select id="f-area" name="area">
+          <option>Compras</option><option>Finanzas</option><option>Comercial</option>
+          <option>Operaciones</option><option>Recursos Humanos</option><option>Otra</option>
+        </select>
+      </div>
+      <input type="hidden" name="origen" value="tecnologia">
+      <button type="submit">Agendar diagnóstico</button>
+    </form>
+
+    <p class="corte" style="margin-top:22px">También puede escribirnos a
+      <a href="mailto:atencion@flowhubcrm.app">atencion@flowhubcrm.app</a> o al
+      <a href="https://wa.me/528688384346">868 838 4346</a>.</p>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/528688384346" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+</a>
+
+<footer><div class="wrap">
+  <span>Flow Hub · Tecnología e inteligencia comercial</span>
+  <span><a href="landing.html">Inicio</a> · <a href="#seguridad">Seguridad</a> · <a href="privacy.html">Privacidad</a> · <a href="terms.html">Términos</a></span>
+</div></footer>
+
+<script>
+  (function () {
+    var SOL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg>';
+    var LUNA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>';
+    var raiz = document.documentElement;
+    var boton = document.getElementById('tema');
+    var logo = document.getElementById('logo');
+
+    function aplicar(t) {
+      raiz.setAttribute('data-theme', t);
+      if (logo) logo.src = 'flow%20hub%20logo%20' + (t === 'dark' ? '2' : '1') + '.png';
+      if (boton) boton.innerHTML = t === 'dark' ? SOL : LUNA;
+      try { localStorage.setItem('theme', t); } catch (e) {}
+    }
+
+    aplicar(raiz.getAttribute('data-theme') || 'light');
+    if (boton) boton.onclick = function () {
+      aplicar(raiz.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    };
+  })();
+</script>
+</body>
+</html>
