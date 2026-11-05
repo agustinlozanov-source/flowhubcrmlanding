@@ -4,6 +4,10 @@
  * cotizador y barra leen de aquí. Si una solución cambia de precio o de
  * promesa, se cambia en un solo lugar.
  *
+ * El acento de cada solución sale del degradado de la casa
+ * —#1aab99 → #0066ff → #3533cd— repartido en el orden de las capas: el color
+ * dice también en qué parte del camino está la pieza. Ninguno se eligió suelto.
+ *
  * Los precios marcados PROVISIONAL son de referencia para la presentación y
  * están pendientes de cerrar. El «Modo trabajo» del pie permite ajustarlos en
  * vivo durante una reunión: se guardan en este dispositivo y no tocan la
@@ -14,7 +18,7 @@
 
   var SOLUCIONES = [
     {
-      id: 'scanx', nombre: 'SCANx', logo: 'logos/scanx-negro.png', capa: '00 · La puerta',
+      id: 'scanx', acento: '#1aab99', nombre: 'SCANx', logo: 'logos/scanx-negro.png', capa: '00 · La puerta',
       dolor: '«Sé que algo no está bien y no sé por dónde empezar.»',
       que: 'Autodiagnóstico de la empresa completa: siete pilares por tres lentes —diseño, despliegue y desempeño— con lectura asistida por inteligencia artificial.',
       impacto: 'La dirección deja de discutir síntomas: sabe en qué pilar está el problema y cuáles son sus tres prioridades para escalar.',
@@ -31,7 +35,7 @@
       ],
     },
     {
-      id: 'dx49', nombre: 'DX49', marca: 'DX49', capa: '01 · El diagnóstico',
+      id: 'dx49', acento: '#108fc2', nombre: 'DX49', marca: 'DX49', capa: '01 · El diagnóstico',
       dolor: '«Voy a comprar una herramienta o a automatizar, y no sé si el problema es de proceso.»',
       que: 'Diagnóstico de madurez operativa de un área, tarea por tarea, contrastado con los registros de sus propios sistemas y validado con entrevistas y observación.',
       impacto: 'Cada tarea del área queda con destino: se ordena, se mide o se automatiza — y en ese orden.',
@@ -49,7 +53,7 @@
       ],
     },
     {
-      id: 'scalex', nombre: 'SCALEx', logo: 'logos/scalex-negro.png', capa: '02 · La estrategia',
+      id: 'scalex', acento: '#0574eb', nombre: 'SCALEx', logo: 'logos/scalex-negro.png', capa: '02 · La estrategia',
       dolor: '«Tengo plan y no baja a la operación. Cada trimestre empezamos de cero.»',
       que: 'La metodología completa de escalabilidad —estrategia, procesos, ritmo y finanzas—, cada pieza con su tablero.',
       impacto: 'El plan baja a rituales, indicadores y responsables; el trimestre arranca donde terminó el anterior.',
@@ -68,7 +72,7 @@
       ],
     },
     {
-      id: 'teamx', nombre: 'TEAMx', logo: 'logos/teamx-negro.png', capa: '03 · La ejecución',
+      id: 'teamx', acento: '#0b5cf5', nombre: 'TEAMx', logo: 'logos/teamx-negro.png', capa: '03 · La ejecución',
       dolor: '«Mi gente no rinde y no sé si es la persona, el puesto o que nadie la dirige.»',
       que: 'Gestión de equipos al máximo rendimiento en ciclos de catorce semanas, con los parámetros de evaluación que cada empresa defina.',
       impacto: 'Se puede decir con evidencia si el problema es la persona, el puesto o que nadie la está dirigiendo.',
@@ -86,7 +90,7 @@
       ],
     },
     {
-      id: 'boardx', nombre: 'BOARDx', logo: 'logos/boardx-negro.png', capa: '04 · El gobierno',
+      id: 'boardx', acento: '#2047e1', nombre: 'BOARDx', logo: 'logos/boardx-negro.png', capa: '04 · El gobierno',
       dolor: '«El consejo se reúne, se acuerda, y al trimestre nadie sabe qué pasó con eso.»',
       que: 'El consejo técnico trimestral con su mesa, su scorecard, sus acuerdos y su acta.',
       impacto: 'Los acuerdos del consejo tienen dueño, fecha y acta; la sesión siguiente arranca con el seguimiento hecho.',
@@ -104,7 +108,7 @@
       ],
     },
     {
-      id: 'flowhub', nombre: 'Flow Hub CRM', marca: 'Flow Hub CRM', capa: '05 · La operación',
+      id: 'flowhub', acento: '#3533cd', nombre: 'Flow Hub CRM', marca: 'Flow Hub CRM', capa: '05 · La operación',
       dolor: '«Entran leads y se enfrían. No sé qué pasó con cada uno ni quién lo tenía.»',
       que: 'El CRM con agente de inteligencia artificial que atiende, califica y entrega el lead a una persona cuando toca.',
       impacto: 'Ningún lead se enfría sin que alguien lo sepa, y el seguimiento queda por escrito.',
@@ -139,13 +143,27 @@
     ['teamx', 'flowhub', 'El equipo comercial medido sobre el pipeline y no sobre percepción.'],
   ];
 
+  /* Iconos planos, de una sola silueta. Sin contornos ni huecos: a 20px un
+     icono de línea se deshace, y la silueta aguanta el degradado del paquete
+     completo sin romperse. */
+  var ICONOS = {
+    bandera:  'M5 2.5h2.2v19H5zM8.6 3.6h11.5l-3.1 4.2 3.1 4.2H8.6z',
+    norte:    'M12.6 2.4l8.4 8.4h-5.2v10.8H9.4V10.8H4.2z',
+    columnas: 'M12 2l9.2 5.1H2.8zM4.9 9h2.6v9H4.9zM10.7 9h2.6v9h-2.6zM16.5 9h2.6v9h-2.6zM2.8 19.2h18.4v2.6H2.8z',
+    embudo:   'M2.6 3.4h18.8l-7.3 8.4v9.4l-4.2-2.3v-7.1z',
+    barras:   'M2.8 14.6h4.3v6.9H2.8zM9.9 9.4h4.3v12.1H9.9zM16.9 3.3h4.3v18.2h-4.3z',
+    bloques:  'M2.8 2.8h8.1v8.1H2.8zM13.1 2.8h8.1v8.1h-8.1zM2.8 13.1h8.1v8.1H2.8zM13.1 13.1h8.1v8.1h-8.1z',
+  };
+
+  /* Cada paquete toma el acento de su pieza ancla, la que lo define. El
+     Ecosistema lleva el degradado entero, porque las lleva todas. */
   var PAQUETES = [
-    { id: 'arranque',   nombre: 'Arranque',   promesa: 'Saber qué pasa antes de invertir.',                      lleva: ['scanx', 'dx49'] },
-    { id: 'direccion',  nombre: 'Dirección',  promesa: 'El plan que sí baja a la gente.',                        lleva: ['scalex', 'teamx'] },
-    { id: 'gobierno',   nombre: 'Gobierno',   promesa: 'Estrategia, equipo y consejo en el mismo tablero.',      lleva: ['scalex', 'teamx', 'boardx'] },
-    { id: 'comercial',  nombre: 'Comercial',  promesa: 'Ordenar la operación y después automatizar la venta.',   lleva: ['dx49', 'flowhub'] },
-    { id: 'escalar',    nombre: 'Escalar',    promesa: 'Diagnóstico, rumbo y la máquina comercial encendida.',   lleva: ['scanx', 'dx49', 'scalex', 'flowhub'] },
-    { id: 'ecosistema', nombre: 'Ecosistema', promesa: 'La empresa completa en un solo sistema.',                lleva: SOLUCIONES.map(function (s) { return s.id; }), full: true },
+    { id: 'arranque',   nombre: 'Arranque',   acento: '#1aab99', icono: 'bandera',  promesa: 'Saber qué pasa antes de invertir.',                      lleva: ['scanx', 'dx49'] },
+    { id: 'direccion',  nombre: 'Dirección',  acento: '#0574eb', icono: 'norte',    promesa: 'El plan que sí baja a la gente.',                        lleva: ['scalex', 'teamx'] },
+    { id: 'gobierno',   nombre: 'Gobierno',   acento: '#2047e1', icono: 'columnas', promesa: 'Estrategia, equipo y consejo en el mismo tablero.',      lleva: ['scalex', 'teamx', 'boardx'] },
+    { id: 'comercial',  nombre: 'Comercial',  acento: '#3533cd', icono: 'embudo',   promesa: 'Ordenar la operación y después automatizar la venta.',   lleva: ['dx49', 'flowhub'] },
+    { id: 'escalar',    nombre: 'Escalar',    acento: '#108fc2', icono: 'barras',   promesa: 'Diagnóstico, rumbo y la máquina comercial encendida.',   lleva: ['scanx', 'dx49', 'scalex', 'flowhub'] },
+    { id: 'ecosistema', nombre: 'Ecosistema', acento: 'var(--marca)', icono: 'bloques', promesa: 'La empresa completa en un solo sistema.',            lleva: SOLUCIONES.map(function (s) { return s.id; }), full: true },
   ];
 
   /* La escalera. Cuenta solo las soluciones con costo: SCANx es gratis y dejarla
@@ -218,7 +236,7 @@
     document.getElementById('fichas').innerHTML = SOLUCIONES.map(function (s) {
       var razones = razonesDe(s.id, SOLUCIONES.map(function (x) { return x.id; }));
       return '' +
-        '<article class="fi" data-id="' + s.id + '">' +
+        '<article class="fi" data-id="' + s.id + '" style="--acento:' + s.acento + '">' +
           '<div class="fi__marca">' + marca(s) +
             '<span class="fi__capa">' + s.capa + '</span>' +
             '<span class="fi__afin"></span>' +
@@ -250,11 +268,23 @@
     }).join('');
   }
 
+  /* El Ecosistema lleva degradado, y un `fill` no acepta uno: se pinta con un
+     <linearGradient> propio. Los demás heredan el color del título. */
+  function icono(p) {
+    var grad = p.full
+      ? '<defs><linearGradient id="g-' + p.id + '" x1="0" y1="1" x2="1" y2="0">' +
+        '<stop offset="0" stop-color="#1aab99"/><stop offset=".5" stop-color="#0066ff"/>' +
+        '<stop offset="1" stop-color="#3533cd"/></linearGradient></defs>' : '';
+    var relleno = p.full ? 'url(#g-' + p.id + ')' : p.acento;
+    return '<svg class="pq__icono" viewBox="0 0 24 24" aria-hidden="true">' + grad +
+      '<path fill="' + relleno + '" d="' + ICONOS[p.icono] + '"/></svg>';
+  }
+
   function pintarPaquetes() {
     document.getElementById('paq').innerHTML = PAQUETES.map(function (p) {
       return '' +
-        '<article class="pq' + (p.full ? ' pq--full' : '') + '">' +
-          '<h3>' + p.nombre + '</h3>' +
+        '<article class="pq' + (p.full ? ' pq--full' : '') + '" style="--acento:' + p.acento + '">' +
+          '<h3>' + icono(p) + p.nombre + '</h3>' +
           '<p class="pq__promesa">' + p.promesa + '</p>' +
           '<div class="pq__lleva">' + p.lleva.map(function (id) {
             return '<span>' + porId(id).nombre + '</span>';
