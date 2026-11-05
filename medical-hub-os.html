@@ -337,6 +337,8 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
 [data-theme="light"] .opcion { box-shadow: 0 14px 36px rgba(0,0,0,.06); }
 .opcion__cab { display: flex; align-items: center; gap: 10px; }
 .opcion__cab h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.3px; }
+.msi { display: inline-flex; padding: 5px 12px; border-radius: 50px; background: rgba(0,200,83,.12); color: #00914b; font-size: 12px; font-weight: 700; }
+[data-theme="dark"] .msi { color: #4ade80; }
 .marcas { display: flex; align-items: center; justify-content: center; gap: 12px; }
 .marcas svg { height: 32px; width: auto; fill: var(--muted); }
 .marcas .m-mc { height: 26px; }
@@ -1229,7 +1231,7 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
           <span class="precio__sub">Pago único · listo en 30 días</span>
         </div>
         <div class="precio__pagos">
-          <div><span>Con tarjeta</span><b>$68,440</b><small>total con IVA</small></div>
+          <div><span>Con tarjeta</span><b>$68,440</b><small>total con IVA, a meses sin intereses</small></div>
           <div><span>Por transferencia</span><b>2 × $34,220</b><small>al iniciar y a la entrega</small></div>
         </div>
       </div>
@@ -1285,6 +1287,7 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
     <div class="pago">
       <div class="opcion">
         <div class="opcion__cab"><i class="ic" style="--c:#0574eb"><svg aria-hidden="true"><use href="#i-caja"/></svg></i><h4>Con tarjeta</h4></div>
+        <span class="msi">A meses sin intereses</span>
         <div class="marcas" role="img" aria-label="Visa, Mastercard y American Express">
           <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#m-visa"/></svg>
           <svg class="m-mc" viewBox="0 0 24 24" aria-hidden="true"><use href="#m-mc"/></svg>
@@ -1312,7 +1315,8 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
         </div>
       </div>
     </div>
-    <p class="corte">Al pagar en línea, el comprobante llega a su correo. Para transferir, como referencia
+    <p class="corte">Los meses sin intereses aplican con tarjetas de crédito mexicanas participantes; se
+      eligen en el pago. Al pagar en línea, el comprobante llega a su correo. Para transferir, como referencia
       basta «Monte Sinaí».</p>
 
     <form class="form" id="factura" name="factura-medical-hub-os" method="POST" data-netlify="true" netlify-honeypot="empresa-web">
