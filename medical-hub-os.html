@@ -316,7 +316,8 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
 .precio__pagos div { border: 1px solid var(--line); border-radius: 14px; padding: 10px 16px; min-width: 128px; }
 .precio__pagos span { display: block; font-size: 11.5px; color: var(--muted); }
 .precio__pagos b { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.5px; font-variant-numeric: tabular-nums; }
-.precio__pagos small { font-size: 11px; color: var(--muted); }
+.precio__pagos small { display: block; font-size: 11px; line-height: 1.4; color: var(--muted); }
+.precio__pagos b { white-space: nowrap; }
 .precio__cuerpo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 22px 24px 8px; }
 .precio__cuerpo ul { font-size: 14.5px; }
 .precio__cuerpo li { margin-bottom: 8px; line-height: 1.5; }
@@ -1140,7 +1141,7 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
     <table class="comp">
       <thead><tr><th></th><th>Aplicación de agenda por suscripción</th><th>Medical Hub OS</th></tr></thead>
       <tbody>
-        <tr><td>Cómo se paga</td><td>Mensualidad por usuario o por médico, siempre</td><td>Una sola vez, en dos pagos</td></tr>
+        <tr><td>Cómo se paga</td><td>Mensualidad por usuario o por médico, siempre</td><td>Una sola vez: con tarjeta, o en dos transferencias</td></tr>
         <tr><td>Expediente</td><td>Genérico o inexistente</td><td>Oftalmológico, por ojo y por visita</td></tr>
         <tr><td>Estudios de imagen</td><td>En otro sistema</td><td>Dentro del expediente, comparables</td></tr>
         <tr><td>Sin internet</td><td>Se detiene</td><td>La clínica sigue trabajando</td></tr>
@@ -1228,8 +1229,8 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
           <span class="precio__sub">Pago único · listo en 30 días</span>
         </div>
         <div class="precio__pagos">
-          <div><span>Al iniciar</span><b>$29,500</b><small>50 % + IVA</small></div>
-          <div><span>A la entrega</span><b>$29,500</b><small>50 % + IVA</small></div>
+          <div><span>Con tarjeta</span><b>$68,440</b><small>total con IVA</small></div>
+          <div><span>Por transferencia</span><b>2 × $34,220</b><small>al iniciar y a la entrega</small></div>
         </div>
       </div>
       <div class="precio__cuerpo">
@@ -1275,11 +1276,12 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
       aparte. La marca blanca y su comercialización se acuerdan por separado.</p>
 
     <!-- ════ CÓMO PAGAR ════
-         El enlace de Stripe es el del primer pago: $29,500 + IVA = $34,220 MXN.
-         ENLACE_STRIPE se reemplaza por el de buy.stripe.com cuando exista el producto. -->
-    <h3 id="pagar" class="pagar__t">Cómo pagar el primer 50 %</h3>
-    <p>El proyecto arranca con el primer pago: <strong>$29,500 + IVA, $34,220 MXN</strong>. El segundo,
-      por el mismo monto, se paga a la entrega.</p>
+         Con tarjeta se paga el total en una exhibición: el enlace de Stripe cobra
+         $59,000 + IVA = $68,440 MXN. Por transferencia van dos pagos de $34,220.
+         Si cambia el monto, se cambia aquí y en el producto de Stripe. -->
+    <h3 id="pagar" class="pagar__t">Cómo pagar</h3>
+    <p>Con tarjeta se paga el total en una exhibición: <strong>$68,440 MXN con IVA</strong>. Por
+      transferencia se divide en dos: <strong>$34,220 al iniciar</strong> y $34,220 a la entrega.</p>
     <div class="pago">
       <div class="opcion">
         <div class="opcion__cab"><i class="ic" style="--c:#0574eb"><svg aria-hidden="true"><use href="#i-caja"/></svg></i><h4>Con tarjeta</h4></div>
@@ -1289,8 +1291,8 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
           <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#m-amex"/></svg>
         </div>
         <div class="opcion__pie">
-          <a class="opcion__b" href="ENLACE_STRIPE">Pagar $34,220 en línea</a>
-          <p class="opcion__seguro">Pago seguro con Stripe</p>
+          <a class="opcion__b" href="https://buy.stripe.com/00w3cx1Rcer5cVz1ub5Vu00">Pagar $68,440 en línea</a>
+          <p class="opcion__seguro">Pago total · seguro con Stripe</p>
         </div>
       </div>
       <div class="opcion">
@@ -1302,7 +1304,7 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
               <dt>Titular</dt><dd><span class="dato">Agustín Lozano</span><button class="copiar" type="button" aria-label="Copiar el titular"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
               <dt>Banco</dt><dd><span class="dato">Santander</span><button class="copiar" type="button" aria-label="Copiar el banco"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
               <dt>CLABE</dt><dd><span class="dato">014818606286393427</span><button class="copiar" type="button" aria-label="Copiar la CLABE"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
-              <dt>Monto</dt><dd><span class="dato">34,220.00</span><button class="copiar" type="button" aria-label="Copiar el monto"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
+              <dt>Primer pago</dt><dd><span class="dato">34,220.00</span><button class="copiar" type="button" aria-label="Copiar el monto"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
               <dt>Referencia</dt><dd><span class="dato">Monte Sinaí</span></dd>
             </dl>
           </details>
@@ -1339,10 +1341,10 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
 <div class="cierre">
   <div class="wrap wrap--ancho">
     <h2 class="con-ic" style="--c:#3533cd"><i class="ic"><svg aria-hidden="true"><use href="#i-bandera"/></svg></i>El siguiente paso</h2>
-    <p class="lead" style="max-width:640px">Con el primer pago arranca el levantamiento en Monte Sinaí y
-      Óptica Shalom. Treinta días después, la clínica opera en su propio sistema.</p>
+    <p class="lead" style="max-width:640px">Con el pago arranca el levantamiento en Monte Sinaí y Óptica
+      Shalom. Treinta días después, la clínica opera en su propio sistema.</p>
     <div class="ctas" style="justify-content:flex-start">
-      <a class="btn" href="#pagar"><span>Pagar el primer 50 %</span></a>
+      <a class="btn" href="#pagar"><span>Ver cómo pagar</span></a>
       <a class="btn btn--ghost" href="https://wa.me/19564760388?text=Hola%2C%20quiero%20arrancar%20con%20Medical%20Hub%20OS"><span>Escribir por WhatsApp</span></a>
     </div>
 
