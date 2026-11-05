@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Hub OS · Propuesta para Clínica de Visión Monte Sinaí · Flow Hub</title>
+<meta name="description" content="Agenda, expediente oftalmológico, estudios de imagen, cirugía, recetas, Óptica Shalom y cobros en un solo sistema que sigue funcionando sin internet y que es de la clínica.">
+<!-- Propuesta para un cliente: se comparte por enlace y no se indexa. -->
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://landing.flowhubcrm.app/medical-hub-os">
+<meta property="og:title" content="Medical Hub OS · Clínica de Visión Monte Sinaí y Óptica Shalom">
+<meta property="og:description" content="El sistema propio de Monte Sinaí y Óptica Shalom. Funciona sin internet y es suyo.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="Icono%20Flow%20Hub%20CRM.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="canales/_estilo.css?v=202611011600">
+<script>
+  (function () {
+    var t = 'light';
+    try { t = localStorage.getItem('theme') || 'light'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+<style>
+.wrap--ancho { max-width: 1060px; }
+
+.conind { display: grid; grid-template-columns: 200px 1fr; gap: 56px; align-items: start; }
+.ind { position: sticky; top: 92px; font-size: 13.5px; line-height: 1.5; }
+.ind a { display: block; padding: 6px 0 6px 12px; color: var(--muted); text-decoration: none; border-left: 2px solid var(--line); }
+.ind a:hover { color: var(--fg); border-left-color: var(--fg); }
+@media (max-width: 920px) { .conind { grid-template-columns: 1fr; gap: 0; } .ind { display: none; } }
+
+.rej { display: grid; gap: 16px; margin: 26px 0 0; }
+.rej--2 { grid-template-columns: repeat(2, 1fr); }
+.rej--3 { grid-template-columns: repeat(3, 1fr); }
+.rej--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 860px) { .rej--3, .rej--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .rej--2, .rej--3, .rej--4 { grid-template-columns: 1fr; } }
+
+.tj { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--bg); }
+.tj h3 { margin: 0 0 7px; font-size: 16px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -.2px; }
+.tj p { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0; }
+.tj__n { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 13px; color: var(--muted); display: block; margin-bottom: 10px; }
+
+.ilustrativa { font-size: 11.5px; color: var(--muted); margin-top: 10px; display: block; }
+.corte { font-size: 12px; color: var(--muted); margin-top: 18px; }
+
+/* ── La ventana de la aplicación ────────────────────────────────
+   Todos los mockups comparten el mismo marco: así se lee que son
+   pantallas del mismo sistema y no ilustraciones sueltas. */
+.mkt { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--bg); font-size: 13.5px; line-height: 1.5; }
+[data-theme="light"] .mkt { box-shadow: 0 20px 50px rgba(0,0,0,.08); }
+.mkt__bar { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+.mkt__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--g3); flex: 0 0 9px; }
+.mkt__bar .estado { margin-left: auto; }
+.mkt__in { padding: 18px 16px; }
+.mkt table { margin: 0; font-size: 13px; }
+.mkt th, .mkt td { padding: 8px 10px 8px 0; }
+.mkt__kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+.mkt__kpi { border: 1px solid var(--line); border-radius: 11px; padding: 12px; }
+.mkt__kpi b { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -.7px; line-height: 1.1; }
+.mkt__kpi span { font-size: 11px; color: var(--muted); display: block; margin-top: 5px; line-height: 1.35; }
+@media (max-width: 720px) { .mkt__kpis { grid-template-columns: repeat(2, 1fr); } }
+
+.estado { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 50px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.estado::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.estado--ok { background: rgba(0,200,83,.12); color: #00914b; }
+.estado--fila { background: rgba(255,149,0,.15); color: #b86a00; }
+[data-theme="dark"] .estado--ok { color: #4ade80; }
+[data-theme="dark"] .estado--fila { color: #fbbf24; }
+
+.et { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 50px; white-space: nowrap; border: 1px solid var(--line); color: var(--fg); display: inline-block; }
+.et--alerta { background: rgba(255,59,48,.1); border-color: transparent; color: #d32f2b; }
+.et--ok { background: rgba(0,200,83,.12); border-color: transparent; color: #00914b; }
+[data-theme="dark"] .et--alerta { color: #f87171; }
+[data-theme="dark"] .et--ok { color: #4ade80; }
+.sube { color: #d32f2b; font-weight: 700; }
+[data-theme="dark"] .sube { color: #f87171; }
+
+.titulo-mk { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: -.3px; margin-bottom: 10px; }
+.sub-mk { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; margin-bottom: 8px; }
+
+/* ── Entrada: la pantalla del expediente va primero ───────────── */
+.escena__centro--app { width: 880px; max-width: 100%; }
+.flotante--izq { left: -6px; top: 150px; }
+.flotante--der { right: -6px; top: 300px; }
+.flotante__mini { display: flex; align-items: center; gap: 10px; }
+.flotante__mini svg { width: 38px; height: 38px; border-radius: 8px; }
+
+.app { display: grid; grid-template-columns: 170px 1fr; }
+.app__menu { border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.app__menu span { padding: 7px 10px; border-radius: 50px; color: var(--muted); }
+.app__menu span.on { background: var(--card); color: var(--fg); font-weight: 600; }
+.app__main { padding: 16px 18px 18px; min-width: 0; }
+.pac { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.pac__av { width: 40px; height: 40px; border-radius: 50%; background: var(--fg); color: var(--bg); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex: 0 0 40px; }
+.pac__n { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: -.3px; line-height: 1.2; }
+.pac__m { font-size: 12px; color: var(--muted); }
+.chips-dx { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.app__rej { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; }
+.ojos th:not(:first-child), .ojos td:not(:first-child) { text-align: center; }
+.ojos td { font-variant-numeric: tabular-nums; }
+/* La hoja común vuelve bloque toda tabla de mockup en teléfono para que se
+   deslice; estas caben enteras y así ocupan el ancho. */
+body .mkt table.ojos { display: table; }
+.miniaturas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.miniaturas figure { margin: 0; }
+.miniaturas svg { width: 100%; aspect-ratio: 1; border-radius: 9px; display: block; }
+.miniaturas figcaption { font-size: 10.5px; color: var(--muted); margin-top: 4px; line-height: 1.3; }
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; }
+  .app__menu { display: none; }
+  .app__rej { grid-template-columns: 1fr; }
+}
+
+/* ── Agenda ──────────────────────────────────────────────────── */
+.agenda { display: grid; grid-template-columns: 46px repeat(3, minmax(0, 1fr)); grid-template-rows: 30px repeat(8, 40px); gap: 4px; font-size: 11.5px; }
+.agenda__h { font-size: 11px; font-weight: 700; color: var(--muted); align-self: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.agenda__hr { font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.cita { border-radius: 8px; padding: 4px 8px; line-height: 1.3; border-left: 3px solid var(--c); background: color-mix(in srgb, var(--c) 10%, transparent); overflow: hidden; }
+.cita b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cita i { font-style: normal; color: var(--muted); font-size: 10.5px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-primera { --c: #0066ff; } .c-sub { --c: #8e8e93; } .c-estudio { --c: #1aab99; }
+.c-cirugia { --c: #3533cd; } .c-postop { --c: #00a651; } .c-opto { --c: #e8743b; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 14px; font-size: 11px; color: var(--muted); }
+.leyenda span { display: inline-flex; align-items: center; gap: 6px; }
+.leyenda span::before { content: ''; width: 9px; height: 9px; border-radius: 3px; background: var(--c); }
+.pestanas { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.pestanas span { font-size: 11.5px; padding: 5px 12px; border-radius: 50px; border: 1px solid var(--line); color: var(--muted); }
+.pestanas span.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+@media (max-width: 620px) { .mkt--desliza .mkt__in { overflow-x: auto; } .mkt--desliza .agenda, .mkt--desliza .flujo { min-width: 560px; } }
+
+/* Flujo de la clínica: por dónde va cada paciente ahora mismo */
+.flujo { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.flujo__col { background: var(--card); border: 1px solid var(--line); border-radius: 11px; padding: 8px; min-height: 150px; }
+.flujo__t { font-size: 10.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; display: flex; justify-content: space-between; }
+.fp { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: 11px; line-height: 1.3; margin-bottom: 6px; }
+.fp b { display: block; font-weight: 600; }
+.fp i { font-style: normal; color: var(--muted); font-size: 10px; }
+.fp--reloj i { color: #b86a00; font-weight: 600; }
+[data-theme="dark"] .fp--reloj i { color: #fbbf24; }
+
+/* ── Expediente ──────────────────────────────────────────────── */
+.exp { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
+@media (max-width: 760px) { .exp { grid-template-columns: 1fr; } }
+.esquema { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center; font-size: 11px; color: var(--muted); }
+.esquema svg { width: 100%; max-width: 120px; display: block; margin: 0 auto 4px; }
+.pio svg { width: 100%; height: auto; display: block; }
+.pio__ley { display: flex; gap: 14px; font-size: 11px; color: var(--muted); margin-top: 4px; }
+.pio__ley span::before { content: ''; display: inline-block; width: 12px; height: 3px; border-radius: 3px; margin-right: 6px; vertical-align: middle; background: var(--c); }
+
+/* ── Estudios de imagen ──────────────────────────────────────── */
+.visor { display: grid; grid-template-columns: 150px 1fr 220px; gap: 16px; }
+.visor__lista { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; }
+.visor__lista span { padding: 6px 10px; border-radius: 9px; color: var(--muted); line-height: 1.3; }
+.visor__lista span b { display: block; color: var(--fg); font-weight: 600; }
+.visor__lista span.on { background: var(--card); border: 1px solid var(--line); }
+.visor__comp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.visor__comp figure { margin: 0; }
+.visor__comp svg { width: 100%; aspect-ratio: 1; display: block; border-radius: 10px; }
+.visor__comp figcaption { font-size: 11px; color: var(--muted); margin-top: 6px; display: flex; justify-content: space-between; }
+.visor__oct svg { width: 100%; display: block; border-radius: 10px; margin-top: 10px; }
+.lectura { border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-size: 12px; background: var(--card); }
+.lectura__f { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--line); }
+.lectura__f:last-of-type { border-bottom: 0; }
+.lectura__f b { font-variant-numeric: tabular-nums; }
+.lectura__btn { margin-top: 10px; text-align: center; background: var(--fg); color: var(--bg); border-radius: 50px; padding: 8px; font-size: 11.5px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; }
+@media (max-width: 900px) { .visor { grid-template-columns: 1fr; } .visor__lista { flex-direction: row; overflow-x: auto; } .visor__lista span { flex: 0 0 auto; } }
+
+/* ── Cirugía: la línea del paciente quirúrgico ───────────────── */
+.linea { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; margin-top: 26px; position: relative; }
+.linea::before { content: ''; position: absolute; left: 8%; right: 8%; top: 13px; height: 2px; background: var(--line); }
+.linea div { position: relative; text-align: center; padding: 0 6px; }
+.linea div::before { content: ''; display: block; width: 12px; height: 12px; margin: 8px auto 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); position: relative; }
+.linea div.auto::before { background: var(--fg); }
+.linea b { display: block; font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; line-height: 1.25; margin-bottom: 4px; }
+.linea span { font-size: 12px; color: var(--muted); line-height: 1.4; display: block; }
+@media (max-width: 760px) {
+  .linea { grid-template-columns: 1fr; gap: 14px; }
+  .linea::before { left: 6px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
+  .linea div { text-align: left; padding-left: 28px; }
+  .linea div::before { position: absolute; left: 0; top: 2px; margin: 0; }
+}
+
+/* ── Recetas: WhatsApp y la receta de anteojos ───────────────── */
+.wa-tel { max-width: 320px; margin: 0 auto; border: 1px solid var(--line); border-radius: 28px; overflow: hidden; background: #efeae2; }
+[data-theme="dark"] .wa-tel { background: #0b141a; }
+[data-theme="light"] .wa-tel { box-shadow: 0 20px 50px rgba(0,0,0,.1); }
+.wa-tel__top { background: #008069; color: #fff; padding: 14px 16px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+[data-theme="dark"] .wa-tel__top { background: #202c33; }
+.wa-tel__av { width: 32px; height: 32px; border-radius: 50%; background: #fff; color: #008069; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; }
+.wa-tel__top small { display: block; opacity: .8; font-size: 11px; }
+.wa-tel__cuerpo { padding: 14px 12px 18px; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; line-height: 1.45; color: #111b21; }
+.wab { max-width: 86%; align-self: flex-end; background: #d9fdd3; border-radius: 10px 10px 2px 10px; padding: 8px 10px; box-shadow: 0 1px 1px rgba(0,0,0,.08); }
+[data-theme="dark"] .wab { background: #005c4b; color: #e9edef; }
+.wab small { display: block; text-align: right; font-size: 10px; opacity: .6; margin-top: 3px; }
+.wab__doc { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,.05); border-radius: 8px; padding: 8px; margin-bottom: 4px; }
+.wab__doc i { width: 28px; height: 34px; border-radius: 4px; background: #e53935; color: #fff; font-style: normal; font-size: 9px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex: 0 0 28px; }
+.wab__doc b { font-weight: 600; font-size: 12px; display: block; }
+.wab__doc span { font-size: 10.5px; opacity: .7; }
+
+.receta { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--bg); font-size: 13px; }
+[data-theme="light"] .receta { box-shadow: 0 20px 50px rgba(0,0,0,.08); }
+.receta__enc { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+.receta__enc b { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px; display: block; }
+.receta__enc span { font-size: 11px; color: var(--muted); display: block; line-height: 1.4; }
+.receta__qr { width: 46px; height: 46px; flex: 0 0 46px; }
+.receta table { margin: 0 0 12px; font-size: 12.5px; }
+.receta th, .receta td { padding: 6px 8px 6px 0; text-align: center; }
+.receta th:first-child, .receta td:first-child { text-align: left; }
+.receta__med { font-size: 12.5px; padding: 10px 0 0; border-top: 1px solid var(--line); }
+.receta__med p { margin: 0 0 4px; }
+
+/* ── Sin internet: el diagrama ───────────────────────────────── */
+.red { display: grid; grid-template-columns: 1fr 44px 1.1fr 44px 1fr; align-items: center; margin-top: 26px; }
+.red__caja { border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: var(--bg); }
+.red__caja--centro { border: 2px solid var(--fg); }
+.red__caja b { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 14.5px; margin-bottom: 6px; }
+.red__caja span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+.red__caja ul { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); }
+.red__caja li { margin-bottom: 3px; padding-left: 14px; }
+.red__caja li::before { left: 2px; top: 9px; width: 4px; height: 4px; }
+.red__flecha { text-align: center; color: var(--muted); font-size: 18px; }
+@media (max-width: 760px) {
+  .red { grid-template-columns: 1fr; gap: 8px; }
+  .red__flecha { transform: rotate(90deg); }
+}
+.momentos .tj { position: relative; padding-top: 46px; }
+.momentos .estado { position: absolute; top: 16px; left: 20px; }
+
+/* ── Comparativa ─────────────────────────────────────────────── */
+.comp td:first-child { color: var(--muted); font-size: 14px; width: 26%; }
+.comp td:last-child { font-weight: 600; }
+.comp th:last-child { color: var(--fg); }
+
+/* ── Fases ───────────────────────────────────────────────────── */
+.fase { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--bg); border-top: 3px solid var(--fg); }
+.fase--despues { border-top-style: dashed; }
+.fase h3 { margin: 0 0 4px; font-size: 16px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; }
+.fase small { display: block; font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.fase ul { font-size: 13.5px; margin: 0; }
+.fase li { margin-bottom: 5px; }
+.fase li::before { top: 10px; }
+
+.crm { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 22px 0 6px; }
+.crm span { padding: 8px 15px; border-radius: 50px; border: 1px solid var(--line); font-size: 13.5px; background: var(--bg); }
+.crm i { font-style: normal; color: var(--muted); }
+
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; padding: 17px 0; font-weight: 600; font-size: 16px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; color: var(--muted); font-weight: 400; font-size: 20px; line-height: 1; }
+.faq details[open] summary::after { content: '−'; }
+.faq p { padding: 0 0 18px; color: var(--muted); font-size: 15.5px; margin: 0; }
+
+/* ── Óptica: la orden de trabajo ─────────────────────────────── */
+.orden__pasos { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.orden__pasos span { font-size: 11.5px; padding: 5px 12px; border-radius: 50px; border: 1px solid var(--line); color: var(--muted); }
+.orden__pasos span.hecho { color: var(--fg); }
+.orden__pasos span.hecho::before { content: '✓ '; }
+.orden__pasos span.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.orden { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px; }
+.orden__f { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 12.5px; }
+.orden__f span { color: var(--muted); }
+.orden__f b { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 760px) { .orden { grid-template-columns: 1fr; } }
+
+/* ── Propuesta económica ─────────────────────────────────────────
+   Una sola tarjeta con contorno negro de 2px: es lo único de la página
+   que se firma, y se nota sin necesidad de color. */
+.precio { border: 2px solid var(--fg); border-radius: 20px; overflow: hidden; margin-top: 26px; background: var(--bg); }
+.precio__cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding: 24px; border-bottom: 1px solid var(--line); }
+.precio__et { display: block; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.precio__monto { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: clamp(38px, 6vw, 52px); letter-spacing: -2px; line-height: 1; }
+.precio__monto small { font-size: 16px; letter-spacing: 0; font-weight: 700; color: var(--muted); }
+.precio__sub { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); }
+.precio__pagos { display: flex; gap: 10px; }
+.precio__pagos div { border: 1px solid var(--line); border-radius: 14px; padding: 10px 16px; min-width: 128px; }
+.precio__pagos span { display: block; font-size: 11.5px; color: var(--muted); }
+.precio__pagos b { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.5px; font-variant-numeric: tabular-nums; }
+.precio__pagos small { font-size: 11px; color: var(--muted); }
+.precio__cuerpo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 22px 24px 8px; }
+.precio__cuerpo ul { font-size: 14.5px; }
+.precio__cuerpo li { margin-bottom: 8px; line-height: 1.5; }
+.precio__cuerpo li::before { top: 10px; }
+@media (max-width: 680px) { .precio__cuerpo { grid-template-columns: 1fr; gap: 6px; } .precio__pagos { width: 100%; } .precio__pagos div { flex: 1; min-width: 0; } }
+
+.wa { display: none; position: fixed; right: 18px; bottom: 18px; z-index: 50; background: #25d366; width: 54px; height: 54px; border-radius: 50%; align-items: center; justify-content: center; box-shadow: 0 10px 26px rgba(0,0,0,.22); }
+.wa svg { width: 27px; height: 27px; fill: #fff; }
+@media (max-width: 860px) { .wa { display: flex; } }
+</style>
+</head>
+<body>
+
+<!-- Las imágenes clínicas se dibujan una vez y se reusan. Son ilustraciones,
+     no estudios reales: lo que importa es que se reconozca cada tipo. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="g-fondo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#f2a04a"/><stop offset=".6" stop-color="#d0582b"/><stop offset="1" stop-color="#6e1d10"/>
+    </radialGradient>
+    <radialGradient id="g-papila"><stop offset="0" stop-color="#fffbe6"/><stop offset=".55" stop-color="#ffe3a0"/><stop offset="1" stop-color="#f0b45c"/></radialGradient>
+    <radialGradient id="g-macula"><stop offset="0" stop-color="#7a2410" stop-opacity=".75"/><stop offset="1" stop-color="#7a2410" stop-opacity="0"/></radialGradient>
+  </defs>
+  <symbol id="s-retina" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#050505"/>
+    <circle cx="50" cy="50" r="47" fill="url(#g-fondo)"/>
+    <circle cx="38" cy="52" r="10" fill="url(#g-macula)"/>
+    <g fill="none" stroke="#8a1a0f" stroke-linecap="round" opacity=".9">
+      <path d="M66 44 C60 31 47 24 26 21" stroke-width="1.7"/>
+      <path d="M66 54 C60 67 47 75 26 79" stroke-width="1.7"/>
+      <path d="M69 43 C73 31 78 22 85 17" stroke-width="1.3"/>
+      <path d="M69 55 C73 67 78 76 85 82" stroke-width="1.3"/>
+      <path d="M62 47 C52 41 44 38 22 39" stroke-width=".8"/>
+      <path d="M62 51 C52 58 44 61 22 61" stroke-width=".8"/>
+      <path d="M47 27 C40 32 34 33 18 31" stroke-width=".6"/>
+      <path d="M47 73 C40 68 34 67 18 69" stroke-width=".6"/>
+    </g>
+    <circle cx="67" cy="49" r="8" fill="url(#g-papila)"/>
+    <circle cx="67.5" cy="49" r="4.4" fill="#fffdf2" opacity=".85"/>
+  </symbol>
+  <symbol id="s-mapa" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#050505"/>
+    <circle cx="50" cy="50" r="46" fill="#22a34a"/>
+    <circle cx="50" cy="50" r="34" fill="#a3c935"/>
+    <circle cx="50" cy="50" r="24" fill="#f2b31a"/>
+    <circle cx="50" cy="50" r="15" fill="#e8743b"/>
+    <circle cx="50" cy="50" r="7" fill="#2f6fe0"/>
+    <g fill="none" stroke="#fff" stroke-opacity=".75" stroke-width=".7">
+      <circle cx="50" cy="50" r="7"/><circle cx="50" cy="50" r="20"/><circle cx="50" cy="50" r="40"/>
+      <path d="M36 36 L21.7 21.7 M64 36 L78.3 21.7 M36 64 L21.7 78.3 M64 64 L78.3 78.3"/>
+    </g>
+    <g fill="#fff" font-family="Inter, sans-serif" font-size="6.5" font-weight="700" text-anchor="middle">
+      <text x="50" y="52.5">248</text><text x="50" y="38">301</text><text x="50" y="68">296</text>
+      <text x="35" y="52.5">289</text><text x="65" y="52.5">305</text>
+    </g>
+  </symbol>
+  <symbol id="s-mapa-fino" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#050505"/>
+    <circle cx="50" cy="50" r="46" fill="#22a34a"/>
+    <path d="M50 50 L50 4 A46 46 0 0 1 96 50 Z" fill="#8bbd2c"/>
+    <circle cx="50" cy="50" r="34" fill="#a3c935"/>
+    <path d="M50 50 L50 16 A34 34 0 0 1 84 50 Z" fill="#c7cf3a"/>
+    <circle cx="50" cy="50" r="24" fill="#f2b31a"/>
+    <path d="M50 50 L50 26 A24 24 0 0 1 74 50 Z" fill="#cfc434"/>
+    <circle cx="50" cy="50" r="15" fill="#e8743b"/>
+    <circle cx="50" cy="50" r="7" fill="#2f6fe0"/>
+    <g fill="none" stroke="#fff" stroke-opacity=".75" stroke-width=".7">
+      <circle cx="50" cy="50" r="7"/><circle cx="50" cy="50" r="20"/><circle cx="50" cy="50" r="40"/>
+      <path d="M36 36 L21.7 21.7 M64 36 L78.3 21.7 M36 64 L21.7 78.3 M64 64 L78.3 78.3"/>
+    </g>
+    <g fill="#fff" font-family="Inter, sans-serif" font-size="6.5" font-weight="700" text-anchor="middle">
+      <text x="50" y="52.5">246</text><text x="50" y="38">279</text><text x="50" y="68">293</text>
+      <text x="35" y="52.5">287</text><text x="65" y="52.5">284</text>
+    </g>
+  </symbol>
+  <symbol id="s-oct" viewBox="0 0 200 70">
+    <rect width="200" height="70" fill="#060608"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M0 18 C50 16 72 18 88 28 C96 35 104 35 112 28 C128 18 150 16 200 18" stroke="#f4f4f5" stroke-width="2"/>
+      <path d="M0 22 C50 20 72 22 88 31 C96 37 104 37 112 31 C128 22 150 20 200 22" stroke="#a1a1aa" stroke-width="4" opacity=".75"/>
+      <path d="M0 31 C50 30 74 31 90 36 C97 39 103 39 110 36 C126 31 150 30 200 31" stroke="#52525b" stroke-width="5" opacity=".8"/>
+      <path d="M0 39 C50 38 76 39 92 41 C98 42.5 102 42.5 108 41 C124 39 150 38 200 39" stroke="#a1a1aa" stroke-width="2" opacity=".7"/>
+      <path d="M0 46 C60 45 140 45 200 46" stroke="#fafafa" stroke-width="2.6"/>
+      <path d="M0 50 C60 49 140 49 200 50" stroke="#d4d4d8" stroke-width="1.6" opacity=".7"/>
+      <path d="M0 56 C60 55 140 55 200 56" stroke="#71717a" stroke-width="4" opacity=".45"/>
+    </g>
+    <path d="M0 64 H200" stroke="#27272a" stroke-width="10" opacity=".6"/>
+  </symbol>
+  <symbol id="s-campo" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#f4f4f5"/>
+    <g fill="#d4d4d8">
+      <circle cx="50" cy="50" r="44" fill="#e4e4e7"/>
+    </g>
+    <path d="M14 46 C18 26 34 14 50 14 C62 14 70 18 76 24 C66 22 58 22 50 24 C36 28 26 36 22 46 Z" fill="#27272a" opacity=".9"/>
+    <path d="M26 46 C30 38 38 32 50 30 C56 29 62 30 66 32 C58 33 50 36 44 40 C38 43 32 46 26 46 Z" fill="#71717a" opacity=".7"/>
+    <path d="M50 6 V94 M6 50 H94" stroke="#a1a1aa" stroke-width=".6"/>
+    <circle cx="66" cy="50" r="3.5" fill="#3f3f46"/>
+  </symbol>
+</svg>
+
+<div class="top"><div class="wrap">
+  <a href="landing.html"><img id="logo" src="flow%20hub%20logo%201.png" alt="Flow Hub"></a>
+  <nav>
+    <a href="#modulos">Qué incluye</a>
+    <a href="#optica">Óptica</a>
+    <a href="#sin-internet">Sin internet</a>
+    <a href="#propuesta" class="cta">Ver propuesta</a>
+    <button class="tema" id="tema" title="Cambiar tema" aria-label="Cambiar tema"></button>
+  </nav>
+</div></div>
+
+<!-- ════ ENTRADA ════ -->
+<div class="hero hero--alto">
+  <div class="wrap">
+    <div class="escena">
+      <div class="escena__centro escena__centro--app">
+        <div class="mkt">
+          <div class="mkt__bar">
+            <span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+            <span style="margin-left:8px">Medical Hub OS · Monte Sinaí · Consultorio 1</span>
+            <span class="estado estado--ok">Sincronizado</span>
+          </div>
+          <div class="app">
+            <div class="app__menu">
+              <span>Agenda</span><span>Flujo de hoy</span><span class="on">Pacientes</span>
+              <span>Estudios</span><span>Cirugía</span><span>Recetas</span><span>Óptica</span><span>Caja</span>
+            </div>
+            <div class="app__main">
+              <div class="pac">
+                <div class="pac__av">MR</div>
+                <div>
+                  <div class="pac__n">María Elena Ruiz Ortega</div>
+                  <div class="pac__m">67 años · Exp. 08412 · Última visita 12 ago 2026</div>
+                </div>
+              </div>
+              <div class="chips-dx">
+                <span class="et">H40.1 Glaucoma de ángulo abierto</span>
+                <span class="et">H25.1 Catarata nuclear OD</span>
+                <span class="et et--alerta">Alergia: sulfas</span>
+              </div>
+              <div class="app__rej">
+                <table class="ojos">
+                  <thead><tr><th>Hoy</th><th>OD</th><th>OI</th></tr></thead>
+                  <tbody>
+                    <tr><td>AV sin corrección</td><td>20/80</td><td>20/40</td></tr>
+                    <tr><td>AV con corrección</td><td>20/40</td><td>20/25</td></tr>
+                    <tr><td>PIO (mmHg)</td><td>17</td><td><span class="sube">24 ↑</span></td></tr>
+                    <tr><td>Excavación C/D</td><td>0.4</td><td>0.7</td></tr>
+                  </tbody>
+                </table>
+                <div>
+                  <div class="sub-mk">Estudios en el expediente</div>
+                  <div class="miniaturas">
+                    <figure><svg><use href="#s-mapa"/></svg><figcaption>OCT macular · hoy</figcaption></figure>
+                    <figure><svg><use href="#s-retina"/></svg><figcaption>Retinografía · hoy</figcaption></figure>
+                    <figure><svg><use href="#s-campo"/></svg><figcaption>Campo visual 24-2 · ago</figcaption></figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flotante flotante--izq">
+          <div class="flotante__t">PIO ojo izquierdo</div>
+          <div class="flotante__v">24 <small>mmHg · +5 desde agosto</small></div>
+        </div>
+        <div class="flotante flotante--der">
+          <div class="flotante__mini">
+            <svg viewBox="0 0 100 100"><use href="#s-mapa"/></svg>
+            <div><div class="flotante__t">Llegó del OCT</div><b style="font-size:13px">Asignado a María Elena</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <div class="kicker"><span>Propuesta para el Dr. Edgar Méndez Dávila</span></div>
+      <h1>Medical Hub OS<br><em>El sistema de Monte Sinaí y Óptica Shalom</em></h1>
+      <p class="lead">Agenda, expediente, estudios de imagen, cirugía, recetas, óptica y cobros de
+        Clínica de Visión Monte Sinaí y Óptica Shalom en un solo lugar. Sigue funcionando cuando se cae
+        el internet, es suyo y queda listo en treinta días.</p>
+      <div class="ctas">
+        <a class="btn" href="#propuesta"><span>Ver propuesta</span></a>
+        <a class="btn btn--ghost" href="#modulos"><span>Qué incluye</span></a>
+      </div>
+      <div class="tira">
+        <span>Clínica y óptica juntas</span><span>Expediente OD / OI</span><span>OCT, campo visual y biometría</span>
+        <span>Funciona sin internet</span><span>Conectado a Flow Hub CRM</span>
+      </div>
+    </header>
+  </div>
+</div>
+
+<main>
+<div class="wrap wrap--ancho">
+<div class="conind">
+
+  <aside class="ind">
+    <a href="#hoy">La clínica hoy</a>
+    <a href="#modulos">Qué incluye</a>
+    <a href="#agenda">Agenda y flujo</a>
+    <a href="#expediente">Expediente oftalmológico</a>
+    <a href="#estudios">Estudios de imagen</a>
+    <a href="#cirugia">Cirugía y seguimiento</a>
+    <a href="#recetas">Recetas</a>
+    <a href="#optica">Óptica Shalom</a>
+    <a href="#caja">Caja y dirección</a>
+    <a href="#sin-internet">Sin internet</a>
+    <a href="#crm">Conectado al CRM</a>
+    <a href="#seguridad">Seguridad y norma</a>
+    <a href="#suyo">Suyo, no rentado</a>
+    <a href="#fases">Treinta días</a>
+    <a href="#migracion">La migración</a>
+    <a href="#preguntas">Preguntas frecuentes</a>
+    <a href="#propuesta">Propuesta económica</a>
+  </aside>
+
+  <div>
+
+  <!-- ════ HOY ════ -->
+  <section id="hoy">
+    <h2>La clínica hoy: cuatro lugares para un solo paciente</h2>
+    <p>La agenda vive en una aplicación de citas. Los estudios se quedan en la computadora de cada
+      equipo o en otro sistema. La exploración se escribe en papel o en un documento. La receta se hace
+      a mano. Cada sistema sabe una parte del paciente y ninguno sabe todo.</p>
+    <p>Y cuando el internet falla, la aplicación de citas se detiene con la sala de espera llena.</p>
+    <div class="rej rej--4">
+      <div class="tj"><span class="tj__n">01</span><h3>La agenda</h3><p>Sirve para citar. No sabe qué estudios lleva el paciente ni en qué etapa de la consulta va.</p></div>
+      <div class="tj"><span class="tj__n">02</span><h3>Las imágenes</h3><p>El OCT, el campímetro y el biómetro guardan cada uno lo suyo. Comparar contra la visita anterior es ir a buscar.</p></div>
+      <div class="tj"><span class="tj__n">03</span><h3>La exploración</h3><p>Agudeza, refracción y presión quedan donde no se pueden graficar ni comparar.</p></div>
+      <div class="tj"><span class="tj__n">04</span><h3>La dependencia</h3><p>Si se cae el internet o el proveedor cambia de precio, la clínica no decide nada.</p></div>
+    </div>
+    <p>Y del otro lado del pasillo, Óptica Shalom vuelve a capturar la graduación que el médico ya
+      escribió.</p>
+    <div class="nota"><strong>Medical Hub OS junta las cuatro piezas, y a la óptica, en un expediente por
+      paciente</strong>, con los campos de la oftalmología y las imágenes de los equipos de Monte Sinaí.</div>
+  </section>
+
+  <!-- ════ MÓDULOS ════ -->
+  <section id="modulos">
+    <h2>Qué incluye</h2>
+    <p>No se parte de cero. La base ya existe y funciona: agenda, expediente, recetas en PDF, catálogo
+      de servicios y cobros. Lo que se construye para Monte Sinaí es la capa de oftalmología, Óptica
+      Shalom, la conexión con sus equipos y el modo sin internet.</p>
+    <div class="rej rej--3">
+      <div class="tj"><h3>Agenda y flujo</h3><p>Monte Sinaí y Óptica Shalom, médicos, optometría, estudios y quirófano. Y por dónde va cada paciente ahora mismo.</p></div>
+      <div class="tj"><h3>Expediente oftalmológico</h3><p>Agudeza, refracción, presión, lámpara de hendidura y fondo de ojo, por ojo y por visita.</p></div>
+      <div class="tj"><h3>Estudios de imagen</h3><p>OCT, retinografía, campo visual, biometría y topografía dentro del expediente, con comparación en el tiempo.</p></div>
+      <div class="tj"><h3>Cirugía</h3><p>Valoración, cálculo de lente, consentimiento, hoja quirúrgica y las citas de seguimiento, solas.</p></div>
+      <div class="tj"><h3>Recetas y Óptica Shalom</h3><p>La graduación pasa del consultorio a la óptica sin reescribirse: venta, orden al laboratorio y entrega.</p></div>
+      <div class="tj"><h3>Caja y dirección</h3><p>Servicios, paquetes, cobros y corte de la clínica y de la óptica. Un tablero para ver todo junto.</p></div>
+    </div>
+  </section>
+
+  <!-- ════ AGENDA ════ -->
+  <section id="agenda">
+    <h2>Agenda y flujo de la clínica</h2>
+    <p>La agenda distingue lo que en oftalmología importa: una primera vez dura más que una subsecuente,
+      un paciente de glaucoma necesita estudios antes de entrar con el médico, y un postoperatorio no
+      puede esperar a que haya hueco.</p>
+
+    <div class="mkt mkt--desliza">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Agenda · Martes 10 de noviembre</span></div>
+      <div class="mkt__in">
+        <div class="pestanas"><span class="on">Monte Sinaí</span><span>Óptica Shalom</span><span>Día</span><span>Semana</span></div>
+        <div class="agenda">
+          <span></span>
+          <span class="agenda__h">Dr. Méndez · Consultorio 1</span>
+          <span class="agenda__h">Optometría</span>
+          <span class="agenda__h">Estudios · Shalom</span>
+
+          <span class="agenda__hr" style="grid-column:1;grid-row:2">8:00</span>
+          <span class="agenda__hr" style="grid-column:1;grid-row:3">8:30</span>
+          <span class="agenda__hr" style="grid-column:1;grid-row:4">9:00</span>
+          <span class="agenda__hr" style="grid-column:1;grid-row:5">9:30</span>
+          <span class="agenda__hr" style="grid-column:1;grid-row:6">10:00</span>
+          <span class="agenda__hr" style="grid-column:1;grid-row:7">10:30</span>
+          <span class="agenda__hr" style="grid-column:1;grid-row:8">11:00</span>
+          <span class="agenda__hr" style="grid-column:1;grid-row:9">11:30</span>
+
+          <div class="cita c-postop" style="grid-column:2;grid-row:2"><b>Rosa Medina</b><i>Postop día 1 · faco OD</i></div>
+          <div class="cita c-primera" style="grid-column:2;grid-row:3 / span 2"><b>Jorge Salinas</b><i>Primera vez · confirmó por WhatsApp</i><i>Dilatando · 12 min</i></div>
+          <div class="cita c-sub" style="grid-column:2;grid-row:5"><b>María Elena Ruiz</b><i>Control de glaucoma</i></div>
+          <div class="cita c-cirugia" style="grid-column:2;grid-row:6 / span 2"><b>Arturo Peña</b><i>Valoración prequirúrgica</i><i>Catarata OI</i></div>
+          <div class="cita c-sub" style="grid-column:2;grid-row:8"><b>Lucía Torres</b><i>Subsecuente · retinopatía</i></div>
+
+          <div class="cita c-opto" style="grid-column:3;grid-row:2"><b>Jorge Salinas</b><i>AV, refracción y PIO</i></div>
+          <div class="cita c-opto" style="grid-column:3;grid-row:3 / span 2"><b>Ana Ríos</b><i>Adaptación de lentes de contacto</i></div>
+          <div class="cita c-opto" style="grid-column:3;grid-row:6"><b>Diego Mora</b><i>Refracción · anteojos</i></div>
+          <div class="cita c-opto" style="grid-column:3;grid-row:8 / span 2"><b>Sofía Lara</b><i>Primera vez · niña de 7 años</i></div>
+
+          <div class="cita c-estudio" style="grid-column:4;grid-row:3 / span 2"><b>María Elena Ruiz</b><i>OCT + campo visual 24-2</i><i>Ya en su expediente ✓</i></div>
+          <div class="cita c-estudio" style="grid-column:4;grid-row:5"><b>Arturo Peña</b><i>Biometría</i></div>
+          <div class="cita c-estudio" style="grid-column:4;grid-row:7 / span 2"><b>Lucía Torres</b><i>Retinografía y OCT macular</i></div>
+        </div>
+        <div class="leyenda">
+          <span class="c-primera">Primera vez</span><span class="c-sub">Subsecuente</span><span class="c-opto">Optometría</span>
+          <span class="c-estudio">Estudio</span><span class="c-cirugia">Cirugía</span><span class="c-postop">Postoperatorio</span>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <h3>El flujo de hoy</h3>
+    <p>La recepción, la optometrista y el médico ven el mismo tablero: quién llegó, quién está
+      dilatando y desde hace cuánto, quién espera estudios y quién ya está listo para pasar. Se acaba el
+      «¿ya está listo el señor de las 9?».</p>
+    <div class="mkt mkt--desliza">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Flujo de hoy · Monte Sinaí</span><span class="estado estado--ok">Espera promedio 21 min</span></div>
+      <div class="mkt__in">
+        <div class="flujo">
+          <div class="flujo__col"><div class="flujo__t"><span>Recepción</span><span>2</span></div>
+            <div class="fp"><b>Lucía Torres</b><i>Llegó 10:52</i></div>
+            <div class="fp"><b>Diego Mora</b><i>Llegó 10:58</i></div></div>
+          <div class="flujo__col"><div class="flujo__t"><span>Optometría</span><span>1</span></div>
+            <div class="fp"><b>Sofía Lara</b><i>Refracción</i></div></div>
+          <div class="flujo__col"><div class="flujo__t"><span>Dilatando</span><span>2</span></div>
+            <div class="fp fp--reloj"><b>Jorge Salinas</b><i>18 min</i></div>
+            <div class="fp fp--reloj"><b>Arturo Peña</b><i>6 min</i></div></div>
+          <div class="flujo__col"><div class="flujo__t"><span>Estudios</span><span>1</span></div>
+            <div class="fp"><b>Ana Ríos</b><i>Topografía</i></div></div>
+          <div class="flujo__col"><div class="flujo__t"><span>Médico</span><span>1</span></div>
+            <div class="fp"><b>María Elena Ruiz</b><i>Consultorio 1</i></div></div>
+          <div class="flujo__col"><div class="flujo__t"><span>Óptica</span><span>2</span></div>
+            <div class="fp"><b>Javier Ortiz</b><i>Eligiendo armazón</i></div>
+            <div class="fp"><b>Rosa Medina</b><i>Caja · postop</i></div></div>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <ul style="margin-top:20px">
+      <li>Tipos de cita con su duración: primera vez, subsecuente, estudio, valoración, cirugía y postoperatorio.</li>
+      <li>Horarios por médico y por clínica, con bloqueos de quirófano y vacaciones.</li>
+      <li>Confirmación y recordatorio por WhatsApp desde Flow Hub CRM, que la clínica ya usa.</li>
+      <li>Lista de espera para llenar cancelaciones del mismo día.</li>
+    </ul>
+  </section>
+
+  <!-- ════ EXPEDIENTE ════ -->
+  <section id="expediente">
+    <h2>Expediente oftalmológico</h2>
+    <p>Cada visita se captura por ojo, con los campos que usa la especialidad y no con un cuadro de
+      texto libre. Lo que se captura como dato se puede graficar, comparar y buscar.</p>
+
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">María Elena Ruiz · Consulta 10 nov · Dr. Méndez</span></div>
+      <div class="mkt__in">
+        <div class="pestanas"><span class="on">Agudeza y refracción</span><span>Segmento anterior</span><span>Fondo de ojo</span><span>Diagnóstico y plan</span></div>
+        <div class="exp">
+          <table class="ojos">
+            <thead><tr><th></th><th>OD</th><th>OI</th></tr></thead>
+            <tbody>
+              <tr><td>AV sin corrección</td><td>20/80</td><td>20/40</td></tr>
+              <tr><td>AV con corrección</td><td>20/40</td><td>20/25</td></tr>
+              <tr><td>Estenopeico</td><td>20/40</td><td>20/25</td></tr>
+              <tr><td>Refracción</td><td>−1.25 −0.50 × 90</td><td>−0.75 −0.75 × 85</td></tr>
+              <tr><td>Adición</td><td>+2.50</td><td>+2.50</td></tr>
+              <tr><td>Queratometría</td><td>43.25 / 44.00</td><td>43.50 / 44.25</td></tr>
+              <tr><td>PIO · Goldmann</td><td>17</td><td><span class="sube">24</span></td></tr>
+              <tr><td>Cristalino</td><td>NO3 NC3</td><td>NO1 NC1</td></tr>
+              <tr><td>Excavación C/D</td><td>0.4</td><td>0.7</td></tr>
+            </tbody>
+          </table>
+          <div>
+            <div class="sub-mk">Esquema</div>
+            <div class="esquema">
+              <div>
+                <svg viewBox="0 0 100 100" aria-label="Esquema del ojo derecho con opacidad de cristalino">
+                  <circle cx="50" cy="50" r="44" fill="none" stroke="var(--g3)" stroke-width="1.5"/>
+                  <circle cx="50" cy="50" r="26" fill="#8a6a4a" opacity=".55"/>
+                  <circle cx="50" cy="50" r="11" fill="var(--fg)"/>
+                  <circle cx="50" cy="50" r="9" fill="#d8c48a" opacity=".8"/>
+                  <path d="M20 22 L30 30" stroke="#e8743b" stroke-width="2" stroke-linecap="round"/>
+                  <text x="12" y="18" font-size="9" fill="#e8743b" font-family="Inter,sans-serif" font-weight="700">1</text>
+                </svg>OD · catarata nuclear
+              </div>
+              <div>
+                <svg viewBox="0 0 100 100" aria-label="Esquema del nervio óptico izquierdo con excavación aumentada">
+                  <circle cx="50" cy="50" r="44" fill="none" stroke="var(--g3)" stroke-width="1.5"/>
+                  <circle cx="50" cy="50" r="30" fill="#f2c27a" opacity=".55"/>
+                  <ellipse cx="50" cy="50" rx="21" ry="23" fill="#fff6dc" stroke="#e8743b" stroke-width="1.5" stroke-dasharray="3 2"/>
+                  <text x="50" y="53" font-size="9" text-anchor="middle" fill="#b86a00" font-family="Inter,sans-serif" font-weight="700">0.7</text>
+                </svg>OI · papila
+              </div>
+            </div>
+            <div class="sub-mk" style="margin-top:16px">Presión por visita</div>
+            <div class="pio">
+              <svg viewBox="0 0 220 90" role="img" aria-label="La presión del ojo izquierdo sube de 19 a 24 en seis visitas; la del derecho se mantiene entre 16 y 17">
+                <line x1="20" y1="20" x2="220" y2="20" stroke="var(--line)" stroke-dasharray="3 3"/>
+                <text x="0" y="23" font-size="8" fill="var(--muted)" font-family="Inter,sans-serif">21</text>
+                <line x1="20" y1="80" x2="220" y2="80" stroke="var(--line)"/>
+                <polyline fill="none" stroke="#0066ff" stroke-width="2" points="25,38 63,35 101,38 139,35 177,38 215,35"/>
+                <polyline fill="none" stroke="#e8743b" stroke-width="2" points="25,26 63,23 101,17 139,14 177,8 215,2"/>
+                <g fill="#e8743b"><circle cx="215" cy="2" r="2.5"/></g>
+                <g font-size="7.5" fill="var(--muted)" font-family="Inter,sans-serif" text-anchor="middle">
+                  <text x="25" y="89">may 25</text><text x="101" y="89">nov 25</text><text x="177" y="89">ago 26</text><text x="215" y="89">hoy</text>
+                </g>
+              </svg>
+              <div class="pio__ley"><span style="--c:#0066ff">OD</span><span style="--c:#e8743b">OI</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <div class="rej rej--2">
+      <div class="tj"><h3>Segmento anterior y fondo de ojo</h3><p>Párpados, conjuntiva, córnea, cámara anterior, iris y cristalino; papila, mácula, vasos y periferia. Con plantillas de normalidad para capturar rápido y escribir solo lo que cambia.</p></div>
+      <div class="tj"><h3>Esquemas para dibujar</h3><p>Sobre el segmento anterior y el fondo de ojo, en la tableta o con el mouse. El dibujo se guarda con la visita.</p></div>
+      <div class="tj"><h3>Optometría captura, el médico decide</h3><p>La optometrista llena agudeza, refracción y presión antes de que el paciente entre. El médico abre el expediente con todo eso ya cargado.</p></div>
+      <div class="tj"><h3>Diagnóstico con CIE-10</h3><p>Búsqueda de diagnósticos, antecedentes, alergias y medicamentos activos que se arrastran de una visita a la siguiente.</p></div>
+    </div>
+  </section>
+
+  <!-- ════ ESTUDIOS ════ -->
+  <section id="estudios">
+    <h2>Estudios de imagen dentro del expediente</h2>
+    <p>Cada equipo de la clínica deja su estudio en una carpeta compartida o lo envía en el formato que
+      maneje. Medical Hub OS lo recoge, lo asigna al paciente y a la visita, y aparece en el expediente sin que
+      nadie lo suba a mano. Lo que no logra asignar solo queda en una bandeja para que recepción lo
+      resuelva con un clic.</p>
+
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Estudios · María Elena Ruiz · OI</span></div>
+      <div class="mkt__in">
+        <div class="visor">
+          <div class="visor__lista">
+            <span class="on"><b>OCT macular</b>10 nov 2026</span>
+            <span><b>Campo visual 24-2</b>10 nov 2026</span>
+            <span><b>Retinografía</b>10 nov 2026</span>
+            <span><b>Campo visual 24-2</b>12 ago 2026</span>
+            <span><b>OCT macular</b>18 mar 2025</span>
+            <span><b>Biometría</b>18 mar 2025</span>
+          </div>
+          <div>
+            <div class="visor__comp">
+              <figure><svg viewBox="0 0 100 100"><use href="#s-mapa"/></svg><figcaption><span>18 mar 2025</span><span>Promedio 296 µm</span></figcaption></figure>
+              <figure><svg viewBox="0 0 100 100"><use href="#s-mapa-fino"/></svg><figcaption><span>10 nov 2026</span><span>Promedio 284 µm</span></figcaption></figure>
+            </div>
+            <div class="visor__oct"><svg viewBox="0 0 200 70"><use href="#s-oct"/></svg></div>
+          </div>
+          <div class="lectura">
+            <div class="sub-mk">Lectura asistida · campo visual</div>
+            <div class="lectura__f"><span>Estrategia</span><b>24-2 SITA</b></div>
+            <div class="lectura__f"><span>Desviación media</span><b>−6.42 dB</b></div>
+            <div class="lectura__f"><span>DSM</span><b>5.10 dB</b></div>
+            <div class="lectura__f"><span>VFI</span><b>84 %</b></div>
+            <div class="lectura__f"><span>Contra agosto</span><b class="sube">−1.3 dB</b></div>
+            <div class="lectura__btn">Revisar y pasar al expediente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <h3>Lectura asistida</h3>
+    <p>Muchos equipos entregan su resultado en PDF. Medical Hub OS lee ese reporte y propone los valores
+      —longitud axial y queratometrías de la biometría, desviación media del campo visual, espesores del
+      OCT— para que el médico los revise y los confirme. Así quedan como datos del expediente y se pueden
+      comparar contra la visita anterior.</p>
+    <div class="nota"><strong>La lectura propone, el médico confirma.</strong> Medical Hub OS no diagnostica:
+      quita la captura manual y pone lado a lado lo de hoy con lo de antes.</div>
+
+    <table>
+      <thead><tr><th>Equipo</th><th>Qué entra al expediente</th></tr></thead>
+      <tbody>
+        <tr><td><strong>OCT</strong></td><td>Mapas de espesor macular y capa de fibras nerviosas, cortes y reporte</td></tr>
+        <tr><td><strong>Campímetro</strong></td><td>Reporte del campo visual con sus índices</td></tr>
+        <tr><td><strong>Biómetro</strong></td><td>Longitud axial, queratometrías y cálculo de lente intraocular</td></tr>
+        <tr><td><strong>Topógrafo</strong></td><td>Mapas corneales para lentes de contacto y cirugía refractiva</td></tr>
+        <tr><td><strong>Retinógrafo</strong></td><td>Fotografías de fondo de ojo y de segmento anterior</td></tr>
+      </tbody>
+    </table>
+    <p class="corte">Cómo se conecta cada equipo depende de su modelo y de lo que exporte: DICOM, PDF o
+      imagen. Se revisa equipo por equipo en la primera semana.</p>
+  </section>
+
+  <!-- ════ CIRUGÍA ════ -->
+  <section id="cirugia">
+    <h2>Cirugía y seguimiento</h2>
+    <p>Del día en que se indica la cirugía al alta del último control, el paciente quirúrgico tiene su
+      propia línea. Las citas de seguimiento se crean solas al cerrar la hoja quirúrgica.</p>
+    <div class="linea">
+      <div><b>Valoración</b><span>Indicación y estudios prequirúrgicos</span></div>
+      <div><b>Biometría</b><span>Cálculo y elección de la lente</span></div>
+      <div><b>Consentimiento</b><span>Firmado en tableta y guardado</span></div>
+      <div><b>Cirugía</b><span>Hoja quirúrgica, lente y lote</span></div>
+      <div class="auto"><b>Día 1 y semana 1</b><span>Citas creadas solas</span></div>
+      <div class="auto"><b>Mes 1</b><span>Refracción final y alta</span></div>
+    </div>
+
+    <div class="mkt" style="margin-top:30px">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Programa quirúrgico · Jueves 12 de noviembre · Quirófano Monte Sinaí</span></div>
+      <div class="mkt__in" style="overflow-x:auto">
+        <table>
+          <thead><tr><th>Hora</th><th>Paciente</th><th>Ojo</th><th>Procedimiento</th><th>Lente</th><th>Listo</th></tr></thead>
+          <tbody>
+            <tr><td>8:00</td><td>Arturo Peña</td><td>OI</td><td>Facoemulsificación + LIO</td><td>+21.5 D</td><td><span class="et et--ok">Completo</span></td></tr>
+            <tr><td>9:00</td><td>Carmen Vidal</td><td>OD</td><td>Facoemulsificación + LIO</td><td>+19.0 D</td><td><span class="et et--alerta">Falta consentimiento</span></td></tr>
+            <tr><td>10:00</td><td>Héctor Gil</td><td>OI</td><td>Trabeculectomía</td><td>—</td><td><span class="et et--ok">Completo</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+  </section>
+
+  <!-- ════ RECETAS ════ -->
+  <section id="recetas">
+    <h2>Recetas de anteojos, lentes de contacto y medicamentos</h2>
+    <p>La graduación sale de la refracción que ya se capturó; no se vuelve a escribir. La receta se genera
+      en PDF con la marca de Monte Sinaí, la cédula del Dr. Méndez y un código para verificarla, y se
+      envía por WhatsApp o se imprime. Si el paciente compra sus lentes en Óptica Shalom, la óptica ya
+      la tiene.</p>
+    <div class="rej rej--2" style="align-items:center">
+      <div>
+        <div class="receta">
+          <div class="receta__enc">
+            <div><b>Receta de anteojos</b>
+              <span>Dr. Edgar Méndez Dávila · Oftalmología · Cédula profesional</span>
+              <span>María Elena Ruiz Ortega · 10 nov 2026</span></div>
+            <svg class="receta__qr" viewBox="0 0 7 7" aria-label="Código de verificación" shape-rendering="crispEdges">
+              <rect width="7" height="7" fill="var(--bg)"/>
+              <path fill="var(--fg)" d="M0 0h3v3H0zM4 0h3v3H4zM0 4h3v3H0zM1 1v1h1V1zM5 1v1h1V1zM1 5v1h1V5zM4 4h1v1H4zM6 4h1v2H6zM4 6h2v1H4zM5 5h1v1H5z"/>
+              <path fill="var(--bg)" d="M1 1h1v1H1zM5 1h1v1H5zM1 5h1v1H1z"/>
+            </svg>
+          </div>
+          <table>
+            <thead><tr><th></th><th>Esf.</th><th>Cil.</th><th>Eje</th><th>Add.</th></tr></thead>
+            <tbody>
+              <tr><td><strong>OD</strong></td><td>−1.25</td><td>−0.50</td><td>90°</td><td>+2.50</td></tr>
+              <tr><td><strong>OI</strong></td><td>−0.75</td><td>−0.75</td><td>85°</td><td>+2.50</td></tr>
+            </tbody>
+          </table>
+          <div class="receta__med">
+            <p><strong>Latanoprost 0.005 %</strong> · 1 gota en ojo izquierdo cada noche</p>
+            <p style="color:var(--muted);font-size:12px">DIP 62 mm · Progresivo · Antirreflejante</p>
+          </div>
+        </div>
+        <span class="ilustrativa">Receta ilustrativa con datos de ejemplo.</span>
+      </div>
+      <div>
+        <div class="wa-tel">
+          <div class="wa-tel__top"><div class="wa-tel__av">MS</div><div>Clínica de Visión Monte Sinaí<small>en línea</small></div></div>
+          <div class="wa-tel__cuerpo">
+            <div class="wab">Hola María Elena, aquí está su receta de hoy.
+              <div class="wab__doc" style="margin-top:6px"><i>PDF</i><div><b>Receta · 10 nov.pdf</b><span>1 página</span></div></div>
+              <small>11:42</small></div>
+            <div class="wab">Le recordamos su gota de latanoprost en el ojo izquierdo cada noche. Su próximo control de presión es el 9 de febrero.<small>11:42</small></div>
+          </div>
+        </div>
+        <span class="ilustrativa" style="text-align:center">Mensaje ilustrativo.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ ÓPTICA ════ -->
+  <section id="optica">
+    <h2>Óptica Shalom, conectada al consultorio</h2>
+    <p>Hoy el paciente sale del consultorio con una receta en la mano y en la óptica alguien la vuelve a
+      capturar. Con Medical Hub OS, Óptica Shalom abre la graduación que el Dr. Méndez acaba de escribir,
+      arma la venta y sigue la orden hasta que el paciente tiene sus lentes.</p>
+
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Óptica Shalom · Orden de trabajo 2026-1184</span><span class="estado estado--fila">En laboratorio</span></div>
+      <div class="mkt__in">
+        <div class="orden__pasos">
+          <span class="hecho">Venta</span><span class="hecho">Enviada</span><span class="on">En laboratorio</span><span>Llegó</span><span>Lista para entrega</span><span>Entregada</span>
+        </div>
+        <div class="orden">
+          <div>
+            <div class="sub-mk">Graduación · desde la consulta del Dr. Méndez, 10 nov</div>
+            <table class="ojos">
+              <thead><tr><th></th><th>Esf.</th><th>Cil.</th><th>Eje</th><th>Add.</th></tr></thead>
+              <tbody>
+                <tr><td><strong>OD</strong></td><td>−1.25</td><td>−0.50</td><td>90°</td><td>+2.50</td></tr>
+                <tr><td><strong>OI</strong></td><td>−0.75</td><td>−0.75</td><td>85°</td><td>+2.50</td></tr>
+              </tbody>
+            </table>
+            <div class="sub-mk" style="margin-top:16px">Lo que se vendió</div>
+            <div class="orden__f"><span>Armazón · acetato carey 52-18</span><b>en existencia · 3</b></div>
+            <div class="orden__f"><span>Micas · progresivo, índice 1.67</span><b>Laboratorio</b></div>
+            <div class="orden__f"><span>Tratamiento · antirreflejante y filtro azul</span><b>—</b></div>
+            <div class="orden__f"><span>DIP · altura de montaje</span><b>62 mm · 19 mm</b></div>
+          </div>
+          <div>
+            <div class="sub-mk">Paciente</div>
+            <div class="pac" style="margin-bottom:14px">
+              <div class="pac__av">MR</div>
+              <div><div class="pac__n" style="font-size:14.5px">María Elena Ruiz</div><div class="pac__m">Exp. 08412 · paciente de Monte Sinaí</div></div>
+            </div>
+            <div class="orden__f"><span>Total</span><b>$ 6,850</b></div>
+            <div class="orden__f"><span>Anticipo · 10 nov</span><b>$ 3,500</b></div>
+            <div class="orden__f"><span>Saldo</span><b>$ 3,350</b></div>
+            <div class="orden__f"><span>Promesa de entrega</span><b>17 nov</b></div>
+            <div class="lectura__btn" style="margin-top:14px">Avisar por WhatsApp cuando esté lista</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <div class="rej rej--2">
+      <div class="tj"><h3>Inventario de armazones</h3><p>Existencias por marca, modelo y color, con lo que se vende más y lo que lleva meses sin moverse.</p></div>
+      <div class="tj"><h3>Órdenes al laboratorio</h3><p>Cada orden con su fecha prometida. Las que se atrasan aparecen antes de que el paciente llame a preguntar.</p></div>
+      <div class="tj"><h3>Aviso de lentes listos</h3><p>El paciente recibe el aviso por WhatsApp y la óptica ve quién no ha pasado a recoger.</p></div>
+      <div class="tj"><h3>Lo que se queda en la receta</h3><p>Cuántas recetas de Monte Sinaí terminan en una venta de Óptica Shalom, y cuántas se van a otra óptica.</p></div>
+    </div>
+  </section>
+
+  <!-- ════ CAJA ════ -->
+  <section id="caja">
+    <h2>Caja y dirección: la clínica y la óptica juntas</h2>
+    <p>Cada servicio tiene su precio en el catálogo: consulta, estudios, paquetes quirúrgicos, armazones y
+      micas. Lo que se hace en la consulta se cobra en caja sin volver a capturarlo, y la clínica y la
+      óptica tienen cada una su corte. El Dr. Méndez ve las dos juntas.</p>
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Dirección · Noviembre · Monte Sinaí y Óptica Shalom</span></div>
+      <div class="mkt__in">
+        <div class="mkt__kpis">
+          <div class="mkt__kpi"><b>864</b><span>pacientes atendidos en el mes</span></div>
+          <div class="mkt__kpi"><b>31</b><span>cirugías realizadas</span></div>
+          <div class="mkt__kpi"><b>58 %</b><span>de las recetas de anteojos se surtieron en Óptica Shalom</span></div>
+          <div class="mkt__kpi"><b>212</b><span>pacientes de glaucoma con control vencido</span></div>
+        </div>
+        <table>
+          <thead><tr><th>Línea</th><th>Atenciones</th><th>Ticket promedio</th><th>Pendiente</th></tr></thead>
+          <tbody>
+            <tr><td>Consulta y estudios · Monte Sinaí</td><td>1,142</td><td>$ 1,080</td><td>8.4 % no llegó</td></tr>
+            <tr><td>Cirugía · Monte Sinaí</td><td>31</td><td>$ 28,500</td><td>4 por programar</td></tr>
+            <tr><td>Óptica Shalom</td><td>296</td><td>$ 4,920</td><td>23 sin recoger</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+  </section>
+
+  <!-- ════ SIN INTERNET ════ -->
+  <section id="sin-internet">
+    <h2>Funciona aunque se caiga el internet</h2>
+    <p>Las aplicaciones de agenda en línea dependen del internet: cuando se cae, la clínica se queda sin
+      agenda y sin expedientes con la sala de espera llena. Medical Hub OS trabaja como los sistemas de antes,
+      dentro de la clínica, y como los de ahora, en la nube. Las dos cosas a la vez.</p>
+
+    <div class="red">
+      <div class="red__caja"><b>Cada sede</b><span>Monte Sinaí y Óptica Shalom: recepción, optometría, consultorios, quirófano, óptica, caja y equipos.</span>
+        <ul><li>Computadoras y tabletas</li><li>OCT, campímetro, biómetro</li></ul></div>
+      <div class="red__flecha">⇄</div>
+      <div class="red__caja red__caja--centro"><b>Servidor en cada sede</b><span>Un equipo pequeño dentro de la sede con la base de datos completa. Todo el trabajo del día ocurre aquí.</span></div>
+      <div class="red__flecha">⇄</div>
+      <div class="red__caja"><b>La nube</b><span>Copia de todo, sincronizada.</span>
+        <ul><li>Respaldo fuera de la sede</li><li>Acceso desde casa</li><li>Une a Monte Sinaí con Shalom</li></ul></div>
+    </div>
+
+    <div class="rej rej--3 momentos">
+      <div class="tj"><span class="estado estado--ok">Con internet</span><h3>Todo al día</h3><p>Cada cambio sube a la nube al momento. La otra sede y el médico desde casa ven lo mismo.</p></div>
+      <div class="tj"><span class="estado estado--fila">Sin internet · 14 por enviar</span><h3>La clínica sigue igual</h3><p>Agenda, expediente, estudios, recetas y caja siguen funcionando dentro de la clínica. Lo nuevo queda en fila.</p></div>
+      <div class="tj"><span class="estado estado--ok">Volvió</span><h3>Se pone al día solo</h3><p>Lo pendiente se envía sin que nadie haga nada ni capture dos veces. Cada cambio queda con quién y cuándo.</p></div>
+    </div>
+
+    <div class="nota"><strong>Lo que sí espera al internet:</strong> los mensajes de WhatsApp, el acceso
+      desde fuera de la clínica y ver en tiempo real lo de la otra sede. Todo lo que ocurre dentro
+      de la clínica, no. Para los cortes de luz se recomienda un no-break en el servidor y en recepción.</div>
+  </section>
+
+  <!-- ════ CRM ════ -->
+  <section id="crm">
+    <h2>Conectado a Flow Hub CRM</h2>
+    <p>Monte Sinaí ya atiende sus mensajes con Flow Hub CRM. Medical Hub OS se conecta con él: el paciente que
+      escribe por WhatsApp y agenda con el agente aparece en la agenda, y lo que pasa en la consulta
+      alimenta el seguimiento.</p>
+    <div class="crm">
+      <span>Escribe por WhatsApp</span><i>→</i><span>El agente agenda</span><i>→</i>
+      <span>La cita aparece en Medical Hub OS</span><i>→</i><span>Consulta</span><i>→</i><span>Seguimiento con fecha</span>
+    </div>
+    <div class="rej rej--3">
+      <div class="tj"><h3>Controles que no se pierden</h3><p>El paciente de glaucoma que debía volver en tres meses y no agendó recibe su recordatorio.</p></div>
+      <div class="tj"><h3>Cirugías que no se enfrían</h3><p>La catarata indicada que no se programó queda en seguimiento con responsable y fecha.</p></div>
+      <div class="tj"><h3>Menos inasistencias</h3><p>Confirmación el día anterior y aviso de llegada con instrucciones de dilatación.</p></div>
+    </div>
+    <p class="corte">Los mensajes se envían solo a pacientes que dieron su consentimiento, conforme al aviso de privacidad de la clínica.</p>
+  </section>
+
+  <!-- ════ SEGURIDAD ════ -->
+  <section id="seguridad">
+    <h2>Seguridad y norma</h2>
+    <p>Un expediente clínico guarda datos personales sensibles. Medical Hub OS se construye pensando en eso
+      desde el principio.</p>
+    <div class="rej rej--2">
+      <div class="tj"><h3>Cada quien ve lo suyo</h3><p>Roles de médico, optometría, recepción, caja y dirección. Cada uno entra solo a lo que le toca.</p></div>
+      <div class="tj"><h3>Bitácora</h3><p>Quién abrió, capturó o cambió cada expediente y cuándo. Lo firmado no se borra: se corrige con una nota.</p></div>
+      <div class="tj"><h3>Respaldos en dos lugares</h3><p>En el servidor de la clínica y en la nube, cifrados. Un equipo que se descompone no se lleva el expediente.</p></div>
+      <div class="tj"><h3>Estructura de la norma</h3><p>El expediente sigue los apartados de la NOM-004-SSA3-2012 y el manejo de datos la Ley Federal de Protección de Datos Personales.</p></div>
+    </div>
+  </section>
+
+  <!-- ════ SUYO ════ -->
+  <section id="suyo">
+    <h2>Suyo, no rentado</h2>
+    <p>Una aplicación por suscripción se paga cada mes, por usuario, para siempre, y hace lo que su
+      proveedor decide. Un sistema propio se paga por construirlo y después es de la clínica.</p>
+    <table class="comp">
+      <thead><tr><th></th><th>Aplicación de agenda por suscripción</th><th>Medical Hub OS</th></tr></thead>
+      <tbody>
+        <tr><td>Cómo se paga</td><td>Mensualidad por usuario o por médico, siempre</td><td>Una sola vez, en dos pagos</td></tr>
+        <tr><td>Expediente</td><td>Genérico o inexistente</td><td>Oftalmológico, por ojo y por visita</td></tr>
+        <tr><td>Estudios de imagen</td><td>En otro sistema</td><td>Dentro del expediente, comparables</td></tr>
+        <tr><td>Sin internet</td><td>Se detiene</td><td>La clínica sigue trabajando</td></tr>
+        <tr><td>Los datos</td><td>En los servidores del proveedor</td><td>En su servidor y en su nube</td></tr>
+        <tr><td>Cambios</td><td>Los que el proveedor decida</td><td>Los que la clínica necesite</td></tr>
+        <tr><td>Óptica</td><td>Otro sistema, otra captura</td><td>La misma receta, la misma caja</td></tr>
+        <tr><td>Marca</td><td>La del proveedor</td><td>Medical Hub OS</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Y si mañana lo quieren otros oftalmólogos</h3>
+    <p>Un sistema hecho para una clínica de oftalmología real, con quirófano y óptica propia, le sirve a
+      cualquier otra. Si el Dr. Méndez decide comercializarlo, Medical Hub OS se convierte en un servicio
+      por suscripción para otros especialistas: cada clínica con su espacio, su marca y sus datos
+      separados, y una mensualidad que cobra él. Flow Hub opera la tecnología.</p>
+    <div class="rej rej--3">
+      <div class="tj"><span class="tj__n">01</span><h3>Hoy</h3><p>Resuelve Monte Sinaí y Óptica Shalom, y deja de pagar rentas.</p></div>
+      <div class="tj"><span class="tj__n">02</span><h3>Probado</h3><p>Meses de uso real en una clínica de oftalmología: el mejor argumento de venta.</p></div>
+      <div class="tj"><span class="tj__n">03</span><h3>Después</h3><p>Se ofrece a colegas como servicio, y la inversión de hoy se vuelve un ingreso.</p></div>
+    </div>
+    <div class="nota"><strong>Primero resuelve su clínica. Después, si conviene, se vende.</strong> Las
+      condiciones de la marca blanca se acuerdan aparte y no son parte de esta propuesta.</div>
+  </section>
+
+  <!-- ════ IMPLEMENTACIÓN ════ -->
+  <section id="fases">
+    <h2>Treinta días, de la firma a la operación</h2>
+    <p>No se parte de cero: la base del sistema ya está construida y funcionando. Por eso se puede
+      entregar completo en treinta días, en vez de en meses.</p>
+    <div class="rej rej--2">
+      <div class="fase"><h3>Semana 1 · Levantamiento</h3><small>En Monte Sinaí y en Óptica Shalom</small>
+        <ul><li>Cómo circula el paciente, de recepción al quirófano y a la óptica</li><li>Formatos de consulta, receta y orden de óptica actuales</li><li>Equipos, modelos y qué exporta cada uno</li><li>Exportación de la base de la aplicación actual</li></ul></div>
+      <div class="fase"><h3>Semana 2 · Configuración</h3><small>El sistema con la forma de la clínica</small>
+        <ul><li>Tipos de cita, horarios y catálogo de servicios</li><li>Expediente, recetas y órdenes con la marca de cada sede</li><li>Instalación de los servidores de cada sede</li><li>Conexión de los equipos de estudios</li></ul></div>
+      <div class="fase"><h3>Semana 3 · Migración y capacitación</h3><small>Los datos adentro, el equipo listo</small>
+        <ul><li>Carga y revisión de pacientes y citas</li><li>Capacitación por puesto</li><li>Pruebas con casos reales de la clínica</li></ul></div>
+      <div class="fase"><h3>Semana 4 · Arranque</h3><small>Se deja la aplicación anterior</small>
+        <ul><li>Día de corte: las citas futuras ya viven aquí</li><li>Acompañamiento en sitio los primeros días</li><li>Consultoría de uso y ajustes</li><li>Entrega del manual operativo</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ════ MIGRACIÓN ════ -->
+  <section id="migracion">
+    <h2>La migración: nada se queda atrás</h2>
+    <p>Cambiar de sistema no puede significar empezar de cero con los pacientes. La migración es parte
+      del método y está incluida.</p>
+    <div class="rej rej--2">
+      <div class="tj"><span class="tj__n">01</span><h3>Exportar</h3><p>Se saca de la aplicación actual todo lo que permita exportar: pacientes, datos de contacto, historial de citas, citas futuras y notas.</p></div>
+      <div class="tj"><span class="tj__n">02</span><h3>Limpiar</h3><p>Se unen pacientes duplicados, se corrigen teléfonos y nombres, y cada paciente queda con un solo expediente.</p></div>
+      <div class="tj"><span class="tj__n">03</span><h3>Cargar y revisar</h3><p>Se carga en Medical Hub OS y recepción revisa una muestra contra la aplicación anterior antes del corte.</p></div>
+      <div class="tj"><span class="tj__n">04</span><h3>Estudios anteriores</h3><p>Los estudios guardados en los equipos se importan al expediente de cada paciente, hasta donde los equipos los conserven.</p></div>
+    </div>
+    <div class="nota"><strong>Lo que la aplicación actual permita exportar, se migra.</strong> Lo que no
+      permita sacar se dice antes del corte, no después.</div>
+  </section>
+
+  <!-- ════ FAQ ════ -->
+  <section id="preguntas">
+    <h2>Preguntas frecuentes</h2>
+    <div class="faq">
+      <details><summary>¿Qué pasa si se cae el internet en plena consulta?</summary><p>Nada que se note dentro de la clínica. El trabajo ocurre en el servidor de la clínica; lo nuevo se queda en fila y sube a la nube cuando vuelve la conexión.</p></details>
+      <details><summary>¿Y si se va la luz?</summary><p>Con un no-break en el servidor y en recepción, la clínica sigue el tiempo que dure la batería. Ningún dato se pierde: lo guardado está en el servidor y en la nube.</p></details>
+      <details><summary>¿Puedo ver la agenda y los expedientes desde mi casa?</summary><p>Sí, cuando la clínica tiene internet, desde la nube y con su usuario.</p></details>
+      <details><summary>¿Qué pasa con los pacientes que ya tengo en mi aplicación actual?</summary><p>Se migran como parte del proyecto: pacientes, datos de contacto, historial y citas futuras, en la medida en que la aplicación actual permita exportarlos.</p></details>
+      <details><summary>¿Hay que pagar algo cada mes?</summary><p>A Flow Hub, no. La nube va a nombre de Monte Sinaí y se paga directo al proveedor, al costo. No hay pago por usuario, por médico ni por paciente.</p></details>
+      <details><summary>¿Y si después necesito algo más?</summary><p>Se construye. Una función nueva o la conexión con otro sistema se cotiza cuando se necesite, sobre un sistema que ya es suyo.</p></details>
+      <details><summary>¿Funciona con mis equipos?</summary><p>Se revisa equipo por equipo en el levantamiento, según su modelo y lo que exporte. Lo que no se pueda conectar directamente entra por su reporte en PDF o imagen.</p></details>
+      <details><summary>¿La inteligencia artificial diagnostica?</summary><p>No. Lee los reportes de los equipos y propone los valores para que el médico los confirme. El diagnóstico siempre es del médico.</p></details>
+      <details><summary>¿De quién son los datos?</summary><p>De Monte Sinaí. Están en su servidor y en su nube, y puede llevárselos cuando quiera.</p></details>
+    </div>
+  </section>
+
+  <!-- ════ PROPUESTA ECONÓMICA ════ -->
+  <section id="propuesta">
+    <h2>Propuesta económica</h2>
+    <p>Para Clínica de Visión Monte Sinaí y Óptica Shalom, a la atención del Dr. Edgar Méndez Dávila.
+      Un solo precio por el sistema completo, entregado en treinta días. Después de eso, no se le vuelve
+      a pagar a Flow Hub por usarlo.</p>
+
+    <div class="precio">
+      <div class="precio__cab">
+        <div>
+          <span class="precio__et">Medical Hub OS · sistema completo</span>
+          <b class="precio__monto">$59,000 <small>MXN + IVA</small></b>
+          <span class="precio__sub">Pago único · listo en 30 días</span>
+        </div>
+        <div class="precio__pagos">
+          <div><span>Al iniciar</span><b>$29,500</b><small>50 % + IVA</small></div>
+          <div><span>A la entrega</span><b>$29,500</b><small>50 % + IVA</small></div>
+        </div>
+      </div>
+      <div class="precio__cuerpo">
+        <div>
+          <div class="sub-mk">El sistema</div>
+          <ul>
+            <li>Agenda y flujo de Monte Sinaí y Óptica Shalom</li>
+            <li>Expediente oftalmológico con trazabilidad de principio a fin</li>
+            <li>Estudios de imagen: conexión de equipos, comparación y lectura asistida</li>
+            <li>Recetas electrónicas de anteojos, lentes de contacto y medicamentos</li>
+            <li>Óptica Shalom: venta, laboratorio, inventario y entregas</li>
+            <li>Cirugía, consentimientos y seguimiento postoperatorio</li>
+            <li>Caja de cada sede y tablero de dirección</li>
+            <li>Funcionamiento sin internet en cada sede</li>
+            <li>Lista para conectarse con Flow Hub CRM</li>
+          </ul>
+        </div>
+        <div>
+          <div class="sub-mk">La puesta en marcha</div>
+          <ul>
+            <li>Migración de la base de la aplicación actual</li>
+            <li>Instalación y configuración en cada sede</li>
+            <li>Capacitación a fondo por puesto: recepción, optometría, médicos, óptica y caja</li>
+            <li>Manual operativo de la clínica</li>
+            <li>Agente de soporte técnico dentro del sistema, que responde dudas de uso a cualquier hora</li>
+            <li>Consultoría de uso en las primeras semanas para ajustar el proceso</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>Lo que corre por cuenta de la clínica</h3>
+    <div class="rej rej--2">
+      <div class="tj"><h3>La nube</h3><p>A nombre de Monte Sinaí y pagada directo al proveedor, al costo. Es el respaldo y el acceso desde casa.</p></div>
+      <div class="tj"><h3>Los servidores</h3><p>Un equipo pequeño por sede, con su no-break. Se compran una vez, a nombre de la clínica; le decimos cuál.</p></div>
+    </div>
+
+    <div class="nota"><strong>Lo que no se paga:</strong> ni mensualidad a Flow Hub, ni por usuario, ni
+      por médico, ni por paciente. Contratar a otra optometrista no cambia nada.</div>
+
+    <p class="corte">Una función nueva o la conexión con otro sistema, cuando se necesite, se cotiza
+      aparte. La marca blanca y su comercialización se acuerdan por separado.</p>
+  </section>
+
+  </div>
+</div>
+</div>
+</main>
+
+<div class="cierre">
+  <div class="wrap wrap--ancho">
+    <h2>El siguiente paso</h2>
+    <p class="lead" style="max-width:640px">Con el primer pago arranca el levantamiento en Monte Sinaí y
+      Óptica Shalom. Treinta días después, la clínica opera en su propio sistema.</p>
+    <div class="ctas" style="justify-content:flex-start">
+      <a class="btn" href="https://wa.me/19564760388?text=Hola%2C%20quiero%20arrancar%20con%20Medical%20Hub%20OS"><span>Arrancar el proyecto</span></a>
+      <a class="btn btn--ghost" href="mailto:atencion@flowhubcrm.app?subject=Medical%20Hub%20OS"><span>Escribir por correo</span></a>
+    </div>
+
+    <p class="corte" style="margin-top:22px">También puede escribirnos a
+      <a href="mailto:atencion@flowhubcrm.app">atencion@flowhubcrm.app</a> o por
+      <a href="https://wa.me/19564760388">WhatsApp</a>.</p>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/19564760388" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+</a>
+
+<footer><div class="wrap">
+  <span>Medical Hub OS · Propuesta de Flow Hub para Clínica de Visión Monte Sinaí. Las pantallas son ilustrativas y los datos, de ejemplo.</span>
+  <span><a href="landing.html">Inicio</a> · <a href="tecnologia.html">Tecnología</a> · <a href="privacy.html">Privacidad</a> · <a href="terms.html">Términos</a></span>
+</div></footer>
+<script src="_tema.js?v=202611011400" defer></script>
+</body>
+</html>
