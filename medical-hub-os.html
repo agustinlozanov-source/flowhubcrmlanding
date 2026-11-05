@@ -326,6 +326,46 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
 .wa { display: none; position: fixed; right: 18px; bottom: 18px; z-index: 50; background: #25d366; width: 54px; height: 54px; border-radius: 50%; align-items: center; justify-content: center; box-shadow: 0 10px 26px rgba(0,0,0,.22); }
 .wa svg { width: 27px; height: 27px; fill: #fff; }
 @media (max-width: 860px) { .wa { display: flex; } }
+/* ── Cómo pagar ──────────────────────────────────────────────────
+   Lo mismo que la página de alto-rendimiento: dos caminos lado a lado y
+   la CLABE copiable de un toque. */
+.pagar__t { margin-top: 36px; scroll-margin-top: 90px; }
+.pago { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 16px; margin-top: 20px; }
+@media (max-width: 620px) { .pago { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; } }
+.opcion { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 22px 20px; border: 1px solid var(--line); border-radius: 20px; background: var(--bg); text-align: center; }
+[data-theme="light"] .opcion { box-shadow: 0 14px 36px rgba(0,0,0,.06); }
+.opcion__cab { display: flex; align-items: center; gap: 10px; }
+.opcion__cab h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.3px; }
+.marcas { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.marcas svg { height: 32px; width: auto; fill: var(--muted); }
+.marcas .m-mc { height: 26px; }
+.opcion__pie { margin-top: auto; display: grid; gap: 8px; width: 100%; }
+.opcion__b { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 18px; border-radius: 50px; background: var(--fg); color: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 14.5px; text-decoration: none; cursor: pointer; list-style: none; transition: opacity .16s ease; }
+.opcion__b::-webkit-details-marker { display: none; }
+.opcion__b:hover { opacity: .88; }
+.opcion__seguro { font-size: 12px; color: var(--muted); margin: 0; }
+.trans__datos { margin-top: 8px; padding: 14px 16px; display: grid; gap: 4px; text-align: left; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+.trans__datos dt { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.trans__datos dd { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.trazo { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.copiar { display: inline-grid; place-items: center; width: 26px; height: 26px; flex: none; padding: 0; border: 0; border-radius: 8px; background: var(--g2); color: var(--fg); cursor: pointer; }
+[data-theme="dark"] .copiar { background: rgba(255,255,255,.1); }
+.copiar:hover { background: var(--fg); color: var(--bg); }
+.copiar__listo { display: none; }
+.copiar.hecho { background: #00c853; color: #fff; }
+.copiar.hecho .copiar__copia { display: none; }
+.copiar.hecho .copiar__listo { display: block; }
+
+.form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 28px; padding: 22px; border: 1px solid var(--line); border-radius: 20px; }
+.form__t { grid-column: 1 / -1; }
+.form__t h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.3px; }
+.form__t p { font-size: 14px; color: var(--muted); margin: 2px 0 0; }
+.form label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+.form input, .form select { width: 100%; padding: 12px 14px; border-radius: 11px; font-size: 15px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font-family: 'Inter', sans-serif; }
+.form input:focus, .form select:focus { outline: none; border-color: var(--fg); }
+.form button { grid-column: 1 / -1; justify-self: start; border: none; cursor: pointer; background: var(--fg); color: var(--bg); padding: 14px 30px; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px; }
+.form button:hover { opacity: .88; }
+@media (max-width: 620px) { .form { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -441,6 +481,12 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
   <symbol id="i-lupa" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></symbol>
   <symbol id="i-reloj" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1 4v7l5.5 3.3 1-1.7-4.5-2.7V6z"/></symbol>
   <symbol id="i-descarga" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11 3h2v9.2l3.3-3.3 1.4 1.4L12 16l-5.7-5.7 1.4-1.4 3.3 3.3zM4 18h16v3H4z"/></symbol>
+<symbol id="m-visa" viewBox="0 0 24 24"><title>Visa</title><path d="M9.112 8.262L5.97 15.758H3.92L2.374 9.775c-.094-.368-.175-.503-.461-.658C1.447 8.864.677 8.627 0 8.479l.046-.217h3.3a.904.904 0 01.894.764l.817 4.338 2.018-5.102zm8.033 5.049c.008-1.979-2.736-2.088-2.717-2.972.006-.269.262-.555.822-.628a3.66 3.66 0 011.913.336l.34-1.59a5.207 5.207 0 00-1.814-.333c-1.917 0-3.266 1.02-3.278 2.479-.012 1.079.963 1.68 1.698 2.04.756.367 1.01.603 1.006.931-.005.504-.602.725-1.16.734-.975.015-1.54-.263-1.992-.473l-.351 1.642c.453.208 1.289.39 2.156.398 2.037 0 3.37-1.006 3.377-2.564m5.061 2.447H24l-1.565-7.496h-1.656a.883.883 0 00-.826.55l-2.909 6.946h2.036l.405-1.12h2.488zm-2.163-2.656l1.02-2.815.588 2.815zm-8.16-4.84l-1.603 7.496H8.34l1.605-7.496z"/></symbol>
+<symbol id="m-mc" viewBox="0 0 24 24"><title>Mastercard</title><path d="M11.343 18.031c.058.049.12.098.181.146-1.177.783-2.59 1.238-4.107 1.238C3.32 19.416 0 16.096 0 12c0-4.095 3.32-7.416 7.416-7.416 1.518 0 2.931.456 4.105 1.238-.06.051-.12.098-.165.15C9.6 7.489 8.595 9.688 8.595 12c0 2.311 1.001 4.51 2.748 6.031zm5.241-13.447c-1.52 0-2.931.456-4.105 1.238.06.051.12.098.165.15C14.4 7.489 15.405 9.688 15.405 12c0 2.31-1.001 4.507-2.748 6.031-.058.049-.12.098-.181.146 1.177.783 2.588 1.238 4.107 1.238C20.68 19.416 24 16.096 24 12c0-4.094-3.32-7.416-7.416-7.416zM12 6.174c-.096.075-.189.15-.28.231C10.156 7.764 9.169 9.765 9.169 12c0 2.236.987 4.236 2.551 5.595.09.08.185.158.28.232.096-.074.189-.152.28-.232 1.563-1.359 2.551-3.359 2.551-5.595 0-2.235-.987-4.236-2.551-5.595-.09-.08-.184-.156-.28-.231z"/></symbol>
+<symbol id="m-amex" viewBox="0 0 24 24"><title>American Express</title><path d="M16.015 14.378c0-.32-.135-.496-.344-.622-.21-.12-.464-.135-.81-.135h-1.543v2.82h.675v-1.027h.72c.24 0 .39.024.478.125.12.13.104.38.104.55v.35h.66v-.555c-.002-.25-.017-.376-.108-.516-.06-.08-.18-.18-.33-.234l.02-.008c.18-.072.48-.297.48-.747zm-.87.407l-.028-.002c-.09.053-.195.058-.33.058h-.81v-.63h.824c.12 0 .24 0 .33.05.098.048.156.147.15.255 0 .12-.045.215-.134.27zM20.297 15.837H19v.6h1.304c.676 0 1.05-.278 1.05-.884 0-.28-.066-.448-.187-.582-.153-.133-.392-.193-.73-.207l-.376-.015c-.104 0-.18 0-.255-.03-.09-.03-.15-.105-.15-.21 0-.09.017-.166.09-.21.083-.046.177-.066.272-.06h1.23v-.602h-1.35c-.704 0-.958.437-.958.84 0 .9.776.855 1.407.87.104 0 .18.015.225.06.046.03.082.106.082.18 0 .077-.035.15-.08.18-.06.053-.15.07-.277.07zM0 0v10.096L.81 8.22h1.75l.225.464V8.22h2.043l.45 1.02.437-1.013h6.502c.295 0 .56.057.756.236v-.23h1.787v.23c.307-.17.686-.23 1.12-.23h2.606l.24.466v-.466h1.918l.254.465v-.466h1.858v3.948H20.87l-.36-.6v.585h-2.353l-.256-.63h-.583l-.27.614h-1.213c-.48 0-.84-.104-1.08-.24v.24h-2.89v-.884c0-.12-.03-.12-.105-.135h-.105v1.036H6.067v-.48l-.21.48H4.69l-.202-.48v.465H2.235l-.256-.624H1.4l-.256.624H0V24h23.786v-7.108c-.27.135-.613.18-.973.18H21.09v-.255c-.21.165-.57.255-.914.255H14.71v-.9c0-.12-.018-.12-.12-.12h-.075v1.022h-1.8v-1.066c-.298.136-.643.15-.928.136h-.214v.915h-2.18l-.54-.617-.57.6H4.742v-3.93h3.61l.518.602.554-.6h2.412c.28 0 .74.03.942.225v-.24h2.177c.202 0 .644.045.903.225v-.24h3.265v.24c.163-.164.508-.24.803-.24h1.89v.24c.194-.15.464-.24.84-.24h1.176V0H0zM21.156 14.955c.004.005.006.012.01.016.01.01.024.01.032.02l-.042-.035zM23.828 13.082h.065v.555h-.065zM23.865 15.03v-.005c-.03-.025-.046-.048-.075-.07-.15-.153-.39-.215-.764-.225l-.36-.012c-.12 0-.194-.007-.27-.03-.09-.03-.15-.105-.15-.21 0-.09.03-.16.09-.204.076-.045.15-.05.27-.05h1.223v-.588h-1.283c-.69 0-.96.437-.96.84 0 .9.78.855 1.41.87.104 0 .18.015.224.06.046.03.076.106.076.18 0 .07-.034.138-.09.18-.045.056-.136.07-.27.07h-1.288v.605h1.287c.42 0 .734-.118.9-.36h.03c.09-.134.135-.3.135-.523 0-.24-.045-.39-.135-.526zM18.597 14.208v-.583h-2.235V16.458h2.235v-.585h-1.57v-.57h1.533v-.584h-1.532v-.51M13.51 8.787h.685V11.6h-.684zM13.126 9.543l-.007.006c0-.314-.13-.5-.34-.624-.217-.125-.47-.135-.81-.135H10.43v2.82h.674v-1.034h.72c.24 0 .39.03.487.12.122.136.107.378.107.548v.354h.677v-.553c0-.25-.016-.375-.11-.516-.09-.107-.202-.19-.33-.237.172-.07.472-.3.472-.75zm-.855.396h-.015c-.09.054-.195.056-.33.056H11.1v-.623h.825c.12 0 .24.004.33.05.09.04.15.128.15.25s-.047.22-.134.266zM15.92 9.373h.632v-.6h-.644c-.464 0-.804.105-1.02.33-.286.3-.362.69-.362 1.11 0 .512.123.833.36 1.074.232.238.645.31.97.31h.78l.255-.627h1.39l.262.627h1.36v-2.11l1.272 2.11h.95l.002.002V8.786h-.684v1.963l-1.18-1.96h-1.02V11.4L18.11 8.744h-1.004l-.943 2.22h-.3c-.177 0-.362-.03-.468-.134-.125-.15-.186-.36-.186-.662 0-.285.08-.51.194-.63.133-.135.272-.165.516-.165zm1.668-.108l.464 1.118v.002h-.93l.466-1.12zM2.38 10.97l.254.628H4V9.393l.972 2.205h.584l.973-2.202.015 2.202h.69v-2.81H6.118l-.807 1.904-.876-1.905H3.343v2.663L2.205 8.787h-.997L.01 11.597h.72l.26-.626h1.39zm-.688-1.705l.46 1.118-.003.002h-.915l.457-1.12zM11.856 13.62H9.714l-.85.923-.825-.922H5.346v2.82H8l.855-.932.824.93h1.302v-.94h.838c.6 0 1.17-.164 1.17-.945l-.006-.003c0-.78-.598-.93-1.128-.93zM7.67 15.853l-.014-.002H6.02v-.557h1.47v-.574H6.02v-.51H7.7l.733.82-.764.824zm2.642.33l-1.03-1.147 1.03-1.108v2.253zm1.553-1.258h-.885v-.717h.885c.24 0 .42.098.42.344 0 .243-.15.372-.42.372zM9.967 9.373v-.586H7.73V11.6h2.237v-.58H8.4v-.564h1.527V9.88H8.4v-.507"/></symbol>
+<symbol id="i-copiar" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+<symbol id="i-palomita-chica" viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></symbol>
+  <symbol id="i-columnas" viewBox="0 0 24 24"><path d="M12 2l9.2 5.1H2.8zM4.9 9h2.6v9H4.9zM10.7 9h2.6v9h-2.6zM16.5 9h2.6v9h-2.6zM2.8 19.2h18.4v2.6H2.8z"/></symbol>
 </svg>
 
 <div class="top"><div class="wrap">
@@ -1227,6 +1273,62 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
 
     <p class="corte">Una función nueva o la conexión con otro sistema, cuando se necesite, se cotiza
       aparte. La marca blanca y su comercialización se acuerdan por separado.</p>
+
+    <!-- ════ CÓMO PAGAR ════
+         El enlace de Stripe es el del primer pago: $29,500 + IVA = $34,220 MXN.
+         ENLACE_STRIPE se reemplaza por el de buy.stripe.com cuando exista el producto. -->
+    <h3 id="pagar" class="pagar__t">Cómo pagar el primer 50 %</h3>
+    <p>El proyecto arranca con el primer pago: <strong>$29,500 + IVA, $34,220 MXN</strong>. El segundo,
+      por el mismo monto, se paga a la entrega.</p>
+    <div class="pago">
+      <div class="opcion">
+        <div class="opcion__cab"><i class="ic" style="--c:#0574eb"><svg aria-hidden="true"><use href="#i-caja"/></svg></i><h4>Con tarjeta</h4></div>
+        <div class="marcas" role="img" aria-label="Visa, Mastercard y American Express">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#m-visa"/></svg>
+          <svg class="m-mc" viewBox="0 0 24 24" aria-hidden="true"><use href="#m-mc"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#m-amex"/></svg>
+        </div>
+        <div class="opcion__pie">
+          <a class="opcion__b" href="ENLACE_STRIPE">Pagar $34,220 en línea</a>
+          <p class="opcion__seguro">Pago seguro con Stripe</p>
+        </div>
+      </div>
+      <div class="opcion">
+        <div class="opcion__cab"><i class="ic" style="--c:#3533cd"><svg aria-hidden="true"><use href="#i-columnas"/></svg></i><h4>Por transferencia</h4></div>
+        <div class="opcion__pie">
+          <details class="trans">
+            <summary class="opcion__b">Ver datos de transferencia</summary>
+            <dl class="trans__datos">
+              <dt>Titular</dt><dd><span class="dato">Agustín Lozano</span><button class="copiar" type="button" aria-label="Copiar el titular"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
+              <dt>Banco</dt><dd><span class="dato">Santander</span><button class="copiar" type="button" aria-label="Copiar el banco"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
+              <dt>CLABE</dt><dd><span class="dato">014818606286393427</span><button class="copiar" type="button" aria-label="Copiar la CLABE"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
+              <dt>Monto</dt><dd><span class="dato">34,220.00</span><button class="copiar" type="button" aria-label="Copiar el monto"><svg class="trazo copiar__copia"><use href="#i-copiar"/></svg><svg class="trazo copiar__listo"><use href="#i-palomita-chica"/></svg></button></dd>
+              <dt>Referencia</dt><dd><span class="dato">Monte Sinaí</span></dd>
+            </dl>
+          </details>
+          <p class="opcion__seguro">SPEI · mismo día hábil</p>
+        </div>
+      </div>
+    </div>
+    <p class="corte">Al pagar en línea, el comprobante llega a su correo. Para transferir, como referencia
+      basta «Monte Sinaí».</p>
+
+    <form class="form" id="factura" name="factura-medical-hub-os" method="POST" data-netlify="true" netlify-honeypot="empresa-web">
+      <input type="hidden" name="form-name" value="factura-medical-hub-os">
+      <p style="display:none"><label>No llenar <input name="empresa-web"></label></p>
+      <div class="form__t"><h4>Datos para su factura</h4><p>Déjelos aquí y el CFDI sale con el pago, sin que tenga que pedirlo.</p></div>
+      <div><label for="f-razon">Razón social</label><input id="f-razon" name="razon_social" required></div>
+      <div><label for="f-rfc">RFC</label><input id="f-rfc" name="rfc" required></div>
+      <div><label for="f-regimen">Régimen fiscal</label><input id="f-regimen" name="regimen" required></div>
+      <div><label for="f-cp">Código postal fiscal</label><input id="f-cp" name="cp" inputmode="numeric" required></div>
+      <div><label for="f-uso">Uso de CFDI</label>
+        <select id="f-uso" name="uso_cfdi"><option value="G03">G03 · Gastos en general</option><option value="I04">I04 · Equipo de cómputo y accesorios</option><option value="P01">P01 · Por definir</option></select></div>
+      <div><label for="f-correo">Correo para la factura</label><input id="f-correo" type="email" name="correo" required></div>
+      <div><label for="f-forma">Cómo va a pagar</label>
+        <select id="f-forma" name="forma_pago"><option>Tarjeta, en línea</option><option>Transferencia</option><option>Transferencia, con factura por adelantado</option></select></div>
+      <input type="hidden" name="origen" value="medical-hub-os">
+      <button type="submit">Enviar mis datos</button>
+    </form>
   </section>
 
   </div>
@@ -1240,8 +1342,8 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
     <p class="lead" style="max-width:640px">Con el primer pago arranca el levantamiento en Monte Sinaí y
       Óptica Shalom. Treinta días después, la clínica opera en su propio sistema.</p>
     <div class="ctas" style="justify-content:flex-start">
-      <a class="btn" href="https://wa.me/19564760388?text=Hola%2C%20quiero%20arrancar%20con%20Medical%20Hub%20OS"><span>Arrancar el proyecto</span></a>
-      <a class="btn btn--ghost" href="mailto:atencion@flowhubcrm.app?subject=Medical%20Hub%20OS"><span>Escribir por correo</span></a>
+      <a class="btn" href="#pagar"><span>Pagar el primer 50 %</span></a>
+      <a class="btn btn--ghost" href="https://wa.me/19564760388?text=Hola%2C%20quiero%20arrancar%20con%20Medical%20Hub%20OS"><span>Escribir por WhatsApp</span></a>
     </div>
 
     <p class="corte" style="margin-top:22px">También puede escribirnos a
@@ -1258,6 +1360,33 @@ h2.con-ic .ic svg { width: 21px; height: 21px; }
   <span>Medical Hub OS · Propuesta de Flow Hub para Clínica de Visión Monte Sinaí. Las pantallas son ilustrativas y los datos, de ejemplo.</span>
   <span><a href="landing.html">Inicio</a> · <a href="tecnologia.html">Tecnología</a> · <a href="privacy.html">Privacidad</a> · <a href="terms.html">Términos</a></span>
 </div></footer>
+<script>
+/* Copiar los datos de transferencia de un toque: nadie quiere transcribir
+   dieciocho dígitos de una CLABE a mano desde un teléfono. */
+for (const b of document.querySelectorAll('.copiar')) {
+  b.addEventListener('click', async () => {
+    const campo = b.previousElementSibling;
+    const texto = campo.textContent.trim();
+    let listo = false;
+    try {
+      await navigator.clipboard.writeText(texto);
+      listo = true;
+    } catch {
+      const r = document.createRange();
+      r.selectNodeContents(campo);
+      const sel = getSelection();
+      sel.removeAllRanges();
+      sel.addRange(r);
+      try { listo = document.execCommand('copy'); } catch { listo = false; }
+      if (listo) sel.removeAllRanges();
+    }
+    if (!listo) return;
+    b.classList.add('hecho');
+    clearTimeout(b._t);
+    b._t = setTimeout(() => b.classList.remove('hecho'), 1400);
+  });
+}
+</script>
 <script src="_tema.js?v=202611011400" defer></script>
 </body>
 </html>
