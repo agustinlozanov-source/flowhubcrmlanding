@@ -254,6 +254,43 @@ body .mkt table.ojos { display: table; }
 .faq details[open] summary::after { content: '−'; }
 .faq p { padding: 0 0 18px; color: var(--muted); font-size: 15.5px; margin: 0; }
 
+/* ── Íconos ──────────────────────────────────────────────────────
+   Planos, de una sola silueta, sobre una ficha del color de su sección.
+   El color recorre el degradado de la casa de arriba a abajo: dice en
+   qué parte del recorrido está quien lee. */
+.ic { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; background: var(--c); color: #fff; font-style: normal; }
+.ic svg { width: 19px; height: 19px; fill: currentColor; display: block; }
+h2.con-ic { display: flex; align-items: center; gap: 12px; line-height: 1.2; }
+h2.con-ic .ic { flex-basis: 38px; width: 38px; height: 38px; border-radius: 11px; }
+h2.con-ic .ic svg { width: 21px; height: 21px; }
+
+.tj__cab { display: flex; align-items: center; gap: 11px; margin-bottom: 9px; }
+.tj__cab h3 { margin: 0 !important; line-height: 1.25; }
+/* La pestaña: un trazo del color de la función, colgando del borde. */
+.tj--c { position: relative; }
+.tj--c::before { content: ''; position: absolute; top: -1px; left: 20px; width: 44px; height: 5px; border-radius: 0 0 6px 6px; background: var(--c); }
+.momentos .tj--c .estado { top: 18px; }
+
+/* Las cuatro piezas sueltas: color sólido, cortas, para que peguen. */
+.tj--solido { background: var(--c); border-color: transparent; color: #fff; padding: 16px 18px; }
+.tj--solido .ic { background: rgba(255,255,255,.2); flex-basis: 30px; width: 30px; height: 30px; border-radius: 9px; }
+.tj--solido .ic svg { width: 17px; height: 17px; }
+.tj--solido h3 { color: #fff; font-size: 15.5px; }
+.tj--solido p { color: rgba(255,255,255,.88); font-size: 13.5px; line-height: 1.5; }
+
+/* ── Punto de venta ──────────────────────────────────────────── */
+.pv { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; }
+.pv__l { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.pv__l span i { display: block; font-style: normal; font-size: 11px; color: var(--muted); }
+.pv__l b { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pv__total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.5px; }
+.pv__metodos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px; }
+.pv__metodos span { text-align: center; font-size: 11.5px; padding: 8px 4px; border-radius: 50px; border: 1px solid var(--line); color: var(--muted); }
+.pv__metodos span.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.pv__traza { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+.pv__traza span { font-size: 10.5px; padding: 4px 9px; border-radius: 50px; background: var(--card); border: 1px solid var(--line); }
+@media (max-width: 760px) { .pv { grid-template-columns: 1fr; } }
+
 /* ── Óptica: la orden de trabajo ─────────────────────────────── */
 .orden__pasos { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
 .orden__pasos span { font-size: 11.5px; padding: 5px 12px; border-radius: 50px; border: 1px solid var(--line); color: var(--muted); }
@@ -378,6 +415,32 @@ body .mkt table.ojos { display: table; }
     <path d="M50 6 V94 M6 50 H94" stroke="#a1a1aa" stroke-width=".6"/>
     <circle cx="66" cy="50" r="3.5" fill="#3f3f46"/>
   </symbol>
+  <symbol id="i-bloques" viewBox="0 0 24 24"><path d="M2.8 2.8h8.1v8.1H2.8zM13.1 2.8h8.1v8.1h-8.1zM2.8 13.1h8.1v8.1H2.8zM13.1 13.1h8.1v8.1h-8.1z"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7 2h2v2h6V2h2v2h2.5A1.5 1.5 0 0 1 21 5.5v15a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5v-15A1.5 1.5 0 0 1 4.5 4H7zM5 9v11h14V9zm2 2h3v3H7zm5 0h3v3h-3zm-5 4h3v3H7z"/></symbol>
+  <symbol id="i-imagen" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M3 4h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm1 2v10.5l4.5-5 3.5 3.8 2.5-2.6L20 17V6zm12 1.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></symbol>
+  <symbol id="i-ojo" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5C6.5 5 2.7 9.3 1.5 12c1.2 2.7 5 7 10.5 7s9.3-4.3 10.5-7C21.3 9.3 17.5 5 12 5zm0 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></symbol>
+  <symbol id="i-candado" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7 10V7.5a5 5 0 0 1 10 0V10h1.5a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-9A1.5 1.5 0 0 1 5.5 10zm2.5 0h5V7.5a2.5 2.5 0 0 0-5 0zM12 14a1.5 1.5 0 0 0-.75 2.8V19h1.5v-2.2A1.5 1.5 0 0 0 12 14z"/></symbol>
+  <symbol id="i-expediente" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M9 2h6a1 1 0 0 1 1 1v1h2.5A1.5 1.5 0 0 1 20 5.5v15a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-15A1.5 1.5 0 0 1 5.5 4H8V3a1 1 0 0 1 1-1zm-1 9v2h8v-2zm0 4v2h5v-2z"/></symbol>
+  <symbol id="i-cruz" viewBox="0 0 24 24"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></symbol>
+  <symbol id="i-receta" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.5 2H14l5 5v13.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20.5v-17A1.5 1.5 0 0 1 6.5 2zM8 12v2h8v-2zm0 4v2h6v-2z"/></symbol>
+  <symbol id="i-lentes" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6 8.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm12 0a5 5 0 1 1 0 10 5 5 0 0 1 0-10zM6 11a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm12 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM11 12h2v2h-2z"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M3.5 5h17A1.5 1.5 0 0 1 22 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17.5v-11A1.5 1.5 0 0 1 3.5 5zM2 8.5V11h20V8.5zM5 14v2h5v-2z"/></symbol>
+  <symbol id="i-barras" viewBox="0 0 24 24"><path d="M2.8 14.6h4.3v6.9H2.8zM9.9 9.4h4.3v12.1H9.9zM16.9 3.3h4.3v18.2h-4.3z"/></symbol>
+  <symbol id="i-nube" viewBox="0 0 24 24"><path d="M7 19a5 5 0 0 1-.6-9.96A6.5 6.5 0 0 1 18.8 10.2 4.5 4.5 0 0 1 18 19z"/></symbol>
+  <symbol id="i-servidor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4 3h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm0 10h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1zM6 6v2h2V6zm0 10v2h2v-2z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5zm-1.2 13.6l6.4-6.4-1.4-1.4-5 5-1.9-1.9-1.4 1.4z"/></symbol>
+  <symbol id="i-casa" viewBox="0 0 24 24"><path d="M12 2.5l9.5 8H19V21h-5v-6h-4v6H5V10.5H2.5z"/></symbol>
+  <symbol id="i-bandera" viewBox="0 0 24 24"><path d="M5 2.5h2.2v19H5zM8.6 3.6h11.5l-3.1 4.2 3.1 4.2H8.6z"/></symbol>
+  <symbol id="i-flechas" viewBox="0 0 24 24"><path d="M3 6h12V2.5L21 8l-6 5.5V10H3zM21 14H9v-3.5L3 16l6 5.5V18h12z"/></symbol>
+  <symbol id="i-pregunta" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1 14v2h2v-2zm1-10a3.5 3.5 0 0 0-3.5 3.5h2a1.5 1.5 0 0 1 3 0c0 .6-.4.9-1 1.3-.7.5-1.5 1.2-1.5 2.6v.6h2v-.5c0-.5.2-.7.7-1.1.8-.6 1.8-1.3 1.8-2.9A3.5 3.5 0 0 0 12 6z"/></symbol>
+  <symbol id="i-etiqueta" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M3 3h8.5L21 12.5 12.5 21 3 11.5zm4.5 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4 4h3v3H4zm5 .5h11v2H9zM4 10.5h3v3H4zm5 .5h11v2H9zM4 17h3v3H4zm5 .5h11v2H9z"/></symbol>
+  <symbol id="i-persona" viewBox="0 0 24 24"><path d="M12 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zM4 21c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5z"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="M15.5 3.5l5 5L9 20H4v-5z"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1 4v7l5.5 3.3 1-1.7-4.5-2.7V6z"/></symbol>
+  <symbol id="i-descarga" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11 3h2v9.2l3.3-3.3 1.4 1.4L12 16l-5.7-5.7 1.4-1.4 3.3 3.3zM4 18h16v3H4z"/></symbol>
 </svg>
 
 <div class="top"><div class="wrap">
@@ -486,7 +549,7 @@ body .mkt table.ojos { display: table; }
     <a href="#cirugia">Cirugía y seguimiento</a>
     <a href="#recetas">Recetas</a>
     <a href="#optica">Óptica Shalom</a>
-    <a href="#caja">Caja y dirección</a>
+    <a href="#caja">Punto de venta y ERP</a>
     <a href="#sin-internet">Sin internet</a>
     <a href="#crm">Conectado al CRM</a>
     <a href="#seguridad">Seguridad y norma</a>
@@ -501,18 +564,18 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ HOY ════ -->
   <section id="hoy">
-    <h2>La clínica hoy: cuatro lugares para un solo paciente</h2>
+    <h2 class="con-ic" style="--c:#1aab99"><i class="ic"><svg aria-hidden="true"><use href="#i-bloques"/></svg></i>La clínica hoy: cuatro lugares para un solo paciente</h2>
     <p>La agenda vive en una aplicación de citas. Los estudios se quedan en la computadora de cada
       equipo o en otro sistema. La exploración se escribe en papel o en un documento. La receta se hace
       a mano. Cada sistema sabe una parte del paciente y ninguno sabe todo.</p>
     <p>Y cuando el internet falla, la aplicación de citas se detiene con la sala de espera llena.</p>
-    <div class="rej rej--4">
-      <div class="tj"><span class="tj__n">01</span><h3>La agenda</h3><p>Sirve para citar. No sabe qué estudios lleva el paciente ni en qué etapa de la consulta va.</p></div>
-      <div class="tj"><span class="tj__n">02</span><h3>Las imágenes</h3><p>El OCT, el campímetro y el biómetro guardan cada uno lo suyo. Comparar contra la visita anterior es ir a buscar.</p></div>
-      <div class="tj"><span class="tj__n">03</span><h3>La exploración</h3><p>Agudeza, refracción y presión quedan donde no se pueden graficar ni comparar.</p></div>
-      <div class="tj"><span class="tj__n">04</span><h3>La dependencia</h3><p>Si se cae el internet o el proveedor cambia de precio, la clínica no decide nada.</p></div>
+    <div class="rej rej--2">
+      <div class="tj tj--solido" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-agenda"/></svg></i><h3>La agenda</h3></div><p>Cita, pero no sabe qué estudios lleva el paciente ni en qué etapa va.</p></div>
+      <div class="tj tj--solido" style="--c:#108fc2"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-imagen"/></svg></i><h3>Las imágenes</h3></div><p>Cada equipo guarda lo suyo. Comparar con la visita anterior es ir a buscar.</p></div>
+      <div class="tj tj--solido" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-ojo"/></svg></i><h3>La exploración</h3></div><p>Agudeza, refracción y presión, sin poder graficarse ni compararse.</p></div>
+      <div class="tj tj--solido" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-candado"/></svg></i><h3>La dependencia</h3></div><p>Se cae el internet o sube el precio, y la clínica no decide nada.</p></div>
     </div>
-    <p>Y del otro lado del pasillo, Óptica Shalom vuelve a capturar la graduación que el médico ya
+    <p style="margin-top:22px">Y del otro lado del pasillo, Óptica Shalom vuelve a capturar la graduación que el médico ya
       escribió.</p>
     <div class="nota"><strong>Medical Hub OS junta las cuatro piezas, y a la óptica, en un expediente por
       paciente</strong>, con los campos de la oftalmología y las imágenes de los equipos de Monte Sinaí.</div>
@@ -520,23 +583,23 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ MÓDULOS ════ -->
   <section id="modulos">
-    <h2>Qué incluye</h2>
+    <h2 class="con-ic" style="--c:#1aab99"><i class="ic"><svg aria-hidden="true"><use href="#i-bloques"/></svg></i>Qué incluye</h2>
     <p>No se parte de cero. La base ya existe y funciona: agenda, expediente, recetas en PDF, catálogo
       de servicios y cobros. Lo que se construye para Monte Sinaí es la capa de oftalmología, Óptica
       Shalom, la conexión con sus equipos y el modo sin internet.</p>
     <div class="rej rej--3">
-      <div class="tj"><h3>Agenda y flujo</h3><p>Monte Sinaí y Óptica Shalom, médicos, optometría, estudios y quirófano. Y por dónde va cada paciente ahora mismo.</p></div>
-      <div class="tj"><h3>Expediente oftalmológico</h3><p>Agudeza, refracción, presión, lámpara de hendidura y fondo de ojo, por ojo y por visita.</p></div>
-      <div class="tj"><h3>Estudios de imagen</h3><p>OCT, retinografía, campo visual, biometría y topografía dentro del expediente, con comparación en el tiempo.</p></div>
-      <div class="tj"><h3>Cirugía</h3><p>Valoración, cálculo de lente, consentimiento, hoja quirúrgica y las citas de seguimiento, solas.</p></div>
-      <div class="tj"><h3>Recetas y Óptica Shalom</h3><p>La graduación pasa del consultorio a la óptica sin reescribirse: venta, orden al laboratorio y entrega.</p></div>
-      <div class="tj"><h3>Caja y dirección</h3><p>Servicios, paquetes, cobros y corte de la clínica y de la óptica. Un tablero para ver todo junto.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-agenda"/></svg></i><h3>Agenda y flujo</h3></div><p>Monte Sinaí y Óptica Shalom, médicos, optometría, estudios y quirófano. Y por dónde va cada paciente ahora mismo.</p></div>
+      <div class="tj tj--c" style="--c:#108fc2"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-expediente"/></svg></i><h3>Expediente oftalmológico</h3></div><p>Agudeza, refracción, presión, lámpara de hendidura y fondo de ojo, por ojo y por visita.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-imagen"/></svg></i><h3>Estudios de imagen</h3></div><p>OCT, retinografía, campo visual, biometría y topografía dentro del expediente, con comparación en el tiempo.</p></div>
+      <div class="tj tj--c" style="--c:#0b5cf5"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-cruz"/></svg></i><h3>Cirugía</h3></div><p>Valoración, cálculo de lente, consentimiento, hoja quirúrgica y las citas de seguimiento, solas.</p></div>
+      <div class="tj tj--c" style="--c:#2047e1"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lentes"/></svg></i><h3>Recetas y Óptica Shalom</h3></div><p>La graduación pasa del consultorio a la óptica sin reescribirse: venta, orden al laboratorio y entrega.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-caja"/></svg></i><h3>Punto de venta y ERP</h3></div><p>Cada cobro de la clínica y de la óptica ligado al paciente, con su costo y su margen. Un tablero para ver todo junto.</p></div>
     </div>
   </section>
 
   <!-- ════ AGENDA ════ -->
   <section id="agenda">
-    <h2>Agenda y flujo de la clínica</h2>
+    <h2 class="con-ic" style="--c:#1aab99"><i class="ic"><svg aria-hidden="true"><use href="#i-agenda"/></svg></i>Agenda y flujo de la clínica</h2>
     <p>La agenda distingue lo que en oftalmología importa: una primera vez dura más que una subsecuente,
       un paciente de glaucoma necesita estudios antes de entrar con el médico, y un postoperatorio no
       puede esperar a que haya hueco.</p>
@@ -623,7 +686,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ EXPEDIENTE ════ -->
   <section id="expediente">
-    <h2>Expediente oftalmológico</h2>
+    <h2 class="con-ic" style="--c:#108fc2"><i class="ic"><svg aria-hidden="true"><use href="#i-expediente"/></svg></i>Expediente oftalmológico</h2>
     <p>Cada visita se captura por ojo, con los campos que usa la especialidad y no con un cuadro de
       texto libre. Lo que se captura como dato se puede graficar, comparar y buscar.</p>
 
@@ -691,16 +754,16 @@ body .mkt table.ojos { display: table; }
     <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
 
     <div class="rej rej--2">
-      <div class="tj"><h3>Segmento anterior y fondo de ojo</h3><p>Párpados, conjuntiva, córnea, cámara anterior, iris y cristalino; papila, mácula, vasos y periferia. Con plantillas de normalidad para capturar rápido y escribir solo lo que cambia.</p></div>
-      <div class="tj"><h3>Esquemas para dibujar</h3><p>Sobre el segmento anterior y el fondo de ojo, en la tableta o con el mouse. El dibujo se guarda con la visita.</p></div>
-      <div class="tj"><h3>Optometría captura, el médico decide</h3><p>La optometrista llena agudeza, refracción y presión antes de que el paciente entre. El médico abre el expediente con todo eso ya cargado.</p></div>
-      <div class="tj"><h3>Diagnóstico con CIE-10</h3><p>Búsqueda de diagnósticos, antecedentes, alergias y medicamentos activos que se arrastran de una visita a la siguiente.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-ojo"/></svg></i><h3>Segmento anterior y fondo de ojo</h3></div><p>Párpados, conjuntiva, córnea, cámara anterior, iris y cristalino; papila, mácula, vasos y periferia. Con plantillas de normalidad para capturar rápido y escribir solo lo que cambia.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lapiz"/></svg></i><h3>Esquemas para dibujar</h3></div><p>Sobre el segmento anterior y el fondo de ojo, en la tableta o con el mouse. El dibujo se guarda con la visita.</p></div>
+      <div class="tj tj--c" style="--c:#0b5cf5"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-persona"/></svg></i><h3>Optometría captura, el médico decide</h3></div><p>La optometrista llena agudeza, refracción y presión antes de que el paciente entre. El médico abre el expediente con todo eso ya cargado.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lupa"/></svg></i><h3>Diagnóstico con CIE-10</h3></div><p>Búsqueda de diagnósticos, antecedentes, alergias y medicamentos activos que se arrastran de una visita a la siguiente.</p></div>
     </div>
   </section>
 
   <!-- ════ ESTUDIOS ════ -->
   <section id="estudios">
-    <h2>Estudios de imagen dentro del expediente</h2>
+    <h2 class="con-ic" style="--c:#108fc2"><i class="ic"><svg aria-hidden="true"><use href="#i-imagen"/></svg></i>Estudios de imagen dentro del expediente</h2>
     <p>Cada equipo de la clínica deja su estudio en una carpeta compartida o lo envía en el formato que
       maneje. Medical Hub OS lo recoge, lo asigna al paciente y a la visita, y aparece en el expediente sin que
       nadie lo suba a mano. Lo que no logra asignar solo queda en una bandeja para que recepción lo
@@ -764,7 +827,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ CIRUGÍA ════ -->
   <section id="cirugia">
-    <h2>Cirugía y seguimiento</h2>
+    <h2 class="con-ic" style="--c:#108fc2"><i class="ic"><svg aria-hidden="true"><use href="#i-cruz"/></svg></i>Cirugía y seguimiento</h2>
     <p>Del día en que se indica la cirugía al alta del último control, el paciente quirúrgico tiene su
       propia línea. Las citas de seguimiento se crean solas al cerrar la hoja quirúrgica.</p>
     <div class="linea">
@@ -795,7 +858,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ RECETAS ════ -->
   <section id="recetas">
-    <h2>Recetas de anteojos, lentes de contacto y medicamentos</h2>
+    <h2 class="con-ic" style="--c:#0574eb"><i class="ic"><svg aria-hidden="true"><use href="#i-receta"/></svg></i>Recetas de anteojos, lentes de contacto y medicamentos</h2>
     <p>La graduación sale de la refracción que ya se capturó; no se vuelve a escribir. La receta se genera
       en PDF con la marca de Monte Sinaí, la cédula del Dr. Méndez y un código para verificarla, y se
       envía por WhatsApp o se imprime. Si el paciente compra sus lentes en Óptica Shalom, la óptica ya
@@ -844,7 +907,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ ÓPTICA ════ -->
   <section id="optica">
-    <h2>Óptica Shalom, conectada al consultorio</h2>
+    <h2 class="con-ic" style="--c:#0574eb"><i class="ic"><svg aria-hidden="true"><use href="#i-lentes"/></svg></i>Óptica Shalom, conectada al consultorio</h2>
     <p>Hoy el paciente sale del consultorio con una receta en la mano y en la óptica alguien la vuelve a
       capturar. Con Medical Hub OS, Óptica Shalom abre la graduación que el Dr. Méndez acaba de escribir,
       arma la venta y sigue la orden hasta que el paciente tiene sus lentes.</p>
@@ -890,19 +953,57 @@ body .mkt table.ojos { display: table; }
     <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
 
     <div class="rej rej--2">
-      <div class="tj"><h3>Inventario de armazones</h3><p>Existencias por marca, modelo y color, con lo que se vende más y lo que lleva meses sin moverse.</p></div>
-      <div class="tj"><h3>Órdenes al laboratorio</h3><p>Cada orden con su fecha prometida. Las que se atrasan aparecen antes de que el paciente llame a preguntar.</p></div>
-      <div class="tj"><h3>Aviso de lentes listos</h3><p>El paciente recibe el aviso por WhatsApp y la óptica ve quién no ha pasado a recoger.</p></div>
-      <div class="tj"><h3>Lo que se queda en la receta</h3><p>Cuántas recetas de Monte Sinaí terminan en una venta de Óptica Shalom, y cuántas se van a otra óptica.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lentes"/></svg></i><h3>Inventario de armazones</h3></div><p>Existencias por marca, modelo y color, con lo que se vende más y lo que lleva meses sin moverse.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-reloj"/></svg></i><h3>Órdenes al laboratorio</h3></div><p>Cada orden con su fecha prometida. Las que se atrasan aparecen antes de que el paciente llame a preguntar.</p></div>
+      <div class="tj tj--c" style="--c:#0b5cf5"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-chat"/></svg></i><h3>Aviso de lentes listos</h3></div><p>El paciente recibe el aviso por WhatsApp y la óptica ve quién no ha pasado a recoger.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-barras"/></svg></i><h3>Lo que se queda en la receta</h3></div><p>Cuántas recetas de Monte Sinaí terminan en una venta de Óptica Shalom, y cuántas se van a otra óptica.</p></div>
     </div>
   </section>
 
   <!-- ════ CAJA ════ -->
   <section id="caja">
-    <h2>Caja y dirección: la clínica y la óptica juntas</h2>
-    <p>Cada servicio tiene su precio en el catálogo: consulta, estudios, paquetes quirúrgicos, armazones y
-      micas. Lo que se hace en la consulta se cobra en caja sin volver a capturarlo, y la clínica y la
-      óptica tienen cada una su corte. El Dr. Méndez ve las dos juntas.</p>
+    <h2 class="con-ic" style="--c:#0574eb"><i class="ic"><svg aria-hidden="true"><use href="#i-caja"/></svg></i>Punto de venta: cada cobro, ligado al paciente</h2>
+    <p>Monte Sinaí y Óptica Shalom cobran con el mismo sistema. Lo que se hizo en la consulta, el estudio
+      o la óptica ya está en la cuenta del paciente: la caja solo cobra. Así cada peso queda ligado a un
+      paciente, a una cita y a quien lo atendió, de principio a fin.</p>
+
+    <div class="mkt">
+      <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
+        <span style="margin-left:8px">Punto de venta · Caja Monte Sinaí · 10 nov</span><span class="estado estado--ok">Turno abierto</span></div>
+      <div class="mkt__in">
+        <div class="pv">
+          <div>
+            <div class="pac" style="margin-bottom:10px">
+              <div class="pac__av">MR</div>
+              <div><div class="pac__n" style="font-size:14.5px">María Elena Ruiz</div><div class="pac__m">Exp. 08412 · consulta del Dr. Méndez</div></div>
+            </div>
+            <div class="pv__l"><span>Consulta subsecuente<i>Dr. Méndez · Consultorio 1</i></span><b>$ 900</b></div>
+            <div class="pv__l"><span>OCT macular · OI<i>Estudios · llegó del equipo</i></span><b>$ 1,400</b></div>
+            <div class="pv__l"><span>Campo visual 24-2 · OI<i>Estudios · llegó del equipo</i></span><b>$ 1,100</b></div>
+            <div class="pv__total"><span>Total</span><span>$ 3,400</span></div>
+          </div>
+          <div>
+            <div class="sub-mk">Forma de pago</div>
+            <div class="pv__metodos"><span>Efectivo</span><span class="on">Tarjeta</span><span>Transferencia</span></div>
+            <div class="orden__f"><span>Factura</span><b>Sí · RFC guardado</b></div>
+            <div class="orden__f"><span>Siguiente cita</span><b>9 feb · control PIO</b></div>
+            <div class="lectura__btn" style="margin-top:14px">Cobrar $ 3,400</div>
+            <div class="pv__traza"><span>Cita</span><span>Optometría</span><span>Estudios</span><span>Consulta</span><span>Cobro</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="ilustrativa">Pantalla ilustrativa con datos de ejemplo.</span>
+
+    <div class="rej rej--2">
+      <div class="tj tj--c" style="--c:#108fc2"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-caja"/></svg></i><h3>Dos cajas, un sistema</h3></div><p>Monte Sinaí y Óptica Shalom, cada una con su turno, su corte y sus formas de pago.</p></div>
+      <div class="tj tj--c" style="--c:#2047e1"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lista"/></svg></i><h3>Nada se cobra de memoria</h3></div><p>La caja ve lo que se hizo; no hay servicios que se olviden ni descuentos sin dueño.</p></div>
+    </div>
+
+    <h3>La base del ERP</h3>
+    <p>Cada servicio y cada producto lleva su costo: insumos, lente intraocular, laboratorio, armazón. Con
+      lo que se vende en el punto de venta, el tablero muestra no solo cuánto entró, sino cuánto se ganó en
+      cada línea. Esos mismos datos son los que después alimentan la contabilidad o un ERP.</p>
     <div class="mkt">
       <div class="mkt__bar"><span class="mkt__dot"></span><span class="mkt__dot"></span><span class="mkt__dot"></span>
         <span style="margin-left:8px">Dirección · Noviembre · Monte Sinaí y Óptica Shalom</span></div>
@@ -914,11 +1015,11 @@ body .mkt table.ojos { display: table; }
           <div class="mkt__kpi"><b>212</b><span>pacientes de glaucoma con control vencido</span></div>
         </div>
         <table>
-          <thead><tr><th>Línea</th><th>Atenciones</th><th>Ticket promedio</th><th>Pendiente</th></tr></thead>
+          <thead><tr><th>Línea</th><th>Ventas</th><th>Costo</th><th>Margen</th><th>Pendiente</th></tr></thead>
           <tbody>
-            <tr><td>Consulta y estudios · Monte Sinaí</td><td>1,142</td><td>$ 1,080</td><td>8.4 % no llegó</td></tr>
-            <tr><td>Cirugía · Monte Sinaí</td><td>31</td><td>$ 28,500</td><td>4 por programar</td></tr>
-            <tr><td>Óptica Shalom</td><td>296</td><td>$ 4,920</td><td>23 sin recoger</td></tr>
+            <tr><td>Consulta y estudios · Monte Sinaí</td><td>$ 1,233,360</td><td>$ 185,000</td><td>85 %</td><td>8.4 % no llegó</td></tr>
+            <tr><td>Cirugía · Monte Sinaí</td><td>$ 883,500</td><td>$ 371,000</td><td>58 %</td><td>4 por programar</td></tr>
+            <tr><td>Óptica Shalom</td><td>$ 1,456,320</td><td>$ 699,000</td><td>52 %</td><td>23 sin recoger</td></tr>
           </tbody>
         </table>
       </div>
@@ -928,7 +1029,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ SIN INTERNET ════ -->
   <section id="sin-internet">
-    <h2>Funciona aunque se caiga el internet</h2>
+    <h2 class="con-ic" style="--c:#0b5cf5"><i class="ic"><svg aria-hidden="true"><use href="#i-servidor"/></svg></i>Funciona aunque se caiga el internet</h2>
     <p>Las aplicaciones de agenda en línea dependen del internet: cuando se cae, la clínica se queda sin
       agenda y sin expedientes con la sala de espera llena. Medical Hub OS trabaja como los sistemas de antes,
       dentro de la clínica, y como los de ahora, en la nube. Las dos cosas a la vez.</p>
@@ -944,9 +1045,9 @@ body .mkt table.ojos { display: table; }
     </div>
 
     <div class="rej rej--3 momentos">
-      <div class="tj"><span class="estado estado--ok">Con internet</span><h3>Todo al día</h3><p>Cada cambio sube a la nube al momento. La otra sede y el médico desde casa ven lo mismo.</p></div>
-      <div class="tj"><span class="estado estado--fila">Sin internet · 14 por enviar</span><h3>La clínica sigue igual</h3><p>Agenda, expediente, estudios, recetas y caja siguen funcionando dentro de la clínica. Lo nuevo queda en fila.</p></div>
-      <div class="tj"><span class="estado estado--ok">Volvió</span><h3>Se pone al día solo</h3><p>Lo pendiente se envía sin que nadie haga nada ni capture dos veces. Cada cambio queda con quién y cuándo.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><span class="estado estado--ok">Con internet</span><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-nube"/></svg></i><h3>Todo al día</h3></div><p>Cada cambio sube a la nube al momento. La otra sede y el médico desde casa ven lo mismo.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><span class="estado estado--fila">Sin internet · 14 por enviar</span><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-servidor"/></svg></i><h3>La clínica sigue igual</h3></div><p>Agenda, expediente, estudios, recetas y caja siguen funcionando dentro de la clínica. Lo nuevo queda en fila.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><span class="estado estado--ok">Volvió</span><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-flechas"/></svg></i><h3>Se pone al día solo</h3></div><p>Lo pendiente se envía sin que nadie haga nada ni capture dos veces. Cada cambio queda con quién y cuándo.</p></div>
     </div>
 
     <div class="nota"><strong>Lo que sí espera al internet:</strong> los mensajes de WhatsApp, el acceso
@@ -956,7 +1057,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ CRM ════ -->
   <section id="crm">
-    <h2>Conectado a Flow Hub CRM</h2>
+    <h2 class="con-ic" style="--c:#0b5cf5"><i class="ic"><svg aria-hidden="true"><use href="#i-chat"/></svg></i>Conectado a Flow Hub CRM</h2>
     <p>Monte Sinaí ya atiende sus mensajes con Flow Hub CRM. Medical Hub OS se conecta con él: el paciente que
       escribe por WhatsApp y agenda con el agente aparece en la agenda, y lo que pasa en la consulta
       alimenta el seguimiento.</p>
@@ -965,29 +1066,29 @@ body .mkt table.ojos { display: table; }
       <span>La cita aparece en Medical Hub OS</span><i>→</i><span>Consulta</span><i>→</i><span>Seguimiento con fecha</span>
     </div>
     <div class="rej rej--3">
-      <div class="tj"><h3>Controles que no se pierden</h3><p>El paciente de glaucoma que debía volver en tres meses y no agendó recibe su recordatorio.</p></div>
-      <div class="tj"><h3>Cirugías que no se enfrían</h3><p>La catarata indicada que no se programó queda en seguimiento con responsable y fecha.</p></div>
-      <div class="tj"><h3>Menos inasistencias</h3><p>Confirmación el día anterior y aviso de llegada con instrucciones de dilatación.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-reloj"/></svg></i><h3>Controles que no se pierden</h3></div><p>El paciente de glaucoma que debía volver en tres meses y no agendó recibe su recordatorio.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-cruz"/></svg></i><h3>Cirugías que no se enfrían</h3></div><p>La catarata indicada que no se programó queda en seguimiento con responsable y fecha.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-agenda"/></svg></i><h3>Menos inasistencias</h3></div><p>Confirmación el día anterior y aviso de llegada con instrucciones de dilatación.</p></div>
     </div>
     <p class="corte">Los mensajes se envían solo a pacientes que dieron su consentimiento, conforme al aviso de privacidad de la clínica.</p>
   </section>
 
   <!-- ════ SEGURIDAD ════ -->
   <section id="seguridad">
-    <h2>Seguridad y norma</h2>
+    <h2 class="con-ic" style="--c:#0b5cf5"><i class="ic"><svg aria-hidden="true"><use href="#i-escudo"/></svg></i>Seguridad y norma</h2>
     <p>Un expediente clínico guarda datos personales sensibles. Medical Hub OS se construye pensando en eso
       desde el principio.</p>
     <div class="rej rej--2">
-      <div class="tj"><h3>Cada quien ve lo suyo</h3><p>Roles de médico, optometría, recepción, caja y dirección. Cada uno entra solo a lo que le toca.</p></div>
-      <div class="tj"><h3>Bitácora</h3><p>Quién abrió, capturó o cambió cada expediente y cuándo. Lo firmado no se borra: se corrige con una nota.</p></div>
-      <div class="tj"><h3>Respaldos en dos lugares</h3><p>En el servidor de la clínica y en la nube, cifrados. Un equipo que se descompone no se lleva el expediente.</p></div>
-      <div class="tj"><h3>Estructura de la norma</h3><p>El expediente sigue los apartados de la NOM-004-SSA3-2012 y el manejo de datos la Ley Federal de Protección de Datos Personales.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-persona"/></svg></i><h3>Cada quien ve lo suyo</h3></div><p>Roles de médico, optometría, recepción, caja y dirección. Cada uno entra solo a lo que le toca.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lista"/></svg></i><h3>Bitácora</h3></div><p>Quién abrió, capturó o cambió cada expediente y cuándo. Lo firmado no se borra: se corrige con una nota.</p></div>
+      <div class="tj tj--c" style="--c:#0b5cf5"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-nube"/></svg></i><h3>Respaldos en dos lugares</h3></div><p>En el servidor de la clínica y en la nube, cifrados. Un equipo que se descompone no se lleva el expediente.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-receta"/></svg></i><h3>Estructura de la norma</h3></div><p>El expediente sigue los apartados de la NOM-004-SSA3-2012 y el manejo de datos la Ley Federal de Protección de Datos Personales.</p></div>
     </div>
   </section>
 
   <!-- ════ SUYO ════ -->
   <section id="suyo">
-    <h2>Suyo, no rentado</h2>
+    <h2 class="con-ic" style="--c:#2047e1"><i class="ic"><svg aria-hidden="true"><use href="#i-casa"/></svg></i>Suyo, no rentado</h2>
     <p>Una aplicación por suscripción se paga cada mes, por usuario, para siempre, y hace lo que su
       proveedor decide. Un sistema propio se paga por construirlo y después es de la clínica.</p>
     <table class="comp">
@@ -1010,9 +1111,9 @@ body .mkt table.ojos { display: table; }
       por suscripción para otros especialistas: cada clínica con su espacio, su marca y sus datos
       separados, y una mensualidad que cobra él. Flow Hub opera la tecnología.</p>
     <div class="rej rej--3">
-      <div class="tj"><span class="tj__n">01</span><h3>Hoy</h3><p>Resuelve Monte Sinaí y Óptica Shalom, y deja de pagar rentas.</p></div>
-      <div class="tj"><span class="tj__n">02</span><h3>Probado</h3><p>Meses de uso real en una clínica de oftalmología: el mejor argumento de venta.</p></div>
-      <div class="tj"><span class="tj__n">03</span><h3>Después</h3><p>Se ofrece a colegas como servicio, y la inversión de hoy se vuelve un ingreso.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-casa"/></svg></i><h3>Hoy</h3></div><p>Resuelve Monte Sinaí y Óptica Shalom, y deja de pagar rentas.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-escudo"/></svg></i><h3>Probado</h3></div><p>Meses de uso real en una clínica de oftalmología: el mejor argumento de venta.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-barras"/></svg></i><h3>Después</h3></div><p>Se ofrece a colegas como servicio, y la inversión de hoy se vuelve un ingreso.</p></div>
     </div>
     <div class="nota"><strong>Primero resuelve su clínica. Después, si conviene, se vende.</strong> Las
       condiciones de la marca blanca se acuerdan aparte y no son parte de esta propuesta.</div>
@@ -1020,7 +1121,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ IMPLEMENTACIÓN ════ -->
   <section id="fases">
-    <h2>Treinta días, de la firma a la operación</h2>
+    <h2 class="con-ic" style="--c:#2047e1"><i class="ic"><svg aria-hidden="true"><use href="#i-bandera"/></svg></i>Treinta días, de la firma a la operación</h2>
     <p>No se parte de cero: la base del sistema ya está construida y funcionando. Por eso se puede
       entregar completo en treinta días, en vez de en meses.</p>
     <div class="rej rej--2">
@@ -1037,14 +1138,14 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ MIGRACIÓN ════ -->
   <section id="migracion">
-    <h2>La migración: nada se queda atrás</h2>
+    <h2 class="con-ic" style="--c:#2047e1"><i class="ic"><svg aria-hidden="true"><use href="#i-flechas"/></svg></i>La migración: nada se queda atrás</h2>
     <p>Cambiar de sistema no puede significar empezar de cero con los pacientes. La migración es parte
       del método y está incluida.</p>
     <div class="rej rej--2">
-      <div class="tj"><span class="tj__n">01</span><h3>Exportar</h3><p>Se saca de la aplicación actual todo lo que permita exportar: pacientes, datos de contacto, historial de citas, citas futuras y notas.</p></div>
-      <div class="tj"><span class="tj__n">02</span><h3>Limpiar</h3><p>Se unen pacientes duplicados, se corrigen teléfonos y nombres, y cada paciente queda con un solo expediente.</p></div>
-      <div class="tj"><span class="tj__n">03</span><h3>Cargar y revisar</h3><p>Se carga en Medical Hub OS y recepción revisa una muestra contra la aplicación anterior antes del corte.</p></div>
-      <div class="tj"><span class="tj__n">04</span><h3>Estudios anteriores</h3><p>Los estudios guardados en los equipos se importan al expediente de cada paciente, hasta donde los equipos los conserven.</p></div>
+      <div class="tj tj--c" style="--c:#1aab99"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-descarga"/></svg></i><h3>Exportar</h3></div><p>Se saca de la aplicación actual todo lo que permita exportar: pacientes, datos de contacto, historial de citas, citas futuras y notas.</p></div>
+      <div class="tj tj--c" style="--c:#0574eb"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lista"/></svg></i><h3>Limpiar</h3></div><p>Se unen pacientes duplicados, se corrigen teléfonos y nombres, y cada paciente queda con un solo expediente.</p></div>
+      <div class="tj tj--c" style="--c:#0b5cf5"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-lupa"/></svg></i><h3>Cargar y revisar</h3></div><p>Se carga en Medical Hub OS y recepción revisa una muestra contra la aplicación anterior antes del corte.</p></div>
+      <div class="tj tj--c" style="--c:#3533cd"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-imagen"/></svg></i><h3>Estudios anteriores</h3></div><p>Los estudios guardados en los equipos se importan al expediente de cada paciente, hasta donde los equipos los conserven.</p></div>
     </div>
     <div class="nota"><strong>Lo que la aplicación actual permita exportar, se migra.</strong> Lo que no
       permita sacar se dice antes del corte, no después.</div>
@@ -1052,7 +1153,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ FAQ ════ -->
   <section id="preguntas">
-    <h2>Preguntas frecuentes</h2>
+    <h2 class="con-ic" style="--c:#3533cd"><i class="ic"><svg aria-hidden="true"><use href="#i-pregunta"/></svg></i>Preguntas frecuentes</h2>
     <div class="faq">
       <details><summary>¿Qué pasa si se cae el internet en plena consulta?</summary><p>Nada que se note dentro de la clínica. El trabajo ocurre en el servidor de la clínica; lo nuevo se queda en fila y sube a la nube cuando vuelve la conexión.</p></details>
       <details><summary>¿Y si se va la luz?</summary><p>Con un no-break en el servidor y en recepción, la clínica sigue el tiempo que dure la batería. Ningún dato se pierde: lo guardado está en el servidor y en la nube.</p></details>
@@ -1068,7 +1169,7 @@ body .mkt table.ojos { display: table; }
 
   <!-- ════ PROPUESTA ECONÓMICA ════ -->
   <section id="propuesta">
-    <h2>Propuesta económica</h2>
+    <h2 class="con-ic" style="--c:#3533cd"><i class="ic"><svg aria-hidden="true"><use href="#i-etiqueta"/></svg></i>Propuesta económica</h2>
     <p>Para Clínica de Visión Monte Sinaí y Óptica Shalom, a la atención del Dr. Edgar Méndez Dávila.
       Un solo precio por el sistema completo, entregado en treinta días. Después de eso, no se le vuelve
       a pagar a Flow Hub por usarlo.</p>
@@ -1095,7 +1196,8 @@ body .mkt table.ojos { display: table; }
             <li>Recetas electrónicas de anteojos, lentes de contacto y medicamentos</li>
             <li>Óptica Shalom: venta, laboratorio, inventario y entregas</li>
             <li>Cirugía, consentimientos y seguimiento postoperatorio</li>
-            <li>Caja de cada sede y tablero de dirección</li>
+            <li>Punto de venta en Monte Sinaí y Óptica Shalom, con costos y márgenes</li>
+            <li>Tablero de dirección, con los datos listos para la contabilidad o un ERP</li>
             <li>Funcionamiento sin internet en cada sede</li>
             <li>Lista para conectarse con Flow Hub CRM</li>
           </ul>
@@ -1116,8 +1218,8 @@ body .mkt table.ojos { display: table; }
 
     <h3>Lo que corre por cuenta de la clínica</h3>
     <div class="rej rej--2">
-      <div class="tj"><h3>La nube</h3><p>A nombre de Monte Sinaí y pagada directo al proveedor, al costo. Es el respaldo y el acceso desde casa.</p></div>
-      <div class="tj"><h3>Los servidores</h3><p>Un equipo pequeño por sede, con su no-break. Se compran una vez, a nombre de la clínica; le decimos cuál.</p></div>
+      <div class="tj tj--c" style="--c:#108fc2"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-nube"/></svg></i><h3>La nube</h3></div><p>A nombre de Monte Sinaí y pagada directo al proveedor, al costo. Es el respaldo y el acceso desde casa.</p></div>
+      <div class="tj tj--c" style="--c:#2047e1"><div class="tj__cab"><i class="ic"><svg aria-hidden="true"><use href="#i-servidor"/></svg></i><h3>Los servidores</h3></div><p>Un equipo pequeño por sede, con su no-break. Se compran una vez, a nombre de la clínica; le decimos cuál.</p></div>
     </div>
 
     <div class="nota"><strong>Lo que no se paga:</strong> ni mensualidad a Flow Hub, ni por usuario, ni
@@ -1134,7 +1236,7 @@ body .mkt table.ojos { display: table; }
 
 <div class="cierre">
   <div class="wrap wrap--ancho">
-    <h2>El siguiente paso</h2>
+    <h2 class="con-ic" style="--c:#3533cd"><i class="ic"><svg aria-hidden="true"><use href="#i-bandera"/></svg></i>El siguiente paso</h2>
     <p class="lead" style="max-width:640px">Con el primer pago arranca el levantamiento en Monte Sinaí y
       Óptica Shalom. Treinta días después, la clínica opera en su propio sistema.</p>
     <div class="ctas" style="justify-content:flex-start">
