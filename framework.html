@@ -1053,6 +1053,13 @@ function cargarContexto() {
 }
 
 $('ctxGuardar').addEventListener('click', function () {
+  // Misma puerta que al guardar una idea: el contexto es el documento del
+  // que cuelga todo lo demás, así que importa todavía más saber quién lo
+  // tocó. Sin esto se guardaba sin firma y el aviso quedaba a medias.
+  if (!yo && !preguntarQuien()) {
+    $('ctxGuardado').textContent = 'Poné tu nombre antes de guardar.';
+    return;
+  }
   var btn = this, span = btn.querySelector('span');
   span.textContent = 'Guardando…'; btn.disabled = true;
   db.collection(CONTEXTO).doc(CTX_DOC).set({
