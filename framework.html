@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Framework de Producto · Flow Hub</title>
+
+<!-- Página interna. Acá viven los dolores de nuestros clientes, nuestros
+     precios y lo que pensamos de la competencia: no tiene por qué estar en
+     Google. Fuera del sitemap y fuera del menú a propósito. -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+
+<link rel="icon" type="image/png" href="Icono%20Flow%20Hub%20CRM.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="canales/_estilo.css?v=202611011600">
+
+<script>
+  (function () {
+    var t = 'light';
+    try { t = localStorage.getItem('theme') || 'light'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<style>
+/* ──────────────────────────────────────────────────────────────────────
+   Esta página es una herramienta, no un folleto. Se aparta del ancho de
+   lectura de 760px porque el inventario necesita tabla y el detalle de
+   una idea necesita dos columnas. Todo lo demás —tipografías, píldoras,
+   el degradado escaso, el blanco y negro— sale de _estilo.css sin tocar.
+   ────────────────────────────────────────────────────────────────────── */
+
+.wrap--app { max-width: 1120px; }
+
+/* El nav de esta página no lleva las secciones públicas: nadie llega acá
+   buscando Soluciones. Lleva quién sos, y nada más. */
+.quien {
+  font: inherit; font-size: 13px; color: var(--muted); cursor: pointer;
+  background: none; border: none; padding: 0;
+}
+.quien:hover { color: var(--fg); }
+.quien b { font-weight: 600; color: var(--fg); }
+
+/* El aviso de que esto está abierto. Va arriba de todo y se ve: una página
+   sin llave que no lo dice en la cara termina con alguien pegando un
+   precio real pensando que está en privado. */
+.abierto {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  border: 1px dashed var(--line); border-radius: 50px;
+  padding: 8px 18px; margin-top: 26px;
+  font-size: 12.5px; color: var(--muted);
+}
+.abierto b { color: var(--fg); font-weight: 600; }
+
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  font-weight: 700; color: var(--muted);
+}
+.campo input, .campo textarea, .campo select {
+  font: inherit; font-size: 15px; color: var(--fg);
+  background: var(--bg); border: 1px solid var(--line); border-radius: 11px;
+  padding: 11px 14px; outline: none; width: 100%;
+  transition: border-color .16s ease;
+}
+.campo textarea { resize: vertical; line-height: 1.6; min-height: 78px; }
+.campo input:focus, .campo textarea:focus, .campo select:focus { border-color: var(--g4); }
+.campo .pista { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+.error {
+  font-size: 13.5px; color: #ff3b30; min-height: 20px;
+}
+
+/* ── Pestañas ───────────────────────────────────────────────────────── */
+.pestanas { display: flex; gap: 7px; flex-wrap: wrap; padding: 26px 0 0; }
+.pestanas button {
+  font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  padding: 8px 18px; border-radius: 50px;
+  background: var(--card); border: 1px solid var(--line); color: var(--muted);
+  transition: color .16s ease, border-color .16s ease;
+}
+.pestanas button:hover { color: var(--fg); border-color: var(--g4); }
+.pestanas button[aria-selected="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+.panel { display: none; padding: 30px 0 72px; }
+.panel.activo { display: block; }
+
+/* ── Inventario ─────────────────────────────────────────────────────── */
+.barra-sup { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.barra-sup h2 { margin-bottom: 0; }
+
+.btn--chico { padding: 10px 22px; font-size: 14px; }
+
+.inv { width: 100%; border-collapse: collapse; font-size: 15px; }
+.inv th { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; text-align: left; padding: 0 12px 10px 0; border-bottom: 1px solid var(--line); }
+.inv td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.inv tr.fila { cursor: pointer; }
+.inv tr.fila:hover td { background: var(--card); }
+.inv .tit { font-weight: 600; letter-spacing: -.2px; }
+.inv .sub { font-size: 12.5px; color: var(--muted); display: block; margin-top: 2px; }
+.inv .num { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.4px; white-space: nowrap; }
+.inv .num em { font-style: normal; font-size: 12px; color: var(--muted); font-weight: 600; }
+
+.etq {
+  display: inline-block; padding: 4px 13px; border-radius: 50px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .02em; white-space: nowrap;
+  border: 1px solid var(--line); background: var(--card); color: var(--muted);
+}
+.etq--avanzar  { border-color: #00c853; color: #00a846; }
+.etq--iterar   { border-color: #ff9500; color: #c47000; }
+.etq--descartar{ border-color: var(--g4); color: var(--g4); }
+[data-theme="dark"] .etq--avanzar { color: #38dd7d; }
+[data-theme="dark"] .etq--iterar { color: #ffab2e; }
+
+.vacio { text-align: center; padding: 64px 0; color: var(--muted); }
+.vacio b { display: block; font-size: 17px; color: var(--fg); font-weight: 600; margin-bottom: 7px; }
+
+/* ── Detalle de una idea ────────────────────────────────────────────── */
+.volver { background: none; border: none; font: inherit; font-size: 13.5px; color: var(--muted); cursor: pointer; padding: 0; margin-bottom: 18px; }
+.volver:hover { color: var(--fg); }
+
+.cols { display: grid; grid-template-columns: 1fr 348px; gap: 34px; align-items: start; }
+@media (max-width: 900px) { .cols { grid-template-columns: 1fr; } }
+
+.bloque { border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-bottom: 18px; background: var(--bg); }
+.bloque > h3 { margin: 0 0 4px; font-size: 16px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -.3px; }
+.bloque > .pista { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 18px; }
+.bloque .campo + .campo { margin-top: 14px; }
+
+/* El marcador acompaña mientras se llena el brief. En una pantalla de
+   portátil corta mide más que la ventana, y entonces el total y el
+   veredicto —lo único que importa del panel— quedaban fuera de alcance
+   hasta el final del documento. Con su propio alto máximo se desplaza
+   por dentro y el veredicto siempre está a un gesto. */
+.lateral {
+  position: sticky; top: 86px;
+  max-height: calc(100vh - 106px); overflow-y: auto;
+}
+@media (max-width: 900px) { .lateral { position: static; max-height: none; overflow: visible; } }
+
+/* El marcador: seis criterios, un total y una decisión que sale sola.
+   El puntaje se elige con botones y no con un desplegable porque la
+   escala de 1 a 5 se lee entera de un vistazo, y así se ve dónde está
+   flojo el conjunto sin abrir nada. */
+.crit + .crit { margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--line); }
+.crit b { display: block; font-size: 13.5px; font-weight: 600; letter-spacing: -.1px; }
+.crit span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.5; margin: 2px 0 9px; }
+.notas { display: flex; gap: 5px; }
+.notas button {
+  flex: 1; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+  padding: 7px 0; border-radius: 9px;
+  background: var(--bg); border: 1px solid var(--line); color: var(--muted);
+  transition: all .14s ease;
+}
+.notas button:hover { border-color: var(--g4); color: var(--fg); }
+.notas button[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+
+.total { display: flex; align-items: baseline; gap: 10px; margin: 20px 0 12px; padding-top: 18px; border-top: 1px solid var(--line); }
+.total b { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 34px; letter-spacing: -1.6px; }
+.total span { font-size: 13px; color: var(--muted); }
+
+.veredicto { font-size: 13px; color: var(--muted); line-height: 1.55; margin-top: 10px; }
+.veredicto strong { color: var(--fg); }
+
+/* ── Las nueve etapas, como referencia ──────────────────────────────── */
+.etapas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+@media (max-width: 820px) { .etapas { grid-template-columns: 1fr; } }
+.et { border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; background: var(--bg); }
+/* Con hijo directo, y no `.et strong` a secas: el título de la etapa y el
+   énfasis dentro del párrafo son la misma etiqueta, así que sin el `>` un
+   «un solo» en medio de una frase se volvía bloque y partía el renglón. */
+.et > b {
+  display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900;
+  font-size: 11px; letter-spacing: .1em; color: var(--muted); margin-bottom: 7px;
+}
+.et > strong { display: block; font-size: 16.5px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; }
+.et q { display: block; font-size: 14px; line-height: 1.55; font-style: italic; color: var(--fg); margin-bottom: 10px; quotes: none; }
+.et p { font-size: 13.5px; line-height: 1.6; color: var(--muted); margin: 0; }
+
+/* ── Bloques de texto para copiar ───────────────────────────────────── */
+.copiable {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 20px; font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12.5px; line-height: 1.65; white-space: pre-wrap; word-break: break-word;
+  max-height: 300px; overflow: auto; color: var(--muted); margin: 14px 0 0;
+}
+.acciones { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+.guardado { font-size: 13px; color: var(--muted); align-self: center; }
+
+.peligro {
+  background: none; border: none; font: inherit; font-size: 13px;
+  color: var(--muted); cursor: pointer; padding: 0; text-decoration: underline;
+}
+.peligro:hover { color: #ff3b30; }
+
+.cargando { text-align: center; padding: 70px 0; color: var(--muted); font-size: 14px; }
+
+/* ── Teléfono ───────────────────────────────────────────────────────────
+   Dos cosas que no se arreglan solas.
+
+   El interruptor de tema: la hoja compartida lo esconde por debajo de 640
+   porque en las páginas públicas viaja dentro del menú de hamburguesa.
+   Acá no hay hamburguesa —el nav no tiene enlaces, así que _tema.js ni
+   la construye—, de modo que esconderlo lo borra del mapa. Vuelve.
+
+   El inventario: cuatro columnas no entran en 375 px. Medían 444 y la
+   página se iba de lado. En vez de encoger la tipografía, cada fila se
+   vuelve una ficha: el nombre arriba y abajo estado, puntaje y decisión
+   en una tira. Se lee igual y no se desborda. */
+@media (max-width: 620px) {
+  .top .tema { display: flex; }
+
+  .inv thead { display: none; }
+  .inv, .inv tbody, .inv tr, .inv td { display: block; width: 100%; }
+  .inv tr.fila { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .inv td { border: none; padding: 0; }
+  .inv td + td { display: inline-block; width: auto; margin: 11px 14px 0 0; vertical-align: middle; }
+  .inv tr.fila:hover td { background: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap wrap--app">
+  <a href="landing.html"><img id="logo" src="flow%20hub%20logo%201.png" alt="Flow Hub"></a>
+  <nav>
+    <button class="quien" id="quien" title="Cambiar quién sos"></button>
+    <button class="tema" id="tema" title="Cambiar tema" aria-label="Cambiar tema"></button>
+  </nav>
+</div></div>
+
+<!-- ════════ La herramienta ════════ -->
+<div class="wrap wrap--app" id="pantallaApp">
+
+  <div class="abierto">
+    <b>Sin llave todavía.</b>
+    <span>Cualquiera con el enlace entra y edita. Es a propósito, para probarla sin fricción; cuando la demos por buena se muda adentro de la app.</span>
+  </div>
+
+  <div class="pestanas" role="tablist">
+    <button role="tab" data-panel="ideas"     aria-selected="true">Ideas</button>
+    <button role="tab" data-panel="framework" aria-selected="false">El framework</button>
+    <button role="tab" data-panel="contexto"  aria-selected="false">Contexto de empresa</button>
+    <button role="tab" data-panel="prompt"    aria-selected="false">Prompt maestro</button>
+  </div>
+
+  <!-- ── Inventario ── -->
+  <div class="panel activo" id="panel-ideas">
+    <div id="vistaLista">
+      <div class="barra-sup">
+        <h2>La línea de trabajo</h2>
+        <button class="btn btn--chico" id="btnNueva"><span>Nueva idea</span></button>
+      </div>
+      <div id="tabla"></div>
+    </div>
+
+    <div id="vistaDetalle" hidden></div>
+  </div>
+
+  <!-- ── Referencia ── -->
+  <div class="panel" id="panel-framework">
+    <h2>Las nueve etapas</h2>
+    <p class="lead" style="font-size:16px">Toda idea las cruza en orden. Si una falla, no se avanza hasta resolverla.</p>
+
+    <div class="etapas">
+      <div class="et"><b>Etapa 0</b><strong>Brief de la idea</strong><q>¿Qué es, para quién y por qué ahora?</q><p>Tres a cinco líneas, el cliente al que apunta y el objetivo para la empresa. Si no se puede explicar en cinco líneas, la idea todavía no está clara.</p></div>
+      <div class="et"><b>Etapa 1</b><strong>Cliente y contexto</strong><q>¿Quién es exactamente y en qué situación está cuando aparece el problema?</q><p>Perfil, situación disparadora, quién decide la compra y el trabajo por hacer: «cuando [situación], quiero [motivación], para [resultado]».</p></div>
+      <div class="et"><b>Etapa 2</b><strong>Dolores, miedos y deseos</strong><q>¿Qué le duele hoy, qué teme y qué quiere lograr?</q><p>Dolor funcional, económico, emocional y social; el miedo si no actúa; el miedo a comprarnos; y el deseo. Siempre en primera persona y con palabras del cliente.</p></div>
+      <div class="et"><b>Etapa 3</b><strong>Problema priorizado</strong><q>De todos los dolores, ¿cuál vale la pena resolver?</q><p>Cada dolor puntuado de 1 a 5 en frecuencia, intensidad y disposición a pagar. Sale <strong>un solo</strong> dolor principal. El resto son secundarios.</p></div>
+      <div class="et"><b>Etapa 4</b><strong>Alternativas actuales</strong><q>¿Cómo lo resuelve hoy y por qué eso no alcanza?</q><p>Competencia directa, soluciones caseras y «no hacer nada», que siempre es un competidor. Cierra con nuestra diferencia en una frase.</p></div>
+      <div class="et"><b>Etapa 5</b><strong>Solución y MVP</strong><q>¿Qué resuelve cada dolor y cuál es la versión mínima que demuestra valor?</q><p>Tabla dolor → funcionalidad → cómo se mide. Si un componente no resuelve ningún dolor, se elimina. Y la lista explícita de lo que queda fuera.</p></div>
+      <div class="et"><b>Etapa 6</b><strong>Oferta</strong><q>¿Cómo lo empaquetamos para que comprar sea fácil y sin riesgo?</q><p>Formato, precio con ancla de valor, garantía y bonos. Más la tabla de objeciones: cada miedo a comprar con cómo lo desactivamos.</p></div>
+      <div class="et"><b>Etapa 7</b><strong>Mensaje</strong><q>¿Cómo lo contamos para que el cliente sienta que hablamos de él?</q><p>Posicionamiento en una frase, tres ganchos, texto problema-agitación-solución y la respuesta a cada objeción, lista para la landing y para ventas.</p></div>
+      <div class="et"><b>Etapa 8</b><strong>Riesgos e hipótesis</strong><q>¿Qué tiene que ser cierto para que esto funcione y cómo lo probamos rápido?</q><p>Hipótesis críticas con su nivel de evidencia, de tres a cinco razones honestas por las que podría fracasar, y de uno a tres experimentos con plazo.</p></div>
+      <div class="et"><b>Etapa 9</b><strong>Scorecard y decisión</strong><q>¿Avanzamos, iteramos o descartamos?</q><p>Seis criterios sobre treinta. Se puntúa en el panel lateral de cada idea y la decisión sale sola.</p></div>
+    </div>
+
+    <section>
+      <h2>Las siete reglas de oro</h2>
+      <ul class="pasos">
+        <li><strong>Evidencia contra hipótesis.</strong> Cada afirmación importante lleva su etiqueta: <code>[Evidencia]</code> si viene de datos o de clientes reales, <code>[Hipótesis]</code> si es lo que creemos.</li>
+        <li><strong>Trazabilidad.</strong> Todo componente de la solución apunta a un dolor. Si no apunta a ninguno, sobra.</li>
+        <li><strong>Un dolor principal.</strong> Intentar resolver todo hace que el mensaje no le hable a nadie.</li>
+        <li><strong>Palabras del cliente.</strong> Frases textuales de entrevistas, reseñas y ventas. No nuestro vocabulario interno.</li>
+        <li><strong>Abogado del diablo.</strong> Toda idea se analiza también desde por qué podría fracasar.</li>
+        <li><strong>Siempre termina en un experimento.</strong> Ninguna idea sale del framework sin un próximo paso de validación con clientes reales.</li>
+        <li><strong>Lo aprendido vuelve al contexto.</strong> Cada resultado se carga en el contexto de empresa. Es lo que hace que la idea número veinte se analice mejor que la primera.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Cómo decide el marcador</h2>
+      <table>
+        <thead><tr><th>Total</th><th>Decisión</th><th>Qué hacer</th></tr></thead>
+        <tbody>
+          <tr><td>24 a 30</td><td><strong>Avanzar</strong></td><td>Correr el experimento y preparar el MVP</td></tr>
+          <tr><td>15 a 23</td><td><strong>Iterar</strong></td><td>Corregir las etapas con puntaje bajo y volver a pasar</td></tr>
+          <tr><td>Menos de 15</td><td><strong>Descartar</strong></td><td>Archivar con lo aprendido</td></tr>
+        </tbody>
+      </table>
+      <div class="nota">
+        <strong>El candado.</strong> Si <strong>tamaño del dolor</strong> o <strong>nivel de evidencia</strong> sacan 2 o menos, lo máximo es <strong>iterar</strong>, aunque el total dé alto. Impide enamorarse de una idea bien argumentada que no tiene un cliente detrás.
+      </div>
+    </section>
+
+    <section>
+      <h2>El flujo del equipo</h2>
+      <table>
+        <thead><tr><th>Paso</th><th>Quién</th><th>Qué hace</th><th>Tiempo</th></tr></thead>
+        <tbody>
+          <tr><td>1 · Idea</td><td>Cualquiera</td><td>La plantea</td><td>—</td></tr>
+          <tr><td>2 · Brief</td><td>Quien la propone</td><td>Completa el brief acá</td><td>15 min</td></tr>
+          <tr><td>3 · IA</td><td>Quien la propone</td><td>Copia la idea y la pega en el proyecto de Claude</td><td>15 min</td></tr>
+          <tr><td>4 · Revisión</td><td>Equipo</td><td>Revisa las hipótesis y puntúa el marcador</td><td>30 min</td></tr>
+          <tr><td>5 · Experimento</td><td>Responsable</td><td>Corre el experimento de la etapa 8</td><td>1 a 3 semanas</td></tr>
+          <tr><td>6 · Resultado</td><td>Responsable</td><td>Documenta qué pasó, con números</td><td>15 min</td></tr>
+          <tr><td>7 · Contexto</td><td>Responsable</td><td>Carga el aprendizaje en el contexto de empresa</td><td>10 min</td></tr>
+          <tr><td>8 · Decisión</td><td>Equipo</td><td>Avanzar, iterar o descartar con evidencia</td><td>30 min</td></tr>
+        </tbody>
+      </table>
+      <div class="nota"><strong>El paso 7 es el que hace que el sistema mejore con el uso.</strong> Cada idea analizada después tiene mejor información que la anterior.</div>
+    </section>
+
+    <section>
+      <h2>Glosario</h2>
+      <table>
+        <tbody>
+          <tr><td><strong>Dolor</strong></td><td>Problema o frustración que el cliente sufre hoy</td></tr>
+          <tr><td><strong>Miedo</strong></td><td>Consecuencia que teme a futuro, o temor que lo frena a comprar</td></tr>
+          <tr><td><strong>Objeción</strong></td><td>Miedo o duda que frena la compra</td></tr>
+          <tr><td><strong>Deseo</strong></td><td>Resultado que el cliente quiere lograr</td></tr>
+          <tr><td><strong>Trabajo por hacer</strong></td><td>El trabajo que el cliente quiere resolver en una situación concreta</td></tr>
+          <tr><td><strong>MVP</strong></td><td>La versión más simple que prueba el valor</td></tr>
+          <tr><td><strong>PAS</strong></td><td>Problema, agitación, solución</td></tr>
+          <tr><td><strong>Ancla de valor</strong></td><td>Comparar el precio con el costo del problema o con el valor del resultado</td></tr>
+          <tr><td><strong>Statu quo</strong></td><td>Seguir como está, sin hacer nada</td></tr>
+          <tr><td><strong>Trazabilidad</strong></td><td>Que cada componente de la solución esté conectado a un dolor</td></tr>
+          <tr><td><strong>Hipótesis</strong></td><td>Algo que creemos pero no comprobamos</td></tr>
+          <tr><td><strong>Evidencia</strong></td><td>Algo que comprobamos con datos o clientes reales</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- ── Contexto de empresa ── -->
+  <div class="panel" id="panel-contexto">
+    <div class="barra-sup">
+      <h2>Contexto de empresa</h2>
+      <span class="guardado" id="ctxGuardado"></span>
+    </div>
+    <p class="lead" style="font-size:16px">Esto es lo que se sube como archivo de conocimiento del proyecto. Sin contexto, la IA responde genérico.</p>
+    <div class="nota"><strong>Se actualiza después de cada experimento</strong>, en la sección de aprendizajes. Es la regla 7, y es lo único que hace que el sistema mejore con el uso.</div>
+    <div class="campo" style="margin-top:20px">
+      <textarea id="ctxTexto" rows="26" style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px"></textarea>
+    </div>
+    <div class="acciones">
+      <button class="btn btn--chico" id="ctxGuardar"><span>Guardar</span></button>
+      <button class="btn btn--chico btn--ghost" id="ctxCopiar"><span>Copiar</span></button>
+    </div>
+  </div>
+
+  <!-- ── Prompt maestro ── -->
+  <div class="panel" id="panel-prompt">
+    <h2>Prompt maestro</h2>
+    <p class="lead" style="font-size:16px">Se pega una sola vez, en las instrucciones del proyecto de Claude. Es lo que hace que la IA aplique el framework siempre igual.</p>
+    <ul class="pasos">
+      <li>Crear un proyecto en claude.ai llamado <strong>Framework de Producto</strong>.</li>
+      <li>Pegar este prompt en las instrucciones del proyecto.</li>
+      <li>Subir el <strong>contexto de empresa</strong> como archivo de conocimiento.</li>
+      <li>Compartir el proyecto con el equipo.</li>
+      <li>Cada idea nueva va en una conversación nueva dentro del proyecto.</li>
+    </ul>
+    <div class="copiable" id="promptTexto"></div>
+    <div class="acciones">
+      <button class="btn btn--chico" id="promptCopiar"><span>Copiar el prompt</span></button>
+    </div>
+  </div>
+
+</div>
+
+<footer><div class="wrap wrap--app">
+  <span>Flow Hub · Framework de Producto · Uso interno</span>
+  <span><a href="landing.html">Inicio</a></span>
+</div></footer>
+
+<script src="_tema.js?v=202611011600"></script>
+<script>
+(function () {
+'use strict';
+
+/* ══════════════════════════════════════════════════════════════════════
+   Firebase. El mismo proyecto que ya usa pipeline-diagnostico.html.
+   Sin sesión: `product_ideas` y `product_context` caen en el comodín
+   abierto de las reglas, igual que `diagnosticos`. Es decisión tomada
+   mientras se prueba —el login sin reglas cerradas no protege nada y solo
+   estorba—, y la página lo dice en la cara con el aviso de arriba.
+
+   Lo que falta el día que esto se dé por bueno, en orden:
+     1. En flowcrm/security/firestore.rules, sacar las dos colecciones del
+        comodín final Y darles su propio match. Las dos cosas: Firestore
+        concede si CUALQUIER regla permite, así que una regla restrictiva
+        no le quita nada a una permisiva.
+     2. Acotar a la gente de la casa. `request.auth != null` NO alcanza:
+        los clientes también tienen cuenta de FlowCRM y entrarían todos.
+        Va por orgId de Flow Hub, o por lista de correos.
+   ══════════════════════════════════════════════════════════════════════ */
+var firebaseConfig = {
+  apiKey: "AIzaSyD-LPZYAMP8FS3IuoH5pzpG3jP659leKes",
+  authDomain: "flowcrm-5cf0a.firebaseapp.com",
+  projectId: "flowcrm-5cf0a",
+  storageBucket: "flowcrm-5cf0a.firebasestorage.app",
+  messagingSenderId: "293326243390",
+  appId: "1:293326243390:web:24bcf0cea7b796319e336f"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+
+var IDEAS = 'product_ideas';
+var CONTEXTO = 'product_context';
+var CTX_DOC = 'flowhub';
+
+var $ = function (id) { return document.getElementById(id); };
+
+/* ── El prompt maestro ─────────────────────────────────────────────────
+   Va acá entero, con el nombre de la empresa ya puesto, para que nadie
+   tenga que acordarse de reemplazar [EMPRESA] ni de dónde estaba el PDF. */
+var PROMPT = [
+'Sos un estratega senior de producto y marketing de Flow Hub. Tu trabajo es',
+'evaluar y desarrollar ideas de productos, servicios, webinars, ofertas o',
+'soluciones aplicando el Framework de Producto de Flow Hub.',
+'',
+'Usá siempre el documento "Contexto de empresa" adjunto como fuente principal.',
+'Si algo del contexto contradice tu conocimiento general, priorizá el contexto.',
+'',
+'=== PROCESO ===',
+'',
+'1. Leé la idea.',
+'2. Si falta información crítica (cliente, problema u objetivo), hacé hasta',
+'   5 preguntas concretas antes de avanzar. No completes vacíos inventando.',
+'   Si el usuario pide avanzar igual, avanzá marcando todo como [Hipótesis].',
+'3. Desarrollá las 9 etapas en orden, con estos encabezados:',
+'',
+'   ## 0 · Brief de la idea',
+'   ## 1 · Cliente y contexto',
+'   ## 2 · Dolores, miedos y deseos',
+'   ## 3 · Problema priorizado',
+'   ## 4 · Alternativas actuales',
+'   ## 5 · Solución y MVP',
+'   ## 6 · Oferta',
+'   ## 7 · Mensaje',
+'   ## 8 · Riesgos e hipótesis',
+'   ## 9 · Scorecard y decisión',
+'',
+'=== REGLAS POR ETAPA ===',
+'',
+'Etapa 0: resumí la idea en máximo 5 líneas: qué es, para quién, por qué',
+'ahora y objetivo para la empresa.',
+'',
+'Etapa 1: definí perfil, situación disparadora, quién decide la compra y el',
+'Job to be Done con el formato "Cuando [situación], quiero [motivación],',
+'para [resultado]".',
+'',
+'Etapa 2: armá una tabla con dolores funcionales, económicos, emocionales y',
+'sociales; miedos si no actúa; miedos a comprar (objeciones); y deseos.',
+'Mínimo 3 por categoría. Escribilos en primera persona, como los diría el',
+'cliente.',
+'',
+'Etapa 3: puntuá cada dolor de 1 a 5 en frecuencia, intensidad y',
+'disposición a pagar. Elegí UN solo dolor principal y justificá por qué.',
+'',
+'Etapa 4: tabla de alternativas (directas, indirectas y "no hacer nada")',
+'con lo que hacen bien, lo que les falta y precio. Cerrá con nuestra',
+'diferencia en una frase.',
+'',
+'Etapa 5: tabla Dolor → Funcionalidad → Cómo se mide. Descartá cualquier',
+'funcionalidad que no resuelva un dolor. Definí el MVP y lo que queda fuera.',
+'',
+'Etapa 6: formato, precio sugerido con ancla de valor, garantía, bonos y',
+'tabla Objeción → Cómo se desactiva.',
+'',
+'Etapa 7: posicionamiento con el formato "Para [cliente] que [dolor],',
+'[producto] es [categoría] que [beneficio]. A diferencia de [alternativa],',
+'[diferencia]". Después 3 ganchos o títulos y un texto PAS completo.',
+'',
+'Etapa 8: tabla de hipótesis críticas con su nivel de evidencia. Sección',
+'"Por qué esto podría fracasar" con 3 a 5 razones honestas. De 1 a 3',
+'experimentos con: qué hacer, con cuántas personas, qué resultado confirma,',
+'qué resultado refuta y plazo en días.',
+'',
+'Etapa 9: puntuá de 1 a 5 tamaño del dolor, diferenciación, encaje con la',
+'empresa, facilidad de ejecución, potencial económico y nivel de evidencia.',
+'Sumá el total sobre 30 y decidí:',
+'– 24 a 30: AVANZAR',
+'– 15 a 23: ITERAR',
+'– menos de 15: DESCARTAR',
+'Si tamaño del dolor o nivel de evidencia tienen 2 o menos, la decisión',
+'máxima es ITERAR. Justificá en 3 líneas y cerrá con el próximo paso',
+'concreto.',
+'',
+'=== REGLAS GENERALES ===',
+'',
+'– Etiquetá cada afirmación importante como [Evidencia] (si viene del',
+'  contexto o de datos que dio el usuario) o [Hipótesis] (si es suposición).',
+'– Nunca inventes datos, cifras ni testimonios. Si das una cifra estimada,',
+'  marcala como [Hipótesis] y explicá de dónde sale.',
+'– Usá tablas cuando ordenen mejor la información.',
+'– Tono directo y concreto, sin relleno ni frases motivacionales.',
+'– Si la idea es débil, decilo con claridad y explicá por qué.',
+'– Al final, sugerí qué aprendizaje habría que cargar en el Contexto de',
+'  empresa después de correr el experimento.',
+'',
+'=== MODOS RÁPIDOS ===',
+'',
+'Si el usuario escribe uno de estos comandos, hacé solo esa parte:',
+'– "/dolores [idea]": solo etapas 1 a 3.',
+'– "/oferta [idea]": solo etapas 5 y 6.',
+'– "/mensaje [idea]": solo etapa 7.',
+'– "/validar [idea]": solo etapas 8 y 9.',
+'– "/completo [idea]": las 9 etapas (es el modo por defecto).'
+].join('\n');
+
+var CTX_PLANTILLA = [
+'# Contexto de empresa: Flow Hub',
+'',
+'## Quiénes somos',
+'– A qué nos dedicamos:',
+'– Propuesta de valor actual:',
+'– Diferencial principal:',
+'',
+'## Clientes ideales',
+'### Segmento 1: [nombre]',
+'– Perfil:',
+'– Situación típica:',
+'– Dolores principales (con citas textuales):',
+'  – "..."',
+'– Objeciones frecuentes:',
+'– Qué valoran:',
+'',
+'### Segmento 2: [nombre]',
+'– ...',
+'',
+'## Productos y servicios actuales',
+'| Producto | Formato | Precio | Resultado (ventas, satisfacción) |',
+'|---|---|---|---|',
+'|  |  |  |  |',
+'',
+'## Competencia y alternativas',
+'| Competidor | Qué ofrece | Precio | Fortaleza | Debilidad |',
+'|---|---|---|---|---|',
+'|  |  |  |  |  |',
+'',
+'## Aprendizajes',
+'### Lo que funcionó',
+'– [fecha] [qué] → [por qué creemos que funcionó]',
+'',
+'### Lo que no funcionó',
+'– [fecha] [qué] → [por qué creemos que falló]',
+'',
+'## Voz de marca',
+'– Tono:',
+'– Palabras que usamos:',
+'– Palabras que evitamos:',
+'– Ejemplos de textos que nos representan:',
+'',
+'## Restricciones',
+'– Presupuesto disponible:',
+'– Capacidad del equipo:',
+'– Cosas que no hacemos:',
+'',
+'## Banco de evidencia',
+'– Reseñas y testimonios textuales:',
+'– Preguntas frecuentes de ventas:',
+'– Objeciones reales escuchadas:',
+'– Métricas relevantes (conversión, ticket, retención):'
+].join('\n');
+
+/* ── Los seis criterios del marcador ─────────────────────────────────── */
+var CRITERIOS = [
+  { id: 'dolor',          nombre: 'Tamaño del dolor',    pregunta: '¿Es frecuente, intenso y está dispuesto a pagar?' },
+  { id: 'diferenciacion', nombre: 'Diferenciación',      pregunta: '¿Somos claramente distintos de las alternativas?' },
+  { id: 'encaje',         nombre: 'Encaje con la empresa',pregunta: '¿Encaja con nuestra marca, clientes y capacidades?' },
+  { id: 'ejecucion',      nombre: 'Facilidad de ejecución', pregunta: '¿Podemos lanzar un MVP rápido y con recursos actuales?' },
+  { id: 'potencial',      nombre: 'Potencial económico',  pregunta: '¿El tamaño del mercado y el margen justifican el esfuerzo?' },
+  { id: 'evidencia',      nombre: 'Nivel de evidencia',   pregunta: '¿Cuánto de esto está validado con clientes reales?' }
+];
+
+/* Los dos criterios del candado: si cualquiera saca 2 o menos, lo máximo
+   que puede salir es ITERAR aunque el total dé 28. Es la salvaguarda
+   contra la idea bien argumentada que no tiene un cliente detrás. */
+var CANDADO = ['dolor', 'evidencia'];
+
+var CAMPOS_BRIEF = [
+  { id: 'queEs',     label: 'Qué es (3 a 5 líneas)', filas: 4 },
+  { id: 'paraQuien', label: 'Para quién',            filas: 2 },
+  { id: 'problema',  label: 'Qué problema resuelve', filas: 2 },
+  { id: 'porQueAhora', label: 'Por qué ahora',       filas: 2 },
+  { id: 'evidencia', label: 'Evidencia que ya tenemos (si hay)', filas: 2 },
+  { id: 'dudas',     label: 'Dudas principales',     filas: 2 }
+];
+
+var ESTADOS = [
+  { id: 'brief',       nombre: 'Brief' },
+  { id: 'analizada',   nombre: 'Analizada por la IA' },
+  { id: 'experimento', nombre: 'En experimento' },
+  { id: 'decidida',    nombre: 'Decidida' }
+];
+
+var OBJETIVOS = ['facturación', 'captación', 'posicionamiento', 'retención'];
+
+/* ── Utilidades ───────────────────────────────────────────────────────── */
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function fecha(ts) {
+  if (!ts) return '—';
+  var d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+}
+
+/* El total y la decisión. Devuelve `null` en decisión mientras falte
+   puntuar algún criterio: media tabla llena da un número que parece un
+   veredicto y no lo es. */
+function marcador(sc) {
+  sc = sc || {};
+  var total = 0, completos = 0;
+  CRITERIOS.forEach(function (c) {
+    var v = Number(sc[c.id]) || 0;
+    total += v;
+    if (v > 0) completos++;
+  });
+  if (completos < CRITERIOS.length) {
+    return { total: total, completo: false, decision: null, frenado: false };
+  }
+  var frenado = CANDADO.some(function (k) { return Number(sc[k]) <= 2; });
+  var decision = total >= 24 ? 'avanzar' : (total >= 15 ? 'iterar' : 'descartar');
+  /* `mordio` es distinto de `frenado`: el candado está puesto siempre que
+     un pilar saque 2 o menos, pero solo CAMBIA la decisión cuando el total
+     alcanzaba para avanzar. Decir «el candado te frenó» con 23 puntos es
+     falso —23 ya era iterar— y una herramienta que se atribuye un veredicto
+     que no dio deja de merecer que le crean el resto. */
+  var mordio = frenado && decision === 'avanzar';
+  if (mordio) decision = 'iterar';
+  return { total: total, completo: true, decision: decision, frenado: frenado, mordio: mordio };
+}
+
+var NOMBRE_DECISION = { avanzar: 'Avanzar', iterar: 'Iterar', descartar: 'Descartar' };
+
+function copiar(texto, boton) {
+  var etiqueta = boton.querySelector('span');
+  var antes = etiqueta.textContent;
+  function ok() {
+    etiqueta.textContent = 'Copiado';
+    setTimeout(function () { etiqueta.textContent = antes; }, 1600);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(ok, respaldo);
+  } else { respaldo(); }
+  function respaldo() {
+    var t = document.createElement('textarea');
+    t.value = texto;
+    t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); ok(); } catch (e) {}
+    document.body.removeChild(t);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Quién sos
+   ══════════════════════════════════════════════════════════════════════
+   Sin login hace falta igual saber quién propuso cada idea: un inventario
+   donde todo lo firmó «alguien» no sirve para repartir responsables. Se
+   pregunta una vez y el navegador lo recuerda. Es una firma, no una
+   credencial, y por eso no da ni quita acceso a nada.
+   ══════════════════════════════════════════════════════════════════════ */
+var LLAVE_YO = 'fw_quien';
+var yo = '';
+
+try { yo = localStorage.getItem(LLAVE_YO) || ''; } catch (e) {}
+
+function pintarQuien() {
+  $('quien').innerHTML = yo
+    ? 'Firmás como <b>' + esc(yo) + '</b>'
+    : '¿Quién sos?';
+}
+
+function preguntarQuien() {
+  var puesto = window.prompt('¿Con qué nombre firmás las ideas?', yo || '');
+  if (puesto === null) return false;           // canceló
+  puesto = puesto.trim();
+  if (!puesto) return false;
+  yo = puesto;
+  try { localStorage.setItem(LLAVE_YO, yo); } catch (e) {}
+  pintarQuien();
+  return true;
+}
+
+$('quien').addEventListener('click', preguntarQuien);
+
+/* ══════════════════════════════════════════════════════════════════════
+   Pestañas
+   ══════════════════════════════════════════════════════════════════════ */
+Array.prototype.forEach.call(document.querySelectorAll('.pestanas button'), function (b) {
+  b.addEventListener('click', function () {
+    Array.prototype.forEach.call(document.querySelectorAll('.pestanas button'), function (o) {
+      o.setAttribute('aria-selected', String(o === b));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.panel'), function (p) {
+      p.classList.toggle('activo', p.id === 'panel-' + b.dataset.panel);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════════════
+   Inventario
+   ══════════════════════════════════════════════════════════════════════ */
+var ideas = [];
+var desuscribir = null;
+var abierta = null;
+
+function arrancar() {
+  $('promptTexto').textContent = PROMPT;
+  cargarContexto();
+
+  if (desuscribir) desuscribir();
+  desuscribir = db.collection(IDEAS).orderBy('actualizadaEn', 'desc')
+    .onSnapshot(function (snap) {
+      ideas = snap.docs.map(function (d) {
+        var x = d.data(); x.id = d.id; return x;
+      });
+      pintarLista();
+      /* La idea abierta NO se reemplaza con lo que acaba de llegar.
+         Mientras está abierta es una copia de trabajo: los campos viven en
+         el formulario y el marcador en `abierta.scorecard`. Si otro del
+         equipo guarda esa misma idea en ese momento, pisarla acá dejaría
+         los botones del marcador marcando una cosa y el objeto guardando
+         otra, y el siguiente Guardar escribiría lo ajeno sin avisar. */
+    }, function (err) {
+      $('tabla').innerHTML = '<div class="vacio"><b>No se pudo leer el inventario</b>' +
+        esc(err.message) + '</div>';
+    });
+}
+
+function pintarLista() {
+  if (!ideas.length) {
+    $('tabla').innerHTML = '<div class="vacio"><b>Todavía no hay ninguna idea</b>' +
+      'La primera que pase por acá empieza la línea de trabajo.</div>';
+    return;
+  }
+  var filas = ideas.map(function (i) {
+    var m = marcador(i.scorecard);
+    var est = ESTADOS.filter(function (e) { return e.id === i.estado; })[0];
+    var dec = m.decision
+      ? '<span class="etq etq--' + m.decision + '">' + NOMBRE_DECISION[m.decision] + '</span>'
+      : '<span class="etq">Sin puntuar</span>';
+    return '<tr class="fila" data-id="' + esc(i.id) + '">' +
+      '<td><span class="tit">' + esc(i.titulo || 'Sin título') + '</span>' +
+        '<span class="sub">' + esc(i.autor || '') + ' · ' + fecha(i.actualizadaEn) + '</span></td>' +
+      '<td><span class="etq">' + esc(est ? est.nombre : 'Brief') + '</span></td>' +
+      '<td class="num">' + (m.completo ? m.total : '—') + ' <em>/30</em></td>' +
+      '<td>' + dec + '</td>' +
+    '</tr>';
+  }).join('');
+
+  $('tabla').innerHTML =
+    '<table class="inv"><thead><tr>' +
+      '<th>Idea</th><th>Estado</th><th>Puntaje</th><th>Decisión</th>' +
+    '</tr></thead><tbody>' + filas + '</tbody></table>';
+
+  Array.prototype.forEach.call($('tabla').querySelectorAll('tr.fila'), function (tr) {
+    tr.addEventListener('click', function () { abrir(tr.dataset.id); });
+  });
+}
+
+$('btnNueva').addEventListener('click', function () {
+  // El nombre se pide al crear, no al entrar: quien solo viene a leer el
+  // framework no tiene por qué firmar nada.
+  if (!yo && !preguntarQuien()) return;
+  abierta = {
+    id: null, titulo: '', autor: yo,
+    estado: 'brief', objetivo: 'facturación',
+    brief: {}, scorecard: {}, proximoPaso: ''
+  };
+  pintarDetalle();
+});
+
+function abrir(id) {
+  abierta = ideas.filter(function (i) { return i.id === id; })[0] || null;
+  if (abierta) pintarDetalle();
+}
+
+function cerrar() {
+  abierta = null;
+  $('vistaDetalle').hidden = true;
+  $('vistaLista').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Detalle de una idea
+   ══════════════════════════════════════════════════════════════════════ */
+function pintarDetalle() {
+  var i = abierta;
+  var b = i.brief || {};
+
+  var campos = CAMPOS_BRIEF.map(function (c) {
+    return '<div class="campo"><label for="b_' + c.id + '">' + esc(c.label) + '</label>' +
+      '<textarea id="b_' + c.id + '" rows="' + c.filas + '">' + esc(b[c.id] || '') + '</textarea></div>';
+  }).join('');
+
+  var opcObjetivo = OBJETIVOS.map(function (o) {
+    return '<option value="' + o + '"' + (i.objetivo === o ? ' selected' : '') + '>' + o + '</option>';
+  }).join('');
+
+  var opcEstado = ESTADOS.map(function (e) {
+    return '<option value="' + e.id + '"' + (i.estado === e.id ? ' selected' : '') + '>' + esc(e.nombre) + '</option>';
+  }).join('');
+
+  var criterios = CRITERIOS.map(function (c) {
+    var v = Number((i.scorecard || {})[c.id]) || 0;
+    var notas = [1, 2, 3, 4, 5].map(function (n) {
+      return '<button type="button" data-crit="' + c.id + '" data-valor="' + n + '"' +
+        ' aria-pressed="' + (v === n) + '">' + n + '</button>';
+    }).join('');
+    return '<div class="crit"><b>' + esc(c.nombre) + '</b><span>' + esc(c.pregunta) + '</span>' +
+      '<div class="notas">' + notas + '</div></div>';
+  }).join('');
+
+  $('vistaDetalle').innerHTML =
+    '<button class="volver" id="volver">← La línea de trabajo</button>' +
+    '<div class="cols">' +
+      '<div>' +
+        '<div class="bloque">' +
+          '<h3>Brief de la idea</h3>' +
+          '<p class="pista">Etapa 0. Si no se puede explicar en cinco líneas, la idea todavía no está clara.</p>' +
+          '<div class="campo"><label for="f_titulo">Nombre provisorio</label>' +
+            '<input id="f_titulo" value="' + esc(i.titulo || '') + '" placeholder="Ej: Webinar de reactivación para clínicas"></div>' +
+          '<div class="campo"><label for="f_objetivo">Objetivo para la empresa</label>' +
+            '<select id="f_objetivo">' + opcObjetivo + '</select></div>' +
+          campos +
+        '</div>' +
+
+        '<div class="bloque">' +
+          '<h3>Pasarla por la IA</h3>' +
+          '<p class="pista">Abrí una conversación nueva dentro del proyecto «Framework de Producto» y pegá esto. La IA devuelve las nueve etapas.</p>' +
+          '<div class="acciones">' +
+            '<button class="btn btn--chico" id="copiarIdea"><span>Copiar esta idea</span></button>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="bloque">' +
+          '<h3>Estado y próximo paso</h3>' +
+          '<p class="pista">Regla 6: ninguna idea sale del framework sin un próximo paso de validación con clientes reales.</p>' +
+          '<div class="campo"><label for="f_estado">Estado</label>' +
+            '<select id="f_estado">' + opcEstado + '</select></div>' +
+          '<div class="campo"><label for="f_paso">Próximo paso concreto</label>' +
+            '<textarea id="f_paso" rows="3" placeholder="Ej: 10 entrevistas con directores de clínica antes del 30 de noviembre">' + esc(i.proximoPaso || '') + '</textarea></div>' +
+        '</div>' +
+
+        '<div class="acciones">' +
+          '<button class="btn btn--chico" id="guardar"><span>Guardar</span></button>' +
+          '<span class="guardado" id="aviso"></span>' +
+          (i.id ? '<button class="peligro" id="borrar" style="margin-left:auto">Borrar la idea</button>' : '') +
+        '</div>' +
+      '</div>' +
+
+      '<div class="lateral">' +
+        '<div class="bloque">' +
+          '<h3>Marcador</h3>' +
+          '<p class="pista">Etapa 9. De 1 (muy bajo) a 5 (muy alto).</p>' +
+          criterios +
+          '<div class="total"><b id="totalNum">—</b><span>de 30</span>' +
+            '<span id="totalEtq" style="margin-left:auto"></span></div>' +
+          '<p class="veredicto" id="veredicto"></p>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  $('vistaLista').hidden = true;
+  $('vistaDetalle').hidden = false;
+
+  $('volver').addEventListener('click', cerrar);
+  $('guardar').addEventListener('click', guardar);
+  $('copiarIdea').addEventListener('click', function () { copiar(textoDeLaIdea(), this); });
+  if ($('borrar')) $('borrar').addEventListener('click', borrar);
+
+  Array.prototype.forEach.call($('vistaDetalle').querySelectorAll('.notas button'), function (btn) {
+    btn.addEventListener('click', function () {
+      var crit = btn.dataset.crit, valor = Number(btn.dataset.valor);
+      abierta.scorecard = abierta.scorecard || {};
+      // Volver a tocar la misma nota la quita: así se puede despuntuar un
+      // criterio sin tener que recargar ni inventar un botón de borrar.
+      abierta.scorecard[crit] = (abierta.scorecard[crit] === valor) ? 0 : valor;
+      Array.prototype.forEach.call(
+        $('vistaDetalle').querySelectorAll('.notas button[data-crit="' + crit + '"]'),
+        function (o) {
+          o.setAttribute('aria-pressed', String(Number(o.dataset.valor) === abierta.scorecard[crit]));
+        }
+      );
+      pintarMarcador();
+    });
+  });
+
+  pintarMarcador();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function pintarMarcador() {
+  var m = marcador(abierta.scorecard);
+  $('totalNum').textContent = m.total || '—';
+  $('totalEtq').innerHTML = m.decision
+    ? '<span class="etq etq--' + m.decision + '">' + NOMBRE_DECISION[m.decision] + '</span>'
+    : '<span class="etq">Sin puntuar</span>';
+
+  var texto;
+  if (!m.completo) {
+    texto = 'Faltan criterios por puntuar. El total parcial no es un veredicto.';
+  } else if (m.mordio) {
+    texto = '<strong>El candado la frenó.</strong> El total da ' + m.total + ', que alcanzaba para avanzar, pero tamaño del dolor o nivel de evidencia sacaron 2 o menos. Lo máximo es iterar.';
+  } else if (m.frenado && m.decision === 'iterar') {
+    // Con `descartar` el candado no agrega nada: el total ya la mandó abajo.
+    texto = '<strong>Iterar.</strong> Y ojo: tamaño del dolor o nivel de evidencia están en 2 o menos. Mientras sigan ahí, esta idea no puede avanzar por más que suba el total.';
+  } else if (m.decision === 'avanzar') {
+    texto = '<strong>Avanzar:</strong> correr el experimento y preparar el MVP.';
+  } else if (m.decision === 'iterar') {
+    texto = '<strong>Iterar:</strong> corregir las etapas con puntaje bajo y volver a pasar.';
+  } else {
+    texto = '<strong>Descartar:</strong> archivar con lo aprendido, y cargarlo en el contexto de empresa.';
+  }
+  $('veredicto').innerHTML = texto;
+}
+
+function leerFormulario() {
+  var brief = {};
+  CAMPOS_BRIEF.forEach(function (c) { brief[c.id] = $('b_' + c.id).value.trim(); });
+  return {
+    titulo: $('f_titulo').value.trim(),
+    objetivo: $('f_objetivo').value,
+    estado: $('f_estado').value,
+    proximoPaso: $('f_paso').value.trim(),
+    brief: brief,
+    scorecard: abierta.scorecard || {}
+  };
+}
+
+function guardar() {
+  var datos = leerFormulario();
+  if (!datos.titulo) {
+    $('aviso').textContent = 'Ponele un nombre antes de guardar.';
+    return;
+  }
+  if (!yo && !preguntarQuien()) {
+    $('aviso').textContent = 'Poné tu nombre para saber quién la tocó.';
+    return;
+  }
+  var btn = $('guardar'), span = btn.querySelector('span');
+  span.textContent = 'Guardando…'; btn.disabled = true;
+  $('aviso').textContent = '';
+
+  datos.actualizadaEn = firebase.firestore.FieldValue.serverTimestamp();
+  datos.actualizadaPor = yo;
+
+  var esNueva = !abierta.id;
+  var p;
+  if (abierta.id) {
+    p = db.collection(IDEAS).doc(abierta.id).update(datos);
+  } else {
+    datos.autor = yo;
+    datos.creadaEn = firebase.firestore.FieldValue.serverTimestamp();
+    p = db.collection(IDEAS).add(datos).then(function (ref) { abierta.id = ref.id; });
+  }
+
+  p.then(function () {
+    Object.keys(datos).forEach(function (k) { abierta[k] = datos[k]; });
+    /* Una idea recién creada se vuelve a pintar: el botón de borrar solo
+       existe cuando hay documento, así que hasta ahora había que salir y
+       volver a entrar para poder deshacer lo que acababas de crear. En una
+       que ya existía NO se repinta, porque saltaría el scroll al principio
+       justo después de guardar. */
+    if (esNueva) { pintarDetalle(); }
+    $('aviso').textContent = 'Guardado.';
+    setTimeout(function () { if ($('aviso')) $('aviso').textContent = ''; }, 2200);
+  }).catch(function (err) {
+    $('aviso').textContent = 'No se pudo guardar: ' + err.message;
+  }).finally(function () {
+    if ($('guardar')) { $('guardar').querySelector('span').textContent = 'Guardar'; $('guardar').disabled = false; }
+  });
+}
+
+/* Borrar pide confirmación en el propio botón, sin ventana del navegador:
+   un confirm() del sistema se acepta por reflejo. */
+function borrar() {
+  var btn = $('borrar');
+  if (btn.dataset.seguro !== 'si') {
+    btn.dataset.seguro = 'si';
+    btn.textContent = '¿Seguro? Esto no se deshace — tocá otra vez';
+    setTimeout(function () {
+      if (btn && btn.dataset.seguro === 'si') {
+        btn.dataset.seguro = ''; btn.textContent = 'Borrar la idea';
+      }
+    }, 5000);
+    return;
+  }
+  db.collection(IDEAS).doc(abierta.id).delete().then(cerrar);
+}
+
+/* Lo que se pega en Claude: el brief con la forma de la plantilla de la
+   sección 7, para que el prompt maestro lo reconozca sin ayuda. */
+function textoDeLaIdea() {
+  var d = leerFormulario();
+  var b = d.brief;
+  return [
+    '# Idea: ' + (d.titulo || '[sin nombre]'),
+    '',
+    '**Qué es (3 a 5 líneas):** ' + (b.queEs || ''),
+    '',
+    '**Para quién:** ' + (b.paraQuien || ''),
+    '',
+    '**Qué problema resuelve:** ' + (b.problema || ''),
+    '',
+    '**Por qué ahora:** ' + (b.porQueAhora || ''),
+    '',
+    '**Objetivo para la empresa:** ' + d.objetivo,
+    '',
+    '**Evidencia que ya tenemos (si hay):** ' + (b.evidencia || ''),
+    '',
+    '**Dudas principales:** ' + (b.dudas || '')
+  ].join('\n');
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Contexto de empresa
+   ══════════════════════════════════════════════════════════════════════ */
+function cargarContexto() {
+  db.collection(CONTEXTO).doc(CTX_DOC).get().then(function (snap) {
+    var d = snap.exists ? snap.data() : null;
+    $('ctxTexto').value = (d && d.texto) || CTX_PLANTILLA;
+    $('ctxGuardado').textContent = d && d.actualizadaEn
+      ? 'Actualizado el ' + fecha(d.actualizadaEn) + ' por ' + (d.actualizadaPor || '—')
+      : 'Todavía es la plantilla vacía';
+  }).catch(function (err) {
+    $('ctxTexto').value = CTX_PLANTILLA;
+    $('ctxGuardado').textContent = 'No se pudo leer: ' + err.message;
+  });
+}
+
+$('ctxGuardar').addEventListener('click', function () {
+  var btn = this, span = btn.querySelector('span');
+  span.textContent = 'Guardando…'; btn.disabled = true;
+  db.collection(CONTEXTO).doc(CTX_DOC).set({
+    texto: $('ctxTexto').value,
+    actualizadaEn: firebase.firestore.FieldValue.serverTimestamp(),
+    actualizadaPor: yo
+  }, { merge: true }).then(function () {
+    $('ctxGuardado').textContent = 'Guardado recién por ' + yo;
+  }).catch(function (err) {
+    $('ctxGuardado').textContent = 'No se pudo guardar: ' + err.message;
+  }).finally(function () {
+    span.textContent = 'Guardar'; btn.disabled = false;
+  });
+});
+
+$('ctxCopiar').addEventListener('click', function () { copiar($('ctxTexto').value, this); });
+$('promptCopiar').addEventListener('click', function () { copiar(PROMPT, this); });
+
+/* ══════════════════════════════════════════════════════════════════════
+   Arranque
+   ══════════════════════════════════════════════════════════════════════ */
+pintarQuien();
+arrancar();
+
+})();
+</script>
+
+</body>
+</html>
