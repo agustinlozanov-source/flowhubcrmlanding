@@ -764,14 +764,14 @@ footer a{text-decoration:none}footer a:hover{color:var(--brand)}
       <p class="lead">Precios por persona en pesos mexicanos, más IVA. Incluyen taller, cuaderno, pin, tarjeta DX Way, copiloto en versión algorítmica y seguimiento a 7, 30 y 90 días.</p>
     </div>
     <div class="tiers">
-      <article class="tier card hl"><div class="nm">Fundador <span class="pill num" id="fundLeft">30 lugares</span></div><div class="pr num">$9,000 <small>+ IVA</small></div><div class="msi num">12 MSI de $870</div><p>Los primeros 30 lugares de cada edición.</p></article>
-      <article class="tier card"><div class="nm">Anticipada</div><div class="pr num">$10,000 <small>+ IVA</small></div><div class="msi num">12 MSI de $967</div><p>Hasta 30 días antes de la edición.</p></article>
-      <article class="tier card"><div class="nm">Regular</div><div class="pr num">$12,000 <small>+ IVA</small></div><div class="msi num">12 MSI de $1,160</div><p>Últimos 30 días antes de la edición.</p></article>
-      <article class="tier card"><div class="nm">Acompañante</div><div class="pr num">$8,000 <small>+ IVA</small></div><div class="msi num">12 MSI de $773</div><p>Un directivo de tu equipo que viene contigo.</p></article>
+      <article class="tier card hl"><div class="nm">Fundador <span class="pill num" id="fundLeft">30 lugares</span></div><div class="pr num">$10,000 <small>+ IVA</small></div><div class="msi num">12 MSI de $967</div><p>Los primeros 30 lugares de cada edición.</p></article>
+      <article class="tier card"><div class="nm">Anticipada</div><div class="pr num">$12,500 <small>+ IVA</small></div><div class="msi num">12 MSI de $1,208</div><p>Hasta 30 días antes de la edición.</p></article>
+      <article class="tier card"><div class="nm">Regular</div><div class="pr num">$17,500 <small>+ IVA</small></div><div class="msi num">12 MSI de $1,692</div><p>Últimos 30 días antes de la edición.</p></article>
+      <article class="tier card"><div class="nm">Acompañante</div><div class="pr num">$9,000 <small>+ IVA</small></div><div class="msi num">12 MSI de $870</div><p>Un directivo de tu equipo que viene contigo.</p></article>
     </div>
     <div class="packs">
-      <div class="pack card"><span class="ic"><span class="ms">group</span></span><div><b>Equipo directivo</b><p>3 personas · se sientan en la misma zona</p></div><div class="pr num">$26,000<small>$8,667 por persona</small></div></div>
-      <div class="pack card"><span class="ic"><span class="ms">groups</span></span><div><b>Equipo completo</b><p>5 personas · una mesa completa</p></div><div class="pr num">$39,000<small>$7,800 por persona</small></div></div>
+      <div class="pack card"><span class="ic"><span class="ms">group</span></span><div><b>Equipo directivo</b><p>3 personas · se sientan en la misma zona</p></div><div class="pr num">$32,500<small>$10,833 por persona</small></div></div>
+      <div class="pack card"><span class="ic"><span class="ms">groups</span></span><div><b>Equipo completo</b><p>5 personas · una mesa completa</p></div><div class="pr num">$48,750<small>$9,750 por persona</small></div></div>
     </div>
 
     <div class="checkout">
@@ -780,12 +780,12 @@ footer a{text-decoration:none}footer a:hover{color:var(--brand)}
         <div class="row2">
           <label for="fEd">Edición<select id="fEd"></select></label>
           <label for="fPlan">Tarifa o paquete<select id="fPlan">
-            <option value="fundador">Fundador · $9,000</option>
-            <option value="anticipada" selected>Anticipada · $10,000</option>
-            <option value="regular">Regular · $12,000</option>
-            <option value="acomp">Acompañante · $8,000</option>
-            <option value="eq3">Equipo directivo (3) · $26,000</option>
-            <option value="eq5">Equipo completo (5) · $39,000</option>
+            <option value="fundador">Fundador · $10,000</option>
+            <option value="anticipada" selected>Anticipada · $12,500</option>
+            <option value="regular">Regular · $17,500</option>
+            <option value="acomp">Acompañante · $9,000</option>
+            <option value="eq3">Equipo directivo (3) · $32,500</option>
+            <option value="eq5">Equipo completo (5) · $48,750</option>
           </select></label>
         </div>
         <div class="row2">
@@ -936,20 +936,20 @@ function renderSide(){const e=EDS[cur];const taken=e.state.filter(s=>s!==0).leng
  $('heroBar').style.width=(EDS[0].state.filter(s=>s!==0).length/110*100)+'%';
  $('heroFund').textContent=`Primera edición, 9 de enero · ${EDS[0].fund} lugares Fundador disponibles`;
  const f=EDS[cur].fund;$('fundLeft').textContent=f>0?`Quedan ${f}`:'Agotada';
- const opt=$('fPlan').querySelector('option[value="fundador"]');opt.disabled=f<=0;opt.textContent=f>0?'Fundador · $9,000':'Fundador · agotada en esta edición';if(f<=0&&$('fPlan').value==='fundador')$('fPlan').value='anticipada';
+ const opt=$('fPlan').querySelector('option[value="fundador"]');opt.disabled=f<=0;opt.textContent=f>0?'Fundador · $10,000':'Fundador · agotada en esta edición';if(f<=0&&$('fPlan').value==='fundador')$('fPlan').value='anticipada';
 }
 
 // ---- pricing
-const PLANS={fundador:{n:'Fundador',p:9000,q:1},anticipada:{n:'Anticipada',p:10000,q:1},regular:{n:'Regular',p:12000,q:1},acomp:{n:'Acompañante',p:8000,q:1},eq3:{n:'Equipo directivo · 3 personas',p:26000,q:3},eq5:{n:'Equipo completo · 5 personas',p:39000,q:5}};
+const PLANS={fundador:{n:'Fundador',p:10000,q:1},anticipada:{n:'Anticipada',p:12500,q:1},regular:{n:'Regular',p:17500,q:1},acomp:{n:'Acompañante',p:9000,q:1},eq3:{n:'Equipo directivo · 3 personas',p:32500,q:3},eq5:{n:'Equipo completo · 5 personas',p:48750,q:5}};
 const CAMARAS=['CANACO','COPARMEX','CANACINTRA','AMEXCAP'];
 function parseCode(c){c=c.trim().toUpperCase();if(!c)return null;
  if(c==='DX-MAPA')return{c,t:'pct',v:.10,d:'10% por haber hecho el diagnóstico'};
- if(c==='DX-WEBINAR')return{c,t:'tarifa',v:10000,d:'Tarifa anticipada por asistir al webinar'};
+ if(c==='DX-WEBINAR')return{c,t:'tarifa',v:12500,d:'Tarifa anticipada por asistir al webinar'};
  if(/^DX-REF-[A-Z]{2,}$/.test(c))return{c,t:'pct',v:.10,d:'10% por recomendación'};
  const m=c.match(/^DX-([A-Z]+)$/);if(m&&CAMARAS.includes(m[1]))return{c,t:'pct',v:.10,d:'10% por convenio con '+m[1]};
  return{c,t:'bad'}}
 function calc(){const pl=PLANS[$('fPlan').value];let base=pl.p,disc=0;const unit=1;
- if(code&&code.t!=='bad'){if(['fundador','eq3','eq5'].includes($('fPlan').value)){disc=0}else if(code.t==='pct'){disc=Math.min(base*code.v,Math.max(0,base-9000))}else if(code.t==='tarifa'){disc=Math.max(0,base-code.v)}}
+ if(code&&code.t!=='bad'){if(['fundador','eq3','eq5'].includes($('fPlan').value)){disc=0}else if(code.t==='pct'){disc=Math.min(base*code.v,Math.max(0,base-10000))}else if(code.t==='tarifa'){disc=Math.max(0,base-code.v)}}
  const sub=base-disc,iva=sub*.16,tot=sub+iva,n=+$('fMsi').value;
  $('sEd').textContent=EDS[cur].n+' · '+EDS[cur].d.replace('Sábado ','');
  $('sSeat').textContent=mine!==null?`Mesa ${Math.floor(mine/5)+1}, lugar ${mine%5+1}`:'Sin elegir';

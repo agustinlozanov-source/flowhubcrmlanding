@@ -953,14 +953,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
       <p class="lead">Propuesta pendiente de aprobación. Precios por persona en MXN más IVA, con hasta 12 meses sin intereses en Visa, Mastercard y American Express.</p>
     </div>
     <div class="tiers">
-      <div class="tier card hl"><span class="t">Fundador</span><span class="p num">$9,000 <small>+ IVA</small></span><span class="m">Primeros 30 lugares</span><p>Crea urgencia real y premia a los primeros.</p></div>
-      <div class="tier card"><span class="t">Anticipada</span><span class="p num">$10,000 <small>+ IVA</small></span><span class="m">Hasta 30 días antes</span><p>El precio de referencia de la campaña.</p></div>
-      <div class="tier card"><span class="t">Regular</span><span class="p num">$12,000 <small>+ IVA</small></span><span class="m">Último mes</span><p>Ancla el valor del taller.</p></div>
-      <div class="tier card"><span class="t">Acompañante</span><span class="p num">$8,000 <small>+ IVA</small></span><span class="m">Misma empresa</span><p>Lleva al equipo directivo.</p></div>
+      <div class="tier card hl"><span class="t">Fundador</span><span class="p num">$10,000 <small>+ IVA</small></span><span class="m">Primeros 30 lugares</span><p>Crea urgencia real y premia a los primeros.</p></div>
+      <div class="tier card"><span class="t">Anticipada</span><span class="p num">$12,500 <small>+ IVA</small></span><span class="m">Hasta 30 días antes</span><p>El precio de referencia de la campaña.</p></div>
+      <div class="tier card"><span class="t">Regular</span><span class="p num">$17,500 <small>+ IVA</small></span><span class="m">Último mes</span><p>Ancla el valor del taller.</p></div>
+      <div class="tier card"><span class="t">Acompañante</span><span class="p num">$9,000 <small>+ IVA</small></span><span class="m">Misma empresa</span><p>Lleva al equipo directivo.</p></div>
     </div>
     <div class="g2">
-      <div class="card pad feat"><span class="ic sm"><span class="ms">group</span></span><div><h4>Equipo directivo · 3 personas · $26,000</h4><p>$8,667 por persona, en la misma zona.</p></div></div>
-      <div class="card pad feat"><span class="ic sm"><span class="ms">groups</span></span><div><h4>Equipo completo · 5 personas · $39,000</h4><p>$7,800 por persona, una mesa completa.</p></div></div>
+      <div class="card pad feat"><span class="ic sm"><span class="ms">group</span></span><div><h4>Equipo directivo · 3 personas · $32,500</h4><p>$10,833 por persona, en la misma zona.</p></div></div>
+      <div class="card pad feat"><span class="ic sm"><span class="ms">groups</span></span><div><h4>Equipo completo · 5 personas · $48,750</h4><p>$9,750 por persona, una mesa completa.</p></div></div>
     </div>
     <div class="tw"><table>
       <thead><tr><th>Código</th><th>Beneficio</th><th>Para qué sirve</th></tr></thead>
@@ -972,7 +972,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
         <tr><td><b>DX-[socio]</b></td><td>Tarifa anticipada</td><td>Atribuir cada venta a cada socio</td></tr>
       </tbody>
     </table></div>
-    <p class="src">Los códigos no se acumulan, no aplican a Fundador ni a paquetes, y el precio mínimo por persona es $9,000. Factura CFDI.</p>
+    <p class="src">Los códigos no se acumulan, no aplican a Fundador ni a paquetes, y el precio mínimo por persona es $10,000. Factura CFDI.</p>
     <a class="golink card" href="https://landing.flowhubcrm.app/dx-socios/taller/#inversion" target="_blank" rel="noopener"><span class="ic"><span class="ms">open_in_new</span></span><span><b>Mira cómo se cobra</b><small>Prueba las tarifas, los paquetes, los códigos y los 12 meses sin intereses en la página del taller.</small></span><span class="ms go">arrow_forward</span></a>
     <h3>Escenario ilustrativo por edición</h3>
     <div class="bars card pad" id="bars"></div>
@@ -1063,7 +1063,7 @@ const T=[
   ['Lo que sigue: domingo, lunes y 30 días',15,'Desarrollar','El recorrido de seguimiento y las parejas de seguimiento.','Su agenda de seguimiento.']]]];
 let k=0;$('acts').innerHTML=T.map(a=>`<div class="act card"><header><span class="ic sm"><span class="ms">${k===0?'frame_person':'key'}</span></span><div><h3 style="font-size:17px">${a[0]}</h3><small>${a[1]}</small></div></header>${a[2].map(t=>{k++;return `<details class="tema"><summary><span class="n">${String(k).padStart(2,'0')}</span><div><b>${t[0]}</b><small>${t[1]} min</small></div><span class="pill">${t[2]}</span></summary><div class="body"><p><b>De qué trata:</b> ${t[3]}</p><p><b>Entregable:</b> ${t[4]}</p></div></details>`}).join('')}</div>`).join('');
 // revenue
-const R=[['30 Fundador',30*9000],['40 Anticipada',40*10000],['26 Regular',26*12000],['3 Equipo directivo (9 personas)',3*26000],['1 Equipo completo (5 personas)',39000],['20 Acompañantes',20*8000]];
+const R=[['30 Fundador',30*10000],['40 Anticipada',40*12500],['26 Regular',26*17500],['3 Equipo directivo (9 personas)',3*32500],['1 Equipo completo (5 personas)',48750],['20 Acompañantes',20*9000]];
 const tot=R.reduce((s,r)=>s+r[1],0),mx=Math.max(...R.map(r=>r[1]));const f=n=>'$'+n.toLocaleString('es-MX');
 $('bars').innerHTML=R.map(r=>`<div class="brow"><span>${r[0]}</span><span class="tr"><i style="width:${r[1]/mx*100}%"></i></span><b class="num">${f(r[1])}</b></div>`).join('');
 $('tEd').textContent=f(tot);$('t3').textContent=f(tot*3);
